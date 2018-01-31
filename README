@@ -49,6 +49,7 @@ How to update local branch with info from repo
 If that doesn't work
 	git pull origin master
 	Close the dialog that opens up
+	git add *
 	git commit -m "Pulled most recent repo"
 	git push origin master
 
