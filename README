@@ -1,0 +1,39 @@
+Commands for Git
+
+How to add or update files:
+1.) git add * (use star to update entire folder, otherwise replace with filename)
+2.) git commit -m "Comment here, Sign your name at the end of it"
+3.) git push origin branchname (master for main branch)
+
+How to delete files:
+1.) git rm "filename"
+2.) git commit -m "Comment here, Sign your name at the end of it"
+3.) git push origin branchname (master for main branch)
+
+How to delete from Git, but not locally:
+1.) git rm --cached "filename"
+2.) git commit -m "Comment here, sign your name at the end of it"
+3.) git push origin master
+
+How to create a branch:
+1.) Create a branch using the command
+	git checkout -b [Name of branch]
+2.) Change working branch to new branch
+	git checkout [name of branch]
+NOTE NOTE NOTE NOTE NOTE NOTE
+TO CHANGE BACK TO THE MAIN BRANCH, USE THE COMMAND
+	git checkout master
+
+How to push branch to git:
+	git push origin [name of branch]
+
+How to see branches on project
+	git branch
+
+How to delete a branch
+	git push origin :[name of branch]
+
+How to update local branch with info from repo
+	git pull origin master
+If that does not work, use this command instead
+	git pull https://github.com/bzhang908/CPSC233BattleShip.git master
