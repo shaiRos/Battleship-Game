@@ -45,5 +45,10 @@ How to delete a branch
 
 How to update local branch with info from repo
 	git pull origin master
+	Close the dialog that opens up
+	git commit -m "Pulled most recent repo"
+	git push origin master
+
 If that does not work, use this command instead
 	git pull https://github.com/bzhang908/CPSC233BattleShip.git master
+and continue with above steps
