@@ -13,8 +13,19 @@ class Ship{
 	public Ship(int num, int len){
 		id = num;
 		length = len;
+		// We should store the points that the ship takes up, so we can check exactly which
+		// parts of the ship have and haven't been hit. Makes checking if it's sunket alot easier too.
+		int[] shipPoints = new int [len];
 	}
 	
+	public boolean isHit(id, int x, int y) {
+
+	}
+
+	public boolean isSunken(id, int x, int y) {
+
+	}
+
 	public void setCoordinates(int x, int y, char orientation){
 		int [][] coordinates;
 		coordinates = new int [length][2];
