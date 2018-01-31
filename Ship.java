@@ -19,17 +19,9 @@ class Ship{
 		int [][] coordinates;
 		coordinates = new int [length][2];
 		
-		for(int i=0; i<length; i++){
-			for(int j = 0; j < coordinates[i].length; j++){
-				switch (orientation){
-					case 'v':
-						coordinates[i][j] = x+1;
-						break;
-					case 'h':
-						coordinates[i][j] = y+1;
-				}
-			}
-		}
+		/*code to determine coordinates of the ship (you can decide 
+		*how you want to do it and change the parameters
+		*/
 		
 	}
 	
