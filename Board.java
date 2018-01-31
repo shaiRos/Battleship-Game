@@ -9,9 +9,8 @@ import java.util.StringJoiner;
 class Board{
 	int [][] gameBoard;
 	
-	public void createBoard(int size){
+	public Board(int size){
 		gameBoard = new int [size][size];
-		
 	}
 
 
