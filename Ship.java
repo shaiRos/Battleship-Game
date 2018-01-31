@@ -15,6 +15,24 @@ class Ship{
 		length = len;
 	}
 	
+	public void setCoordinates(int x, int y, char orientation){
+		int [][] coordinates;
+		coordinates = new int [length][2];
+		
+		for(int i=0; i<length; i++){
+			for(int j = 0; j < coordinates[i].length; j++){
+				switch (orientation){
+					case 'v':
+						coordinates[i][j] = x+1;
+						break;
+					case 'h':
+						coordinates[i][j] = y+1;
+				}
+			}
+		}
+		
+	}
+	
 	
 	
 	
