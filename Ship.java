@@ -33,6 +33,9 @@ class Ship{
 				}
 			}
 		}
+		/*code to determine coordinates of the ship (you can decide 
+		*how you want to do it and change the parameters
+		*/
 		
 	}
 	
