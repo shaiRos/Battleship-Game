@@ -27,6 +27,9 @@ class Ship{
 						break;
 					case 'h':
 						coordinates[i][j] = y+1;
+						break;
+					default:
+						System.out.println("Oops. Something broke. This should never happen.");
 				}
 			}
 		}

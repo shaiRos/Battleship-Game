@@ -13,7 +13,6 @@ class Board{
 		gameBoard = new int [size][size];
 	}
 
-
 	// https://stackoverflow.com/questions/34846566/how-to-print-2d-arrays-to-look-like-a-grid-matrix
 	public void returnBoard() {
 		for (int[] row : gameBoard) {
@@ -24,7 +23,7 @@ class Board{
 			System.out.println(split.toString());
 		}
 	}
-	
+
 	public void placeShips(){
 		//comment
 	}
