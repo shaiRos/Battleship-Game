@@ -1,5 +1,15 @@
 Commands for Git
 
+How to setup a folder for Git
+1.) git init
+2.) touch "test", or just make a test file and remember it's name
+3.) git add *
+4.) git commit -m "Initial test commit"
+5.) git remote add https://github.com/bzhang908/cpsc233BattleShip.git
+6.) git pull https://github.com/bzhang908/cpsc233BattleShip.git master --allow-unrelated-histories
+7.) git push origin master
+
+
 How to add or update files:
 1.) git add * (use star to update entire folder, otherwise replace with filename)
 2.) git commit -m "Comment here, Sign your name at the end of it"
