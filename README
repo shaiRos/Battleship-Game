@@ -5,7 +5,7 @@ How to setup a folder for Git
 2.) touch "test", or just make a test file and remember it's name
 3.) git add *
 4.) git commit -m "Initial test commit"
-5.) git remote add https://github.com/bzhang908/cpsc233BattleShip.git
+5.) git remote add origin https://github.com/bzhang908/cpsc233BattleShip.git
 6.) git pull https://github.com/bzhang908/cpsc233BattleShip.git master --allow-unrelated-histories
 7.) git push origin master
 
