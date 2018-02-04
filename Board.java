@@ -113,7 +113,26 @@ class Board{
 		}return valid;
 	}		
 				
-
+	//addShip given all properties of the ship
+	public void addShip(char orientation, int length, int column, int row){
+		switch(orientation) {
+			case 'h': {
+				int maxColumn = column + (length-1); //right most coordinate of the ship					
+				for (int x = column; x <= maxColumn; x++) {	//changing the values of the coordinates it occupies.
+					gameBoard[row-1][x-1] = 5;
+				}break;
+			}
+			case 'v': {
+				int maxRow = row + (length-1); //bottom most coordinate of the ship	
+				for (int x = row; x <= maxRow; x++) {	//change values
+						gameBoard[x-1][column-1] = 5;
+				}break;
+			}
+		}
+	}		
+	
+	
+	
 	public boolean placeShips(){
 		/*comment horizontal or vertical only
 		if picked horizontal indicate the left most coordinate of where you want to put it
@@ -149,27 +168,11 @@ class Board{
 			System.out.println("Cannot fit the ship in the indicated coordinate. Please try again");
 			return false; //failed to set ship into the board
 		}else {			//if all is good, update gameBoard.
-			switch(orientation) {
-				case 'h': {
-					int maxColumn = column + (length-1); //right most coordinate of the ship					
-					for (int x = column; x <= maxColumn; x++) {	//changing the values of the coordinates it occupies.
-						gameBoard[row-1][x-1] = 5;
-					}break;
-				}
-				case 'v': {
-					int maxRow = row + (length-1); //bottom most coordinate of the ship	
-					for (int x = row; x <= maxRow; x++) {	//change values
-							gameBoard[x-1][column-1] = 5;
-					}break;
-				}
-			}
-			
+			addShip(orientation,length,column,row);
 			return true; //Success on setting the ships into the board
-		}
-			
-				
-			
-	}
+		}	
+	
+	}		
 	
 }
 
