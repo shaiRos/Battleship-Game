@@ -39,7 +39,7 @@ class Board{
 				System.out.print("\nColumn Coordinate: ");	
 			}				
 			Scanner Coord = new Scanner(System.in);
-			coordinate = Coord.nextInt();												//EXCEPTION NEEDED NUMBER ONLY
+			coordinate = Coord.nextInt();		//EXCEPTION NEEDED NUMBER ONLY
 			if (coordinate > boardSize || coordinate < 0) { //check if coordinates are within the board
 				valid = false; 
 				System.out.println("Invalid Row Coordinate");
@@ -61,7 +61,7 @@ class Board{
 				System.out.print("\nOrientation of ship \n1) Horizontal \n2) Vertical\nOrientation: ");	
 			}
 			Scanner keyboard = new Scanner(System.in);	
-			number = keyboard.nextInt();												//EXCEPTION MAKE SURE IT'S A NUMBER
+			number = keyboard.nextInt();	//EXCEPTION MAKE SURE IT'S A NUMBER
 			if (properties == "length"){	//different conditions for both
 				if (number > maxShipSize || number < minShipSize) {  //check if ship is the supported size
 					valid = false; 
