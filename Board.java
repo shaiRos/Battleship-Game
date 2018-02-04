@@ -114,6 +114,8 @@ class Board{
 	}		
 				
 	//addShip given all properties of the ship
+	//just make sure for horizontal indicate the left most coordinates
+	//and for vertical indicate the top most coordinate
 	public void addShip(char orientation, int length, int column, int row){
 		switch(orientation) {
 			case 'h': {
