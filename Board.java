@@ -27,7 +27,28 @@ class Board{
 			System.out.println(split.toString());
 		}
 	}
+	public int chooseCoordinate(String which) {
+		boolean valid = true;
+		int coordinate;
+		do {
+			if (which == "row"){
+				System.out.print("\nRow Coordinate: ");
+			}else if (which == "column"){
+				System.out.print("\nColumn Coordinate: ");	
+			}				
+			Scanner Coord = new Scanner(System.in);
+			coordinate = Coord.nextInt();														//EXCEPTION NEEDED
+			if (coordinate > boardSize || coordinate < 0) {
+				valid = false; 
+				System.out.println("Invalid Row Coordinate");
+			} else {
+				valid = true;
+			}	
+		} while (valid != true);
+		return coordinate;
+	}
 
+			
 
 	public boolean placeShips(){
 		/*comment horizontal or vertical only
@@ -78,32 +99,8 @@ class Board{
 				break;
 			}
 		}
-		
-		//row coordinate
-		do {
-			System.out.print("\nRow Coordinate: ");
-			Scanner Row = new Scanner(System.in);
-			row = Row.nextInt();														//EXCEPTION NEEDED
-			if (row > boardSize || row < 0) {
-				valid = false; 
-				System.out.println("Invalid Row Coordinate");
-			} else {
-				valid = true;
-			}	
-		} while (valid != true);  
-
-		//column coordinate
-		do {		
-			System.out.print("\nColumn Coordinate: ");
-			Scanner Col = new Scanner(System.in);
-			column = Col.nextInt();											//EXCEPTION NEEDED
-			if (column > boardSize || column < 0) {
-				valid = false; 
-				System.out.println("Invalid Row Coordinate");
-			} else {
-				valid = true;
-			}
-		} while (valid != true);  	
+		row = chooseCoordinate("row");		//used choose Coordinate method.
+		column = chooseCoordinate("column");
 
 		//check if ship can be put on the board
 		switch(orientation) { 
