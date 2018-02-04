@@ -129,7 +129,7 @@ class Board{
 				for (int x = row; x <= maxRow; x++) {	//change values
 						gameBoard[x-1][column-1] = 5;
 				}break;
-			}
+			}//SHOULD PROBABLY MAKE A SHIP OBJECT AFTER UPDATING THE BOARD. AND TRANSFER IT'S CHARACTERISTICS
 		}
 	}		
 	
