@@ -90,10 +90,12 @@ class Board{
 		}else if (orientation == 'v') {
 			changingCoord = row;
 		}
-		int maxCoord = changingCoord + (length-1); //right most coordinate of the ship
+		int maxCoord = changingCoord + (length-1); //right or top most coordinate of the ship
 		//Check if ship doesn't go overboard.
 		if (maxCoord > boardSize) {
-			valid = false;
+			return false;
+			
+	
 		}
 		//check if all coordinates it occupies doesn't contain another ship
 		if (orientation == 'h'){
@@ -147,7 +149,9 @@ class Board{
 		char orientation = 'n';
 		int choice;
 		
+		
 		returnBoard();
+		
 		length = shipProperties("length");
 		choice = shipProperties("orientation"); //choose from horizontal or vertical
 		switch(choice) {
@@ -167,7 +171,7 @@ class Board{
 		
 		//actions for if ship can/can't be put in the board
 		if (valid == false) {
-			System.out.println("Cannot fit the ship in the indicated coordinate. Please try again");
+			System.out.println("Cannot fit the ship in the indicated coordinate. Please try again"); //Could make them choose to only change a specific characteristic.
 			return false; //failed to set ship into the board
 		}else {			//if all is good, update gameBoard.
 			addShip(orientation,length,column,row);
