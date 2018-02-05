@@ -1,5 +1,3 @@
-// make grid look pretty like matrix
-import java.util.StringJoiner;
 /**
 * created January 30, 2018
 * @author Betty Zhang
@@ -17,15 +15,32 @@ class Board{
 	public void Board(){
 	}
 
-	// https://stackoverflow.com/questions/34846566/how-to-print-2d-arrays-to-look-like-a-grid-matrix
+	// I changed the way the board is formatted
+	// -1 = Default, 	denoted by ~
+	// 0 = Miss, 		denoted by *
+	// 1 = Hit, 		denoted by X
+	// We can add more if we like - Brandon
 	public void returnBoard() {
-		for (int[] row : gameBoard) {
-            StringJoiner split = new StringJoiner(" | ");
-			for (int column : row) {
-				split.add(String.format("%01d", column));
-			}
-			System.out.println(split.toString());
-		}
+		        
+        for (int x = 0; x < boardSize; x++) {
+        		System.out.print(("\t" + (x + 1)));
+        }
+        System.out.println();
+        
+        for(int row=0 ; row < boardSize ; row++ ){
+            System.out.print((row+1)+"");
+            for(int column=0 ; column < boardSize ; column++ ){
+                if(gameBoard[row][column]==-1){
+                    System.out.print("\t"+"~");
+                }else if(gameBoard[row][column]==0){
+                    System.out.print("\t"+"*");
+                }else if(gameBoard[row][column]==1){
+                    System.out.print("\t"+"X");
+                }
+                
+            }
+            System.out.println();
+        }
 	}
 	
 	//method for choosing row or column indicate "row" or "column" in params.
