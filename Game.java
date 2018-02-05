@@ -8,14 +8,19 @@ public class Game{
 		
 		
 		for (int numOfShips = 1; numOfShips <= maxShips ; numOfShips++) {
-			boolean setUpShip = false;
-			while (setUpShip != true){
-				setUpShip = gameMap.placeShips();
-			}System.out.println("\n" + (maxShips-numOfShips) + " more ships to place");
-		}gameMap.returnBoard();
-		
 
-        
+			boolean setUpShip = false;
+
+			while (setUpShip != true) {
+				setUpShip = gameMap.placeShips();
+			}
+
+            System.out.println("\n" + (maxShips-numOfShips) + " more ships to place");
+
+		}
+
+        gameMap.returnBoard();
+	
     }
 
 
