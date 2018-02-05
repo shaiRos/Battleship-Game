@@ -1,5 +1,8 @@
 Commands for Git
 
+Testing the --rebase command
+
+
 How to setup a folder for Git
 1.) git init
 2.) touch "test", or just make a test file and remember it's name
