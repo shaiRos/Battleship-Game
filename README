@@ -1,5 +1,8 @@
 Commands for Git
 
+
+I am now pulling the file with rebase
+
 How to setup a folder for Git
 1.) git init
 2.) touch "test", or just make a test file and remember it's name
@@ -25,6 +28,17 @@ How to delete from Git, but not locally:
 2.) git commit -m "Comment here, sign your name at the end of it"
 3.) git push origin master
 
+
+How to update local branch with info from repo
+	git pull --rebase
+
+If that does not work, use this command instead
+	git pull https://github.com/bzhang908/CPSC233BattleShip.git master --rebase
+
+
+
+Lesser important stuff
+
 How to create a branch:
 1.) Create a branch using the command
 	git checkout -b [Name of branch]
@@ -42,17 +56,3 @@ How to see branches on project
 
 How to delete a branch
 	git push origin :[name of branch]
-
-How to update local branch with info from repo
-	git pull
-
-If that doesn't work
-	git pull origin master
-	Close the dialog that opens up
-	git add *
-	git commit -m "Pulled most recent repo"
-	git push origin master
-
-If that does not work, use this command instead
-	git pull https://github.com/bzhang908/CPSC233BattleShip.git master
-and continue with above steps
