@@ -27,11 +27,10 @@ How to delete from Git, but not locally:
 
 
 How to update local branch with info from repo
-	git pull --rebase
+	git pull origin master
 
 If that does not work, use this command instead
-	git pull https://github.com/bzhang908/CPSC233BattleShip.git master --rebase
-
+	git pull https://github.com/bzhang908/CPSC233BattleShip.git master
 
 
 Lesser important stuff

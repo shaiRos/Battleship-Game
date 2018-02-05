@@ -19,6 +19,7 @@ class Board{
 	// -1 = Default, 	denoted by ~
 	// 0 = Miss, 		denoted by *
 	// 1 = Hit, 		denoted by X
+	// 5 - our ship 	denoted by {}
 	// We can add more if we like - Brandon
 	public void returnBoard() {
 		        
@@ -27,15 +28,17 @@ class Board{
         }
         System.out.println();
         
-        for(int row=0 ; row < boardSize ; row++ ){
-            System.out.print((row+1)+"");
-            for(int column=0 ; column < boardSize ; column++ ){
-                if(gameBoard[row][column]==-1){
-                    System.out.print("\t"+"~");
-                }else if(gameBoard[row][column]==0){
-                    System.out.print("\t"+"*");
-                }else if(gameBoard[row][column]==1){
-                    System.out.print("\t"+"X");
+        for (int row=0 ; row < boardSize ; row++ ) {
+            System.out.print( (row + 1) + "" );
+            for (int column=0 ; column < boardSize ; column++ ) {
+                if (gameBoard[row][column] == -1) {
+                    System.out.print("\t" + "~");
+                } else if (gameBoard[row][column] == 0) {
+                    System.out.print("\t" + "*");
+                } else if (gameBoard[row][column] == 1) {
+                    System.out.print("\t" + "X");
+                } else if (gameBoard[row][column] == 5) {
+                	System.out.print("\t" + "{}"); // TEMPORARY
                 }
                 
             }
