@@ -1,8 +1,5 @@
 Commands for Git
 
-
-I am now pulling the file with rebase
-
 How to setup a folder for Git
 1.) git init
 2.) touch "test", or just make a test file and remember it's name
