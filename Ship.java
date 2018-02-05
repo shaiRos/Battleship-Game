@@ -18,12 +18,12 @@ class Ship{
 		int[] shipPoints = new int [len];
 	}
 	
-	public boolean isHit(id, int x, int y) {
-
+	public boolean isHit(int id, int x, int y) {
+		return true;
 	}
 
-	public boolean isSunken(id, int x, int y) {
-
+	public boolean isSunken(int id, int x, int y) {
+		return true;
 	}
 
 	public void setCoordinates(int x, int y, char orientation){
