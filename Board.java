@@ -5,6 +5,9 @@
 */
 import java.util.Scanner;
 
+//This is a test commit
+
+
 class Board{
 	int boardSize = 8;	
 	int [][] gameBoard = new int [boardSize][boardSize];
