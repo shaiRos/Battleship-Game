@@ -5,7 +5,11 @@
 */
 import java.util.Scanner;
 
+<<<<<<< HEAD
 //This is a test commit
+=======
+// And another one
+>>>>>>> And another test with rebase
 
 
 class Board{
