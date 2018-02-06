@@ -5,7 +5,6 @@
 */
 
 class Ship{
-	int id;
 	int length;
 	char orientation;
 	int column;

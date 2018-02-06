@@ -14,14 +14,19 @@ public class Game{
 			boolean setUpShip = false;
 
 			while (setUpShip != true) {
-				setUpShip = gameMap.placeShips();
+				setUpShip = gameMap.placeShips(numOfShips);
 			}
 
             System.out.println("\n" + (maxShips-numOfShips) + " more ships to place");
 
 		}
 
+
+
         gameMap.returnBoard();
+
+        System.out.println(1.Ship())
+
 	
     }
 	
