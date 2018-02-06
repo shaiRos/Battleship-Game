@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Game{
 
     public static void main(String[] args) {
@@ -22,6 +24,32 @@ public class Game{
         gameMap.returnBoard();
 	
     }
+	
+	
+	
+	public static int askForInput(String askThis) {
+		switch(askThis) {
+			case "row": {
+				System.out.print("\nRow Coordinate: ");
+				break;
+			}
+			case "column": {
+				System.out.print("\nColumn Coordinate: ");	
+				break;
+			}
+			case "length": {
+				System.out.print("\nLength of ship (2-5): ");
+				break;
+			}
+			case "orientation": {
+				System.out.print("\nOrientation of ship \n1) Horizontal \n2) Vertical\nOrientation: ");	
+				break;
+			}
+		}Scanner keyboard = new Scanner(System.in);	
+		int number = keyboard.nextInt();	//EXCEPTION MAKE SURE IT'S A NUMBER
+		return number;
+		
+	}
 
 
 }

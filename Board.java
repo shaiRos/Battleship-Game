@@ -31,9 +31,9 @@ class Board{
         for (int row=0 ; row < boardSize ; row++ ) {
             System.out.print( (row + 1) + "" );
             for (int column=0 ; column < boardSize ; column++ ) {
-                if (gameBoard[row][column] == -1) {
+                if (gameBoard[row][column] == 0) {
                     System.out.print("\t" + "~");
-                } else if (gameBoard[row][column] == 0) {
+                } else if (gameBoard[row][column] == -1) {
                     System.out.print("\t" + "*");
                 } else if (gameBoard[row][column] == 1) {
                     System.out.print("\t" + "X");
@@ -49,15 +49,13 @@ class Board{
 	//method for choosing row or column indicate "row" or "column" in params.
 	public int chooseCoordinate(String which) {
 		boolean valid = true;
-		int coordinate;
+		int coordinate = 0;
 		do {
 			if (which == "row"){					//ask for row/column
-				System.out.print("\nRow Coordinate: ");
+				coordinate = Game.askForInput("row");
 			}else if (which == "column"){
-				System.out.print("\nColumn Coordinate: ");	
+				coordinate = Game.askForInput("column");
 			}				
-			Scanner Coord = new Scanner(System.in);
-			coordinate = Coord.nextInt();		//EXCEPTION NEEDED NUMBER ONLY
 			if (coordinate > boardSize || coordinate < 0) { //check if coordinates are within the board
 				valid = false; 
 				System.out.println("Invalid Row Coordinate");
@@ -70,24 +68,19 @@ class Board{
 	
 	//method for asking "length" or "orientation"
 	public int shipProperties(String properties) {
-		int number;
+		int number = 0;
 		boolean valid = true;
 		do {
 			if (properties == "length"){		//ask for input for length/orientation
-				System.out.print("\nLength of ship (2-5): ");
-			}else if (properties == "orientation"){
-				System.out.print("\nOrientation of ship \n1) Horizontal \n2) Vertical\nOrientation: ");	
-			}
-			Scanner keyboard = new Scanner(System.in);	
-			number = keyboard.nextInt();	//EXCEPTION MAKE SURE IT'S A NUMBER
-			if (properties == "length"){	//different conditions for both
+				number = Game.askForInput("length");
 				if (number > maxShipSize || number < minShipSize) {  //check if ship is the supported size
 					valid = false; 
 					System.out.println("Invalid Ship Size");
 				}else {
 					valid = true;
-				}	
-			}else if (properties == "orientation"){	
+				}				
+			}else if (properties == "orientation"){
+				number = Game.askForInput("orientation");
 				if (number != 1 && number != 2) {		//check if input is one of the two choices (1) or (2)
 					System.out.println("\nPlease pick choice 1 or 2");
 					valid = false;	
@@ -95,12 +88,14 @@ class Board{
 					valid = true;
 				}
 			}
-		}while (valid != true);
-		return number;
+		}
+		while (valid != true);
+		return number;		
 	}
 	
+	
 	//check if ship can be put on the board. if 'h' changingCoord = column if 'v' changingCoord = row
-	public boolean shipPlaced(char orientation,int length,int column, int row){
+	public boolean shipFitsBoard(char orientation,int length,int column, int row){
 		boolean valid = true;
 		int changingCoord = 'n';
 		if (orientation == 'h'){
@@ -167,7 +162,6 @@ class Board{
 		char orientation = 'n';
 		int choice;
 		
-		
 		returnBoard();
 		
 		length = shipProperties("length");
@@ -185,7 +179,7 @@ class Board{
 		row = chooseCoordinate("row");		//used choose Coordinate method.
 		column = chooseCoordinate("column");
 		//check if ship can be put on the board	using method	
-		valid = shipPlaced(orientation,length,column,row);
+		valid = shipFitsBoard(orientation,length,column,row);
 		
 		//actions for if ship can/can't be put in the board
 		if (valid == false) {
