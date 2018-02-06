@@ -160,11 +160,11 @@ class Board{
 		if vertical, pick the top most coordinate of where you want to put it.
 		*/
 		boolean valid = true;
-		int length;
-		int column;
-		int row;
+		int length = 0;
+		int column = 0;
+		int row = 0;
 		char orientation = 'n';
-		int choice;
+		int choice = 0;
 		
 		returnBoard();
 		
