@@ -27,7 +27,25 @@ How to delete from Git, but not locally:
 
 
 How to update local branch with info from repo
-	git pull origin master
+	git pull origin master --rebase
+
+	IF THERE ARE MERGE CONFLICTS, WE MUST CORRECT THEM MANUALLY
+	
+	Open the folder .git/rebase-apply/patch
+
+	AFTER THIS IS FIXED, YOU CAN RUN
+	git rebase --continue
+
+	THIS WILL LET YOU REVIEW BEFORE YOU OVERWITE ANYTHING THAT IS CONFLICTING
+	
+	After pulling the changes, re-open the file and manually reformat everything
+	(There should be a message in all caps <HEAD> and ===== denoting the changes, remove those)
+
+	Then, readd the files by
+	git add *
+	git commit -m "Comment here"
+	git push origin master
+
 
 If that does not work, use this command instead
 	git pull https://github.com/bzhang908/CPSC233BattleShip.git master
