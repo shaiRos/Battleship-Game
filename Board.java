@@ -161,10 +161,13 @@ class Board{
 		int row;
 		char orientation = 'n';
 		int choice;
-		
+		Ship a1 = new Ship('n',0,0,0);
 		returnBoard();
 		
+		
+		
 		length = shipProperties("length");
+		a1.length = length;
 		choice = shipProperties("orientation"); //choose from horizontal or vertical
 		switch(choice) {
 			case 1: {
@@ -180,6 +183,7 @@ class Board{
 		column = chooseCoordinate("column");
 		//check if ship can be put on the board	using method	
 		valid = shipFitsBoard(orientation,length,column,row);
+		System.out.println(a1.length);
 		
 		//actions for if ship can/can't be put in the board
 		if (valid == false) {
@@ -190,7 +194,9 @@ class Board{
 			return true; //Success on setting the ships into the board
 		}	
 	
-	}		
+	}
+	
+		
 	
 }
 

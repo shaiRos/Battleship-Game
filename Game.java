@@ -47,6 +47,7 @@ public class Game{
 			}
 		}Scanner keyboard = new Scanner(System.in);	
 		int number = keyboard.nextInt();	//EXCEPTION MAKE SURE IT'S A NUMBER
+		//keyboard.close();
 		return number;
 		
 	}

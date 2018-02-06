@@ -7,12 +7,17 @@
 class Ship{
 	int id;
 	int length;
+	char orientation;
+	int column;
+	int row;
 	boolean hit = false;
 	boolean sunken = false;
 	
-	public Ship(int num, int len){
-		id = num;
+	public Ship(char orient,int len, int col, int ro){
+		orientation = orient;
 		length = len;
+		column = col;
+		row = ro;
 		// We should store the points that the ship takes up, so we can check exactly which
 		// parts of the ship have and haven't been hit. Makes checking if it's sunket alot easier too.
 		int[] shipPoints = new int [len];
