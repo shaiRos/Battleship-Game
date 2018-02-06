@@ -15,6 +15,7 @@ public class MenuScreen {
             switch (userChoice) {
                 case 1:
                     System.out.println("Player vs Player");
+                    Game.main(args);
                     run = false;
                     break;
                 case 2:

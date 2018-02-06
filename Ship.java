@@ -5,10 +5,10 @@
 */
 
 class Ship{
-	int length;
-	char orientation;
-	int column;
-	int row;
+	int length = 0;
+	char orientation = 0;
+	int column = 0;
+	int row = 0;
 	boolean hit = false;
 	boolean sunken = false;
 	
@@ -28,6 +28,10 @@ class Ship{
 
 	public boolean isSunken(int id, int x, int y) {
 		return true;
+	}
+
+	public int getLength() {
+		return this.length;
 	}
 
 	public void setCoordinates(int x, int y, char orientation){

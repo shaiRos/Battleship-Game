@@ -154,7 +154,7 @@ class Board{
 	
 	
 	
-	public boolean placeShips(int shipNumber){
+	public boolean placeShips(){
 		/*comment horizontal or vertical only
 		if picked horizontal indicate the left most coordinate of where you want to put it
 		if vertical, pick the top most coordinate of where you want to put it.
@@ -164,10 +164,9 @@ class Board{
 		int column = 0;
 		int row = 0;
 		char orientation = 'n';
-		int choice;
+		int choice = 0;
 		Ship a1 = new Ship('n',0,0,0);
 
-		int choice = 0;
 		
 		returnBoard();
 		
@@ -198,7 +197,7 @@ class Board{
 			return false; //failed to set ship into the board
 		}else {			//if all is good, update gameBoard.
 			addShip(orientation,length,column,row);
-			Ship shipNumber = new Ship(orientation, length, column, row)
+
 			return true; //Success on setting the ships into the board
 		}	
 	
