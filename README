@@ -69,4 +69,7 @@ How to see branches on project
 	git branch
 
 How to delete a branch
-	git push origin :[name of branch]
+	To delete the remote branch on git
+	git push -d origin <BranchName>
+	To delete the locally saved branch
+	git branch -d <BranchName>
