@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Game{
 
@@ -7,15 +8,23 @@ public class Game{
         Board gameMap = new Board();
 		int x = gameMap.gameBoard[0][0];
 		int maxShips = 4;	//max number of ships for each board
+
+		ArrayList<Ship> shipArray = new ArrayList<Ship>();
 		
 		
 		for (int numOfShips = 1; numOfShips <= maxShips ; numOfShips++) {
 
-			boolean setUpShip = false;
+			gameMap.placeShips();
 
-			while (setUpShip != true) {
-				setUpShip = gameMap.placeShips();
-			}
+
+
+			char orientation = gameMap.orientation;
+			int length = gameMap.length;
+			int row = gameMap.row;
+			int column = gameMap.column;
+			
+			// We should create the object here because placeShip was successful
+			shipArray.add(new Ship(orientation, length, row, column));
 
             System.out.println("\n" + (maxShips-numOfShips) + " more ships to place");
 
@@ -25,7 +34,7 @@ public class Game{
 
         gameMap.returnBoard();
 
-        System.out.println();
+        shipArray.get(2).getLength();
 
 	
     }

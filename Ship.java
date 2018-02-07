@@ -11,7 +11,7 @@ class Ship{
 	int row = 0;
 	boolean hit = false;
 	boolean sunken = false;
-	
+
 	public Ship(char orient,int len, int col, int ro){
 		orientation = orient;
 		length = len;
@@ -30,8 +30,8 @@ class Ship{
 		return true;
 	}
 
-	public int getLength() {
-		return this.length;
+	public void getLength() {
+		System.out.println("\n\n\n\n\nLength of: " + this.length);
 	}
 
 	public void setCoordinates(int x, int y, char orientation){

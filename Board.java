@@ -152,55 +152,61 @@ class Board{
 		}
 	}		
 	
+	boolean valid = true;
+
+	public int length = 0;
+	public int column = 0;
+	public int row = 0;
+	public char orientation = 'n';
+	public int choice = 0;
 	
-	
-	public boolean placeShips(){
+	public void placeShips(){
 		/*comment horizontal or vertical only
 		if picked horizontal indicate the left most coordinate of where you want to put it
 		if vertical, pick the top most coordinate of where you want to put it.
 		*/
-		boolean valid = true;
-		int length = 0;
-		int column = 0;
-		int row = 0;
-		char orientation = 'n';
-		int choice = 0;
-		Ship a1 = new Ship('n',0,0,0);
 
-		
-		returnBoard();
-		
-		
-		
-		length = shipProperties("length");
-		a1.length = length;
-		choice = shipProperties("orientation"); //choose from horizontal or vertical
-		switch(choice) {
-			case 1: {
-				orientation = 'h';
-				break;
-			}
-			case 2: {
-				orientation = 'v';
-				break;
-			}
-		}
-		row = chooseCoordinate("row");		//used choose Coordinate method.
-		column = chooseCoordinate("column");
-		//check if ship can be put on the board	using method	
-		valid = shipFitsBoard(orientation,length,column,row);
-		System.out.println(a1.length);
-		
-		//actions for if ship can/can't be put in the board
-		if (valid == false) {
-			System.out.println("Cannot fit the ship in the indicated coordinate. Please try again"); //Could make them choose to only change a specific characteristic.
-			return false; //failed to set ship into the board
-		}else {			//if all is good, update gameBoard.
-			addShip(orientation,length,column,row);
+		do {
+			returnBoard();
 
-			return true; //Success on setting the ships into the board
-		}	
-	
+			length = 0;
+			column = 0;
+			row = 0;
+			orientation = 'n';
+			choice = 0;
+
+
+			length = shipProperties("length");
+			choice = shipProperties("orientation"); //choose from horizontal or vertical
+
+			switch(choice) {
+				case 1: {
+					orientation = 'h';
+					break;
+				}
+				case 2: {
+					orientation = 'v';
+					break;
+				}
+			}
+			row = chooseCoordinate("row");		//used choose Coordinate method.
+			column = chooseCoordinate("column");
+
+
+
+			//check if ship can be put on the board	using method	
+			valid = shipFitsBoard(orientation,length,column,row);
+			
+			//actions for if ship can/can't be put in the board
+			if (valid == false) {
+				System.out.println("Cannot fit the ship in the indicated coordinate. Please try again"); //Could make them choose to only change a specific characteristic.
+				valid = false; //failed to set ship into the board
+			}else {			//if all is good, update gameBoard.
+				addShip(orientation,length,column,row);
+
+				valid = true; //Success on setting the ships into the board
+			}	
+		} while (valid != true);
 	}
 	
 		
