@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Game{
 
@@ -51,25 +52,46 @@ public class Game{
 	
 	
 	public static int askForInput(String askThis) {
+		int number = 0;
+
 		switch(askThis) {
-			case "row": {
+
+			case "row":
 				System.out.print("\nRow Coordinate: ");
 				break;
-			}
-			case "column": {
+			case "column": 
 				System.out.print("\nColumn Coordinate: ");	
 				break;
-			}
-			case "length": {
+			case "length": 
 				System.out.print("\nLength of ship (2-5): ");
 				break;
-			}
-			case "orientation": {
+			case "orientation": 
 				System.out.print("\nOrientation of ship \n1) Horizontal \n2) Vertical\nOrientation: ");	
 				break;
+			case "menu":
+	            System.out.println("Choose a menu option: ");
+	            System.out.println("1.) Player vs Player\n2.) Player vs AI\n3.) Exit");
+	            break;
+	        default:
+	        	System.out.println("There was no input required");
+	        	break;
+		}
+
+		boolean takeInput = false;
+
+		Scanner keyboard = new Scanner(System.in);	
+		while (takeInput != true) {
+			try {
+				number = keyboard.nextInt();	//EXCEPTION MAKE SURE IT'S A NUMBER
+				takeInput = true;
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid Input.");
+				keyboard.next();
+				takeInput = false;
 			}
-		}Scanner keyboard = new Scanner(System.in);	
-		int number = keyboard.nextInt();	//EXCEPTION MAKE SURE IT'S A NUMBER
+
+
+		}
 		//keyboard.close();
 		return number;
 		

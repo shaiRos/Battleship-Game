@@ -7,10 +7,7 @@ public class MenuScreen {
 
         do {
 
-            System.out.println("Choose a menu option: ");
-            System.out.println("1.) Player vs Player\n2.) Player vs AI\n3.) Exit");
-            Scanner input = new Scanner(System.in);
-            int userChoice = input.nextInt();
+            int userChoice = Game.askForInput("menu");
 
             switch (userChoice) {
                 case 1:
