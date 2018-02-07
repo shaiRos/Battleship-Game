@@ -28,24 +28,40 @@ class Board{
 	public void returnBoard() {
 		        
         for (int x = 0; x < boardSize; x++) {
-        		System.out.print(("\t" + (x + 1)));
+        	// Will print the x axis
+        	System.out.print(("\t" + (x + 1)));
         }
+        // Print a blank line for formatting purposes
         System.out.println();
         
         for (int row=0 ; row < boardSize ; row++ ) {
+        	// Print the y axis - will probably change to letters
+        	// Convert from numerical to char
             System.out.print( (row + 1) + "" );
+
+            // For each column, check if any of the values match the following
+            // They're spaced out for now so we can edit them with ease
             for (int column=0 ; column < boardSize ; column++ ) {
                 if (gameBoard[row][column] == 0) {
+
                     System.out.print("\t" + "~");
+
                 } else if (gameBoard[row][column] == -1) {
+
                     System.out.print("\t" + "*");
+
                 } else if (gameBoard[row][column] == 1) {
+
                     System.out.print("\t" + "X");
+
                 } else if (gameBoard[row][column] == 5) {
+
                 	System.out.print("\t" + "{}"); // TEMPORARY
+
                 }
                 
             }
+            // Another blank space
             System.out.println();
         }
 	}
@@ -206,6 +222,8 @@ class Board{
 				System.out.println("Cannot fit the ship in the indicated coordinate. Please try again"); //Could make them choose to only change a specific characteristic.
 				valid = false; //failed to set ship into the board
 			}else {			//if all is good, update gameBoard.
+
+				// Adds ship to the grid
 				addShip(orientation,length,column,row);
 
 				valid = true; //Success on setting the ships into the board
