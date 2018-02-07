@@ -30,6 +30,9 @@ class Ship{
 		return true;
 	}
 
+
+	// TEMP TEMP TEMP TEMP TEMP
+	// This is a temp method so we could test the ArrayList pull
 	public void getLength() {
 		System.out.println("\n\n\n\n\nLength of: " + this.length);
 	}

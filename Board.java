@@ -154,6 +154,10 @@ class Board{
 	
 	boolean valid = true;
 
+	// TEMP TEMP TEMP TEMP TEMP
+	// This stuff is outside placeShips on purpose
+	// We can pull info from the placeShips setup and create Ship objects to store into the arraylist
+
 	public int length = 0;
 	public int column = 0;
 	public int row = 0;
@@ -168,7 +172,7 @@ class Board{
 
 		do {
 			returnBoard();
-
+			// Reset the values everytime the loop is run
 			length = 0;
 			column = 0;
 			row = 0;
