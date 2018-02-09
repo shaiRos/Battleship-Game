@@ -77,7 +77,31 @@ public class Game{
 
 	// was thinking of moving stuff into here once it was working, but it doesnt
 
-	public static void sendAttack(int row, int column) {
+	public static void sendAttack(Board playerBoard, int row, int column) {
+        // This is broken, check isnt working //fixed. Switched column and row....
+        int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
+        if (boardValue == 5) {
+            playerBoard.guessBoard[column - 1][row - 1] = 1;
+            System.out.println("Hit!");
+
+        } else if (boardValue == 0) {
+            playerBoard.guessBoard[column - 1][row - 1] = -1;
+            System.out.println("Miss!");
+
+        } else if (boardValue == -1) {
+            playerBoard.guessBoard[column - 1][row - 1] = -1;
+            System.out.println("Miss!");
+        }
+
+         else if (boardValue == 1) {
+            System.out.println("Previously hit!");
+
+        // Should probably have a different check case for else
+        } else {
+            System.out.println("I broke something whoops");
+            System.out.println("Debuggies");
+            System.out.println(boardValue);
+        }
 
 	}
 
