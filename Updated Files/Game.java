@@ -77,10 +77,26 @@ public class Game{
 
 	// was thinking of moving stuff into here once it was working, but it doesnt
 
-	public void sendAttack(int xCor, int yCor) {
+	public static void sendAttack(int xCor, int yCor) {
 
 	}
 
+	public static boolean winCondition(Board board) {
+        int shipCounter = 0;
+        for (int x = 0; x < board.getBoardSize(); x++) {
+            for (int y = 0; y < board.getBoardSize(); y++) {
+                if (board.gameBoard[x][y] == '5') {
+                    shipCounter++;
+                }
+            }
+        }
+
+        if (shipCounter == 0) {
+            return true;
+        }
+        return false;
+
+    }
    public static void main(String[] args) {
    		// create boards for both the players
         Board player1Board = new Board();
@@ -99,13 +115,18 @@ public class Game{
 
 		int boardSize = 8;
 		do {
-			
+
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
 
 			clearScreen();
 			System.out.println("Player 1 turn starting....");
 			player1.playerTurn();
+			// if (winCondition(player2Board) == true) {
+			// 	System.out.println("Player 1 has won!");
+			// 	sleepThread(5000);
+			// 	System.exit(0);
+			// }
 			sleepThread(2500);
 			
 			//check win conditions for every turn
@@ -113,6 +134,11 @@ public class Game{
 			clearScreen();
 			System.out.println("Player 2 turn starting....");
 			player2.playerTurn();
+			// if (winCondition(player1Board) == true) {
+			// 	System.out.println("Player 2 has won!");
+			// 	sleepThread(5000);
+			// 	System.exit(0);
+			// }
 			sleepThread(2500);
 			
 			//check win conditions maybe make this an exception. throws an exception if winning conditions are met, catches condition and exits loop.

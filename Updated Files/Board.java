@@ -23,11 +23,10 @@ class Board{
 		return minShipSize;
 	}
 	// I changed the way the board is formatted
-	// -1 = Miss, 	denoted by *
-	// 0 = Default, 		denoted by ~
+	// -1 = Miss, 	    denoted by * 
+	// 0 = Default, 	denoted by ~
 	// 1 = Hit, 		denoted by X
 	// 5 - our ship 	denoted by S
-    // 6 - our hit ship denoted by Z
 	// We can add more if we like - Brandon
 	public void returnBoard(int boardType) {
 		int[][] board = null;
@@ -56,7 +55,7 @@ class Board{
         // Print a blank line for formatting purposes
         System.out.println();
 
-        for (int row=0 ; row < boardSize ; row++ ) {
+        for (int row = 0 ; row < boardSize ; row++ ) {
         	// Print the y axis - will probably change to letters
         	// Convert from numerical to char
             System.out.print( (row + 1) + "" );
@@ -94,8 +93,6 @@ class Board{
             System.out.println();
         }
 	}
-	
-
 	
 	
 	//check if ship can be put on the board. if 'h' changingCoord = column if 'v' changingCoord = row

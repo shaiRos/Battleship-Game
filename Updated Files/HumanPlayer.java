@@ -47,11 +47,14 @@ public class HumanPlayer {
 				if (boardValue == 5) {
                     playerBoard.guessBoard[column - 1][row - 1] = 1;
                     System.out.println("Hit!");
+
                 } else if (boardValue == 0) {
                     playerBoard.guessBoard[column - 1][row - 1] = -1;
                     System.out.println("Miss!");
+                    
                 } else if (boardValue == 1) {
                     System.out.println("Previously hit!");
+
                 } else {
                     System.out.println("I broke something whoops");
                     System.out.println("Debuggies");
