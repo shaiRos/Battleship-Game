@@ -77,7 +77,7 @@ public class Game{
 
 	// was thinking of moving stuff into here once it was working, but it doesnt
 
-	public static void sendAttack(int xCor, int yCor) {
+	public static void sendAttack(int row, int column) {
 
 	}
 
@@ -85,7 +85,7 @@ public class Game{
         int shipCounter = 0;
         for (int x = 0; x < board.getBoardSize(); x++) {
             for (int y = 0; y < board.getBoardSize(); y++) {
-                if (board.gameBoard[x][y] == '5') {
+                if (board.gameBoard[x][y] == 5) {
                     shipCounter++;
                 }
             }
@@ -115,18 +115,18 @@ public class Game{
 
 		int boardSize = 8;
 		do {
-
+            // set each player's guess board to the other player's game board
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
 
 			clearScreen();
 			System.out.println("Player 1 turn starting....");
 			player1.playerTurn();
-			// if (winCondition(player2Board) == true) {
-			// 	System.out.println("Player 1 has won!");
-			// 	sleepThread(5000);
-			// 	System.exit(0);
-			// }
+			if (winCondition(player2Board) == true) {
+				System.out.println("Player 1 has won!");
+				sleepThread(2500);
+				System.exit(0);
+			}
 			sleepThread(2500);
 			
 			//check win conditions for every turn
@@ -134,11 +134,11 @@ public class Game{
 			clearScreen();
 			System.out.println("Player 2 turn starting....");
 			player2.playerTurn();
-			// if (winCondition(player1Board) == true) {
-			// 	System.out.println("Player 2 has won!");
-			// 	sleepThread(5000);
-			// 	System.exit(0);
-			// }
+			if (winCondition(player1Board) == true) {
+				System.out.println("Player 2 has won!");
+				sleepThread(2500);
+				System.exit(0);
+			}
 			sleepThread(2500);
 			
 			//check win conditions maybe make this an exception. throws an exception if winning conditions are met, catches condition and exits loop.

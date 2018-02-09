@@ -40,11 +40,9 @@ public class HumanPlayer {
 
                 System.out.println("Sending attack to (" + row + "," + column + ")" );
 
-
-
                 // This is broken, check isnt working //fixed. Switched column and row....
                 int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
-				if (boardValue == 5) {
+                if (boardValue == 5) {
                     playerBoard.guessBoard[column - 1][row - 1] = 1;
                     System.out.println("Hit!");
 
@@ -57,8 +55,6 @@ public class HumanPlayer {
                     System.out.println("Miss!");
                 }
 
-
-
                  else if (boardValue == 1) {
                     System.out.println("Previously hit!");
 
@@ -67,7 +63,6 @@ public class HumanPlayer {
                     System.out.println("Debuggies");
                     System.out.println(boardValue);
                 }
-
 
             }
             catch (NumberFormatException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
