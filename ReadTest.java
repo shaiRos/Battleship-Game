@@ -1,5 +1,13 @@
+/* Cited by: 
+** https://www.caveofprogramming.com/java/java-file-reading-and-writing-files-in-java.html
+** Monday Feb 5 2018 
+*/ 
+
+
 import java.io.*;
 import java.util.Scanner;
+
+
 
 public class ReadTest{
 	public static void main(String[] args)
