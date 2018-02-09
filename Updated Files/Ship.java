@@ -21,15 +21,7 @@ class Ship{
 		// parts of the ship have and haven't been hit. Makes checking if it's sunket alot easier too.
 		int[] shipPoints = new int [len];
 	}
-	
-	public void setShipValues(char orient, int len, int col, int ro){
-		orientation = orient;
-		length = len;
-		column = col;
-		row = ro;	
-	}	
-	
-	
+
 	public boolean isHit(int id, int x, int y) {
 		return true;
 	}

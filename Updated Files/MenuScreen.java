@@ -7,7 +7,7 @@ public class MenuScreen {
 
         do {
 
-            int userChoice = Game.askForInput("menu");
+            int userChoice = 1;
 
             switch (userChoice) {
                 case 1:
