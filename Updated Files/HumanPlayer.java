@@ -18,13 +18,13 @@ public class HumanPlayer {
                 System.out.println("Current game board");
                 // return the game board
                 playerBoard.returnBoard(1);
-                System.out.println("\n\n\n");
+                System.out.println("\n");
                 System.out.println("Current guessing board");
                 // return the guessing board
                 playerBoard.returnBoard(2);
                 System.out.println("Enter coordinates to attack (xCoor yCoor): ");
 
-                // split up multi line information
+                // Stolen from other method - Take row and column from input
                 Scanner input = new Scanner(System.in);
                 String inputLine = input.nextLine();
                 String[] inputInfo = inputLine.split(" ");

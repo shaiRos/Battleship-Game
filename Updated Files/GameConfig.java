@@ -10,15 +10,16 @@ public class GameConfig {
 		while (formatted != true){
 			try {
 				
-				System.out.print("\nIndicate (orientation length xCoord yCoord): ");
+				System.out.print("\nIndicate (orientation length row column): ");
 				Scanner Setup = new Scanner(System.in);
 				String setup = Setup.nextLine();
 				String setupInfo[] = setup.split(" ");
 				char orientation = setupInfo[0].toLowerCase().charAt(0);
 				int length = Integer.parseInt(setupInfo[1]);
-				int column = Integer.parseInt(setupInfo[2]);
-				int row = Integer.parseInt(setupInfo[3]);
-				
+				char tempRow = setupInfo[2].toUpperCase().charAt(0);
+				int row = (((int)(tempRow) - 65 ) + 1);
+				int column = Integer.parseInt(setupInfo[3]);
+
 				//all checks
 				validateCoordinate(column,row, board.getBoardSize());		//check if coordinates are within the board
 				validateShipProperties(length,orientation);

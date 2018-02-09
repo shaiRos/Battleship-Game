@@ -43,7 +43,7 @@ public class Game{
 
 		System.out.println("Player 1 game board successfully set. Player 2 standby...");
 
-		sleepThread(2500);
+		sleepThread(1000);
 		clearScreen();
 
 
@@ -64,13 +64,8 @@ public class Game{
 
 		System.out.println("Player 2 game board successfully set.");
 
-		sleepThread(2500);
+		sleepThread(1000);
 		clearScreen();
-
-		System.out.println("DEBUG\n\n\nPLAYER 1 BOARD\n");
-		player1Board.returnBoard(1);
-		System.out.println("DEBUG\n\n\nPLAYER 2 BOARD\n");
-		player2Board.returnBoard(2);
 
 	}
 
@@ -132,8 +127,6 @@ public class Game{
 		// Create a new human that can access their boards
 		HumanPlayer player1 = new HumanPlayer(player1Board);
 		HumanPlayer player2 = new HumanPlayer(player2Board);
-		
-		
 		
 		boolean winCondition = false;
 
