@@ -14,8 +14,13 @@ class Board{
 	static int maxShipSize = 5;
 	static int minShipSize = 2;
 	
+    // getters and setters for our board and ships
     public static int getBoardSize() {
         return boardSize;
+    }
+
+    public static void setBoardSize(int size) {
+        boardSize = size;
     }
 
     public static int getMinShipSize() {
@@ -26,11 +31,11 @@ class Board{
         return maxShipSize;
     }
 
+    // constructor for our board
 	public void Board(){
 	}
     
-	public int getShipSize(){
-		return minShipSize;
+
 	}
 	// I changed the way the board is formatted
 	// -1 = Miss, 	    denoted by * 

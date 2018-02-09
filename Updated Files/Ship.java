@@ -9,9 +9,8 @@ class Ship{
 	char orientation = 0;
 	int column = 0;
 	int row = 0;
-	boolean hit = false;
-	boolean sunken = false;
 
+	// constructor for ship
 	public Ship(char orient,int len, int col, int ro){
 		orientation = orient;
 		length = len;
