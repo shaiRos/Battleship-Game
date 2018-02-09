@@ -36,7 +36,7 @@ class Board{
 	}
     
 
-	}
+	
 	// I changed the way the board is formatted
 	// -1 = Miss, 	    denoted by * 
 	// 0 = Default, 	denoted by ~
