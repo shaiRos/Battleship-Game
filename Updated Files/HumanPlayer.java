@@ -58,6 +58,7 @@ public class HumanPlayer {
                  else if (boardValue == 1) {
                     System.out.println("Previously hit!");
 
+                // Should probably have a different check case for else
                 } else {
                     System.out.println("I broke something whoops");
                     System.out.println("Debuggies");
