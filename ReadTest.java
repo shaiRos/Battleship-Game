@@ -10,8 +10,8 @@ public class ReadTest{
 
     public static void getShipInfo()
     {
-        //Initiate which file to read
-        String fileToRead = "readmebitch.txt";
+        //Initiate which file to read (must create text file with following name)
+        String fileToRead = "shipsToAdd.txt";
 
         //Initiate line for ship data from file 
         String shipInfo = null;
