@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class GameConfig {
 	
-	
+	// The main code for inserting ships on the other board
+	// Error checking, logic checking etc
 	public static void setupInput(Ship name, Board board) {
 		
 		boolean formatted = false;

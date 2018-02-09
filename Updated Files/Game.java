@@ -14,6 +14,7 @@ public class Game{
 	// This will pause program execution - use what would be a reasonable
 	// delay for the user to read the console
 	public static void sleepThread(int milliseconds) {
+        // Try sleeping for specified time given in ms
 		try {
 			Thread.sleep(milliseconds);
 		} catch (InterruptedException e) {
@@ -21,15 +22,18 @@ public class Game{
 		}
 	}
 
+    // setup the initial board for gameplay
+	public static void setupBoard(Board player1Board, Board player2Board, int shipCount) {
 
-	public static void setupBoard(Board player1Board, Board player2Board) {
-
-		int maxShips = 2;	//max number of ships for each board
+		int maxShips = shipCount;	//max number of ships for each board
 
 		System.out.println("Player 1 setup phase: ");
+        // create a list to store our ships into
 		ArrayList<Ship> shipArray1 = new ArrayList<Ship>();
-			player1Board.returnBoard(1);
+        // return the game board of current player
+		player1Board.returnBoard(1);
 
+        // loop to add ships into ship array
 		for (int numOfShips = 1; numOfShips <= maxShips ; numOfShips++) {
 			//creates the ship object first with 0 values...will be set in placeShips.
 			shipArray1.add(new Ship('n', 0, 0, 0));
@@ -42,15 +46,17 @@ public class Game{
 		}
 
 		System.out.println("Player 1 game board successfully set. Player 2 standby...");
-
 		sleepThread(1000);
 		clearScreen();
 
 
-
 		System.out.println("Player 2 setup phase: ");
+        // create a list to store our ships into
 		ArrayList<Ship> shipArray2 = new ArrayList<Ship>();
+        // return the game board of the current player
 		player2Board.returnBoard(1);
+
+        // loop to add ships into ship array
 		for (int numOfShips = 1; numOfShips <= maxShips ; numOfShips++) {
 			//creates the ship object first with 0 values...will be set in placeShips.
 			shipArray2.add(new Ship('n', 0, 0, 0));
@@ -73,7 +79,8 @@ public class Game{
 	// was thinking of moving stuff into here once it was working, but it doesnt
 
 	public static void sendAttack(Board playerBoard, int row, int column) {
-        // This is broken, check isnt working //fixed. Switched column and row....
+        // check the value of the block specified, if the values match, change the values with
+        // a hit or a miss
         int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
         if (boardValue == 5) {
             playerBoard.guessBoard[column - 1][row - 1] = 1;
@@ -100,6 +107,7 @@ public class Game{
 
 	}
 
+    // Check the board for remaining ships
 	public static boolean winCondition(Board board) {
         int shipCounter = 0;
         for (int x = 0; x < board.getBoardSize(); x++) {
@@ -118,24 +126,33 @@ public class Game{
     }
    public static void main(String[] args) {
    		// create boards for both the players
+        int userBoardSize = 8;
+        int userShipCount = 2;
+
+        // Initialize the boards and set the board sizes
         Board player1Board = new Board();
+        player1Board.setBoardSize(userBoardSize);
         Board player2Board = new Board();
+        player2Board.setBoardSize(userBoardSize);
 
         // populate boards with battleships
-		setupBoard(player1Board, player2Board);
+		setupBoard(player1Board, player2Board, userShipCount);
 
 		// Create a new human that can access their boards
 		HumanPlayer player1 = new HumanPlayer(player1Board);
 		HumanPlayer player2 = new HumanPlayer(player2Board);
 		
+        // set the win condition
 		boolean winCondition = false;
 
-		int boardSize = 8;
+
+        // Game loop
 		do {
             // set each player's guess board to the other player's game board
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
 
+            // Player 1 turn
 			clearScreen();
 			System.out.println("Player 1 turn starting....");
 			player1.playerTurn();
@@ -148,6 +165,7 @@ public class Game{
 			
 			//check win conditions for every turn
 			
+            // Player 2 turn
 			clearScreen();
 			System.out.println("Player 2 turn starting....");
 			player2.playerTurn();

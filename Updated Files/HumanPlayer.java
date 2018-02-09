@@ -38,12 +38,14 @@ public class HumanPlayer {
                 } else {
                     formatted = true;
                 }
-
+                // Specify where the attack has went
                 System.out.println("Sending attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
 
+                // Send the attack. Check if the attack hits or misses
                 Game.sendAttack(playerBoard, row, column);
 
             }
+            // error checking
             catch (NumberFormatException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("Wrong format");
                 formatted = false;
