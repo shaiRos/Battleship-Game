@@ -22,21 +22,6 @@ class Ship{
 		int[] shipPoints = new int [len];
 	}
 
-	public boolean isHit(int id, int x, int y) {
-		return true;
-	}
-
-	public boolean isSunken(int id, int x, int y) {
-		return true;
-	}
-
-
-	// TEMP TEMP TEMP TEMP TEMP
-	// This is a temp method so we could test the ArrayList pull
-	public void getLength() {
-		System.out.println("\n\n\n\n\nLength of: " + this.length);
-	}
-
 	public void setCoordinates(int x, int y, char orientation){
 		int [][] coordinates;
 		coordinates = new int [length][2];
