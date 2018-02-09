@@ -41,6 +41,10 @@ How to update files on git
 	Click on that branch, add an author and comments if you like, then request a pull
 	You will be able to see and fix your merge conflicts
 
+5.) Click on the merge pull request, close the branch after you're done
+6.) Pull all the new changes by
+	git checkout master
+	git pull origin master
 ======================================
 
 
