@@ -22,6 +22,14 @@ class Ship{
 		int[] shipPoints = new int [len];
 	}
 	
+	public void setShipValues(char orient, int len, int col, int ro){
+		orientation = orient;
+		length = len;
+		column = col;
+		row = ro;	
+	}	
+	
+	
 	public boolean isHit(int id, int x, int y) {
 		return true;
 	}

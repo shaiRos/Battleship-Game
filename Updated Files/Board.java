@@ -23,8 +23,8 @@ class Board{
 		return minShipSize;
 	}
 	// I changed the way the board is formatted
-	// -1 = Default, 	denoted by ~
-	// 0 = Miss, 		denoted by *
+	// -1 = Miss, 	denoted by *
+	// 0 = Default, 		denoted by ~
 	// 1 = Hit, 		denoted by X
 	// 5 - our ship 	denoted by S
     // 6 - our hit ship denoted by Z
@@ -63,19 +63,19 @@ class Board{
 
             // For each column, check if any of the values match the following
             // They're spaced out for now so we can edit them with ease
-            for (int column=0 ; column < boardSize ; column++ ) {
+            for (int column = 0 ; column < boardSize ; column++ ) {
                 if (guessing != true) {
 
                     if (board[row][column] == 0) {
                         System.out.print("\t" + hidden);
                     } else if (board[row][column] == -1) {
-                        System.out.print("\t" + miss);
-                    } else if (board[row][column] == 1) {
+                        System.out.print("\t" + hidden);	//if we want the players to see where the enemy missed in their gameBoard
+                    } else if (board[row][column] == 1) {	// can change to miss ^^^
                         System.out.print("\t" + hit);
                     } else if (board[row][column] == 5) {
                         System.out.print("\t" + ship);
                     }
-                //I'm unsure if this is the culprit, it might be but can't check
+              
                 } else {
                     if (board[row][column] == -1) {
                         System.out.print("\t" + miss);
@@ -83,6 +83,9 @@ class Board{
                         System.out.print("\t" + hit);
                     } else if (board[row][column] == 0) {
                         System.out.print("\t" + hidden);
+                    } else if (board[row][column] == 5) {
+                        System.out.print("\t" + hidden);
+
                     }
                 }
 
@@ -145,7 +148,7 @@ class Board{
 				for (int x = row; x <= maxRow; x++) {	//change values
 						gameBoard[x-1][column-1] = 5;
 				}break;
-			}//SHOULD PROBABLY MAKE A SHIP OBJECT AFTER UPDATING THE BOARD. AND TRANSFER IT'S CHARACTERISTICS
+			}
 		}
 	}		
 	

@@ -93,11 +93,13 @@ public class Game{
 		HumanPlayer player1 = new HumanPlayer(player1Board);
 		HumanPlayer player2 = new HumanPlayer(player2Board);
 		
+		
+		
 		boolean winCondition = false;
 
+		int boardSize = 8;
 		do {
-			//WIP
-			// Logic failure somewhere here, proceed if you dare
+			
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
 
@@ -105,11 +107,16 @@ public class Game{
 			System.out.println("Player 1 turn starting....");
 			player1.playerTurn();
 			sleepThread(2500);
+			
+			//check win conditions for every turn
+			
 			clearScreen();
 			System.out.println("Player 2 turn starting....");
 			player2.playerTurn();
 			sleepThread(2500);
-
+			
+			//check win conditions maybe make this an exception. throws an exception if winning conditions are met, catches condition and exits loop.
+			
 		} while (winCondition != true);
 
 

@@ -42,13 +42,13 @@ public class HumanPlayer {
 
 
 
-                // This is broken, check isnt working
-                int boardValue = (playerBoard.guessBoard[row - 1][column - 1]);
-                if (boardValue == 5) {
-                    playerBoard.guessBoard[row - 1][column - 1] = 1;
+                // This is broken, check isnt working //fixed. Switched column and row....
+                int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
+				if (boardValue == 5) {
+                    playerBoard.guessBoard[column - 1][row - 1] = 1;
                     System.out.println("Hit!");
-                } else if (boardValue == -1 || boardValue == 0) {
-                    playerBoard.guessBoard[row - 1][column - 1] = 0;
+                } else if (boardValue == 0) {
+                    playerBoard.guessBoard[column - 1][row - 1] = -1;
                     System.out.println("Miss!");
                 } else if (boardValue == 1) {
                     System.out.println("Previously hit!");
