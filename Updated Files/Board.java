@@ -68,7 +68,7 @@ class Board{
                     if (board[row][column] == 0) {
                         System.out.print("\t" + hidden);
                     } else if (board[row][column] == -1) {
-                        System.out.print("\t" + hidden);	//if we want the players to see where the enemy missed in their gameBoard
+                        System.out.print("\t" + miss);	//if we want the players to see where the enemy missed in their gameBoard
                     } else if (board[row][column] == 1) {	// can change to miss ^^^
                         System.out.print("\t" + hit);
                     } else if (board[row][column] == 5) {
