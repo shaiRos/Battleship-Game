@@ -60,7 +60,12 @@ class Board{
         for (int row = 0 ; row < boardSize ; row++ ) {
         	// Print the y axis - will probably change to letters
         	// Convert from numerical to char
-            System.out.print( (row + 1) + "" );
+            
+            //System.out.print( (row + 1) + "" );
+
+
+            char rowName = (char)(row + 65);
+            System.out.print(rowName);
 
             // For each column, check if any of the values match the following
             // They're spaced out for now so we can edit them with ease
