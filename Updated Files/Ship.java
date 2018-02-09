@@ -60,8 +60,13 @@ class Ship{
 		*/
 		
 	}
-	
-	
-	
+
+	public void setShipValues(char orient, int len, int col, int ro){
+		orientation = orient;
+		length = len;
+		column = col;
+		row = ro;	
+	}	
+
 	
 }
