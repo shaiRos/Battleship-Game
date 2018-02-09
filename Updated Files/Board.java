@@ -6,6 +6,8 @@
 import java.util.Scanner;
 
 class Board{
+
+    // Remove duplicates of these, turn these into privates, create getter methods for these
 	int boardSize = 8;	
 	int [][] gameBoard = new int [boardSize][boardSize];
 	int [][] guessBoard = new int [boardSize][boardSize];
@@ -13,7 +15,7 @@ class Board{
 	int minShipSize = 2;
 	
     public int getBoardSize() {
-        return boardSize;
+        return this.boardSize;
     }
 
 	public void Board(){
