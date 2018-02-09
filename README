@@ -25,6 +25,12 @@ How to delete from Git, but not locally:
 2.) git commit -m "Comment here, sign your name at the end of it"
 3.) git push origin master
 
+How to undo your commit if you didn't push
+1.) git commit -m "Oops."
+2.) git reset HEAD~
+3.) git add ........
+4.) git commit -c ORIG_HEAD
+
 NEW ==================================
 How to update files on git
 1.) Create a new branch using
