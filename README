@@ -1,0 +1,75 @@
+Commands for Git
+
+How to setup a folder for Git
+1.) git init
+2.) touch "test", or just make a test file and remember it's name
+3.) git add *
+4.) git commit -m "Initial test commit"
+5.) git remote add origin https://github.com/bzhang908/cpsc233BattleShip.git
+6.) git pull https://github.com/bzhang908/cpsc233BattleShip.git master --allow-unrelated-histories
+7.) git push origin master
+
+
+How to add or update files:
+1.) git add * (use star to update entire folder, otherwise replace with filename)
+2.) git commit -m "Comment here, Sign your name at the end of it"
+3.) git push origin branchname (master for main branch)
+
+How to delete files:
+1.) git rm "filename"
+2.) git commit -m "Comment here, Sign your name at the end of it"
+3.) git push origin branchname (master for main branch)
+
+How to delete from Git, but not locally:
+1.) git rm --cached "filename"
+2.) git commit -m "Comment here, sign your name at the end of it"
+3.) git push origin master
+
+
+How to update local branch with info from repo
+	git pull origin master --rebase
+
+	IF THERE ARE MERGE CONFLICTS, WE MUST CORRECT THEM MANUALLY
+	
+	Open the folder .git/rebase-apply/patch
+
+	AFTER THIS IS FIXED, YOU CAN RUN
+	git rebase --continue
+
+	THIS WILL LET YOU REVIEW BEFORE YOU OVERWITE ANYTHING THAT IS CONFLICTING
+	
+	After pulling the changes, re-open the file and manually reformat everything
+	(There should be a message in all caps <HEAD> and ===== denoting the changes, remove those)
+
+	Then, readd the files by
+	git add *
+	git commit -m "Comment here"
+	git push origin master
+
+
+If that does not work, use this command instead
+	git pull https://github.com/bzhang908/CPSC233BattleShip.git master
+
+
+Lesser important stuff
+
+How to create a branch:
+1.) Create a branch using the command
+	git checkout -b [Name of branch]
+2.) Change working branch to new branch
+	git checkout [name of branch]
+NOTE NOTE NOTE NOTE NOTE NOTE
+TO CHANGE BACK TO THE MAIN BRANCH, USE THE COMMAND
+	git checkout master
+
+How to push branch to git:
+	git push origin [name of branch]
+
+How to see branches on project
+	git branch
+
+How to delete a branch
+	To delete the remote branch on git
+	git push -d origin <BranchName>
+	To delete the locally saved branch
+	git branch -d <BranchName>
