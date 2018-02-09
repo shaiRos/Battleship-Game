@@ -10,25 +10,25 @@ public class GameConfig {
 		while (formatted != true){
 			try {
 				
-				System.out.print("\nIndicate (orientation length row column): ");
+				System.out.print("\nIndicate (orientation length column row): ");
 				Scanner Setup = new Scanner(System.in);
 				String setup = Setup.nextLine();
 				String setupInfo[] = setup.split(" ");
 				char orientation = setupInfo[0].toLowerCase().charAt(0);
 				int length = Integer.parseInt(setupInfo[1]);
-				char tempRow = setupInfo[2].toUpperCase().charAt(0);
-				int row = (((int)(tempRow) - 65 ) + 1);
-				int column = Integer.parseInt(setupInfo[3]);
+				char tempColumn = setupInfo[2].toUpperCase().charAt(0);
+				int column = (((int)(tempColumn) - 65 ) + 1);
+				int row = Integer.parseInt(setupInfo[3]);
 
 				//all checks
-				validateCoordinate(column,row, board.getBoardSize());		//check if coordinates are within the board
-				validateShipProperties(length,orientation);
-				board.shipFitsBoard(orientation,length,column,row);
+				validateCoordinate(row,column, board.getBoardSize());		//check if coordinates are within the board
+				validateShipProperties(board,length,orientation);
+				board.shipFitsBoard(orientation,length,row,column);
 				
 				// Adds ship to the grid
-				board.addShip(orientation,length,column,row);
+				board.addShip(orientation,length,row,column);
 				//sets the values of the ship object
-				name.setShipValues(orientation,length,column, row); 				
+				name.setShipValues(orientation,length,row,column); 				
 				
 				
 				formatted = true;
@@ -54,11 +54,9 @@ public class GameConfig {
 		
 	}
 	
-	public static void validateShipProperties(int len, char orientation) {
-		int maxShipSize = 5;
-		int minShipSize = 2;	
+	public static void validateShipProperties(Board board, int len, char orientation) {
 		
-		if (len > maxShipSize || len < minShipSize) {  //check if ship is the supported size
+		if (len > Board.getMaxShipSize() || len < Board.getMinShipSize()) {  //check if ship is the supported size
 			throw new IllegalArgumentException("Ship size is not supported");
 		}
 		if (orientation != 'h' && orientation != 'v') {

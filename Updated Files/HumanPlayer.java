@@ -22,15 +22,16 @@ public class HumanPlayer {
                 System.out.println("Current guessing board");
                 // return the guessing board
                 playerBoard.returnBoard(2);
-                System.out.println("Enter coordinates to attack (xCoor yCoor): ");
+                System.out.println("Enter coordinates to attack (column row): ");
 
                 // Stolen from other method - Take row and column from input
                 Scanner input = new Scanner(System.in);
                 String inputLine = input.nextLine();
                 String[] inputInfo = inputLine.split(" ");
-                int row = Integer.parseInt(inputInfo[0]);
-                int column = Integer.parseInt(inputInfo[1]);
-                
+                char tempColumn = inputInfo[0].toUpperCase().charAt(0);
+                int column = (((int)(tempColumn) - 65 ) + 1);
+                int row = Integer.parseInt(inputInfo[1]);
+
                 // check to make sure its a legit value
                 if ((row > playerBoard.getBoardSize()) || (column > playerBoard.getBoardSize()) || (row < 0) || (column < 0)) {
                     System.out.println("Invalid coordinates");
@@ -38,7 +39,7 @@ public class HumanPlayer {
                     formatted = true;
                 }
 
-                System.out.println("Sending attack to (" + row + "," + column + ")" );
+                System.out.println("Sending attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
 
                 Game.sendAttack(playerBoard, row, column);
 
