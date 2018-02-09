@@ -162,10 +162,6 @@ public class Game{
 			
 		} while (winCondition != true);
 
-
-        // We can access the ships using this format
-        // shipArray.get(0).getLength();
-		// shipArray.get(1).getLength();
 	
     }
 }
