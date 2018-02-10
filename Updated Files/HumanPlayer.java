@@ -22,7 +22,7 @@ public class HumanPlayer {
                 System.out.println("Current guessing board");
                 // return the guessing board
                 playerBoard.returnBoard(2);
-                System.out.println("Enter coordinates to attack (column row): ");
+                System.out.println("Enter coordinates to attack (row column): ");
 
                 // Stolen from other method - Take row and column from input
                 Scanner input = new Scanner(System.in);

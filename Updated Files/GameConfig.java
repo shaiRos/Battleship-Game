@@ -11,7 +11,7 @@ public class GameConfig {
 		while (formatted != true){
 			try {
 				//asd for input for the variables needed to place ships
-				System.out.print("\nIndicate (orientation length column row): ");
+				System.out.print("\nIndicate (orientation length row column): ");
 				Scanner Setup = new Scanner(System.in);
 				String setup = Setup.nextLine();
 				//take the input that was converted into String and separate the info
@@ -19,17 +19,17 @@ public class GameConfig {
 				//store info to designated variables and convert string to their types
 				char orientation = setupInfo[0].toLowerCase().charAt(0);
 				int length = Integer.parseInt(setupInfo[1]);
-				char tempColumn = setupInfo[2].toUpperCase().charAt(0);
-				int column = (((int)(tempColumn) - 65 ) + 1);
-				int row = Integer.parseInt(setupInfo[3]);
+				char tempRow = setupInfo[2].toUpperCase().charAt(0);
+				int row = (((int)(tempRow) - 65 ) + 1);
+				int column = Integer.parseInt(setupInfo[3]);
 
 				//all checks
-				validateCoordinate(row,column, board.getBoardSize());	//check if coordinates are within the board
+				validateCoordinate(column,row, board.getBoardSize());	//check if coordinates are within the board
 				validateShipProperties(board,length,orientation);	//checks if ship properties meet the rules of the game
-				board.shipFitsBoard(orientation,length,row,column);	//check if ship fits board depending on coordinates 
+				board.shipFitsBoard(orientation,length,column,row);	//check if ship fits board depending on coordinates 
 				
 				// Adds ship to the grid
-				board.addShip(orientation,length,row,column);
+				board.addShip(orientation,length,column,row);
 				//sets the values of the ship object
 				name.setShipValues(orientation,length,row,column); 				
 				formatted = true;
