@@ -1,13 +1,17 @@
 import java.io.*;
 import java.util.Scanner;
 
+/**
+*	Temporary class - to be implemented later in gameConfig or
+*	similar class so we import already created maps instead of
+*	asking users for input
+*
+*/
 public class ReadTest{
-	public static void main(String[] args)
-	{
-		getShipInfo();
-    }
     
-
+	/**
+	* read file and store data in an array
+	*/
     public static void getShipInfo()
     {
         //Initiate which file to read
