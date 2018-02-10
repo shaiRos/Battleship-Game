@@ -11,7 +11,7 @@ public class ReadTest{
     public static void getShipInfo()
     {
         //Initiate which file to read
-        String fileToRead = "readmebitch.txt";
+        String fileToRead = "map.txt";
 
         //Initiate line for ship data from file 
         String shipInfo = null;
