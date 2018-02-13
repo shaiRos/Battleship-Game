@@ -5,118 +5,119 @@
 */
 import java.util.Scanner;
 
-//This is a test commit
-// And another one
-
-
 class Board{
-	int boardSize = 8;	
+
+    // Remove duplicates of these, turn these into privates, create getter methods for these
+	static int boardSize = 8;	
 	int [][] gameBoard = new int [boardSize][boardSize];
 	int [][] guessBoard = new int [boardSize][boardSize];
-	int maxShipSize = 5;
-	int minShipSize = 2;
+	static int maxShipSize = 5;
+	static int minShipSize = 2;
 	
+    // getters and setters for our board and ships
+    public static int getBoardSize() {
+        return boardSize;
+    }
+
+    public static void setBoardSize(int size) {
+        boardSize = size;
+    }
+
+    public static int getMinShipSize() {
+        return minShipSize;
+    }
+
+    public static int getMaxShipSize() {
+        return maxShipSize;
+    }
+
+    // constructor for our board
 	public void Board(){
 	}
+    
 
+	
 	// I changed the way the board is formatted
-	// -1 = Default, 	denoted by ~
-	// 0 = Miss, 		denoted by *
+	// -1 = Miss, 	    denoted by * 
+	// 0 = Default, 	denoted by ~
 	// 1 = Hit, 		denoted by X
-	// 5 - our ship 	denoted by {}
+	// 5 - our ship 	denoted by S
 	// We can add more if we like - Brandon
-	public void returnBoard() {
-		        
+	public void returnBoard(int boardType) {
+		int[][] board = null;
+
+        // our definitions
+        char hidden = '~';
+        char miss = '*';
+        char hit = 'X';
+        char ship = 'S';    
+        char downed = 'Z';  
+
+        boolean guessing = false;
+
+        // specify if this board is for game, or guessing
+        if (boardType == 1) {
+            board = this.gameBoard;
+        } else if (boardType == 2) {
+            board = this.guessBoard;
+            guessing = true;
+        }
+
         for (int x = 0; x < boardSize; x++) {
         	// Will print the x axis
         	System.out.print(("\t" + (x + 1)));
         }
         // Print a blank line for formatting purposes
         System.out.println();
-        
-        for (int row=0 ; row < boardSize ; row++ ) {
+
+        for (int row = 0 ; row < boardSize ; row++ ) {
         	// Print the y axis - will probably change to letters
         	// Convert from numerical to char
-            System.out.print( (row + 1) + "" );
+            
+            //System.out.print( (row + 1) + "" );
+
+
+            char rowName = (char)(row + 65);
+            System.out.print(rowName);
 
             // For each column, check if any of the values match the following
             // They're spaced out for now so we can edit them with ease
-            for (int column=0 ; column < boardSize ; column++ ) {
-                if (gameBoard[row][column] == 0) {
+            for (int column = 0 ; column < boardSize ; column++ ) {
+                if (guessing != true) {
 
-                    System.out.print("\t" + "~");
+                    if (board[row][column] == 0) {
+                        System.out.print("\t" + hidden);
+                    } else if (board[row][column] == -1) {
+                        System.out.print("\t" + miss);	//if we want the players to see where the enemy missed in their gameBoard
+                    } else if (board[row][column] == 1) {	// can change to miss ^^^
+                        System.out.print("\t" + hit);
+                    } else if (board[row][column] == 5) {
+                        System.out.print("\t" + ship);
+                    }
+              
+                } else {
+                    if (board[row][column] == -1) {
+                        System.out.print("\t" + miss);
+                    } else if (board[row][column] == 1) {
+                        System.out.print("\t" + hit);
+                    } else if (board[row][column] == 0) {
+                        System.out.print("\t" + hidden);
+                    } else if (board[row][column] == 5) {
+                        System.out.print("\t" + hidden);
 
-                } else if (gameBoard[row][column] == -1) {
-
-                    System.out.print("\t" + "*");
-
-                } else if (gameBoard[row][column] == 1) {
-
-                    System.out.print("\t" + "X");
-
-                } else if (gameBoard[row][column] == 5) {
-
-                	System.out.print("\t" + "{}"); // TEMPORARY
-
+                    }
                 }
-                
+
             }
             // Another blank space
             System.out.println();
         }
 	}
 	
-	//method for choosing row or column indicate "row" or "column" in params.
-	public int chooseCoordinate(String which) {
-		boolean valid = true;
-		int coordinate = 0;
-		do {
-			if (which == "row"){					//ask for row/column
-				coordinate = Game.askForInput("row");
-			}else if (which == "column"){
-				coordinate = Game.askForInput("column");
-			}				
-			if (coordinate > boardSize || coordinate < 0) { //check if coordinates are within the board
-				valid = false; 
-				System.out.println("Invalid Row Coordinate");
-			} else {
-				valid = true;
-			}	
-		} while (valid != true);
-		return coordinate;
-	}
-	
-	//method for asking "length" or "orientation"
-	public int shipProperties(String properties) {
-		int number = 0;
-		boolean valid = true;
-		do {
-			if (properties == "length"){		//ask for input for length/orientation
-				number = Game.askForInput("length");
-				if (number > maxShipSize || number < minShipSize) {  //check if ship is the supported size
-					valid = false; 
-					System.out.println("Invalid Ship Size");
-				}else {
-					valid = true;
-				}				
-			}else if (properties == "orientation"){
-				number = Game.askForInput("orientation");
-				if (number != 1 && number != 2) {		//check if input is one of the two choices (1) or (2)
-					System.out.println("\nPlease pick choice 1 or 2");
-					valid = false;	
-				}else {
-					valid = true;
-				}
-			}
-		}
-		while (valid != true);
-		return number;		
-	}
-	
 	
 	//check if ship can be put on the board. if 'h' changingCoord = column if 'v' changingCoord = row
-	public boolean shipFitsBoard(char orientation,int length,int column, int row){
-		boolean valid = true;
+	public void shipFitsBoard(char orientation,int length,int column, int row){
+
 		int changingCoord = 'n';
 		if (orientation == 'h'){
 			changingCoord = column;
@@ -126,7 +127,7 @@ class Board{
 		int maxCoord = changingCoord + (length-1); //right or top most coordinate of the ship
 		//Check if ship doesn't go overboard.
 		if (maxCoord > boardSize) {
-			return false;
+			throw new IllegalArgumentException("The ship doesn't fit on the board");
 			
 	
 		}
@@ -135,17 +136,17 @@ class Board{
 			for (int x = changingCoord; x <= maxCoord; x++) {	
 				int value = gameBoard[row-1][x-1];
 				if (value != 0) {		
-					valid = false;
+					throw new IllegalArgumentException("The area contains another ship");
 				}
 			}
 		}else if (orientation == 'v') {
 			for (int x = changingCoord; x <= maxCoord; x++) {	
 				int value = gameBoard[x-1][column-1];
 				if (value != 0) {			
-					valid = false;
+					throw new IllegalArgumentException("The area contains another ship");
 				}
 			}
-		}return valid;
+		}
 	}		
 				
 	//addShip given all properties of the ship
@@ -164,75 +165,11 @@ class Board{
 				for (int x = row; x <= maxRow; x++) {	//change values
 						gameBoard[x-1][column-1] = 5;
 				}break;
-			}//SHOULD PROBABLY MAKE A SHIP OBJECT AFTER UPDATING THE BOARD. AND TRANSFER IT'S CHARACTERISTICS
+			}
 		}
 	}		
 	
-	boolean valid = true;
 
-	// TEMP TEMP TEMP TEMP TEMP
-	// This stuff is outside placeShips on purpose
-	// We can pull info from the placeShips setup and create Ship objects to store into the arraylist
-
-	public int length = 0;
-	public int column = 0;
-	public int row = 0;
-	public char orientation = 'n';
-	public int choice = 0;
-	
-	public void placeShips(){
-		/*comment horizontal or vertical only
-		if picked horizontal indicate the left most coordinate of where you want to put it
-		if vertical, pick the top most coordinate of where you want to put it.
-		*/
-
-		do {
-			returnBoard();
-			// Reset the values everytime the loop is run
-			length = 0;
-			column = 0;
-			row = 0;
-			orientation = 'n';
-			choice = 0;
-
-
-			length = shipProperties("length");
-			choice = shipProperties("orientation"); //choose from horizontal or vertical
-
-			switch(choice) {
-				case 1: {
-					orientation = 'h';
-					break;
-				}
-				case 2: {
-					orientation = 'v';
-					break;
-				}
-			}
-			row = chooseCoordinate("row");		//used choose Coordinate method.
-			column = chooseCoordinate("column");
-
-
-
-			//check if ship can be put on the board	using method	
-			valid = shipFitsBoard(orientation,length,column,row);
-			
-			//actions for if ship can/can't be put in the board
-			if (valid == false) {
-				System.out.println("Cannot fit the ship in the indicated coordinate. Please try again"); //Could make them choose to only change a specific characteristic.
-				valid = false; //failed to set ship into the board
-			}else {			//if all is good, update gameBoard.
-
-				// Adds ship to the grid
-				addShip(orientation,length,column,row);
-
-				valid = true; //Success on setting the ships into the board
-			}	
-		} while (valid != true);
-	}
-	
-		
-	
 }
 
 				
