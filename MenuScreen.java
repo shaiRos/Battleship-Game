@@ -3,7 +3,7 @@ import java.util.InputMismatchException;
 
 public class MenuScreen {
 
-    public static void main (String[] args) {
+    public static void printMenu(String[] args) {
         boolean run = true;
         boolean userSelect = true;
 
@@ -40,7 +40,10 @@ public class MenuScreen {
                     System.out.println("Invalid choice. Please re-enter your choice");
             }
         } while (run == true);
+    }
 
+    public static void main (String[] args) {
+        printMenu(args);
     }
 
 

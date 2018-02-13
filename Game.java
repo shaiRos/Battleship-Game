@@ -126,7 +126,8 @@ public class Game{
     }
    public static void main(String[] args) {
    		// create boards for both the players
-        int userBoardSize = 8;
+        // difficulty will rely on these settings - add user input to specify difficulty
+        int userBoardSize = 5;
         int userShipCount = 2;
 
         // Initialize the boards and set the board sizes
@@ -155,7 +156,9 @@ public class Game{
             // Player 1 turn
 			clearScreen();
 			System.out.println("Player 1 turn starting....");
+            // Take the user coordinates and attack
 			player1.playerTurn();
+            // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
 				System.out.println("Player 1 has won!");
 				sleepThread(2500);
@@ -168,7 +171,9 @@ public class Game{
             // Player 2 turn
 			clearScreen();
 			System.out.println("Player 2 turn starting....");
+            // Take the user coordinates and attack
 			player2.playerTurn();
+            // Check for remaining ships on enemy board
 			if (winCondition(player1Board) == true) {
 				System.out.println("Player 2 has won!");
 				sleepThread(2500);

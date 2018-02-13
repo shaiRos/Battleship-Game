@@ -8,11 +8,11 @@ import java.util.Scanner;
 class Board{
 
     // Remove duplicates of these, turn these into privates, create getter methods for these
-	static int boardSize = 8;	
+	private static int boardSize = 5;	
 	int [][] gameBoard = new int [boardSize][boardSize];
 	int [][] guessBoard = new int [boardSize][boardSize];
-	static int maxShipSize = 5;
-	static int minShipSize = 2;
+	private static int maxShipSize = 5;
+	private static int minShipSize = 2;
 	
     // getters and setters for our board and ships
     public static int getBoardSize() {
