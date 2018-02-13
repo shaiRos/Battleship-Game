@@ -73,9 +73,6 @@ class Board{
         for (int row = 0 ; row < boardSize ; row++ ) {
         	// Print the y axis - will probably change to letters
         	// Convert from numerical to char
-            
-            //System.out.print( (row + 1) + "" );
-
 
             char rowName = (char)(row + 65);
             System.out.print(rowName);
@@ -83,31 +80,24 @@ class Board{
             // For each column, check if any of the values match the following
             // They're spaced out for now so we can edit them with ease
             for (int column = 0 ; column < boardSize ; column++ ) {
-                if (guessing != true) {
 
-                    if (board[row][column] == 0) {
-                        System.out.print("\t" + hidden);
-                    } else if (board[row][column] == -1) {
-                        System.out.print("\t" + miss);	//if we want the players to see where the enemy missed in their gameBoard
-                    } else if (board[row][column] == 1) {	// can change to miss ^^^
-                        System.out.print("\t" + hit);
-                    } else if (board[row][column] == 5) {
+                if (board[row][column] == 0) {
+                    System.out.print("\t" + hidden);
+                } else if (board[row][column] == -1) {
+                    System.out.print("\t" + miss);  //if we want the players to see where the enemy missed in their gameBoard
+                } else if (board[row][column] == 1) {   // can change to miss ^^^
+                    System.out.print("\t" + hit);
+                }
+                if (guessing != true) {
+                    if (board[row][column] == 5) {
                         System.out.print("\t" + ship);
                     }
-              
                 } else {
-                    if (board[row][column] == -1) {
-                        System.out.print("\t" + miss);
-                    } else if (board[row][column] == 1) {
-                        System.out.print("\t" + hit);
-                    } else if (board[row][column] == 0) {
+                    if (board[row][column] == 5) {
                         System.out.print("\t" + hidden);
-                    } else if (board[row][column] == 5) {
-                        System.out.print("\t" + hidden);
-
                     }
                 }
-
+              
             }
             // Another blank space
             System.out.println();
