@@ -1,13 +1,26 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class MenuScreen {
 
     public static void main (String[] args) {
         boolean run = true;
+        boolean userSelect = true;
 
         do {
 
-            int userChoice = 1;
+            int userChoice = 0;
+            Scanner input = new Scanner(System.in);
+            while (userSelect != false) {
+                System.out.println("Select an option: \n1.) Player vs Player\n2.) Player vs AI\n3.) Exit");
+                try {
+                    userChoice = input.nextInt();
+                    userSelect = false;
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Try again.");
+                    input.next();
+                }
+            }
 
             switch (userChoice) {
                 case 1:
