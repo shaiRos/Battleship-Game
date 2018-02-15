@@ -79,7 +79,9 @@ public class Game{
 
 
 	// was thinking of moving stuff into here once it was working, but it doesnt
-
+    /**
+    *   We want to research enumeration for this method
+    **/
 	public static void sendAttack(Board playerBoard, int row, int column) {
         // check the value of the block specified, if the values match, change the values with
         // a hit or a miss
@@ -126,6 +128,16 @@ public class Game{
         return false;
 
     }
+    /**
+    *   Default board difficulties
+    *   Rules for specific ship lengths
+    *   Use the AI thingy to setup random board placement
+    *   Research enum on sendAttack
+    *   Inheritance on the players
+    *   use readFile for default maps
+    *   Implement Ship class features - ship sunk
+    *   Fix board size constants
+    **/
    public static void main(String[] args) {
    		// create boards for both the players
         // difficulty will rely on these settings - add user input to specify difficulty
@@ -133,9 +145,9 @@ public class Game{
         int userShipCount = 2;
 
         // Initialize the boards and set the board sizes
-        Board player1Board = new Board();
         // WIP:
         //      - Re-create the board using the new boardSize values
+        Board player1Board = new Board();
         player1Board.setBoardSize(userBoardSize);
         Board player2Board = new Board();
         player2Board.setBoardSize(userBoardSize);
@@ -144,6 +156,9 @@ public class Game{
 		setupBoard(player1Board, player2Board, userShipCount);
 
 		// Create a new human that can access their boards
+        /**
+        *   Make the player an inheritance of a Player class
+        **/
 		HumanPlayer player1 = new HumanPlayer(player1Board);
 		HumanPlayer player2 = new HumanPlayer(player2Board);
 		
