@@ -7,7 +7,8 @@ public class Game{
 
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
     // Debug tool while also hiding enemy boards!
-	public static void clearScreen() {  
+	public static void clearScreen() {
+        // ASCII escape codes  
 	    System.out.print("\033[H\033[2J");  
 	    System.out.flush();  
 	}  
@@ -133,6 +134,8 @@ public class Game{
 
         // Initialize the boards and set the board sizes
         Board player1Board = new Board();
+        // WIP:
+        //      - Re-create the board using the new boardSize values
         player1Board.setBoardSize(userBoardSize);
         Board player2Board = new Board();
         player2Board.setBoardSize(userBoardSize);
