@@ -24,7 +24,7 @@ public class GameConfig {
 				int column = Integer.parseInt(setupInfo[3]);
 
 				//all checks
-				validateCoordinate(column,row, board.getBoardSize());	//check if coordinates are within the board
+				validateCoordinate(column,row, board.getBoardSize());	//check if coordinates chosen are wthin the board
 				validateShipProperties(board,length,orientation);	//checks if ship properties meet the rules of the game
 				board.shipFitsBoard(orientation,length,column,row);	//check if ship fits board depending on coordinates 
 				
