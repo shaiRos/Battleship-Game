@@ -12,10 +12,12 @@ import javafx.scene.control.Button;
 import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.RowConstraints;
 
 public class BattleShipGUI extends Application
 {
-	private int windowSize = 455;
+	private int windowSize = 500;
 	
 	
 	public static void main(String [] args)
@@ -26,8 +28,6 @@ public class BattleShipGUI extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
-		
-		
 		
 		BorderPane uiLayout = new BorderPane();
 		Scene gameUI = new Scene(uiLayout, windowSize,windowSize);
@@ -46,39 +46,29 @@ public class BattleShipGUI extends Application
 	}
 	
 	
-	//using gridPanes, objects can span multiple col or rows
+	//using gridPanes since children can span multiple col or rows
 	public GridPane battleField() {	
 		
-		int gridBoxSize = 40;
+		int gridBoxSize = 50;
+		int gridSize = 6;
 		
 		GridPane battleField = new GridPane();
-		battleField.setGridLinesVisible(true); //ONLY FOR DEBUG
-		battleField.setHgap(gridBoxSize);
-		battleField.setVgap(gridBoxSize);
 		
-		Label label = new Label(" hello ");		
-		battleField.add(label, 8, 8);
-
-		
-		
-		/*for (int x = 0 ; x < 10 ; x++) {
-			Label label = new Label(" ");
-			battleField.add(label, x, x);
-		}*/
-
-		/*TilePane battleField = new TilePane();	
-		battleField.setPadding(new Insets(10));
-        battleField.setVgap(5);
-        battleField.setHgap(5);
-        battleField.setPrefColumns(8);			
-		
-		for (int x = 0 ; x < 64 ; x++) {
+		for (int i = 0; i < gridSize; i++) {
+			//this sets the constraints for box size so the size doesn't automatically adjust to child inside
+			ColumnConstraints column = new ColumnConstraints(gridBoxSize);
+			RowConstraints row = new RowConstraints(gridBoxSize);			
+			battleField.getColumnConstraints().add(column);			
 			
-		
-			TextField text = new TextField();
-			text.setMaxWidth(25);
-			battleField.getChildren().add(text);
-		}*/
+			battleField.getRowConstraints().add(row);
+			
+			//ONLY FOR DEBUG. find another way to display grid lines. was too dark anyways...	
+			battleField.setGridLinesVisible(true);
+			
+			//grid isn't formed until you put something in it...
+			Label label = new Label("wee");		
+			battleField.add(label,i,i);		
+		}	
 		
 		return battleField;
 	}
