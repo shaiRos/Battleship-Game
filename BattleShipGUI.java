@@ -24,7 +24,7 @@ public class BattleShipGUI extends Application
 	{
 		launch(args);
 	}
-	
+								
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
@@ -33,10 +33,10 @@ public class BattleShipGUI extends Application
 		Scene gameUI = new Scene(uiLayout, windowSize,windowSize);
 		
 		
-		uiLayout.setTop(topPanel());
+		//uiLayout.setTop(topPanel());		//don't think top and left panel is needed
 		uiLayout.setBottom(botPanel());
 		uiLayout.setCenter(battleField());	
-		uiLayout.setLeft(leftPanel());
+		//uiLayout.setLeft(leftPanel());
 		uiLayout.setRight(rightPanel());
 
 
@@ -49,25 +49,32 @@ public class BattleShipGUI extends Application
 	//using gridPanes since children can span multiple col or rows
 	public GridPane battleField() {	
 		
-		int gridBoxSize = 50;
-		int gridSize = 6;
+		int gridSize = 9;
 		
 		GridPane battleField = new GridPane();
 		
-		for (int i = 0; i < gridSize; i++) {
+		for (int y = 0; y < gridSize; y++) {
 			//this sets the constraints for box size so the size doesn't automatically adjust to child inside
-			ColumnConstraints column = new ColumnConstraints(gridBoxSize);
-			RowConstraints row = new RowConstraints(gridBoxSize);			
-			battleField.getColumnConstraints().add(column);			
+			ColumnConstraints column = new ColumnConstraints();
+			RowConstraints row = new RowConstraints();			
 			
+			//so it fits the parent slot (center) for the grid whatever the size of the grid
+			column.setPercentWidth(50);			
+			row.setPercentHeight(50);			
+			
+			battleField.getColumnConstraints().add(column);			
 			battleField.getRowConstraints().add(row);
 			
 			//ONLY FOR DEBUG. find another way to display grid lines. was too dark anyways...	
 			battleField.setGridLinesVisible(true);
 			
+			/* For adding stuff in the grid
+			for (int x = 0; x < gridSize; x++) {
+				
 			//grid isn't formed until you put something in it...
-			Label label = new Label("wee");		
-			battleField.add(label,i,i);		
+				Label label = new Label("wee");		
+				battleField.add(label,y,x);	
+			}	*/			
 		}	
 		
 		return battleField;
