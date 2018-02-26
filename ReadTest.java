@@ -42,7 +42,7 @@ public class ReadTest{
                 */
                 String[] line = shipInfo.split(" ");
 
-                //Stores ship data in seperate variables 
+                //Stores ship data in separate variables 
                 int orientation = Integer.parseInt(line[0]);
                 int length = Integer.parseInt(line[1]);
                 int column = Integer.parseInt(line[2]);
