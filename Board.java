@@ -104,41 +104,7 @@ class Board{
         }
 	}
 	
-	
-	//check if ship can be put on the board. if 'h' changingCoord = column if 'v' changingCoord = row
-	public void shipFitsBoard(char orientation,int length,int column, int row){
-
-		int changingCoord = 'n';
-		if (orientation == 'h'){
-			changingCoord = column;
-		}else if (orientation == 'v') {
-			changingCoord = row;
-		}
-		int maxCoord = changingCoord + (length-1); //right or top most coordinate of the ship
-		//Check if ship doesn't go overboard.
-		if (maxCoord > boardSize) {
-			throw new IllegalArgumentException("The ship doesn't fit on the board");
-			
-	
-		}
-		//check if all coordinates it occupies doesn't contain another ship
-		if (orientation == 'h'){
-			for (int x = changingCoord; x <= maxCoord; x++) {	
-				int value = gameBoard[row-1][x-1];
-				if (value != 0) {		
-					throw new IllegalArgumentException("The area contains another ship");
-				}
-			}
-		}else if (orientation == 'v') {
-			for (int x = changingCoord; x <= maxCoord; x++) {	
-				int value = gameBoard[x-1][column-1];
-				if (value != 0) {			
-					throw new IllegalArgumentException("The area contains another ship");
-				}
-			}
-		}
-	}		
-				
+		
 	//addShip given all properties of the ship
 	//just make sure for horizontal indicate the left most coordinates
 	//and for vertical indicate the top most coordinate

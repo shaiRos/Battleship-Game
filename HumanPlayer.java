@@ -37,12 +37,12 @@ public class HumanPlayer {
                     System.out.println("Invalid coordinates");
                 } else {
                     formatted = true;
-                }
-                // Specify where the attack has went
-                System.out.println("Sending attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
+                    // Specify where the attack has went
+                    System.out.println("Sending attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
 
-                // Send the attack. Check if the attack hits or misses
-                Game.sendAttack(playerBoard, row, column);
+                    // Send the attack. Check if the attack hits or misses
+                    Game.sendAttack(playerBoard, row, column);
+                }
 
             }
             // error checking
