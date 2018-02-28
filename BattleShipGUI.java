@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 
 
 
+
 public class BattleShipGUI extends Application
 {
 	private int windowSize = 900;
@@ -23,10 +24,11 @@ public class BattleShipGUI extends Application
 	private BoardGUI ownBoard;
 	
 	//experimenting with the sizes of everything in the gui
-	private int xWindowSize = 900;
-	private int yWindowSize = 800;
+	private int xWindowSize = 920;
+	private int yWindowSize = 820;
 	private int botHeight = 150;
 	private int rightWidth = 250;
+	//bigGridSize = (xWindowSize - rightWidth) x (yWindowSize - botHeight)
 	
 	public static void main(String [] args)
 	{
@@ -47,6 +49,8 @@ public class BattleShipGUI extends Application
 		uiLayout.setRight(rightPanel());
 		//uiLayout.setPadding(new Insets(5));
 		
+	
+		
 		primaryStage.setTitle("BattleShip");
 		primaryStage.setScene(gameUI);
 		primaryStage.show();
@@ -57,14 +61,27 @@ public class BattleShipGUI extends Application
 	public GridPane battleField() {	
 		
 		int Array[][] = new int [gridSize][gridSize];
-		String object;
+		Array[0][0] = 5; //WIP laying out one ship image for consecutive values of 5..
+		Array[0][1] = 5; //from 2d Array
+		Array[0][2] = 5; 
 		
 		//create the GridPane object for guess board
 		guessBoard = new BoardGUI(gridSize, rightWidth); //rightwidth doesn't actually do anything since center wraps to parent slot for center.
 		//adding values from a 2d array
 		guessBoard.addValuesFromArray(Array);
-		//battleField.setPrefWidth(200);
+
+	
+		//had it take a ship object to setup from
+		//this should be changed into taking a ship array instead of individual ship objects
+		Ship ship1 = new Ship('h', 5, 0, 0);
+		guessBoard.setupBoardFromShipObjects(ship1);
 		
+		Ship ship2 = new Ship('v', 3, 3, 3);		
+		guessBoard.setupBoardFromShipObjects(ship2);		
+
+
+
+
 		return guessBoard.getBoardGrid();  //Definitely some privacy issues here I think....
 	}
 	
@@ -88,6 +105,8 @@ public class BattleShipGUI extends Application
 		rightPanel.setPrefWidth(rightWidth);
 		//rightPanel.setPadding(new Insets(60));
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
+		rightPanel.setPadding(new Insets(10));
+		
 		ownBoard = new BoardGUI(gridSize, rightWidth);		
 		rightPanel.getChildren().add(ownBoard.getBoardGrid());			
 		return rightPanel;
