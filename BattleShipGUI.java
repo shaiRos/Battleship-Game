@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
@@ -16,9 +17,16 @@ import javafx.scene.control.Label;
 
 public class BattleShipGUI extends Application
 {
-	private int windowSize = 500;
-	private int gridSize = 10; //Default size
-	//GridSize: 20 max for  WindowSize: 500 , increase window size if want a bigger gridSize  
+	private int windowSize = 900;
+	private int gridSize = 10; 
+	private BoardGUI guessBoard;
+	private BoardGUI ownBoard;
+	
+	//experimenting with the sizes of everything in the gui
+	private int xWindowSize = 900;
+	private int yWindowSize = 800;
+	private int botHeight = 150;
+	private int rightWidth = 250;
 	
 	public static void main(String [] args)
 	{
@@ -30,7 +38,7 @@ public class BattleShipGUI extends Application
 	{
 		
 		BorderPane uiLayout = new BorderPane();
-		Scene gameUI = new Scene(uiLayout, windowSize,windowSize);
+		Scene gameUI = new Scene(uiLayout, xWindowSize, yWindowSize);
 		
 		
 
@@ -52,34 +60,36 @@ public class BattleShipGUI extends Application
 		String object;
 		
 		//create the GridPane object for guess board
-		BoardGUI battleField = new BoardGUI(gridSize);
+		guessBoard = new BoardGUI(gridSize, rightWidth); //rightwidth doesn't actually do anything since center wraps to parent slot for center.
 		//adding values from a 2d array
-		battleField.addValuesFromArray(Array);
+		guessBoard.addValuesFromArray(Array);
+		//battleField.setPrefWidth(200);
 		
-		return battleField.getBoardGrid();
+		return guessBoard.getBoardGrid();  //Definitely some privacy issues here I think....
 	}
 	
 	
 	public HBox botPanel() {
 		
 		
-		HBox botPanel = new HBox();   
+		HBox botPanel = new HBox(10); 
+		botPanel.setPrefHeight(botHeight);	
+		botPanel.setPadding(new Insets(60));		
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
-		
-		//make GridPane for own board
-		BoardGUI ownBoard = new BoardGUI(gridSize);		
-		botPanel.getChildren().add(ownBoard.getBoardGrid());	
+
 
 		return botPanel;
 	}
 	
 	
-	public VBox rightPanel() {
+	public TilePane rightPanel() {
 		
-		VBox rightPanel = new VBox(10);
-		rightPanel.setPadding(new Insets(60));
+		TilePane rightPanel = new TilePane();
+		rightPanel.setPrefWidth(rightWidth);
+		//rightPanel.setPadding(new Insets(60));
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
-		
+		ownBoard = new BoardGUI(gridSize, rightWidth);		
+		rightPanel.getChildren().add(ownBoard.getBoardGrid());			
 		return rightPanel;
 	}	
 	
