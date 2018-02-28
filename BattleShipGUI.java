@@ -61,18 +61,18 @@ public class BattleShipGUI extends Application
 	public GridPane battleField() {	
 		
 		int Array[][] = new int [gridSize][gridSize];
-		Array[0][0] = 5;
-		Array[0][1] = 5;
-		Array[0][2] = 5;
+		Array[0][0] = 5; //WIP laying out one ship image for consecutive values of 5..
+		Array[0][1] = 5; //from 2d Array
+		Array[0][2] = 5; 
 		
 		//create the GridPane object for guess board
 		guessBoard = new BoardGUI(gridSize, rightWidth); //rightwidth doesn't actually do anything since center wraps to parent slot for center.
 		//adding values from a 2d array
 		guessBoard.addValuesFromArray(Array);
-		//battleField.setPrefWidth(200);
 
 	
-		
+		//had it take a ship object to setup from
+		//this should be changed into taking a ship array instead of individual ship objects
 		Ship ship1 = new Ship('h', 5, 0, 0);
 		guessBoard.setupBoardFromShipObjects(ship1);
 		

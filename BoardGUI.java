@@ -23,7 +23,7 @@ public class BoardGUI {
 		board.setStyle("-fx-background-color: #b2e9f7;");		
 		
 	
-		
+		//sets the grid depending on size
 		for (int x = 0; x < gridSize; x++) {
 			//this sets the constraints for box size so the size doesn't automatically adjust to child inside
 			ColumnConstraints column = new ColumnConstraints();
@@ -37,7 +37,7 @@ public class BoardGUI {
 			board.getColumnConstraints().add(column);			
 			board.getRowConstraints().add(row);
 			
-			//ONLY FOR DEBUG. find another way to display grid lines. was too dark anyways...	
+//========== ONLY INTENDED FOR DEBUG. find another way to display grid lines. ==============================	
 			board.setGridLinesVisible(true);
 		}
 	}
@@ -49,15 +49,7 @@ public class BoardGUI {
 	
 	
 	public void addValuesFromArray(int[][] boardArray) {
-		
-
-		
-
-		
 	
-		//board.add(shipImage,0,0,5,1);
-		
-		
 		for (int x = 0; x < gridSize; x++) {
 			for (int y = 0; y < gridSize; y++) {
 				//add the object to this coordinate
@@ -72,13 +64,15 @@ public class BoardGUI {
 	public void setupBoardFromShipObjects(Ship ship) {
 		
 		//ship Picture
+		//NOTE: each ship image in the board are SEPARATE ImageView OBJECTS. that's why this is here vvv
+		//i.e make a new ImageView object for every ship you add in the board
+		//so this has to be in the loop when doing shipArrays		
 		Image shipPic = new Image("ShipImage.jpg");
 		shipImage = new ImageView();
 		shipImage.setImage(shipPic);	//Format for adding stuff in grid
 		shipImage.setFitWidth(blockImageSize);		//board.add(object,x ,y ,xSpan, ySpan) Spans are optional
 		shipImage.setFitHeight(blockImageSize);			
-		//NOTE: each ship image in the board are SEPARATE ImageView OBJECTS. that's why this is here ^^^
-		//i.e make a new ImageView object for every ship you add in the board
+
 		
 		char orientation = ship.getOrientation();
 		int x = ship.getColumn();
@@ -86,7 +80,8 @@ public class BoardGUI {
 		int length = ship.getLength();
 		
 		
-		
+		//format for adding objects to grid   board.add(object, x, y, xSpan, ySpan) 
+		//Span is optional but if you use it, you have to include both
 		if (orientation == 'h') {
 			//this just stretches the picture depending on length
 			shipImage.setFitWidth(blockImageSize * length);			
