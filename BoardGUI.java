@@ -10,12 +10,12 @@ public class BoardGUI {
 	int gridSize;
 	
 	//constructor for making the GridPane Board
-	public BoardGUI(int gridsize) {
+	public BoardGUI(int gridsize, int gridWidth) {
 		
 		gridSize = gridsize;
 		board = new GridPane();
 		board.setPadding(new Insets(5)); //margin for the slot the grid will be in
-		board.setPrefSize(100,100);		
+		board.setPrefSize(gridWidth, gridWidth);		
 		
 		for (int x = 0; x < gridSize; x++) {
 			//this sets the constraints for box size so the size doesn't automatically adjust to child inside
