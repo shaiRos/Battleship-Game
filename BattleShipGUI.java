@@ -27,6 +27,8 @@ public class BattleShipGUI extends Application
 	private int yWindowSize = 800;
 	private int botHeight = 150;
 	private int rightWidth = 250;
+	//helo;
+	//bigGridSize = (xWindowSize - rightWidth) x (yWindowSize - botHeight)
 	
 	public static void main(String [] args)
 	{
