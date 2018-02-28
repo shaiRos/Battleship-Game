@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.io.*;
+
 
 public class Game{
 
@@ -36,16 +38,7 @@ public class Game{
 		player1Board.returnBoard(1);
 
         // loop to add ships into ship array
-		for (int numOfShips = 1; numOfShips <= maxShips ; numOfShips++) {
-			//creates the ship object first with 0 values...will be set in placeShips.
-			shipArray1.add(new Ship('n', 0, 0, 0));
-			// Place the ships into the grid, this is important step because all of the orientation, values of row and column are still saved
-			GameConfig.setupInput(shipArray1.get(numOfShips-1), player1Board);
-			// return player 1 board
-			player1Board.returnBoard(1);
-            System.out.println("\n" + (maxShips-numOfShips) + " more ships to place");
-            // At this point, the loop will restart, clearing the placeShips variables to 0.
-		}
+        GameConfig.playerInputShips(shipArray1, player1Board, shipCount);
 
 		System.out.println("Player 1 game board successfully set. Player 2 standby...");
 		sleepThread(1000);
@@ -59,16 +52,7 @@ public class Game{
 		player2Board.returnBoard(1);
 
         // loop to add ships into ship array
-		for (int numOfShips = 1; numOfShips <= maxShips ; numOfShips++) {
-			//creates the ship object first with 0 values...will be set in placeShips.
-			shipArray2.add(new Ship('n', 0, 0, 0));
-			// Place the ships into the grid, this is important step because all of the orientation, values of row and column are still saved
-			GameConfig.setupInput(shipArray2.get(numOfShips-1), player2Board);
-			// return player 1 board
-			player2Board.returnBoard(1);
-            System.out.println("\n" + (maxShips-numOfShips) + " more ships to place");
-            // At this point, the loop will restart, clearing the placeShips variables to 0.
-		}
+        GameConfig.playerInputShips(shipArray2, player2Board, shipCount);
 
 		System.out.println("Player 2 game board successfully set.");
 
@@ -128,6 +112,53 @@ public class Game{
         return false;
 
     }
+
+
+    public static void mapFromFiles(String mapLevel, Board board){
+
+        //Initiate line for ship data from file 
+        String shipInfo = null;
+        
+        try {
+            // FileReader reads text files
+            FileReader fileReader = new FileReader(mapLevel);
+
+            // Wrap FileReader in BufferedReader to efficiently read chars, lines, etc. (lines in this case)
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+           
+            //Extracting data from file
+            while ((shipInfo = bufferedReader.readLine()) != null) {
+                System.out.println(shipInfo);
+                String[] line = shipInfo.split(" ");
+                
+                char orientation = line[0].toLowerCase().charAt(0);
+                int length = Integer.parseInt(line[1]);
+                char tempRow = line[2].toUpperCase().charAt(0);
+                int row = (((int)(tempRow) - 65 ) + 1);
+                int column = Integer.parseInt(line[3]);
+
+                System.out.println(orientation);
+                System.out.println(length);
+                System.out.println(row);
+                System.out.println(column);
+
+                board.addShip(orientation,length,row,column);
+     
+            }
+            //Need to always close after done using it
+            bufferedReader.close();         
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + mapLevel + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println("Error reading file '" + mapLevel + "'");
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
     /**
     *   Default board difficulties
     *   Rules for specific ship lengths
@@ -144,6 +175,8 @@ public class Game{
         int userBoardSize = 5;
         int userShipCount = 2;
 
+        String fileName = "map.txt";
+
         // Initialize the boards and set the board sizes
         // WIP:
         //      - Re-create the board using the new boardSize values
@@ -153,7 +186,9 @@ public class Game{
         player2Board.setBoardSize(userBoardSize);
 
         // populate boards with battleships
-		setupBoard(player1Board, player2Board, userShipCount);
+		// setupBoard(player1Board, player2Board, userShipCount);
+        mapFromFiles(fileName, player1Board);
+        mapFromFiles(fileName, player2Board);
 
 		// Create a new human that can access their boards
         /**
