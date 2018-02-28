@@ -1,0 +1,37 @@
+	private void mapFromFiles(String mapLevel){
+		map = mapLevel;
+		
+        //Initiate line for ship data from file 
+        String shipInfo = null;
+		
+		try {
+            // FileReader reads text files
+            FileReader fileReader = new FileReader(map);
+
+            // Wrap FileReader in BufferedReader to efficiently read chars, lines, etc. (lines in this case)
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+           
+            //Extracting data from file
+            while ((shipInfo = bufferedReader.readLine()) != null) {
+               
+				String[] line = shipInfo.split(" ");
+				
+				int orientation = line[0];
+                int length = Integer.parseInt(line[1]);
+                int row = line[2];
+                int column = Integer.parseInt(line[3]);
+				board.addShip(orientation,length,row,column);
+
+            //Need to always close after done using it
+            bufferedReader.close();         
+			}
+		}
+        catch(FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + map + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println("Error reading file '" + map + "'");  
+        }
+	}
+
