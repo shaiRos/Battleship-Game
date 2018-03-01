@@ -12,23 +12,26 @@ import javafx.scene.control.Button;
 import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
 
 
 
 
 public class BattleShipGUI extends Application
 {
-	private int windowSize = 900;
-	private int gridSize = 10; 
+	private int gridSize = 20; //can change size
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
+	private Scene gameUI;
 	
-	//experimenting with the sizes of everything in the gui
-	private int xWindowSize = 920;
-	private int yWindowSize = 820;
-	private int botHeight = 150;
-	private int rightWidth = 250;
-	//bigGridSize = (xWindowSize - rightWidth) x (yWindowSize - botHeight)
+	//DON'T TOUCH or it'll BREAK
+	final private int xWindowSize = 1040;
+	final private int yWindowSize = 920;
+	final private int botHeight = 150;
+	final private int rightWidth = 250; 
+	final private int bigGridWidth = xWindowSize - rightWidth - 20; //20 = rightWidth inset
+	//bigGridSize = (xWindowSize - rightWidth - 10) x (yWindowSize - botHeight + 10)
+	//current 770 x 770 
 	
 	public static void main(String [] args)
 	{
@@ -40,17 +43,14 @@ public class BattleShipGUI extends Application
 	{
 		
 		BorderPane uiLayout = new BorderPane();
-		Scene gameUI = new Scene(uiLayout, xWindowSize, yWindowSize);
-		
-		
+		gameUI = new Scene(uiLayout, 1040, yWindowSize);
 
 		uiLayout.setBottom(botPanel());
 		uiLayout.setCenter(battleField());	
 		uiLayout.setRight(rightPanel());
 		//uiLayout.setPadding(new Insets(5));
 		
-	
-		
+		primaryStage.setResizable(false);
 		primaryStage.setTitle("BattleShip");
 		primaryStage.setScene(gameUI);
 		primaryStage.show();
@@ -58,19 +58,19 @@ public class BattleShipGUI extends Application
 	
 	
 	//using gridPanes since children can span multiple col or rows
-	public GridPane battleField() {	
+	public TilePane battleField() {	
 		
+		TilePane centerSlot = new TilePane();
 		int Array[][] = new int [gridSize][gridSize];
 		Array[0][0] = 5; //WIP laying out one ship image for consecutive values of 5..
 		Array[0][1] = 5; //from 2d Array
 		Array[0][2] = 5; 
 		
 		//create the GridPane object for guess board
-		guessBoard = new BoardGUI(gridSize, rightWidth); //rightwidth doesn't actually do anything since center wraps to parent slot for center.
+		guessBoard = new BoardGUI(gridSize, 0, bigGridWidth); //rightwidth doesn't actually do anything since center wraps to parent slot for center.
 		//adding values from a 2d array
-		guessBoard.addValuesFromArray(Array);
+		//guessBoard.addValuesFromArray(Array);
 
-	
 		//had it take a ship object to setup from
 		//this should be changed into taking a ship array instead of individual ship objects
 		Ship ship1 = new Ship('h', 5, 0, 0);
@@ -78,11 +78,12 @@ public class BattleShipGUI extends Application
 		
 		Ship ship2 = new Ship('v', 3, 3, 3);		
 		guessBoard.setupBoardFromShipObjects(ship2);		
-
-
-
-
-		return guessBoard.getBoardGrid();  //Definitely some privacy issues here I think....
+		
+		//sets dimensions of Large grid
+		centerSlot.setPrefTileWidth(xWindowSize - rightWidth - 10);	
+		centerSlot.setPrefTileHeight(yWindowSize - botHeight + 10); //this measurement is broken because of bot panel but is currently working for now
+		centerSlot.getChildren().add(guessBoard.getBoardGrid());
+		return centerSlot;  //Definitely some privacy issues here I think....
 	}
 	
 	
@@ -91,10 +92,9 @@ public class BattleShipGUI extends Application
 		
 		HBox botPanel = new HBox(10); 
 		botPanel.setPrefHeight(botHeight);	
+		botPanel.setMaxHeight(botHeight);			
 		botPanel.setPadding(new Insets(60));		
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
-
-
 		return botPanel;
 	}
 	
@@ -103,11 +103,12 @@ public class BattleShipGUI extends Application
 		
 		TilePane rightPanel = new TilePane();
 		rightPanel.setPrefWidth(rightWidth);
-		//rightPanel.setPadding(new Insets(60));
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));
+		rightPanel.setPrefTileWidth(rightWidth);	
 		
-		ownBoard = new BoardGUI(gridSize, rightWidth);		
+		ownBoard = new BoardGUI(gridSize, rightWidth, bigGridWidth);		
+		//rightPanel.setPrefTileHeight(yWindowSize - botHeight);		
 		rightPanel.getChildren().add(ownBoard.getBoardGrid());			
 		return rightPanel;
 	}	

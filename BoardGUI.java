@@ -6,40 +6,41 @@ import javafx.geometry.Insets;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 public class BoardGUI {
 	
 	private GridPane board;
 	private int gridSize;
 	private ImageView shipImage;
-	private int blockImageSize = 64;	//width & height for each square in grid
+	private int blockImageSize = 63;	//width & height for each square in grid
 	//constructor for making the GridPane Board
-	public BoardGUI(int gridsize, int gridWidth) {
+	public BoardGUI(int gridsize, int smallGridWidth, int bigGridWidth) {
 		
 		gridSize = gridsize;
+		blockImageSize = ((bigGridWidth-10)/gridSize);
+		
 		board = new GridPane();
 		board.setPadding(new Insets(5)); //margin for the slot the grid will be in
-		board.setPrefSize(gridWidth, gridWidth);		
-		board.setStyle("-fx-background-color: #b2e9f7;");		
+		board.setPrefSize(smallGridWidth, smallGridWidth);
+		board.setStyle("-fx-background-color: #b2e9f7;");	
+			
 		
-	
 		//sets the grid depending on size
 		for (int x = 0; x < gridSize; x++) {
 			//this sets the constraints for box size so the size doesn't automatically adjust to child inside
 			ColumnConstraints column = new ColumnConstraints();
 			RowConstraints row = new RowConstraints();	
-			row.setVgrow(Priority.ALWAYS);
-			
 			//so it fits the parent slot (center) for the grid whatever the size of the grid
 			column.setPercentWidth(50);			
 			row.setPercentHeight(50);			
-			
 			board.getColumnConstraints().add(column);			
 			board.getRowConstraints().add(row);
+		}
 			
 //========== ONLY INTENDED FOR DEBUG. find another way to display grid lines. ==============================	
-			board.setGridLinesVisible(true);
-		}
+		board.setGridLinesVisible(true);
+		
 	}
 	
 	//returns the GridPane object
