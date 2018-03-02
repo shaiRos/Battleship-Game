@@ -9,8 +9,8 @@ class Board{
 
     // Remove duplicates of these, turn these into privates, create getter methods for these
 	private static int boardSize = 5;	
-	int [][] gameBoard = new int [boardSize][boardSize];
-	int [][] guessBoard = new int [boardSize][boardSize];
+	public static int [][] gameBoard = new int [boardSize][boardSize];
+	public static int [][] guessBoard = new int [boardSize][boardSize];
 	private static int maxShipSize = 5;
 	private static int minShipSize = 2;
     private static boolean guessing = false;
@@ -32,7 +32,15 @@ class Board{
     public static int getMaxShipSize() {
         return maxShipSize;
     }
-
+    
+    public static int[][] getGameBoard() {
+    		return gameBoard;
+    }
+    
+    public static int[][] getGuessBoard() {
+    		return guessBoard;
+    }
+    
     // constructor for our board
 	public void Board(){
 	}
