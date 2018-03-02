@@ -21,7 +21,7 @@ import javafx.event.ActionEvent;
 public class BattleShipGUI extends Application
 {
 	private BorderPane uiLayout;
-	private int gridSize = 30; //max 20
+	private int gridSize = 10; //max 20
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
 	private Scene gameUI;
