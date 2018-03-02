@@ -11,27 +11,28 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
+import javafx.scene.input.MouseEvent;
+import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 
 
 
 
 public class BattleShipGUI extends Application
 {
-	private int gridSize = 20; //can change size
+	private BorderPane uiLayout;
+	private int gridSize = 20; //max 20
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
 	private Scene gameUI;
 	
-	//DON'T TOUCH or it'll BREAK
+	//DON'T TOUCH 
 	final private int xWindowSize = 1040;
 	final private int yWindowSize = 920;
 	final private int botHeight = 150;
-	final private int rightWidth = 250; 
-	final private int bigGridWidth = xWindowSize - rightWidth - 20; //20 = rightWidth inset
-	//bigGridSize = (xWindowSize - rightWidth - 10) x (yWindowSize - botHeight + 10)
-	//current 770 x 770 
+	final private int smallGridWidth = 250; //including margins
+	final private int rightPanelWidth = 270;	
+	final private int bigGridWidth = 770; //including margins
 	
 	public static void main(String [] args)
 	{
@@ -42,15 +43,13 @@ public class BattleShipGUI extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		
-		BorderPane uiLayout = new BorderPane();
-		gameUI = new Scene(uiLayout, 1040, yWindowSize);
-
-		uiLayout.setBottom(botPanel());
+		uiLayout = new BorderPane();
+		gameUI = new Scene(uiLayout, xWindowSize, yWindowSize);
 		uiLayout.setCenter(battleField());	
+		uiLayout.setBottom(botPanel());		
 		uiLayout.setRight(rightPanel());
-		//uiLayout.setPadding(new Insets(5));
-		
-		primaryStage.setResizable(false);
+
+		//primaryStage.setResizable(false);			
 		primaryStage.setTitle("BattleShip");
 		primaryStage.setScene(gameUI);
 		primaryStage.show();
@@ -65,55 +64,45 @@ public class BattleShipGUI extends Application
 		Array[0][0] = 5; //WIP laying out one ship image for consecutive values of 5..
 		Array[0][1] = 5; //from 2d Array
 		Array[0][2] = 5; 
-		
-		//create the GridPane object for guess board
-		guessBoard = new BoardGUI(gridSize, 0, bigGridWidth); //rightwidth doesn't actually do anything since center wraps to parent slot for center.
-		//adding values from a 2d array
-		//guessBoard.addValuesFromArray(Array);
+		//centerSlot.setPrefTileWidth(770);
+		guessBoard = new BoardGUI(gridSize, bigGridWidth); 
 
 		//had it take a ship object to setup from
 		//this should be changed into taking a ship array instead of individual ship objects
-		Ship ship1 = new Ship('h', 5, 0, 0);
+		Ship ship1 = new Ship('h', 5, 1, 1);
+		Ship ship2 = new Ship('v', 3, 3, 3);			
 		guessBoard.setupBoardFromShipObjects(ship1);
-		
-		Ship ship2 = new Ship('v', 3, 3, 3);		
 		guessBoard.setupBoardFromShipObjects(ship2);		
 		
-		//sets dimensions of Large grid
-		centerSlot.setPrefTileWidth(xWindowSize - rightWidth - 10);	
-		centerSlot.setPrefTileHeight(yWindowSize - botHeight + 10); //this measurement is broken because of bot panel but is currently working for now
+		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard));
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
-		return centerSlot;  //Definitely some privacy issues here I think....
-	}
-	
-	
-	public HBox botPanel() {
-		
-		
-		HBox botPanel = new HBox(10); 
-		botPanel.setPrefHeight(botHeight);	
-		botPanel.setMaxHeight(botHeight);			
-		botPanel.setPadding(new Insets(60));		
-		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
-		return botPanel;
+
+		return centerSlot; 	
 	}
 	
 	
 	public TilePane rightPanel() {
 		
 		TilePane rightPanel = new TilePane();
-		rightPanel.setPrefWidth(rightWidth);
+		rightPanel.setPrefWidth(rightPanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
-		rightPanel.setPadding(new Insets(10));
-		rightPanel.setPrefTileWidth(rightWidth);	
+		rightPanel.setPadding(new Insets(10));	
 		
-		ownBoard = new BoardGUI(gridSize, rightWidth, bigGridWidth);		
-		//rightPanel.setPrefTileHeight(yWindowSize - botHeight);		
+		ownBoard = new BoardGUI(gridSize, smallGridWidth);		
 		rightPanel.getChildren().add(ownBoard.getBoardGrid());			
 		return rightPanel;
-	}	
+	}		
 	
+	public TilePane botPanel() {
+		
+		TilePane botPanel = new TilePane(); 
+		botPanel.setPrefHeight(botHeight);	
+		botPanel.setMaxHeight(botHeight);				
+		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
+		return botPanel;
+	}
 	
+
 	public HBox topPanel() {
 		
 		HBox topPanel = new HBox();	    
