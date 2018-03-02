@@ -13,6 +13,8 @@ class Board{
 	int [][] guessBoard = new int [boardSize][boardSize];
 	private static int maxShipSize = 5;
 	private static int minShipSize = 2;
+    private static boolean guessing = false;
+
 	
     // getters and setters for our board and ships
     public static int getBoardSize() {
@@ -47,6 +49,7 @@ class Board{
 				void printLabel () {
 		            System.out.print("\t" + "~");
 				}
+
 		},
 		
 		HIT {
@@ -69,7 +72,11 @@ class Board{
 			} else if (boardValue == 1) {
 				HIT.printLabel();
 			} else if (boardValue == 5) {
-				SHIP.printLabel();
+				if (guessing != true) {
+					SHIP.printLabel();
+				} else {
+					DEFAULT.printLabel();
+				}
 			}
 		};
 		
@@ -87,17 +94,16 @@ class Board{
 		int[][] board = null;
 
         // our definitions
-        char hidden = '~';
-        char miss = '*';
-        char hit = 'X';
-        char ship = 'S';    
-        char downed = 'Z';  
-
-        boolean guessing = false;
+//        char hidden = '~';
+//        char miss = '*';
+//        char hit = 'X';
+//        char ship = 'S';    
+//        char downed = 'Z';  
 
         // specify if this board is for game, or guessing
         if (boardType == 1) {
             board = this.gameBoard;
+            guessing = false;
         } else if (boardType == 2) {
             board = this.guessBoard;
             guessing = true;
