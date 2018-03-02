@@ -35,7 +35,47 @@ class Board{
 	public void Board(){
 	}
     
-
+	// https://www.mkyong.com/java/java-enum-example/
+	public enum Definitions {
+		MISS {
+				void printLabel () {
+		            System.out.print("\t" + "*");
+				}
+		},
+		
+		DEFAULT {
+				void printLabel () {
+		            System.out.print("\t" + "~");
+				}
+		},
+		
+		HIT {
+				void printLabel () {
+		            System.out.print("\t" + "X");
+				}
+		},
+		
+		SHIP {
+				void printLabel () {
+		            System.out.print("\t" + "S");
+				}		
+		};
+		
+		static void checkValue(int boardValue) {
+			if (boardValue == -1) {
+				MISS.printLabel();
+			} else if (boardValue == 0) {
+				DEFAULT.printLabel();
+			} else if (boardValue == 1) {
+				HIT.printLabel();
+			} else if (boardValue == 5) {
+				SHIP.printLabel();
+			}
+		};
+		
+		abstract void printLabel();
+	}
+	
 	
 	// I changed the way the board is formatted
 	// -1 = Miss, 	    denoted by * 
@@ -81,23 +121,25 @@ class Board{
             // They're spaced out for now so we can edit them with ease
             for (int column = 0 ; column < boardSize ; column++ ) {
 
-                if (board[row][column] == 0) {
-                    System.out.print("\t" + hidden);
-                } else if (board[row][column] == -1) {
-                    System.out.print("\t" + miss);  //if we want the players to see where the enemy missed in their gameBoard
-                } else if (board[row][column] == 1) {   // can change to miss ^^^
-                    System.out.print("\t" + hit);
-                }
-                if (guessing != true) {
-                    if (board[row][column] == 5) {
-                        System.out.print("\t" + ship);
-                    }
-                } else {
-                    if (board[row][column] == 5) {
-                        System.out.print("\t" + hidden);
-                    }
-                }
-              
+            	
+            		Definitions.checkValue(board[row][column]);
+//                if (board[row][column] == 0) {
+//                    System.out.print("\t" + hidden);
+//                } else if (board[row][column] == -1) {
+//                    System.out.print("\t" + miss);  //if we want the players to see where the enemy missed in their gameBoard
+//                } else if (board[row][column] == 1) {   // can change to miss ^^^
+//                    System.out.print("\t" + hit);
+//                }
+//                if (guessing != true) {
+//                    if (board[row][column] == 5) {
+//                        System.out.print("\t" + ship);
+//                    }
+//                } else {
+//                    if (board[row][column] == 5) {
+//                        System.out.print("\t" + hidden);
+//                    }
+//                }
+//              
             }
             // Another blank space
             System.out.println();

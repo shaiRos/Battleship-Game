@@ -164,9 +164,9 @@ public class Game{
 
         // populate boards with battleships
         
-		setupBoard(player1Board, player2Board, userShipCount);
-        // mapFromFiles(fileName, player1Board);
-        // mapFromFiles(fileName, player2Board);
+		// setupBoard(player1Board, player2Board, userShipCount);
+        mapFromFiles(fileName, player1Board);
+        mapFromFiles(fileName, player2Board);
 
         // instantiate our players
 		Player player1 = new HumanPlayer(player1Board);
