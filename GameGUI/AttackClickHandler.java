@@ -19,8 +19,8 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
 	public AttackClickHandler(BoardGUI grid, Scene stage, int num) {
 		
-		nextPlayerGuessBoard = new BoardGUI(10, 770);
-		nextPlayerOwnBoard = new BoardGUI(10, 250);
+		nextPlayerGuessBoard = new BoardGUI(grid.getGridSize(), 770);
+		nextPlayerOwnBoard = new BoardGUI(grid.getGridSize(), 250);
 		scne = stage;
 		blockSize = grid.getGridBlockSize();
 		
@@ -42,14 +42,13 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		nextPlayerOwnBoard.setupBoardFromShipObjects(ship2);	
 
 
-		
+		//get array for the nextplayer's guess and own board
 		
 		
 		BaseGameLayout testUI = new BaseGameLayout(scne, nextPlayerOwnBoard, nextPlayerGuessBoard, l);
-		//Scene testScene = new Scene(testUI.BaseGameUI(), 1040, 920);
 		
 		
-		scne.setRoot(testUI.BaseGameUI());
+
 
 		//
 		

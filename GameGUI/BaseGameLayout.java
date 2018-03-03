@@ -1,4 +1,3 @@
-
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -11,59 +10,36 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 
 
-public class BaseGameLayout {
-	
-	final private int xWindowSize = 1040;
-	final private int yWindowSize = 920;
-	final private int botHeight = 150;
-	final private int smallGridWidth = 250; //including margins
-	final private int rightPanelWidth = 270;	
-	final private int bigGridWidth = 770; //including margins		
-	
-	private int gridSize = 10; //max 20
-	private BoardGUI guessBoard;
-	private BoardGUI ownBoard;
+public class BaseGameLayout extends Settings {
 
 	private Scene gameUI;	
-
-	private SidePane sidePane;
 	private BorderPane uiLayout;
-	
+	private BoardGUI guessBoard;
+	private BoardGUI ownBoard;	
 	int l;
 	
+	//constructor for AttackEventHandler to update scene for each turn
 	public BaseGameLayout(Scene scene, BoardGUI ownboard, BoardGUI guessboard, int num) {
-		
-		ownBoard = ownboard;
+
+		ownBoard = ownboard;  //gonna make the new board objects here taken from the arrayListBoard
 		guessBoard = guessboard;
 		gameUI = scene;
 		l += num;
-	}
-	
-	
-	
-	
-	public BorderPane BaseGameUI() {
-	
+		
 		uiLayout = new BorderPane();
 		uiLayout.setCenter(battleField());	
 		uiLayout.setBottom(botPanel());		
 		uiLayout.setRight(rightPanel());	
-		return uiLayout;
-	}
+		gameUI.setRoot(uiLayout);		
 
-	
-	
-	
+	}
 		
 	//using gridPanes since children can span multiple col or rows
 	public TilePane battleField() {	
 		
 		TilePane centerSlot = new TilePane();
-		
-		
 		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard, gameUI,l));
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
-
 		return centerSlot; 	
 	}
 
@@ -71,13 +47,9 @@ public class BaseGameLayout {
 	public TilePane rightPanel() {
 		
 		TilePane rightPanel = new TilePane();
-		rightPanel.setPrefWidth(rightPanelWidth);
+		rightPanel.setPrefWidth(sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));	
-			
-		
-
-		
 		
 		rightPanel.getChildren().add(ownBoard.getBoardGrid());			
 		return rightPanel;
@@ -94,23 +66,7 @@ public class BaseGameLayout {
 	}
 	
 
-	public HBox topPanel() {
-		
-		HBox topPanel = new HBox();	    
-		topPanel.setPadding(new Insets(50));
-        topPanel.setStyle("-fx-background-color: red;");	
-		return topPanel;
-	}
 
-
-	
-	public VBox leftPanel() {
-		
-		VBox leftPanel = new VBox(10);
-		leftPanel.setPadding(new Insets(100));
-        leftPanel.setStyle("-fx-background-color: blue;");			
-		return leftPanel;
-	}	
 	
 
 }			
