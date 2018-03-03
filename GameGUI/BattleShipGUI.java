@@ -88,7 +88,7 @@ public class BattleShipGUI extends Application
 		guessBoard.setupBoardFromShipObjects(ship1);
 		guessBoard.setupBoardFromShipObjects(ship2);		
 		
-		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard, gameUI));
+		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard, gameUI,0));
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 
 		return centerSlot; 	

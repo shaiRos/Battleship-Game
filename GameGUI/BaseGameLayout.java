@@ -29,14 +29,14 @@ public class BaseGameLayout {
 	private SidePane sidePane;
 	private BorderPane uiLayout;
 	
+	int l;
 	
-	
-	public BaseGameLayout(Scene scene, BoardGUI ownboard, BoardGUI guessboard) {
+	public BaseGameLayout(Scene scene, BoardGUI ownboard, BoardGUI guessboard, int num) {
 		
 		ownBoard = ownboard;
 		guessBoard = guessboard;
 		gameUI = scene;
-	
+		l += num;
 	}
 	
 	
@@ -61,7 +61,7 @@ public class BaseGameLayout {
 		TilePane centerSlot = new TilePane();
 		
 		
-		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard, gameUI));
+		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard, gameUI,l));
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 
 		return centerSlot; 	
