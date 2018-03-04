@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
 
 
 public class BaseGameLayout extends Settings {

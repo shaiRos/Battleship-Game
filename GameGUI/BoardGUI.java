@@ -60,15 +60,38 @@ public class BoardGUI {
 		return blockSize;
 	}
 	
+	public ImageView getImage(String image) {
+		
+		Image shippPic = new Image(image);
+		ImageView shipImage = new ImageView();
+		shipImage.setImage(shippPic);	
+		shipImage.setFitWidth(blockSize);		
+		shipImage.setFitHeight(blockSize);		
+		return shipImage;
+	}
+		
 	
 	public void addValuesFromArray(int[][] boardArray) {
 	
 		for (int x = 0; x < gridSize; x++) {
 			for (int y = 0; y < gridSize; y++) {
 				//add the object to this coordinate
-				String value = Integer.toString(boardArray[y][x]);
-				Label label = new Label(value);		
-				board.add(label,x,y);	
+				int value = boardArray[y][x];
+
+				if (value != 0) {
+					
+					switch(value) {
+						
+						case 5:
+							ImageView shipImage = getImage("RedCircle.png");
+							board.add(shipImage, x, y);
+							break;
+						case -1:
+							ImageView missImage = getImage("MissImage.png");							
+							board.add(missImage, x, y);
+							break;   
+					}
+				}	
 			}
 		}
 	}
@@ -78,12 +101,7 @@ public class BoardGUI {
 		
 		//ship Picture
 		//NOTE: each ship image in the board are SEPARATE ImageView OBJECTS. 
-		//i.e make a new ImageView object for every ship you add in the board	
-		Image shipPic = new Image("ShipImage.jpg");
-		shipImage = new ImageView();
-		shipImage.setImage(shipPic);	
-		shipImage.setFitWidth(blockSize);		
-		shipImage.setFitHeight(blockSize);			
+		//i.e make a new ImageView object for every ship you add in the board			
 
 		char orientation = ship.getOrientation();
 		int x = ship.getColumn() - 1; //indexing -1
@@ -93,15 +111,32 @@ public class BoardGUI {
 		//format for adding objects to grid   board.add(object, x, y, xSpan, ySpan) 
 		//Span is optional but if you use it, you have to include both
 		if (orientation == 'h') {
-			//this just stretches the picture depending on length
-			shipImage.setFitWidth(blockSize * length);			
+			
+			for (int coord = 0; coord < ship.getLength(); coord++) {
+				
+				
+				ImageView shipImage = getImage("RedCircle.png");				
+				board.add(shipImage, (x + coord) , y);
+			}
+
+		//this just stretches the picture depending on length
+			//shipImage.setFitWidth(blockSize * length);			
 			//add pic to board spanning it's length depending on orientation
-			board.add(shipImage, x , y , length , 1); 
+			//board.add(shipImage, x , y , length , 1); 
 		}
 		else if (orientation == 'v') {
-			//need to rotate the image vertically here
-			shipImage.setFitHeight(blockSize * length);			
-			board.add(shipImage, x, y, 1, length);
+
+			for (int coord = 0; coord < ship.getLength(); coord++) {
+				
+				ImageView shipImage = getImage("RedCircle.png");					
+				board.add(shipImage,x , (y+coord));
+			}
+
+
+	
+		//need to rotate the image vertically here
+		//	shipImage.setFitHeight(blockSize * length);			
+		//	board.add(shipImage, x, y, 1, length);
 		}
 	
 	}

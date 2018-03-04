@@ -17,11 +17,11 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
 	int l;
 	
-	public AttackClickHandler(BoardGUI grid, Scene stage, int num) {
+	public AttackClickHandler(BoardGUI grid, Scene scene, int num) {
 		
 		nextPlayerGuessBoard = new BoardGUI(grid.getGridSize(), 770);
 		nextPlayerOwnBoard = new BoardGUI(grid.getGridSize(), 250);
-		scne = stage;
+		scne = scene;
 		blockSize = grid.getGridBlockSize();
 		
 		
