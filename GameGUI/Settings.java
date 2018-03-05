@@ -11,7 +11,26 @@ public class Settings {
 	final protected int bigGridWidth = 770; //including margins	
 	
 	//Grid Settings
-	protected int gridSize = 10; //max 20
+	protected int gridSize = 5; //max 20  can change just comment out adding stuff to ownboards and uncomment new int....
+	protected String mode = "AIvP"; //'PvP' or 'AIvP'		
+	protected String setupMode = "mapFromFiless";			
+	protected String fileName = "map.txt";
+	
+	//players
+	protected int player1OwnBoard[][] = {{5,5,5,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};//new int [gridSize][gridSize];
+	protected int player2OwnBoard[][] = {{0,0,0,0,0},{0,0,0,0,0},{5,5,5,5,0},{0,0,0,0,0},{0,0,0,0,0}};//new int [gridSize][gridSize];
+	protected int player1GuessBoard[][] = new int[gridSize][gridSize];
+	protected int player2GuessBoard[][] = new int [gridSize][gridSize];	
+	
+	
+	public void setGridSize(int value) {
+		gridSize = value;
+	}
+	
+	public void setupMode(String mode) {
+		setupMode = mode;
+	}
+		
 
 
 }

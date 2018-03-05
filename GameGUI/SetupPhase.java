@@ -16,26 +16,40 @@ import javafx.event.ActionEvent;
 
 
 
-public class SetupScene extends Settings{
+public class SetupPhase extends Settings{
 	
 	private Scene scene;
-	
 	private BorderPane root;
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
+	private Button endSetup;
+	private Board player;
 	
-	public SetupScene(Scene scene) {
-		
+	
+	public SetupPhase(Scene scene) {
+	
 		root = new BorderPane();
 		root.setCenter(battleField());	
 		root.setBottom(botPanel());		
 		root.setRight(rightPanel());	
-		scene.setRoot(root);		
-		//Once setup is done, call this vvv
-		ownBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(ownBoard, scene,0));
+		scene.setRoot(root);
+		player = new Board();	
+
 	}
 	
+	
+	public Button setupEnd() {
+		return endSetup;
+	}
 
+	
+	public TilePane battleField() {	
+		
+		TilePane centerSlot = new TilePane();
+		ownBoard = new BoardGUI(gridSize, bigGridWidth); 	
+		centerSlot.getChildren().add(ownBoard.getBoardGrid());
+		return centerSlot; 	
+	}
 	
 	public TilePane rightPanel() {
 		
@@ -43,7 +57,7 @@ public class SetupScene extends Settings{
 		rightPanel.setPrefWidth(sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));	
-		
+	
 		guessBoard = new BoardGUI(gridSize, smallGridWidth);		
 		rightPanel.getChildren().add(guessBoard.getBoardGrid());			
 		return rightPanel;
@@ -55,30 +69,11 @@ public class SetupScene extends Settings{
 		botPanel.setPrefHeight(botHeight);	
 		botPanel.setMaxHeight(botHeight);				
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
+		endSetup = new Button("Setup DONE");
+		botPanel.getChildren().add(endSetup);
 		return botPanel;
 	}	
-	//using gridPanes since children can span multiple col or rows
-	public TilePane battleField() {	
-		
-		TilePane centerSlot = new TilePane();
-		int Array[][] = new int [gridSize][gridSize];
-		Array[0][0] = 5; //WIP laying out one ship image for consecutive values of 5..
-		Array[0][1] = 5; //from 2d Array
-		Array[0][2] = 5; 
-		//centerSlot.setPrefTileWidth(770);
-		ownBoard = new BoardGUI(gridSize, bigGridWidth); 
 
-		//had it take a ship object to setup from
-		//this should be changed into taking a ship array instead of individual ship objects
-		Ship ship1 = new Ship('h', 5, 1, 1);
-		Ship ship2 = new Ship('v', 3, 3, 3);			
-		ownBoard.setupBoardFromShipObjects(ship1);
-		ownBoard.setupBoardFromShipObjects(ship2);		
-	
-		centerSlot.getChildren().add(ownBoard.getBoardGrid());
-
-		return centerSlot; 	
-	}
 	
 
 }	
