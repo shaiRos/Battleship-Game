@@ -11,27 +11,27 @@ import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 
 
-public class BaseGameLayout extends Settings {
+public class AttackPhase extends Settings {
 
 	private Scene gameUI;	
-	private BorderPane uiLayout;
+	private BorderPane gameLayout;
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;	
 	int l;
 	
 	//constructor for AttackEventHandler to update scene for each turn
-	public BaseGameLayout(Scene scene, BoardGUI ownboard, BoardGUI guessboard, int num) {
+	public AttackPhase(Scene scene, BoardGUI ownboard, BoardGUI guessboard, int num) {
 
 		ownBoard = ownboard;  //gonna make the new board objects here taken from the arrayListBoard
 		guessBoard = guessboard;
 		gameUI = scene;
-		l += num;
+		l = num;
 		
-		uiLayout = new BorderPane();
-		uiLayout.setCenter(battleField());	
-		uiLayout.setBottom(botPanel());		
-		uiLayout.setRight(rightPanel());	
-		gameUI.setRoot(uiLayout);		
+		gameLayout = new BorderPane();
+		gameLayout.setCenter(battleField());	
+		gameLayout.setBottom(botPanel());		
+		gameLayout.setRight(rightPanel());	
+		gameUI.setRoot(gameLayout);		
 
 	}
 		

@@ -25,7 +25,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		blockSize = grid.getGridBlockSize();
 		
 		
-		l = num;
+		l = num+1;
 	}
 	
 	public void handle(MouseEvent myEvent) {
@@ -33,8 +33,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		x = (int)((myEvent.getX()-10)/(blockSize))+1;
 		y = (int)((myEvent.getY()-10)/blockSize)+1;
 		System.out.println(x + ", " + y);
-		
-		l += 1;
 		
 		Ship ship1 = new Ship('h', 5, l, 1);
 		Ship ship2 = new Ship('v', 3, 3, 3);			
@@ -45,7 +43,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		//get array for the nextplayer's guess and own board
 		
 		
-		BaseGameLayout testUI = new BaseGameLayout(scne, nextPlayerOwnBoard, nextPlayerGuessBoard, l);
+		AttackPhase testUI = new AttackPhase(scne, nextPlayerOwnBoard, nextPlayerGuessBoard, l);
 		
 		
 

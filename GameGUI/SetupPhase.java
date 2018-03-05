@@ -16,43 +16,44 @@ import javafx.event.ActionEvent;
 
 
 
-public class SetupScene extends Settings{
+public class SetupPhase extends Settings{
 	
 	private Scene scene;
 	
 	private BorderPane root;
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
+	private Button endSetup;
+	private Board player1Board;
+	private Board player2Board;
 	
-	public SetupScene(Scene scene) {
+	
+	public SetupPhase(Scene scene, Board p1, Board p2) {
 		
 		root = new BorderPane();
 		root.setCenter(battleField());	
 		root.setBottom(botPanel());		
 		root.setRight(rightPanel());	
-		scene.setRoot(root);		
-		//Once setup is done, call this vvv
-		ownBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(ownBoard, scene,0));
+		scene.setRoot(root);			
 	}
+	
+	public Button setupEnd() {
+		return endSetup;
+	}
+		
 	
 
 	public TilePane battleField() {	
 		
 		TilePane centerSlot = new TilePane();
-		int Array[][] = new int [gridSize][gridSize];
-		Array[0][0] = 5; //WIP laying out one ship image for consecutive values of 5..
-		Array[0][1] = 5; //from 2d Array
-		Array[0][2] = 5; 
 		ownBoard = new BoardGUI(gridSize, bigGridWidth); 
-		//ownBoard.addValuesFromArray(Array);
-
-		Ship ship1 = new Ship('h', 5, 1, 1);
-		Ship ship2 = new Ship('v', 3, 3, 3);			
-		ownBoard.setupBoardFromShipObjects(ship1);
-		ownBoard.setupBoardFromShipObjects(ship2);		
+		if (mode == "AIvP") {		
+			if (setupMode == "mapFromFiles") {
+				ownBoard.addValuesFromArray(player1Board.getGameBoard());
+			}
+		}
 	
 		centerSlot.getChildren().add(ownBoard.getBoardGrid());
-
 		return centerSlot; 	
 	}
 	
@@ -74,6 +75,11 @@ public class SetupScene extends Settings{
 		botPanel.setPrefHeight(botHeight);	
 		botPanel.setMaxHeight(botHeight);				
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
+		endSetup = new Button("DONE");
+		
+	
+		
+		botPanel.getChildren().add(endSetup);
 		return botPanel;
 	}	
 
