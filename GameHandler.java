@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 public class GameHandler implements EventHandler<ActionEvent>{
 
 
-    public BankHandler() {
+    public GameHandlder() {
 
     }
 
