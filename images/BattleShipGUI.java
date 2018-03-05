@@ -49,7 +49,7 @@ public class BattleShipGUI extends Application
         player2Board.setBoardSize(userBoardSize);
 
         Game.mapFromFiles(fileName, player1Board);
-        Game.mapFromFiles(fileName, player2Board);
+        //Game.mapFromFiles(fileName, player2Board);
 
 		Player player1 = new HumanPlayer(player1Board);
 		Player player2 = new HumanPlayer(player2Board); 
@@ -68,7 +68,7 @@ public class BattleShipGUI extends Application
 		//guess board is currently displayed as is...with the ships.
 		AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1");
 		BoardGUI hitBoard = startAttack.getBoardNode();
-		hitBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(hitBoard.getGridBlockSize(), gameUI, player1, player2,"P1"));
+		hitBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(hitBoard, gameUI,"P1"));
 		//send humanPlayer
 		
 //==========Up to this point===================================================

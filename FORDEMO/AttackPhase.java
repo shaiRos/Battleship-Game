@@ -18,8 +18,6 @@ public class AttackPhase extends Settings {
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;	
 	private String attackingPlayer;
-	private Player player1;
-	private Player player2;
 	
 	//constructor to display the attackPhase of a player
 	public AttackPhase(Scene scene, String player) {
@@ -57,8 +55,6 @@ public class AttackPhase extends Settings {
 		gameUI = scenee;	
 		ownBoard = new BoardGUI(gridSize, smallGridWidth);
 		guessBoard = new BoardGUI(gridSize, bigGridWidth);
-		player1 = p1;
-		player2 = p2;
 
 		if (attackingPlayer == "P1") {
 			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.gameBoard);
@@ -66,12 +62,14 @@ public class AttackPhase extends Settings {
 
 			}
 		else if (attackingPlayer == "P2") {
+			if (Game.getAIStatus() == true) {
 
 				ownBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.gameBoard);	
 				guessBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.guessBoard);
 			/*} else {
 				ownBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGameBoard());	
-				guessBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGuessBoard());	*/				
+				guessBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGuessBoard());	*/
+			}				
 				
 		}
 		//Update the Display with the new changes
@@ -98,7 +96,7 @@ public class AttackPhase extends Settings {
 		
 		TilePane centerSlot = new TilePane();
 		//attack handler on the big board
-		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, player1, player2, attackingPlayer));
+		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard, gameUI,attackingPlayer));
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 		return centerSlot; 	
 	}
