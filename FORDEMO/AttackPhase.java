@@ -57,15 +57,15 @@ public class AttackPhase extends Settings {
 		guessBoard = new BoardGUI(gridSize, bigGridWidth);
 
 		if (attackingPlayer == "P1") {
-			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.getGameBoard());
-			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.getGuessBoard()); //remember guess board also shows ships....in values
+			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.gameBoard);
+			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard); //remember guess board also shows ships....in values
 
 			}
 		else if (attackingPlayer == "P2") {
 			if (Game.getAIStatus() == true) {
 
-				ownBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.getGameBoard());	
-				guessBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.getGuessBoard());
+				ownBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.gameBoard);	
+				guessBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.guessBoard);
 			/*} else {
 				ownBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGameBoard());	
 				guessBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGuessBoard());	*/
