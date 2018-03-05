@@ -52,7 +52,7 @@ public class BattleShipGUI extends Application
         //Game.mapFromFiles(fileName, player2Board);
 
 		Player player1 = new HumanPlayer(player1Board);
-		Player player2 = new HumanPlayer(player2Board); //wtf
+		Player player2 = new HumanPlayer(player2Board); 
 
 		boolean winCondition = false;
 		
