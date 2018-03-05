@@ -164,7 +164,10 @@ public class Game{
 
         // populate boards with battleships
         
+        // Ask for user input from players to setup game
 		// setupBoard(player1Board, player2Board, userShipCount);
+
+        // Use files to setup our game
         mapFromFiles(fileName, player1Board);
         mapFromFiles(fileName, player2Board);
 
