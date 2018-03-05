@@ -89,7 +89,11 @@ public class BoardGUI {
 						case -1:
 							ImageView missImage = getImage("MissImage.png");							
 							board.add(missImage, x, y);
-							break;   
+							break;
+						case 1:
+							ImageView hitImage = getImage("HitImage.png");							
+							board.add(hitImage, x, y);		
+							break;
 					}
 				}	
 			}

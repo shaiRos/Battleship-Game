@@ -23,7 +23,6 @@ public class SetupPhase extends Settings{
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
 	private Button endSetup;
-	private Board player;
 	
 	
 	public SetupPhase(Scene scene) {
@@ -32,8 +31,7 @@ public class SetupPhase extends Settings{
 		root.setCenter(battleField());	
 		root.setBottom(botPanel());		
 		root.setRight(rightPanel());	
-		scene.setRoot(root);
-		player = new Board();	
+		scene.setRoot(root);	
 
 	}
 	
