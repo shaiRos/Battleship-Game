@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 
-public class HumanPlayer {
+public class HumanPlayer extends Player {
     Board playerBoard = null;
 
 
@@ -41,7 +41,7 @@ public class HumanPlayer {
                     System.out.println("Sending attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
 
                     // Send the attack. Check if the attack hits or misses
-                    Game.sendAttack(playerBoard, row, column);
+                    sendAttack(playerBoard, row, column);
                 }
 
             }

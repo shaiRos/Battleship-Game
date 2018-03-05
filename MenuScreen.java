@@ -30,7 +30,8 @@ public class MenuScreen {
                     break;
                 case 2:
                     System.out.println("Player vs AI");
-                    
+                    Game.enableAI();
+                    Game.main(args);
                     run = false;
                     break;
                 case 3:

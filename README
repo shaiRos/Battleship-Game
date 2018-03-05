@@ -25,10 +25,17 @@ How to delete from Git, but not locally:
 2.) git commit -m "Comment here, sign your name at the end of it"
 3.) git push origin master
 
+How to undo your commit if you didn't push
+1.) git commit -m "Oops."
+2.) git reset HEAD~
+3.) git add ........
+4.) git commit -c ORIG_HEAD
+
 NEW ==================================
 How to update files on git
 1.) Create a new branch using
 	git checkout -b branchname
+    If the branch already exists
 	git checkout branchname
 2.) Add your files and commit them
 	git add *
@@ -40,7 +47,11 @@ How to update files on git
 	You will be brought to a "Compare changes" view. Select the branch you made
 	Click on that branch, add an author and comments if you like, then request a pull
 	You will be able to see and fix your merge conflicts
-
+	Confirm the merge request
+5.) Click on the merge pull request, close the branch after you're done
+6.) Pull all the new changes by
+	git checkout master
+	git pull origin master
 ======================================
 
 

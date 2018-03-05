@@ -9,10 +9,12 @@ class Board{
 
     // Remove duplicates of these, turn these into privates, create getter methods for these
 	private static int boardSize = 5;	
-	int [][] gameBoard = new int [boardSize][boardSize];
-	int [][] guessBoard = new int [boardSize][boardSize];
+	public int [][] gameBoard = new int [boardSize][boardSize];
+	public int [][] guessBoard = new int [boardSize][boardSize];
 	private static int maxShipSize = 5;
 	private static int minShipSize = 2;
+    private static boolean guessing = false;
+
 	
     // getters and setters for our board and ships
     public static int getBoardSize() {
@@ -30,12 +32,57 @@ class Board{
     public static int getMaxShipSize() {
         return maxShipSize;
     }
-
+    
     // constructor for our board
 	public void Board(){
 	}
     
+	// https://www.mkyong.com/java/java-enum-example/
+	public enum Definitions {
+		MISS {
+				void printLabel () {
+		            System.out.print("\t" + "*");
+				}
+		},
+		
+		DEFAULT {
+				void printLabel () {
+		            System.out.print("\t" + "~");
+				}
 
+		},
+		
+		HIT {
+				void printLabel () {
+		            System.out.print("\t" + "X");
+				}
+		},
+		
+		SHIP {
+				void printLabel () {
+		            System.out.print("\t" + "S");
+				}		
+		};
+		
+		static void checkValue(int boardValue) {
+			if (boardValue == -1) {
+				MISS.printLabel();
+			} else if (boardValue == 0) {
+				DEFAULT.printLabel();
+			} else if (boardValue == 1) {
+				HIT.printLabel();
+			} else if (boardValue == 5) {
+				if (guessing != true) {
+					SHIP.printLabel();
+				} else {
+					DEFAULT.printLabel();
+				}
+			}
+		};
+		
+		abstract void printLabel();
+	}
+	
 	
 	// I changed the way the board is formatted
 	// -1 = Miss, 	    denoted by * 
@@ -47,17 +94,16 @@ class Board{
 		int[][] board = null;
 
         // our definitions
-        char hidden = '~';
-        char miss = '*';
-        char hit = 'X';
-        char ship = 'S';    
-        char downed = 'Z';  
-
-        boolean guessing = false;
+//        char hidden = '~';
+//        char miss = '*';
+//        char hit = 'X';
+//        char ship = 'S';    
+//        char downed = 'Z';  
 
         // specify if this board is for game, or guessing
         if (boardType == 1) {
             board = this.gameBoard;
+            guessing = false;
         } else if (boardType == 2) {
             board = this.guessBoard;
             guessing = true;
@@ -81,23 +127,25 @@ class Board{
             // They're spaced out for now so we can edit them with ease
             for (int column = 0 ; column < boardSize ; column++ ) {
 
-                if (board[row][column] == 0) {
-                    System.out.print("\t" + hidden);
-                } else if (board[row][column] == -1) {
-                    System.out.print("\t" + miss);  //if we want the players to see where the enemy missed in their gameBoard
-                } else if (board[row][column] == 1) {   // can change to miss ^^^
-                    System.out.print("\t" + hit);
-                }
-                if (guessing != true) {
-                    if (board[row][column] == 5) {
-                        System.out.print("\t" + ship);
-                    }
-                } else {
-                    if (board[row][column] == 5) {
-                        System.out.print("\t" + hidden);
-                    }
-                }
-              
+            	
+            		Definitions.checkValue(board[row][column]);
+//                if (board[row][column] == 0) {
+//                    System.out.print("\t" + hidden);
+//                } else if (board[row][column] == -1) {
+//                    System.out.print("\t" + miss);  //if we want the players to see where the enemy missed in their gameBoard
+//                } else if (board[row][column] == 1) {   // can change to miss ^^^
+//                    System.out.print("\t" + hit);
+//                }
+//                if (guessing != true) {
+//                    if (board[row][column] == 5) {
+//                        System.out.print("\t" + ship);
+//                    }
+//                } else {
+//                    if (board[row][column] == 5) {
+//                        System.out.print("\t" + hidden);
+//                    }
+//                }
+//              
             }
             // Another blank space
             System.out.println();

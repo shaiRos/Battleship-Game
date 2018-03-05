@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class GameConfig {
@@ -24,14 +25,12 @@ public class GameConfig {
 				int column = Integer.parseInt(setupInfo[3]);
 
 				//all checks
-				validateCoordinate(column,row, board.getBoardSize());	//check if coordinates are within the board
-				validateShipProperties(board,length,orientation);	//checks if ship properties meet the rules of the game
-				board.shipFitsBoard(orientation,length,column,row);	//check if ship fits board depending on coordinates 
+				validateShipProperties(board,length,orientation,column,row);	//checks if ship properties meet the rules of the game
 				
 				// Adds ship to the grid
 				board.addShip(orientation,length,column,row);
 				//sets the values of the ship object
-				name.setShipValues(orientation,length,row,column); 				
+				name.setShipValues(orientation,length,column,row); 				
 				formatted = true;
 				
 			}
@@ -49,19 +48,55 @@ public class GameConfig {
 			}
 		}
 	}
-	
-	//validates coordinates are reasonable depending on board size
-	public static void validateCoordinate(int xCoord, int yCoord, int boardSize) {
-		if ((xCoord > boardSize || xCoord < 0) || (yCoord > boardSize || yCoord < 0)) { //check if coordinates are within the board
-			//throws error so it doesn't continue the procedures in the setUpInput exception. since input doesn't meet requirements
-			throw new IllegalArgumentException("\ncoordinate over the board size");
+
+	public static void playerInputShips (ArrayList<Ship> shipArray, Board playerBoard, int shipCount) {
+		int maxShips = shipCount;	//max number of ships for each board
+
+		for (int numOfShips = 1; numOfShips <= maxShips ; numOfShips++) {
+			//creates the ship object first with 0 values...will be set in placeShips.
+			shipArray.add(new Ship('n', 0, 0, 0));
+			// Place the ships into the grid, this is important step because all of the orientation, values of row and column are still saved
+			GameConfig.setupInput(shipArray.get(numOfShips-1), playerBoard);
+			// return player 1 board
+			playerBoard.returnBoard(1);
+            System.out.println("\n" + (maxShips-numOfShips) + " more ships to place");
+            // At this point, the loop will restart, clearing the placeShips variables to 0.
 		}
-		
 	}
+
 	//validates ship properties are reasonable depending on game rules
-	public static void validateShipProperties(Board board, int len, char orientation) {
-		
-		if (len > Board.getMaxShipSize() || len < Board.getMinShipSize()) {  //check if ship is the supported size
+	public static void validateShipProperties(Board board, int length, char orientation, int column, int row) {
+		int changingCoord = 'n';
+		if (orientation == 'h'){
+			changingCoord = column;
+		}else if (orientation == 'v') {
+			changingCoord = row;
+		}
+		int maxCoord = changingCoord + (length-1); //right or top most coordinate of the ship
+		//Check if ship doesn't go overboard.
+		if (maxCoord > board.getBoardSize()) {
+			throw new IllegalArgumentException("The ship doesn't fit on the board");
+			
+	
+		}
+		//check if all coordinates it occupies doesn't contain another ship
+		if (orientation == 'h'){
+			for (int x = changingCoord; x <= maxCoord; x++) {	
+				int value = board.gameBoard[row-1][x-1];
+				if (value != 0) {		
+					throw new IllegalArgumentException("The area contains another ship");
+				}
+			}
+		} else if (orientation == 'v') {
+			for (int x = changingCoord; x <= maxCoord; x++) {	
+				int value = board.gameBoard[x-1][column-1];
+				if (value != 0) {			
+					throw new IllegalArgumentException("The area contains another ship");
+				}
+			}
+		}
+
+		if (length > Board.getMaxShipSize() || length < Board.getMinShipSize()) {  //check if ship is the supported size
 			throw new IllegalArgumentException("Ship size is not supported");
 		}
 		if (orientation != 'h' && orientation != 'v') { //Only takes choices between horizontal or vertical.

@@ -9,6 +9,23 @@ class Ship{
 	private char orientation = 0;
 	private int column = 0;
 	private int row = 0;
+	
+	public int getColumn() {
+		return this.column;
+	}
+	
+	public int getRow() {
+		return this.row; 
+	}
+	
+	public char getOrientation() {
+		return this.orientation;
+	}
+	
+	public int getLength() {
+		return this.length;
+	}
+	
 
 	// constructor for ship
 	public Ship(char orient,int len, int col, int ro){
