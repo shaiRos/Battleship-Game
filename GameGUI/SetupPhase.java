@@ -19,7 +19,6 @@ import javafx.event.ActionEvent;
 public class SetupPhase extends Settings{
 	
 	private Scene scene;
-	
 	private BorderPane root;
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
@@ -42,14 +41,12 @@ public class SetupPhase extends Settings{
 	public Button setupEnd() {
 		return endSetup;
 	}
-		
-	
 
+	
 	public TilePane battleField() {	
 		
 		TilePane centerSlot = new TilePane();
 		ownBoard = new BoardGUI(gridSize, bigGridWidth); 	
-	
 		centerSlot.getChildren().add(ownBoard.getBoardGrid());
 		return centerSlot; 	
 	}
@@ -60,7 +57,7 @@ public class SetupPhase extends Settings{
 		rightPanel.setPrefWidth(sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));	
-		
+	
 		guessBoard = new BoardGUI(gridSize, smallGridWidth);		
 		rightPanel.getChildren().add(guessBoard.getBoardGrid());			
 		return rightPanel;
@@ -72,7 +69,7 @@ public class SetupPhase extends Settings{
 		botPanel.setPrefHeight(botHeight);	
 		botPanel.setMaxHeight(botHeight);				
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
-		endSetup = new Button("DONE");
+		endSetup = new Button("Setup DONE");
 		botPanel.getChildren().add(endSetup);
 		return botPanel;
 	}	

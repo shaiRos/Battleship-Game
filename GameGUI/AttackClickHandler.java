@@ -8,15 +8,13 @@ import javafx.scene.Scene;
 
 public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
-	double blockSize;
-	int x;
-	int y;
-	Scene scne;
-	BoardGUI nextPlayerOwnBoard;
-	BoardGUI nextPlayerGuessBoard;
-	String nextPlayer;
+
+	private int x;
+	private int y;
+	private double blockSize;
+	private Scene scne;
+	private String nextPlayer;
 	
-	int l;
 	
 	public AttackClickHandler(BoardGUI grid, Scene scene, String attackingPlayer) {
 		
@@ -33,7 +31,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
 	public void handle(MouseEvent myEvent) {
 
-		//find the col and row it clicked
+		//find the col and row that was clicked
 		x = (int)((myEvent.getX()-10)/(blockSize))+1;
 		y = (int)((myEvent.getY()-10)/blockSize)+1;
 		System.out.println(x + ", " + y);
@@ -43,13 +41,8 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		//FEED TO PLAYERTURN METHOD IN TXT VERSION
 		
 		
+		//Change the display into the next player's attack phase
 		AttackPhase testUI = new AttackPhase(scne, nextPlayer);
-		
-		
-
-
-		//
-		
 		
 	}
 }

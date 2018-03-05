@@ -24,10 +24,11 @@ public class AttackPhase extends Settings {
 
 		attackingPlayer = player;
 		gameUI = scene;
+
 		ownBoard = new BoardGUI(gridSize, smallGridWidth);
 		guessBoard = new BoardGUI(gridSize, bigGridWidth);
 
-		//set it to display the board of the player that's currently attacking
+		//display the current state of the player's (attacking player) guess and own board
 		if (attackingPlayer == "P1") {
 			ownBoard.addValuesFromArray(player1OwnBoard);
 			guessBoard.addValuesFromArray(player1GuessBoard);
@@ -40,7 +41,7 @@ public class AttackPhase extends Settings {
 
 		//Update the Display with the new changes
 		gameLayout = new BorderPane();
-		gameLayout.setCenter(battleField());	
+		gameLayout.setCenter(centerPane());	
 		gameLayout.setBottom(botPanel());		
 		gameLayout.setRight(rightPanel());	
 		gameUI.setRoot(gameLayout);		
@@ -48,10 +49,11 @@ public class AttackPhase extends Settings {
 		System.out.println("\nCurrent player: " + player);	
 	}
 		
-	//using gridPanes since children can span multiple col or rows
-	public TilePane battleField() {	
+
+	public TilePane centerPane() {	
 		
 		TilePane centerSlot = new TilePane();
+		//attack handler on the big board
 		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard, gameUI,attackingPlayer));
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 		return centerSlot; 	

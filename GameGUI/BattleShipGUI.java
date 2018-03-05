@@ -15,7 +15,7 @@ public class BattleShipGUI extends Application
 
 	private Stage primaryStage;
 	private Scene gameUI;	
-	private BorderPane uiLayout;
+	private BorderPane mainMenu;
 
 	public static void main(String [] args)
 	{
@@ -27,8 +27,8 @@ public class BattleShipGUI extends Application
 	{
 		
 		primaryStage = primaryStage;
-		uiLayout = new BorderPane();
-		gameUI = new Scene(uiLayout, xWindowSize, yWindowSize);
+		mainMenu = new BorderPane();
+		gameUI = new Scene(mainMenu, xWindowSize, yWindowSize);
 		//enter setup stage
 		SetupPhase setup = new SetupPhase(gameUI);
 		setup.setupEnd().setOnMousePressed(new EndSetupHandler(gameUI));	
