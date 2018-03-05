@@ -1,0 +1,106 @@
+Commands for Git
+
+How to setup a folder for Git
+1.) git init
+2.) touch "test", or just make a test file and remember it's name
+3.) git add *
+4.) git commit -m "Initial test commit"
+5.) git remote add origin https://github.com/bzhang908/cpsc233BattleShip.git
+6.) git pull https://github.com/bzhang908/cpsc233BattleShip.git master --allow-unrelated-histories
+7.) git push origin master
+
+
+How to add or update files:
+1.) git add * (use star to update entire folder, otherwise replace with filename)
+2.) git commit -m "Comment here, Sign your name at the end of it"
+3.) git push origin branchname (master for main branch)
+
+How to delete files:
+1.) git rm "filename"
+2.) git commit -m "Comment here, Sign your name at the end of it"
+3.) git push origin branchname (master for main branch)
+
+How to delete from Git, but not locally:
+1.) git rm --cached "filename"
+2.) git commit -m "Comment here, sign your name at the end of it"
+3.) git push origin master
+
+How to undo your commit if you didn't push
+1.) git commit -m "Oops."
+2.) git reset HEAD~
+3.) git add ........
+4.) git commit -c ORIG_HEAD
+
+NEW ==================================
+How to update files on git
+1.) Create a new branch using
+	git checkout -b branchname
+    If the branch already exists
+	git checkout branchname
+2.) Add your files and commit them
+	git add *
+	git commit -m "Comments"
+3.) PUSH THEM USING THIS COMMAND
+	git push -u origin branchname
+4.) Go to Github and open a new pull request
+	There's a green pull request button, click to open
+	You will be brought to a "Compare changes" view. Select the branch you made
+	Click on that branch, add an author and comments if you like, then request a pull
+	You will be able to see and fix your merge conflicts
+	Confirm the merge request
+5.) Click on the merge pull request, close the branch after you're done
+6.) Pull all the new changes by
+	git checkout master
+	git pull origin master
+======================================
+
+
+
+OLD ********
+	How to update local branch with info from repo
+	git pull origin master --rebase
+
+	IF THERE ARE MERGE CONFLICTS, WE MUST CORRECT THEM MANUALLY
+	
+	Open the folder .git/rebase-apply/patch
+
+	AFTER THIS IS FIXED, YOU CAN RUN
+	git rebase --continue
+
+	THIS WILL LET YOU REVIEW BEFORE YOU OVERWITE ANYTHING THAT IS CONFLICTING
+	
+	After pulling the changes, re-open the file and manually reformat everything
+	(There should be a message in all caps <HEAD> and ===== denoting the changes, remove those)
+
+	Then, readd the files by
+	git add *
+	git commit -m "Comment here"
+	git push origin master
+
+
+If that does not work, use this command instead
+	git pull https://github.com/bzhang908/CPSC233BattleShip.git master
+
+
+Lesser important stuff
+
+How to create a branch:
+1.) Create a branch using the command
+	git checkout -b [Name of branch]
+2.) Change working branch to new branch
+	git checkout [name of branch]
+NOTE NOTE NOTE NOTE NOTE NOTE
+TO CHANGE BACK TO THE MAIN BRANCH, USE THE COMMAND
+	git checkout master
+
+How to push branch to git:
+	git push origin [name of branch]
+
+How to see branches on project
+	git branch
+
+How to delete a branch
+	To delete the remote branch on git
+	git push -d origin <BranchName>
+	To delete the locally saved branch
+	git branch -d <BranchName>
