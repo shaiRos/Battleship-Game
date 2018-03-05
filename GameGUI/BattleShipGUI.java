@@ -34,17 +34,11 @@ public class BattleShipGUI extends Application
 
 	//Settings should be set in main menu
 		Settings settings = new Settings();
-		settings.setGridSize(5);
-        int userShipCount = 2;
-		settings.setupMode("mapFromFiles", "map.txt");
-
-
-
 
         Board player1Board = new Board();
-        player1Board.setBoardSize(settings.gridSize);
+        player1Board.setBoardSize(5);
         Board player2Board = new Board();
-        player2Board.setBoardSize(settings.gridSize);
+        player2Board.setBoardSize(5);
 
 		
 		
