@@ -164,7 +164,10 @@ public class Game{
 
         // populate boards with battleships
         
+        // This will allow user input to setup board
 		// setupBoard(player1Board, player2Board, userShipCount);
+
+        // This will allow us to read from a file to setup player boards
         mapFromFiles(fileName, player1Board);
         mapFromFiles(fileName, player2Board);
 
@@ -190,8 +193,8 @@ public class Game{
 		
 		do {
             // set each player's guess board to the other player's game board
-			player1Board.guessBoard = player2Board.getGameBoard();
-			player2Board.guessBoard = player1Board.getGameBoard();
+			player1Board.guessBoard = player2Board.gameBoard;
+			player2Board.guessBoard = player1Board.gameBoard;
 
             // Player 1 turn
 			clearScreen();
@@ -206,7 +209,7 @@ public class Game{
 				sleepThread(2500);
 				System.exit(0);
 			}
-			//sleepThread(1000);
+			sleepThread(1000);
 			
 			//check win conditions for every turn
 			
@@ -227,7 +230,7 @@ public class Game{
 				sleepThread(2500);
 				System.exit(0);
 			}
-			//sleepThread(1000);
+			sleepThread(1000);
 			
 			//check win conditions maybe make this an exception. throws an exception if winning conditions are met, catches condition and exits loop.
 			
