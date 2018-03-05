@@ -30,23 +30,7 @@ public class BattleShipGUI extends Application
 		uiLayout = new BorderPane();
 		gameUI = new Scene(uiLayout, xWindowSize, yWindowSize);
 		//enter setup stage
-//=========================================================================================================  
-
-	//Settings should be set in main menu
-		Settings settings = new Settings();
-
-        Board player1Board = new Board();
-        player1Board.setBoardSize(5);
-        Board player2Board = new Board();
-        player2Board.setBoardSize(5);
-
-		
-		
-		// setupBoard(player1Board, player2Board, userShipCount);
-        Game.mapFromFiles(settings.fileName, player1Board);
-        Game.mapFromFiles(settings.fileName, player2Board);
-//=========================================================================================================
-		SetupPhase setup = new SetupPhase(gameUI, player1Board, player2Board);
+		SetupPhase setup = new SetupPhase(gameUI);
 		setup.setupEnd().setOnMousePressed(new EndSetupHandler(gameUI));	
 		
 

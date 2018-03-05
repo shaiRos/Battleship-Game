@@ -17,29 +17,42 @@ public class AttackPhase extends Settings {
 	private BorderPane gameLayout;
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;	
-	int l;
+	private String attackingPlayer;
 	
-	//constructor for AttackEventHandler to update scene for each turn
-	public AttackPhase(Scene scene, BoardGUI ownboard, BoardGUI guessboard, int num) {
+	//constructor to display the attackPhase of a player
+	public AttackPhase(Scene scene, String player) {
 
-		ownBoard = ownboard;  //gonna make the new board objects here taken from the arrayListBoard
-		guessBoard = guessboard;
+		attackingPlayer = player;
 		gameUI = scene;
-		l = num;
-		
+		ownBoard = new BoardGUI(gridSize, smallGridWidth);
+		guessBoard = new BoardGUI(gridSize, bigGridWidth);
+
+		//set it to display the board of the player that's currently attacking
+		if (attackingPlayer == "P1") {
+			ownBoard.addValuesFromArray(player1OwnBoard);
+			guessBoard.addValuesFromArray(player1GuessBoard);
+
+		}
+		else if (attackingPlayer == "P2") {
+			ownBoard.addValuesFromArray(player2OwnBoard);	
+			guessBoard.addValuesFromArray(player2GuessBoard);
+		}					
+
+		//Update the Display with the new changes
 		gameLayout = new BorderPane();
 		gameLayout.setCenter(battleField());	
 		gameLayout.setBottom(botPanel());		
 		gameLayout.setRight(rightPanel());	
 		gameUI.setRoot(gameLayout);		
 
+		System.out.println("\nCurrent player: " + player);	
 	}
 		
 	//using gridPanes since children can span multiple col or rows
 	public TilePane battleField() {	
 		
 		TilePane centerSlot = new TilePane();
-		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard, gameUI,l));
+		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard, gameUI,attackingPlayer));
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 		return centerSlot; 	
 	}

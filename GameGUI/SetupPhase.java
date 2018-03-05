@@ -24,18 +24,20 @@ public class SetupPhase extends Settings{
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
 	private Button endSetup;
-	private Board player1Board;
-	private Board player2Board;
+	private Board player;
 	
 	
-	public SetupPhase(Scene scene, Board p1, Board p2) {
-		
+	public SetupPhase(Scene scene) {
+	
 		root = new BorderPane();
 		root.setCenter(battleField());	
 		root.setBottom(botPanel());		
 		root.setRight(rightPanel());	
-		scene.setRoot(root);			
+		scene.setRoot(root);
+		player = new Board();	
+
 	}
+	
 	
 	public Button setupEnd() {
 		return endSetup;
@@ -46,12 +48,7 @@ public class SetupPhase extends Settings{
 	public TilePane battleField() {	
 		
 		TilePane centerSlot = new TilePane();
-		ownBoard = new BoardGUI(gridSize, bigGridWidth); 
-		if (mode == "AIvP") {		
-			if (setupMode == "mapFromFiles") {
-				ownBoard.addValuesFromArray(player1Board.getGameBoard());
-			}
-		}
+		ownBoard = new BoardGUI(gridSize, bigGridWidth); 	
 	
 		centerSlot.getChildren().add(ownBoard.getBoardGrid());
 		return centerSlot; 	
@@ -76,9 +73,6 @@ public class SetupPhase extends Settings{
 		botPanel.setMaxHeight(botHeight);				
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
 		endSetup = new Button("DONE");
-		
-	
-		
 		botPanel.getChildren().add(endSetup);
 		return botPanel;
 	}	

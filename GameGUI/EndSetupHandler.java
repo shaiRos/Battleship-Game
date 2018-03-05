@@ -6,35 +6,17 @@ import javafx.scene.input.MouseEvent;
 
 public class EndSetupHandler implements EventHandler<MouseEvent> {
 	
-	Button doneButton;
-	BoardGUI FirstTurnGuessBoard;
-	BoardGUI FirstTurnOwnBoard;
-	int gridSize;
-	Scene scne;
-
-
-
-	public EndSetupHandler(Scene scene) {
+	private Scene scene;
+	
+	public EndSetupHandler(Scene scenee) {
 		
-		scne = scene;
-		
-		Settings setting = new Settings();
-		gridSize = setting.gridSize;		
-		
-		FirstTurnGuessBoard = new BoardGUI(gridSize, 770);
-		FirstTurnOwnBoard = new BoardGUI(gridSize, 250);
+		scene = scenee;		
 	}
 	
 	public void handle(MouseEvent myEvent) {
-		
-		Ship ship1 = new Ship('h', 2, 2, 1);
-		Ship ship2 = new Ship('v', 3, 3, 3);			
-		FirstTurnOwnBoard.setupBoardFromShipObjects(ship1);
-		FirstTurnOwnBoard.setupBoardFromShipObjects(ship2);			
 
-
-	
-		AttackPhase change = new AttackPhase(scne, FirstTurnOwnBoard, FirstTurnGuessBoard, 0);	
+		//start attack phase of the game	player 1 goes first so it displays p1 first
+		AttackPhase start = new AttackPhase(scene, "P1"); 	
 
 	
 	}

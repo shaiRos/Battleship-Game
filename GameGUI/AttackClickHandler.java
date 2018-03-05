@@ -14,36 +14,36 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	Scene scne;
 	BoardGUI nextPlayerOwnBoard;
 	BoardGUI nextPlayerGuessBoard;
+	String nextPlayer;
 	
 	int l;
 	
-	public AttackClickHandler(BoardGUI grid, Scene scene, int num) {
+	public AttackClickHandler(BoardGUI grid, Scene scene, String attackingPlayer) {
 		
-		nextPlayerGuessBoard = new BoardGUI(grid.getGridSize(), 770);
-		nextPlayerOwnBoard = new BoardGUI(grid.getGridSize(), 250);
+
 		scne = scene;
-		blockSize = grid.getGridBlockSize();
+		blockSize = grid.getGridBlockSize();	//only needed the grid to get block size
 		
-		
-		l = num+1;
+		if (attackingPlayer == "P1") {
+			nextPlayer = "P2";
+		}else if (attackingPlayer == "P2") {
+			nextPlayer = "P1";
+		}
 	}
 	
 	public void handle(MouseEvent myEvent) {
-		
+
+		//find the col and row it clicked
 		x = (int)((myEvent.getX()-10)/(blockSize))+1;
 		y = (int)((myEvent.getY()-10)/blockSize)+1;
 		System.out.println(x + ", " + y);
 		
-		Ship ship1 = new Ship('h', 5, l, 1);
-		Ship ship2 = new Ship('v', 3, 3, 3);			
-		nextPlayerOwnBoard.setupBoardFromShipObjects(ship1);
-		nextPlayerOwnBoard.setupBoardFromShipObjects(ship2);	
 
 
-		//get array for the nextplayer's guess and own board
+		//FEED TO PLAYERTURN METHOD IN TXT VERSION
 		
 		
-		AttackPhase testUI = new AttackPhase(scne, nextPlayerOwnBoard, nextPlayerGuessBoard, l);
+		AttackPhase testUI = new AttackPhase(scne, nextPlayer);
 		
 		
 
