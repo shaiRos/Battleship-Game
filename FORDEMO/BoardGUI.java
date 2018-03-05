@@ -83,15 +83,15 @@ public class BoardGUI {
 					switch(value) {
 						
 						case 5:
-							ImageView shipImage = getImage("RedCircle.png");
+							ImageView shipImage = getImage("images/RedCircle.png");
 							board.add(shipImage, x, y);
 							break;
 						case -1:
-							ImageView missImage = getImage("MissImage.png");							
+							ImageView missImage = getImage("images/MissImage.png");							
 							board.add(missImage, x, y);
 							break;
 						case 1:
-							ImageView hitImage = getImage("HitImage.png");							
+							ImageView hitImage = getImage("images/HitImage.png");							
 							board.add(hitImage, x, y);		
 							break;
 					}
