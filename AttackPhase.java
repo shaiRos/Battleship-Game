@@ -21,35 +21,7 @@ public class AttackPhase extends Settings {
 	private Player player1;
 	private Player player2;
 	
-	//constructor to display the attackPhase of a player
-	public AttackPhase(Scene scene, String player) {
-
-		attackingPlayer = player;
-		gameUI = scene;
-
-		ownBoard = new BoardGUI(gridSize, smallGridWidth);
-		guessBoard = new BoardGUI(gridSize, bigGridWidth);
-
-		//display the current state of the player's (attacking player) guess and own board
-		if (attackingPlayer == "P1") {
-			ownBoard.addValuesFromArray(player1OwnBoard);
-			guessBoard.addValuesFromArray(player1GuessBoard);
-
-		}
-		else if (attackingPlayer == "P2") {
-			ownBoard.addValuesFromArray(player2OwnBoard);	
-			guessBoard.addValuesFromArray(player2GuessBoard);
-		}					
-
-		//Update the Display with the new changes
-		gameLayout = new BorderPane();
-		gameLayout.setCenter(centerPane());	
-		gameLayout.setBottom(botPanel());		
-		gameLayout.setRight(rightPanel());	
-		gameUI.setRoot(gameLayout);		
-
-		System.out.println("\nCurrent player: " + player);	
-	}
+	//constructor to display the attackPhase of a player and listens for input events
 	
 	public AttackPhase(Scene scenee, Player p1, Player p2, String player) {
 
@@ -61,14 +33,14 @@ public class AttackPhase extends Settings {
 		player2 = p2;
 
 		if (attackingPlayer == "P1") {
-			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.gameBoard);
-			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard); //remember guess board also shows ships....in values
+			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.gameBoard, "gameBoard");
+			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard, "guessBoard"); //remember guess board also shows ships....in values
 
 			}
 		else if (attackingPlayer == "P2") {
 
-				ownBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.gameBoard);	
-				guessBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.guessBoard);
+				ownBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.gameBoard, "gameBoard");	
+				guessBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.guessBoard, "guessBoard");
 			/*} else {
 				ownBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGameBoard());	
 				guessBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGuessBoard());	*/				
@@ -83,16 +55,12 @@ public class AttackPhase extends Settings {
 
 		System.out.println("\nCurrent player: " + player);	
 	}
-		
-		
-		
 
-		
 	
 	public BoardGUI getBoardNode() {
 		return guessBoard;
 	}
-		
+	
 
 	public TilePane centerPane() {	
 		
@@ -110,7 +78,6 @@ public class AttackPhase extends Settings {
 		rightPanel.setPrefWidth(sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));	
-		
 		rightPanel.getChildren().add(ownBoard.getBoardGrid());			
 		return rightPanel;
 	}	
@@ -124,9 +91,4 @@ public class AttackPhase extends Settings {
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
 		return botPanel;
 	}
-	
-
-
-	
-
 }			
