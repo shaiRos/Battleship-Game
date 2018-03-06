@@ -4,7 +4,7 @@ public class Player {
     /**
     *   We want to research enumeration for this method
     **/
-	public static void sendAttack(Board playerBoard, int row, int column) {
+	public void sendAttack(Board playerBoard, int row, int column) {
         // check the value of the block specified, if the values match, change the values with
         // a hit or a miss
         int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
@@ -19,11 +19,6 @@ public class Player {
         } else if (boardValue == -1) {
             playerBoard.guessBoard[column - 1][row - 1] = -1;
             System.out.println("Miss!");
-        }
-
-         else if (boardValue == 1) {
-            System.out.println("Previously hit!");
-
         // Should probably have a different check case for else
         } else {
             System.out.println("I broke something whoops");
@@ -31,6 +26,14 @@ public class Player {
             System.out.println(boardValue);
         }
 
+	}
+	
+	public boolean checkPreviousHit(Board playerBoard, int row, int column) {
+		int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
+		if (boardValue == 1) {
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -202,6 +202,7 @@ public class Game{
             // Take the user coordinates and attack
 			// DO NOTE
 			// Currently, you need to typecast the type the player is to access the playerTurn method
+			
 			((HumanPlayer)player1).playerTurn();
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
@@ -209,6 +210,7 @@ public class Game{
 				sleepThread(2500);
 				System.exit(0);
 			}
+			
 			sleepThread(1000);
 			
 			//check win conditions for every turn
