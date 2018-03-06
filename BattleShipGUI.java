@@ -71,13 +71,8 @@ public class BattleShipGUI extends Application
 		hitBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(hitBoard.getGridBlockSize(), gameUI, player1, player2,"P1"));
 		//send humanPlayer
 		
-//==========Up to this point===================================================
+//=============================================================
 
-
-
-
-	
-		
 
 		primaryStage.setMaxHeight(yWindowSize);	
 		primaryStage.setMaxWidth(xWindowSize + 15);		

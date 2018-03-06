@@ -71,7 +71,7 @@ public class BoardGUI {
 	}
 		
 	
-	public void addValuesFromArray(int[][] boardArray) {
+	public void addValuesFromArray(int[][] boardArray, String boardType) {
 	
 		for (int x = 0; x < gridSize; x++) {
 			for (int y = 0; y < gridSize; y++) {
@@ -83,9 +83,12 @@ public class BoardGUI {
 					switch(value) {
 						
 						case 5:
-							ImageView shipImage = getImage("images/RedCircle.png");
-							board.add(shipImage, x, y);
-							break;
+							if (boardType != "guessBoard") {
+								ImageView shipImage = getImage("images/RedCircle.png");
+								board.add(shipImage, x, y);
+							}
+								break;
+							
 						case -1:
 							ImageView missImage = getImage("images/MissImage.png");							
 							board.add(missImage, x, y);
