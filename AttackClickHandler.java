@@ -51,15 +51,20 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		y = (int)((myEvent.getY()-10)/blockSize)+1;
 		System.out.println(x + ", " + y);
 		//initiate attack
-		playerAttacking.sendAttack((((HumanPlayer)playerAttacking).playerBoard), x, y);
-		System.out.println(nextPlayer);
-
-
-		if (Game.winCondition(((HumanPlayer)playerAttacked).playerBoard) == false) {
-			//display the next player turn
-			AttackPhase testUI = new AttackPhase(scene,player1,player2, nextPlayer);
+		
+		boolean checkPrevHit = playerAttacked.checkPreviousHit((((HumanPlayer)playerAttacking).playerBoard), x, y);	
+		
+		if (checkPrevHit == true) {													//if they chose a coordinate they previously hit
+			System.out.println("prevhit true, Please try again");
+			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer);//display current player again. ONLY FOR SHIPS. Misses don't count.
 		} else {
-			System.out.println(thisPlayer + " has won"); //it stops the display but clicking still works...
-		}
+			playerAttacking.sendAttack((((HumanPlayer)playerAttacking).playerBoard), x, y);	
+			if (Game.winCondition(((HumanPlayer)playerAttacked).playerBoard) == false) {
+				//display the next player turn
+				AttackPhase testUI = new AttackPhase(scene,player1,player2, nextPlayer);
+			} else {
+				System.out.println(thisPlayer + " has won"); //it stops the display but clicking still works...		
+			}				
+		}			
 	}
 }
