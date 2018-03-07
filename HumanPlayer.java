@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 
-public class HumanPlayer {
+public class HumanPlayer extends Player {
     Board playerBoard = null;
 
 
@@ -35,13 +35,15 @@ public class HumanPlayer {
                 // check to make sure its a legit value
                 if ((row > playerBoard.getBoardSize()) || (column > playerBoard.getBoardSize()) || (row < 0) || (column < 0)) {
                     System.out.println("Invalid coordinates");
+                } else if (checkPreviousHit(playerBoard, row, column) == true) {
+                		System.out.println("Previously guessed! Try again");
                 } else {
                     formatted = true;
                     // Specify where the attack has went
                     System.out.println("Sending attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
 
                     // Send the attack. Check if the attack hits or misses
-                    Game.sendAttack(playerBoard, row, column);
+                    sendAttack(playerBoard, row, column);
                 }
 
             }

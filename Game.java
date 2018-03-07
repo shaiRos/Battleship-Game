@@ -5,7 +5,17 @@ import java.io.*;
 
 
 public class Game{
-
+	
+	// This will toggle if our game will let us fight another player or an AI
+    private static boolean aiStatus = false;
+    
+    public static void enableAI() {
+    		aiStatus = true;
+    }
+    
+    public static boolean getAIStatus() {
+    		return aiStatus;
+    }
 
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
     // Debug tool while also hiding enemy boards!
@@ -58,40 +68,6 @@ public class Game{
 
 		sleepThread(1000);
 		clearScreen();
-
-	}
-
-
-	// was thinking of moving stuff into here once it was working, but it doesnt
-    /**
-    *   We want to research enumeration for this method
-    **/
-	public static void sendAttack(Board playerBoard, int row, int column) {
-        // check the value of the block specified, if the values match, change the values with
-        // a hit or a miss
-        int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
-        if (boardValue == 5) {
-            playerBoard.guessBoard[column - 1][row - 1] = 1;
-            System.out.println("Hit!");
-
-        } else if (boardValue == 0) {
-            playerBoard.guessBoard[column - 1][row - 1] = -1;
-            System.out.println("Miss!");
-
-        } else if (boardValue == -1) {
-            playerBoard.guessBoard[column - 1][row - 1] = -1;
-            System.out.println("Miss!");
-        }
-
-         else if (boardValue == 1) {
-            System.out.println("Previously hit!");
-
-        // Should probably have a different check case for else
-        } else {
-            System.out.println("I broke something whoops");
-            System.out.println("Debuggies");
-            System.out.println(boardValue);
-        }
 
 	}
 
@@ -158,6 +134,7 @@ public class Game{
         }
 
     }
+    
 
     /**
     *   Default board difficulties
@@ -186,22 +163,34 @@ public class Game{
         player2Board.setBoardSize(userBoardSize);
 
         // populate boards with battleships
+        
+        // This will allow user to input coordinates and setup board
 		// setupBoard(player1Board, player2Board, userShipCount);
+
+        // This will read a file and allow us to setup predefined board
         mapFromFiles(fileName, player1Board);
         mapFromFiles(fileName, player2Board);
+
+        // instantiate our players
+		Player player1 = new HumanPlayer(player1Board);
+		Player player2 = null;
 
 		// Create a new human that can access their boards
         /**
         *   Make the player an inheritance of a Player class
         **/
-		HumanPlayer player1 = new HumanPlayer(player1Board);
-		HumanPlayer player2 = new HumanPlayer(player2Board);
-		
+        if (getAIStatus() != true) {
+	    		player2 = new HumanPlayer(player2Board);
+        } else {
+        		player2 = new ComputerPlayer(player2Board);
+        }
+
         // set the win condition
 		boolean winCondition = false;
 
 
         // Game loop
+		
 		do {
             // set each player's guess board to the other player's game board
 			player1Board.guessBoard = player2Board.gameBoard;
@@ -211,14 +200,18 @@ public class Game{
 			clearScreen();
 			System.out.println("Player 1 turn starting....");
             // Take the user coordinates and attack
-			player1.playerTurn();
+			// DO NOTE
+			// Currently, you need to typecast the type the player is to access the playerTurn method
+			
+			((HumanPlayer)player1).playerTurn();
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
 				System.out.println("Player 1 has won!");
 				sleepThread(2500);
 				System.exit(0);
 			}
-			sleepThread(2500);
+			
+			sleepThread(1000);
 			
 			//check win conditions for every turn
 			
@@ -226,14 +219,20 @@ public class Game{
 			clearScreen();
 			System.out.println("Player 2 turn starting....");
             // Take the user coordinates and attack
-			player2.playerTurn();
+			// DO NOTE
+			// Currently, you need to typecast the type the player is to access the playerTurn method
+			if (getAIStatus() == true) {
+				((ComputerPlayer) player2).playerTurn();
+			} else {
+				((HumanPlayer) player2).playerTurn();
+			}
             // Check for remaining ships on enemy board
 			if (winCondition(player1Board) == true) {
 				System.out.println("Player 2 has won!");
 				sleepThread(2500);
 				System.exit(0);
 			}
-			sleepThread(2500);
+			sleepThread(1000);
 			
 			//check win conditions maybe make this an exception. throws an exception if winning conditions are met, catches condition and exits loop.
 			
