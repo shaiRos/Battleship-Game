@@ -33,24 +33,14 @@ public class AttackPhase extends Settings {
 		player2 = p2;
 
 		if (attackingPlayer == "P1") {
-<<<<<<< HEAD:FORDEMO/AttackPhase.java
-			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.gameBoard);
-			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard); //remember guess board also shows ships....in values
-=======
 			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.gameBoard, "gameBoard");
 			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard, "guessBoard"); //remember guess board also shows ships....in values
->>>>>>> 60e614f262448585db795713739fffc1946671b8:AttackPhase.java
 
 			}
 		else if (attackingPlayer == "P2") {
 
-<<<<<<< HEAD:FORDEMO/AttackPhase.java
-				ownBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.gameBoard);	
-				guessBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.guessBoard);
-=======
 				ownBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.gameBoard, "gameBoard");	
 				guessBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.guessBoard, "guessBoard");
->>>>>>> 60e614f262448585db795713739fffc1946671b8:AttackPhase.java
 			/*} else {
 				ownBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGameBoard());	
 				guessBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGuessBoard());	*/				
