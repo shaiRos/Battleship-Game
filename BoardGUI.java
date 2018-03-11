@@ -84,7 +84,7 @@ public class BoardGUI {
 						
 						case 5:
 							if (boardType != "guessBoard") {
-								ImageView shipImage = getImage("images/RedCircle.png");
+								ImageView shipImage = getImage("images/Shipt.png");
 								board.add(shipImage, x, y);
 							}
 								break;

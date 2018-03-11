@@ -69,7 +69,7 @@ public class BattleShipGUI extends Application
 		AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1");
 		BoardGUI hitBoard = startAttack.getBoardNode();
 		hitBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(hitBoard.getGridBlockSize(), gameUI, player1, player2,"P1"));
-		//send humanPlayer
+		//send humanPlayer  
 		
 //=============================================================
 
