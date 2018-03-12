@@ -9,16 +9,28 @@ public class Game{
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
     
+
+    /**
+    *   Enables the AI 
+    */
     public static void enableAI() {
     		aiStatus = true;
     }
     
+
+    /**
+    *   Checks the status of the AI   
+    */
     public static boolean getAIStatus() {
     		return aiStatus;
     }
 
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
     // Debug tool while also hiding enemy boards!
+    /**
+    *   Clears the screen for the game
+    *   Debug tool while also hiding enemy boards!
+    */
 	public static void clearScreen() {
         // ASCII escape codes  
 	    System.out.print("\033[H\033[2J");  
