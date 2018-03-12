@@ -5,6 +5,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 
 public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
@@ -19,13 +20,15 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	private Player playerAttacked;
 	private Player player1;
 	private Player player2;	
+	private Label coordinate;
 	
-	public AttackClickHandler(double BlockSize, Scene scenee, Player p1, Player p2, String attackingPlayer) {
+	public AttackClickHandler(double BlockSize, Scene scenee, Player p1, Player p2, String attackingPlayer, Label coords) {
 
 		player1 = p1;
 		player2 = p2;
 		scene = scenee;
 		blockSize = BlockSize;
+		coordinate = coords;
 
 		if (attackingPlayer == "P1") {
 			
@@ -51,6 +54,11 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		y = (int)((myEvent.getY()-10)/blockSize)+1;
 		System.out.println(x + ", " + y);
 		//initiate attack
+		if (coordinate != null) {
+			coordinate.setText(x + ", " + y);
+		}
+		
+		
 		
 		boolean checkPrevHit = playerAttacked.checkPreviousHit((((HumanPlayer)playerAttacking).playerBoard), x, y);	
 		

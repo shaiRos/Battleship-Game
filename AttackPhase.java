@@ -20,6 +20,7 @@ public class AttackPhase extends Settings {
 	private String attackingPlayer;
 	private Player player1;
 	private Player player2;
+	private Label coordinates = new Label();
 	
 	//constructor to display the attackPhase of a player and listens for input events
 	
@@ -66,7 +67,7 @@ public class AttackPhase extends Settings {
 		
 		TilePane centerSlot = new TilePane();
 		//attack handler on the big board
-		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, player1, player2, attackingPlayer));
+		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, player1, player2, attackingPlayer, coordinates));
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 		return centerSlot; 	
 	}
@@ -89,6 +90,8 @@ public class AttackPhase extends Settings {
 		botPanel.setPrefHeight(botHeight);	
 		botPanel.setMaxHeight(botHeight);				
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
+		//coordinates = new Label();
+		botPanel.getChildren().add(coordinates);
 		return botPanel;
 	}
 }			
