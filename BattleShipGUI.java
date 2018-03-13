@@ -65,10 +65,8 @@ public class BattleShipGUI extends Application
 			// Currently, you need to typecast the type the player is to access the playerTurn method
 		//((HumanPlayer) player1).playerTurn();		
 
-		//guess board is currently displayed as is...with the ships.
-		AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1");
-		BoardGUI hitBoard = startAttack.getBoardNode();
-		hitBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(hitBoard.getGridBlockSize(), gameUI, player1, player2,"P1", null));
+		//Start attack Phase
+		AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1", null);
 		//send humanPlayer  
 		
 //=============================================================

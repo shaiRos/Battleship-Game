@@ -20,11 +20,11 @@ public class AttackPhase extends Settings {
 	private String attackingPlayer;
 	private Player player1;
 	private Player player2;
-	private Label coordinates = new Label();
+	private Label coordinates = null;
 	
 	//constructor to display the attackPhase of a player and listens for input events
 	
-	public AttackPhase(Scene scenee, Player p1, Player p2, String player) {
+	public AttackPhase(Scene scenee, Player p1, Player p2, String player, Label coord) {
 
 		attackingPlayer = player;
 		gameUI = scenee;	
@@ -32,10 +32,11 @@ public class AttackPhase extends Settings {
 		guessBoard = new BoardGUI(gridSize, bigGridWidth);
 		player1 = p1;
 		player2 = p2;
+		coordinates = coord;
 
 		if (attackingPlayer == "P1") {
 			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.gameBoard, "gameBoard");
-			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard, "guessBoard"); //remember guess board also shows ships....in values
+			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard, "guessBoard");
 
 			}
 		else if (attackingPlayer == "P2") {
@@ -52,7 +53,7 @@ public class AttackPhase extends Settings {
 		gameLayout.setCenter(centerPane());	
 		gameLayout.setBottom(botPanel());		
 		gameLayout.setRight(rightPanel());	
-		gameUI.setRoot(gameLayout);		
+		gameUI.setRoot(gameLayout);	
 
 		System.out.println("\nCurrent player: " + player);	
 	}
@@ -67,7 +68,9 @@ public class AttackPhase extends Settings {
 		
 		TilePane centerSlot = new TilePane();
 		//attack handler on the big board
-		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, player1, player2, attackingPlayer, coordinates));
+		if (coordinates == null) {
+			guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, player1, player2, attackingPlayer));
+		}
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 		return centerSlot; 	
 	}
@@ -84,14 +87,17 @@ public class AttackPhase extends Settings {
 	}	
 	
 	
-	public TilePane botPanel() {
+	public GridPane botPanel() {
 		
-		TilePane botPanel = new TilePane(); 
+		GridPane botPanel = new GridPane(); 
 		botPanel.setPrefHeight(botHeight);	
 		botPanel.setMaxHeight(botHeight);				
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
-		//coordinates = new Label();
-		botPanel.getChildren().add(coordinates);
+		
+		if (coordinates != null) {
+			botPanel.getChildren().add(coordinates);
+			System.out.println("not null");
+		}
 		return botPanel;
 	}
 }			
