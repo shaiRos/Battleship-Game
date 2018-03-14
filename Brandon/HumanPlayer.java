@@ -14,7 +14,7 @@ public class HumanPlayer extends Player {
 		return playerBoard;
 	}
 
-
+    // Main method for the player turn routine
     public void playerTurn() {
         boolean formatted = false;
         while (formatted != true) {
@@ -39,6 +39,7 @@ public class HumanPlayer extends Player {
                 // check to make sure its a legit value
                 if ((row > playerBoard.getBoardSize()) || (column > playerBoard.getBoardSize()) || (row < 0) || (column < 0)) {
                     System.out.println("Invalid coordinates");
+                // make sure the values havent been guessed before
                 } else if (checkPreviousHit(playerBoard, row, column) == true) {
                 		System.out.println("Previously guessed! Try again");
                 } else {

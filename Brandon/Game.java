@@ -6,13 +6,18 @@ import java.io.*;
 
 public class Game{
 	
+	
+	// Constructor for the game
+	// Uses a boolean to specify if the AI will be enabled
+	public Game(boolean specifyAIStatus) {
+		aiStatus = specifyAIStatus;
+		start();
+	}
+	
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
     
-    public static void enableAI() {
-    		aiStatus = true;
-    }
-    
+    // getter for AI state
     public static boolean getAIStatus() {
     		return aiStatus;
     }
@@ -89,7 +94,9 @@ public class Game{
 
     }
 
-
+	// Read values from a file and create board based on those values
+	// NOTE
+	// 		I DONT THINK THIS USES ANY CHECKS, THE FILE MUST HAVE VALID VALUES
     public static void mapFromFiles(String mapLevel, Board board){
 
         //Initiate line for ship data from file 
@@ -108,12 +115,14 @@ public class Game{
                 System.out.println(shipInfo);
                 String[] line = shipInfo.split(" ");
                 
+                // split the lines to proper format
                 char orientation = line[0].toLowerCase().charAt(0);
                 int length = Integer.parseInt(line[1]);
                 char tempRow = line[2].toUpperCase().charAt(0);
                 int row = (((int)(tempRow) - 65 ) + 1);
                 int column = Integer.parseInt(line[3]);
 
+                // DEBUG
                 System.out.println(orientation);
                 System.out.println(length);
                 System.out.println(row);
@@ -138,16 +147,14 @@ public class Game{
 
     /**
     *   Default board difficulties
-    *   Rules for specific ship lengths
     *   Use the AI thingy to setup random board placement
-    *   Research enum on sendAttack
-    *   Inheritance on the players
-    *   use readFile for default maps
     *   Implement Ship class features - ship sunk
     *   Fix board size constants
     **/
-   public static void main(String[] args) {
-   		// create boards for both the players
+    
+    
+    public void start() {
+    	// create boards for both the players
         // difficulty will rely on these settings - add user input to specify difficulty
         int userBoardSize = 5;
         int userShipCount = 2;
@@ -233,8 +240,6 @@ public class Game{
 			//check win conditions maybe make this an exception. throws an exception if winning conditions are met, catches condition and exits loop.
 			
 		} while (winCondition != true);
-
-	
     }
 }
 	

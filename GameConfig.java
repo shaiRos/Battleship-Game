@@ -15,6 +15,8 @@ public class GameConfig {
 				System.out.print("\nIndicate (orientation length row column): ");
 				Scanner Setup = new Scanner(System.in);
 				String setup = Setup.nextLine();
+
+				//Scanner to test user input
 				//take the input that was converted into String and separate the info
 				String setupInfo[] = setup.split(" ");
 				//store info to designated variables and convert string to their types
@@ -24,6 +26,11 @@ public class GameConfig {
 				int row = (((int)(tempRow) - 65 ) + 1);
 				int column = Integer.parseInt(setupInfo[3]);
 
+				// TODO
+				/*	
+				*	POSSIBLE JUNIT TESTING 
+				*	
+				*/
 				//all checks
 				validateShipProperties(board,length,orientation,column,row);	//checks if ship properties meet the rules of the game
 				
