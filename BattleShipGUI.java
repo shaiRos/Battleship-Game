@@ -51,8 +51,19 @@ public class BattleShipGUI extends Application
         Game.mapFromFiles(fileName, player1Board);
         Game.mapFromFiles(fileName, player2Board);
 
+		Game.enableAI();		
+		
+		
 		Player player1 = new HumanPlayer(player1Board);
-		Player player2 = new HumanPlayer(player2Board); 
+		Player player2 = null;
+		
+        if (Game.getAIStatus() != true) {
+	    		player2 = new HumanPlayer(player2Board);
+				System.out.println("human");
+        } else {
+        		player2 = new ComputerPlayer(player2Board);
+				System.out.println("ai");
+        }		
 
 		boolean winCondition = false;
 		
