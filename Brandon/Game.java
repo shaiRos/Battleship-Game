@@ -203,7 +203,7 @@ public class Game{
 			// DO NOTE
 			// Currently, you need to typecast the type the player is to access the playerTurn method
 			
-			((HumanPlayer)player1).playerTurn();
+			player1.playerTurn();
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
 				System.out.println("Player 1 has won!");
@@ -219,13 +219,9 @@ public class Game{
 			clearScreen();
 			System.out.println("Player 2 turn starting....");
             // Take the user coordinates and attack
-			// DO NOTE
-			// Currently, you need to typecast the type the player is to access the playerTurn method
-			if (getAIStatus() == true) {
-				((ComputerPlayer) player2).playerTurn();
-			} else {
-				((HumanPlayer) player2).playerTurn();
-			}
+
+			// Before it was typecasted, changed Player to abstract and called it a day
+			player2.playerTurn();
             // Check for remaining ships on enemy board
 			if (winCondition(player1Board) == true) {
 				System.out.println("Player 2 has won!");
