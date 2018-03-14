@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Player {
+public abstract class Player {
 	// was thinking of moving stuff into here once it was working, but it doesnt
     /**
     *   We want to research enumeration for this method
@@ -44,5 +44,7 @@ public class Player {
 		}
 		return false;
 	}
+	
+	public abstract void playerTurn();
 
 }
