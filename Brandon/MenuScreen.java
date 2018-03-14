@@ -47,7 +47,8 @@ public class MenuScreen {
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Invalid choice. Please re-enter your choice");
+                    System.out.println("Invalid choice. Exiting...");
+                    System.exit(0);
             }
         } while (run == true);
     }
