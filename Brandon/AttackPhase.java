@@ -20,11 +20,10 @@ public class AttackPhase extends Settings {
 	private String attackingPlayer;
 	private Player player1;
 	private Player player2;
-	private Label coordinates = null;
 	
 	//constructor to display the attackPhase of a player and listens for input events
 	
-	public AttackPhase(Scene scenee, Player p1, Player p2, String player, Label coord) {
+	public AttackPhase(Scene scenee, Player p1, Player p2, String player) {
 
 		attackingPlayer = player;
 		gameUI = scenee;	
@@ -32,11 +31,10 @@ public class AttackPhase extends Settings {
 		guessBoard = new BoardGUI(gridSize, bigGridWidth);
 		player1 = p1;
 		player2 = p2;
-		coordinates = coord;
 
 		if (attackingPlayer == "P1") {
 			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.gameBoard, "gameBoard");
-			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard, "guessBoard");
+			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard, "guessBoard"); //remember guess board also shows ships....in values
 
 			}
 		else if (attackingPlayer == "P2") {
@@ -53,7 +51,7 @@ public class AttackPhase extends Settings {
 		gameLayout.setCenter(centerPane());	
 		gameLayout.setBottom(botPanel());		
 		gameLayout.setRight(rightPanel());	
-		gameUI.setRoot(gameLayout);	
+		gameUI.setRoot(gameLayout);		
 
 		System.out.println("\nCurrent player: " + player);	
 	}
@@ -68,9 +66,7 @@ public class AttackPhase extends Settings {
 		
 		TilePane centerSlot = new TilePane();
 		//attack handler on the big board
-		if (coordinates == null) {
-			guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, player1, player2, attackingPlayer));
-		}
+		guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, player1, player2, attackingPlayer));
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 		return centerSlot; 	
 	}
@@ -87,17 +83,12 @@ public class AttackPhase extends Settings {
 	}	
 	
 	
-	public GridPane botPanel() {
+	public TilePane botPanel() {
 		
-		GridPane botPanel = new GridPane(); 
+		TilePane botPanel = new TilePane(); 
 		botPanel.setPrefHeight(botHeight);	
 		botPanel.setMaxHeight(botHeight);				
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
-		
-		if (coordinates != null) {
-			botPanel.getChildren().add(coordinates);
-			System.out.println("not null");
-		}
 		return botPanel;
 	}
 }			

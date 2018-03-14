@@ -17,6 +17,10 @@ public class Settings {
 	protected String fileName = "map.txt";
 	
 	//players
+	protected int player1OwnBoard[][] = {{5,5,5,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};//new int [gridSize][gridSize];
+	protected int player2OwnBoard[][] = {{0,0,0,0,0},{0,0,0,0,0},{5,5,5,5,0},{0,0,0,0,0},{0,0,0,0,0}};//new int [gridSize][gridSize];
+	protected int player1GuessBoard[][] = new int[gridSize][gridSize];
+	protected int player2GuessBoard[][] = new int [gridSize][gridSize];	
 	
 	
 	public void setGridSize(int value) {
