@@ -20,7 +20,7 @@ public class ComputerPlayer extends Player{
 	
 	public int randomCoordinate() {
 		Random rand = new Random();
-		int coordinate = rand.nextInt(playerBoard.getBoardSize()) + 1;
+		int coordinate = rand.nextInt(Board.getBoardSize()) + 1;
 		return coordinate;
 	}
 	
@@ -180,7 +180,7 @@ public class ComputerPlayer extends Player{
          		
             		
                 // check to make sure its a legit value
-                if ((row > playerBoard.getBoardSize()) || (column > playerBoard.getBoardSize()) || (row < 0) || (column < 0)) {
+                if ((row > Board.getBoardSize()) || (column > Board.getBoardSize()) || (row < 0) || (column < 0)) {
                     System.out.println("Invalid coordinates");
                     System.out.println(row);
                     System.out.println(column);
