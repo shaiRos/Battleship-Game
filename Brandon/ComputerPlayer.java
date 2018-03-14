@@ -13,6 +13,10 @@ public class ComputerPlayer extends Player{
 		this.playerBoard = board;
 	}
 	
+	public Board getPlayerBoard() {
+		return playerBoard;
+	}
+	
 	public int randomCoordinate() {
 		Random rand = new Random();
 		int coordinate = rand.nextInt(playerBoard.getBoardSize()) + 1;

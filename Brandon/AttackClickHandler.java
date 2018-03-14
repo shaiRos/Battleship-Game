@@ -17,7 +17,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	private Player playerAttacked;
 	private Player player1;
 	private Player player2;	
-	private Board attackedPlayerBoard;
 	private String thisPlayer;
 	private String nextPlayer;	
 	private double blockSize;	
@@ -47,11 +46,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			playerAttacked = p1;
 			nextPlayer = "P1";
 						
-		}
-		if (Game.getAIStatus() == true) {
-			attackedPlayerBoard = ((ComputerPlayer)playerAttacked).playerBoard;
-		} else {
-			attackedPlayerBoard = ((HumanPlayer)playerAttacked).playerBoard;
 		}		
 	}
 
@@ -70,14 +64,16 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		
 		coordinate.setText(x + ", " + y);
 		coordinate.setFont(new Font(40));
-		boolean checkPrevHit = playerAttacked.checkPreviousHit((((HumanPlayer)playerAttacking).playerBoard), x, y);	
+		
+		boolean checkPrevHit = playerAttacked.checkPreviousHit(playerAttacking.getPlayerBoard(), x, y);	
 		if (checkPrevHit == true) {													
 			System.out.println("prevhit true, Please try again");
 			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);
 		} else {
-			playerAttacking.sendAttack((((HumanPlayer)playerAttacking).playerBoard), x, y);	
+			//Send the attack of this player and change the boards
+			playerAttacking.sendAttack(playerAttacking.getPlayerBoard(), x, y);	
 			//Win condition
-			if ((Game.winCondition(attackedPlayerBoard)) == false) {
+			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss
 				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, coordinate);
 				//Pause transition to display that waits for prompt for next player turn, or AI making a turn loading screen
@@ -133,7 +129,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		Label message = new Label("AI is making a turn...");
 		message.setFont(new Font(50));
 		display.setCenter(message);
-		((ComputerPlayer) player2).playerTurn();
+		player2.playerTurn();
 		//https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
 		PauseTransition pause = new PauseTransition(Duration.seconds(.7));		
 		pause.setOnFinished(event -> {
