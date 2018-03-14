@@ -133,9 +133,19 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		//https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
 		PauseTransition pause = new PauseTransition(Duration.seconds(.7));		
 		pause.setOnFinished(event -> {
-			AttackPhase nextDisplay = new AttackPhase(scene,player1,player2, thisPlayer, null);          
-		} );			
-		pause.play();		
+			if ((Game.winCondition(player1.getPlayerBoard())) == false) {			
+				AttackPhase nextDisplay = new AttackPhase(scene,player1,player2, thisPlayer, null); 
+			} else {
+				System.out.println(thisPlayer + " has won"); //it stops the display but clicking still works...		
+				coordinate.setText("You Lose!");
+				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, coordinate);				
+			} 
+		}
+		);			
+		pause.play();	
+
+
+				
 		return display;
 	}		
 }

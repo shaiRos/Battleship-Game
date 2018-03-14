@@ -14,6 +14,8 @@ public class Game{
 		start();
 	}
 	
+
+	
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
     
@@ -21,6 +23,10 @@ public class Game{
     public static boolean getAIStatus() {
     		return aiStatus;
     }
+	
+	public static void enableAI() {
+		aiStatus = true;
+	}
 
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
     // Debug tool while also hiding enemy boards!
