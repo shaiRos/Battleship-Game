@@ -30,11 +30,13 @@ public abstract class Player {
 
 	}
 	
+	//formats into (x,y) format, outputs a string
 	public String coordToString(int column, int row) {
         String formattedString = Integer.toString(column) + "," + Integer.toString(row);
         return formattedString;
 	}
 	
+	//check if the value attacked was previously hit
 	public boolean checkPreviousHit(Board playerBoard, int row, int column) {
 		int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
 		if (boardValue == 1) {

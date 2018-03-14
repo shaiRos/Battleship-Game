@@ -5,6 +5,11 @@
 */
 import java.util.Scanner;
 
+/**
+ * Creates the boards required for gameplay
+ * @author bigdumbobject
+ *
+ */
 class Board{
 
     // Remove duplicates of these, turn these into privates, create getter methods for these
@@ -38,6 +43,7 @@ class Board{
 	}
     
 	// https://www.mkyong.com/java/java-enum-example/
+	// Print the symbols that will represent the values of the ships, hits and misses on the board
 	public enum Definitions {
 		MISS {
 				void printLabel () {
@@ -90,15 +96,13 @@ class Board{
 	// 1 = Hit, 		denoted by X
 	// 5 - our ship 	denoted by S
 	// We can add more if we like - Brandon
+	
+	// Print the board based on the boardType
+	// boardType will be denoted by
+	// 	1 - the current player's board
+	// 	2 - The enemy board
 	public void returnBoard(int boardType) {
 		int[][] board = null;
-
-        // our definitions
-//        char hidden = '~';
-//        char miss = '*';
-//        char hit = 'X';
-//        char ship = 'S';    
-//        char downed = 'Z';  
 
         // specify if this board is for game, or guessing
         if (boardType == 1) {
@@ -129,23 +133,7 @@ class Board{
 
             	
             		Definitions.checkValue(board[row][column]);
-//                if (board[row][column] == 0) {
-//                    System.out.print("\t" + hidden);
-//                } else if (board[row][column] == -1) {
-//                    System.out.print("\t" + miss);  //if we want the players to see where the enemy missed in their gameBoard
-//                } else if (board[row][column] == 1) {   // can change to miss ^^^
-//                    System.out.print("\t" + hit);
-//                }
-//                if (guessing != true) {
-//                    if (board[row][column] == 5) {
-//                        System.out.print("\t" + ship);
-//                    }
-//                } else {
-//                    if (board[row][column] == 5) {
-//                        System.out.print("\t" + hidden);
-//                    }
-//                }
-//              
+
             }
             // Another blank space
             System.out.println();
