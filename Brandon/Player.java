@@ -48,5 +48,7 @@ public abstract class Player {
 	}
 	
 	public abstract void playerTurn();
+	
+	public abstract Board getPlayerBoard();
 
 }

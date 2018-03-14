@@ -14,18 +14,17 @@ import javafx.scene.text.Font;
 public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
 
-	private int x;
-	private int y;
-	private double blockSize;
-	private Scene scene;
-	private String thisPlayer;
-	private String nextPlayer;
-	private Player playerAttacking;
+	private Player playerAttacking;	
 	private Player playerAttacked;
 	private Player player1;
 	private Player player2;	
+	private String thisPlayer;
+	private String nextPlayer;	
+	private double blockSize;	
+	private int x;
+	private int y;
+  private Scene scene;
 	private Label coordinate = new Label();
-	private Board attackedPlayerBoard;
 	
 	public AttackClickHandler(double BlockSize, Scene scenee, Player p1, Player p2, String attackingPlayer) {
 
@@ -48,9 +47,14 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			playerAttacked = p1;
 			nextPlayer = "P1";
 						
-		}
+		}		
 	}
 
+	/**	Finds Column and row clicked, checks if it was previously hit (display doesn't continue if it is)
+	*	Sends Attack which updates the player's guessBoard and enemy gameBoard
+	*	Checks for win condition, if false, displays the outcome of the action first (hit or miss) then 
+	*	displays transition modes. *See transition methods below
+	*/	
 	public void handle(MouseEvent myEvent) {
 
 		//find the col and row that was clicked
@@ -62,26 +66,15 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		coordinate.setText(x + ", " + y);
 		coordinate.setFont(new Font(40));
 		
-		
-		if (Game.getAIStatus() == true) {
-			attackedPlayerBoard = ((ComputerPlayer)playerAttacked).playerBoard;
-		} else {
-			attackedPlayerBoard = ((HumanPlayer)playerAttacked).playerBoard;
-		}
-
-		
-		boolean checkPrevHit = playerAttacked.checkPreviousHit((((HumanPlayer)playerAttacking).playerBoard), x, y);	
-		
-		if (checkPrevHit == true) {													//if they chose a coordinate they previously hit
+		boolean checkPrevHit = playerAttacked.checkPreviousHit(playerAttacking.getPlayerBoard(), x, y);	
+		if (checkPrevHit == true) {													
 			System.out.println("prevhit true, Please try again");
 			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);//display current player again. ONLY FOR SHIPS. Misses don't count.
 		} else {
-			//Send Attack and update the board arrays ONLY FOR PVP
-			playerAttacking.sendAttack((((HumanPlayer)playerAttacking).playerBoard), x, y);	
+			//Send the attack of this player and change the boards
+			playerAttacking.sendAttack(playerAttacking.getPlayerBoard(), x, y);	
 			//Win condition
-			
-			
-			if ((Game.winCondition(attackedPlayerBoard)) == false) {
+			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss
 				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, coordinate);
 				//Pause transition to display that waits for prompt for next player turn, or AI making a turn loading screen
@@ -111,7 +104,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
 	/**	Transition in PvP mode to hide previous player's display
 	* 	makes a button so when clicked, changes the display to the next player's attack phase
-	*	@return a new root for the scene to transition into after a pause for each turn
+	*	@return a new root for the scene to transition into for the pause for each turn
 	*/
 	public BorderPane pvpTurnTransition() {
 
@@ -131,8 +124,9 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
 	
 	/**	Transition in P-v-AI mode to let the player know that the AI is making a move
-	* 	After a few seconds, the display returns to the Human player's attack phase
-	*	@return a new root for the scene to transition into after a pause for each turn
+	* 	initiates playerTurn for AI which makes the attack for the AI and updates the boards.
+	* 	After a few seconds, the display returns to the Human player's attack phase with the updated boards
+	*	@return a new root for the scene to transition into for the pause for each turn
 	*/	
 	public BorderPane aiTurnTransition() {
 
@@ -140,8 +134,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		Label message = new Label("AI is making a turn...");
 		message.setFont(new Font(50));
 		display.setCenter(message);
-		
-		//((ComputerPlayer) player2).playerTurn();
+		player2.playerTurn();
 		//https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
 		PauseTransition pause = new PauseTransition(Duration.seconds(1.5));		
 		pause.setOnFinished(event -> {

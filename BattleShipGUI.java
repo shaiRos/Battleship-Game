@@ -33,16 +33,13 @@ public class BattleShipGUI extends Application
 		//enter setup stage
 		//SetupPhase setup = new SetupPhase(gameUI);
 		//setup.setupEnd().setOnMousePressed(new EndSetupHandler(gameUI));		
-		
+		Game.enableAI(); 		
 //================== Copied From Text Version main =================================================================================
-        int userBoardSize = 5;
+       
+		int userBoardSize = 5;
         int userShipCount = 2;
 
         String fileName = "map.txt";
-
-        // Initialize the boards and set the board sizes
-        // WIP:
-        //      - Re-create the board using the new boardSize values
         Board player1Board = new Board();
         player1Board.setBoardSize(userBoardSize);
         Board player2Board = new Board();
@@ -51,9 +48,6 @@ public class BattleShipGUI extends Application
         Game.mapFromFiles(fileName, player1Board);
         Game.mapFromFiles(fileName, player2Board);
 
-		Game.enableAI();		
-		
-		
 		Player player1 = new HumanPlayer(player1Board);
 		Player player2 = null;
 		
@@ -68,7 +62,7 @@ public class BattleShipGUI extends Application
 		boolean winCondition = false;
 		
 		player1Board.guessBoard = player2Board.gameBoard;
-		player2Board.guessBoard = player1Board.gameBoard;	//GUESSBOARD IS MESSED UP
+		player2Board.guessBoard = player1Board.gameBoard;	
 		Game.clearScreen();
 		System.out.println("Player 1 turn starting....");
             // Take the user coordinates and attack

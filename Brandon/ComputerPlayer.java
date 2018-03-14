@@ -14,7 +14,10 @@ public class ComputerPlayer extends Player{
 		this.playerBoard = board;
 	}
 	
-	// Generates random coordinates that fit the board specifications
+	public Board getPlayerBoard() {
+		return playerBoard;
+	}
+	
 	public int randomCoordinate() {
 		Random rand = new Random();
 		int coordinate = rand.nextInt(Board.getBoardSize()) + 1;

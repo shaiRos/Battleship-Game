@@ -35,17 +35,14 @@ public class AttackPhase extends Settings {
 		coordinates = coord;
 
 		if (attackingPlayer == "P1") {
-			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.gameBoard, "gameBoard");
-			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard, "guessBoard");
+			ownBoard.addValuesFromArray(p1.getPlayerBoard().gameBoard, "gameBoard");
+			guessBoard.addValuesFromArray(p1.getPlayerBoard().guessBoard, "guessBoard");
 
 			}
 		else if (attackingPlayer == "P2") {
 
-				ownBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.gameBoard, "gameBoard");	
-				guessBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.guessBoard, "guessBoard");
-			/*} else {
-				ownBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGameBoard());	
-				guessBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGuessBoard());	*/				
+				ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");	
+				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");			
 				
 		}
 		//Update the Display with the new changes
