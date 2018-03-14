@@ -50,8 +50,8 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	}
 
 	/**	Finds Column and row clicked, checks if it was previously hit (display doesn't continue if it is)
-	*	Sends Attack which updates the the player's guessBoard and enemy gameBoard
-	*	Checks for win condition, if false, displays the outcome of the action  first (hit or miss) then 
+	*	Sends Attack which updates the player's guessBoard and enemy gameBoard
+	*	Checks for win condition, if false, displays the outcome of the action first (hit or miss) then 
 	*	displays transition modes. *See transition methods below
 	*/	
 	public void handle(MouseEvent myEvent) {
@@ -99,7 +99,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
 	/**	Transition in PvP mode to hide previous player's display
 	* 	makes a button so when clicked, changes the display to the next player's attack phase
-	*	@return a new root for the scene to transition into after a pause for each turn
+	*	@return a new root for the scene to transition into for the pause for each turn
 	*/
 	public BorderPane pvpTurnTransition() {
 
@@ -121,7 +121,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	/**	Transition in P-v-AI mode to let the player know that the AI is making a move
 	* 	initiates playerTurn for AI which makes the attack for the AI and updates the boards.
 	* 	After a few seconds, the display returns to the Human player's attack phase with the updated boards
-	*	@return a new root for the scene to transition into after a pause for each turn
+	*	@return a new root for the scene to transition into for the pause for each turn
 	*/	
 	public BorderPane aiTurnTransition() {
 
