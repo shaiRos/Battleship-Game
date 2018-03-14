@@ -16,7 +16,7 @@ public class EndSetupHandler implements EventHandler<MouseEvent> {
 	public void handle(MouseEvent myEvent) {
 
 		//start attack phase of the game	player 1 goes first so it displays p1 first
-		AttackPhase start = new AttackPhase(scene, "P1"); 	
+		//AttackPhase start = new AttackPhase(scene, "P1"); 	
 
 	
 	}

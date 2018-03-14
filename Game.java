@@ -9,16 +9,28 @@ public class Game{
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
     
+
+    /**
+    *   Enables the AI 
+    */
     public static void enableAI() {
     		aiStatus = true;
     }
     
+
+    /**
+    *   Checks the status of the AI   
+    */
     public static boolean getAIStatus() {
     		return aiStatus;
     }
 
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
     // Debug tool while also hiding enemy boards!
+    /**
+    *   Clears the screen for the game
+    *   Debug tool while also hiding enemy boards!
+    */
 	public static void clearScreen() {
         // ASCII escape codes  
 	    System.out.print("\033[H\033[2J");  
@@ -202,6 +214,7 @@ public class Game{
             // Take the user coordinates and attack
 			// DO NOTE
 			// Currently, you need to typecast the type the player is to access the playerTurn method
+			
 			((HumanPlayer)player1).playerTurn();
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
@@ -209,6 +222,7 @@ public class Game{
 				sleepThread(2500);
 				System.exit(0);
 			}
+			
 			sleepThread(1000);
 			
 			//check win conditions for every turn

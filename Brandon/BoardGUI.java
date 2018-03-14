@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.Background;
+
 
 public class BoardGUI { 
 	
@@ -28,6 +30,8 @@ public class BoardGUI {
 		board = new GridPane();
 		board.setPrefSize(gridWidth, gridWidth);	
 		board.setPadding(new Insets(5)); //margin for the slot the grid will be in
+		
+		//board.setBackground(new Background
 		board.setStyle("-fx-background-color: #b2e9f7;");	
 		//sets the grid depending on size
 		for (int x = 0; x < gridSize; x++) {
@@ -84,7 +88,7 @@ public class BoardGUI {
 						
 						case 5:
 							if (boardType != "guessBoard") {
-								ImageView shipImage = getImage("images/RedCircle.png");
+								ImageView shipImage = getImage("images/Shipt.png");
 								board.add(shipImage, x, y);
 							}
 								break;
