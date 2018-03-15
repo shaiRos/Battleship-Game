@@ -44,7 +44,7 @@ public class HumanPlayer extends Player {
                 // check to make sure its a legit value
                 if ((row > playerBoard.getBoardSize()) || (column > playerBoard.getBoardSize()) || (row < 0) || (column < 0)) {
                     System.out.println("Invalid coordinates");
-                } else if (checkPreviousHit(playerBoard, row, column) == true) {
+                } else if (checkPreviousHitEnum(playerBoard, row, column) == true) {
                 		System.out.println("Previously guessed! Try again");
                 } else {
                     formatted = true;

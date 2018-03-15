@@ -55,7 +55,7 @@ public abstract class Player {
 
 	}
 	
-	public boolean checkPreviousHit(Board playerBoard, int row, int column) {
+	public boolean checkPreviousHitEnum(Board playerBoard, int row, int column) {
         BoardValue value = (playerBoard.guessingBoard[column - 1][row - 1]);
 		if (value == BoardValue.HIT) {
 			return true;
@@ -71,7 +71,7 @@ public abstract class Player {
         return formattedString;
 	}
 	
-	public boolean checkPreviousHitEnum(Board playerBoard, int row, int column) {
+	public boolean checkPreviousHit(Board playerBoard, int row, int column) {
 		int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
 		if (boardValue == 1) {
 			return true;
