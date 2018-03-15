@@ -79,10 +79,10 @@ public class BoardGUI {
 		
 	
 	public void addValuesFromArray(int[][] boardArray, String boardType) {
-	
-		for (int x = 0; x < gridSize; x++) {
-			for (int y = 0; y < gridSize; y++) {
+		for (int x = 0; x < boardArray.length; x++) {
+			for (int y = 0; y < boardArray.length; y++) {
 				//add the object to this coordinate
+				//System.out.println(x + ", " + y);
 				int value = boardArray[y][x];
 
 				if (value != 0) {

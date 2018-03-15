@@ -13,7 +13,6 @@ import javafx.scene.text.Font;
 
 public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
-
 	private Player playerAttacking;	
 	private Player playerAttacked;
 	private Player player1;
@@ -23,7 +22,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	private double blockSize;	
 	private int x;
 	private int y;
-  private Scene scene;
+	private Scene scene;
 	private Label coordinate = new Label();
 	
 	public AttackClickHandler(double BlockSize, Scene scenee, Player p1, Player p2, String attackingPlayer) {
@@ -56,7 +55,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	*	displays transition modes. *See transition methods below
 	*/	
 	public void handle(MouseEvent myEvent) {
-
 		//find the col and row that was clicked
 		x = (int)((myEvent.getX()-10)/(blockSize))+1;
 		y = (int)((myEvent.getY()-10)/blockSize)+1;
@@ -69,7 +67,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		boolean checkPrevHit = playerAttacked.checkPreviousHit(playerAttacking.getPlayerBoard(), x, y);	
 		if (checkPrevHit == true) {													
 			System.out.println("prevhit true, Please try again");
-			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);//display current player again. ONLY FOR SHIPS. Misses don't count.
+			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);
 		} else {
 			//Send the attack of this player and change the boards
 			playerAttacking.sendAttack(playerAttacking.getPlayerBoard(), x, y);	
@@ -78,20 +76,16 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 				//First Display if it Hit or miss
 				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, coordinate);
 				//Pause transition to display that waits for prompt for next player turn, or AI making a turn loading screen
-				
-				
-				PauseTransition pause = new PauseTransition(Duration.seconds(.5));
+				PauseTransition pause = new PauseTransition(Duration.seconds(.7));
+				//Pause transition differ between each mode
 				if (Game.getAIStatus() == false) {
 					pause.setOnFinished(event -> scene.setRoot(pvpTurnTransition()));
 				}
 				else {	
-					((ComputerPlayer) player2).playerTurn();
 					pause.setOnFinished(event -> scene.setRoot(aiTurnTransition()));
 				}
 				pause.play();
 					
-									
-				//AttackPhase nextDisplay = new AttackPhase(scene,player1,player2, nextPlayer, null);
 			} else {
 				System.out.println(thisPlayer + " has won"); //it stops the display but clicking still works...		
 				coordinate.setText("You Win!");
@@ -136,11 +130,21 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		display.setCenter(message);
 		player2.playerTurn();
 		//https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
-		PauseTransition pause = new PauseTransition(Duration.seconds(1.5));		
+		PauseTransition pause = new PauseTransition(Duration.seconds(.7));		
 		pause.setOnFinished(event -> {
-			AttackPhase nextDisplay = new AttackPhase(scene,player1,player2, thisPlayer, null);          
-		} );			
-		pause.play();		
+			if ((Game.winCondition(player1.getPlayerBoard())) == false) {			
+				AttackPhase nextDisplay = new AttackPhase(scene,player1,player2, thisPlayer, null); 
+			} else {
+				System.out.println(thisPlayer + " has won"); //it stops the display but clicking still works...		
+				coordinate.setText("You Lose!");
+				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, coordinate);				
+			} 
+		}
+		);			
+		pause.play();	
+
+
+				
 		return display;
 	}		
 }
