@@ -59,8 +59,9 @@ public class BattleShipGUI extends Application
 
 		boolean winCondition = false;
 		
-		player1Board.guessBoard = player2Board.gameBoard;
-		player2Board.guessBoard = player1Board.gameBoard;	
+		player1Board.guessingBoard = player2Board.shipBoard;
+		player2Board.guessingBoard = player1Board.shipBoard;
+	
 		Game.clearScreen();
 		System.out.println("Player 1 turn starting....");
             // Take the user coordinates and attack

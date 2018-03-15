@@ -46,7 +46,6 @@ public class Game{
 		ArrayList<Ship> shipArray1 = new ArrayList<Ship>();
         // return the game board of current player
 		//@enum
-		//player1Board.returnBoard(1);
 		player1Board.returnBoardEnum(1);
 
         // loop to add ships into ship array
@@ -61,7 +60,6 @@ public class Game{
         // create a list to store our ships into
 		ArrayList<Ship> shipArray2 = new ArrayList<Ship>();
         // return the game board of the current player
-		//player2Board.returnBoard(1);
 		player2Board.returnBoardEnum(2);
 
 
@@ -75,12 +73,31 @@ public class Game{
 
 	}
 
+	//@enum changed name for enum
     // Check the board for remaining ships
-	public static boolean winCondition(Board board) {
+/* 	public static boolean winCondition1(Board board) {
         int shipCounter = 0;
         for (int x = 0; x < board.getBoardSize(); x++) {
             for (int y = 0; y < board.getBoardSize(); y++) {
                 if (board.gameBoard[x][y] == 5) {
+                    shipCounter++;
+                }
+            }
+        }
+
+        if (shipCounter == 0) {
+            return true;
+        }
+        return false;
+
+    } */
+	
+	// Check the board for remaining ships
+	public static boolean winCondition(Board board) {
+        int shipCounter = 0;
+        for (int x = 0; x < board.getBoardSize(); x++) {
+            for (int y = 0; y < board.getBoardSize(); y++) {
+                if (board.shipBoard[x][y] == BoardValue.SHIP) {
                     shipCounter++;
                 }
             }
@@ -197,8 +214,7 @@ public class Game{
 		
 		do {
             // set each player's guess board to the other player's game board
-			player1Board.guessBoard = player2Board.gameBoard;
-			player2Board.guessBoard = player1Board.gameBoard;
+
 			
 			//@enum stuff
 			/*player1Board.setupGuessingBoard(player2Board.gameBoard);
