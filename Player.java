@@ -30,6 +30,42 @@ public abstract class Player {
 
 	}
 	
+		public boolean sendAttackEnum(Board playerBoard, int row, int column) {
+        // check the value of the block specified, if the values match, change the values with
+        // a hit or a miss
+        BoardValue value = (playerBoard.guessingBoard[column - 1][row - 1]);
+        if (value == BoardValue.SHIP) {
+            playerBoard.guessingBoard[column - 1][row - 1] = BoardValue.HIT;
+            System.out.println("Hit!");
+            return true;
+        } else if (value == BoardValue.EMPTY) {
+            playerBoard.guessingBoard[column - 1][row - 1] = BoardValue.MISS;
+            System.out.println("Miss!");
+        } else if (value == BoardValue.MISS) {
+            playerBoard.guessingBoard[column - 1][row - 1] = BoardValue.MISS;
+            System.out.println("Miss!");
+        // Should probably have a different check case for else
+        } else {
+            System.out.println("I broke something whoops");
+            System.out.println("Debuggies");
+            System.out.println(value);
+        }
+        
+        return false;
+
+	}
+	
+	public boolean checkPreviousHitEnum(Board playerBoard, int row, int column) {
+        BoardValue value = (playerBoard.guessingBoard[column - 1][row - 1]);
+		if (value == BoardValue.HIT) {
+			return true;
+		} else if (value == BoardValue.MISS) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public String coordToString(int column, int row) {
         String formattedString = Integer.toString(column) + "," + Integer.toString(row);
         return formattedString;
