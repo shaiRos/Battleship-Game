@@ -9,6 +9,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.Background;
 
+import javafx.scene.layout.BackgroundImage;
+
 
 public class BoardGUI { 
 	
@@ -30,9 +32,10 @@ public class BoardGUI {
 		board = new GridPane();
 		board.setPrefSize(gridWidth, gridWidth);	
 		board.setPadding(new Insets(5)); //margin for the slot the grid will be in
-		
-		//board.setBackground(new Background
-		board.setStyle("-fx-background-color: #b2e9f7;");	
+		//https://pngtree.com/freebackground/blue-watercolor-background-material_754790.html
+		Image bg = new Image("images/sea.jpg");
+		BackgroundImage bgImage = new BackgroundImage(bg,null,null,null,null);
+		board.setBackground(new Background(bgImage));
 		//sets the grid depending on size
 		for (int x = 0; x < gridSize; x++) {
 			//this sets the constraints for box size so the size doesn't automatically adjust to child inside
@@ -76,10 +79,10 @@ public class BoardGUI {
 		
 	
 	public void addValuesFromArray(int[][] boardArray, String boardType) {
-	
-		for (int x = 0; x < gridSize; x++) {
-			for (int y = 0; y < gridSize; y++) {
+		for (int x = 0; x < boardArray.length; x++) {
+			for (int y = 0; y < boardArray.length; y++) {
 				//add the object to this coordinate
+				//System.out.println(x + ", " + y);
 				int value = boardArray[y][x];
 
 				if (value != 0) {

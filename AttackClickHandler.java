@@ -55,7 +55,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	*	displays transition modes. *See transition methods below
 	*/	
 	public void handle(MouseEvent myEvent) {
-
 		//find the col and row that was clicked
 		x = (int)((myEvent.getX()-10)/(blockSize))+1;
 		y = (int)((myEvent.getY()-10)/blockSize)+1;

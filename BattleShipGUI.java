@@ -53,10 +53,8 @@ public class BattleShipGUI extends Application
 		
         if (Game.getAIStatus() != true) {
 	    		player2 = new HumanPlayer(player2Board);
-				System.out.println("human");
         } else {
         		player2 = new ComputerPlayer(player2Board);
-				System.out.println("ai");
         }		
 
 		boolean winCondition = false;
@@ -68,8 +66,8 @@ public class BattleShipGUI extends Application
             // Take the user coordinates and attack
 			// DO NOTE
 			// Currently, you need to typecast the type the player is to access the playerTurn method
-		//((HumanPlayer) player1).playerTurn();		
-
+		//((HumanPlayer) player1).playerTurn();			
+		
 		//Start attack Phase
 		AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1", null);
 		//send humanPlayer  
