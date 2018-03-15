@@ -30,23 +30,7 @@ class Board{
 		}
 		
 	}
-	//@ENUM
-	public void setupGuessingBoard(int [][] aBoard){
-		int size = aBoard.length;
-		guessingBoard = new BoardValue[size][size];
-
-		for(int row = 0; row < aBoard.length; row ++){
-			for (int col = 0; col < aBoard.length; col ++){
-				if(aBoard[row][col] == 0){
-					guessingBoard[row][col] = BoardValue.EMPTY;	
-				}else{
-					guessingBoard[row][col] = BoardValue.SHIP;
-				}
-				
-			}
-			
-		}
-	}
+	
 	
 	public void returnBoardEnum(int boardType) {
 		//int[][] board = null;
