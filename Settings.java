@@ -11,7 +11,7 @@ public class Settings {
 	final public static int bigGridWidth = 770; //including margins	
 	
 	//Grid Settings
-	public static int gridSize = 6; //max 20  can change just comment out adding stuff to ownboards and uncomment new int....
+	public static int gridSize = 5; //max 20  can change just comment out adding stuff to ownboards and uncomment new int....
 	public static String mode = "AIvP"; //'PvP' or 'AIvP'		
 	public static String setupMode = "mapFromFiless";			
 	public static String fileName = "map.txt";
