@@ -182,8 +182,8 @@ public class ComputerPlayer extends Player{
                     if (!queue.isEmpty()) {
                         queue.remove(0);
                     }
-                    
-                    if (sendAttack(playerBoard, row, column) == true) {
+                    //@enum
+                    if (sendAttackEnum(playerBoard, row, column) == true) {
                     		makeQueue(column, row);
                     }
                     

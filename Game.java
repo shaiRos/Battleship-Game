@@ -45,7 +45,9 @@ public class Game{
         // create a list to store our ships into
 		ArrayList<Ship> shipArray1 = new ArrayList<Ship>();
         // return the game board of current player
-		player1Board.returnBoard(1);
+		//@enum
+		//player1Board.returnBoard(1);
+		player1Board.returnBoardEnum(1);
 
         // loop to add ships into ship array
         GameConfig.playerInputShips(shipArray1, player1Board, shipCount);
@@ -59,7 +61,9 @@ public class Game{
         // create a list to store our ships into
 		ArrayList<Ship> shipArray2 = new ArrayList<Ship>();
         // return the game board of the current player
-		player2Board.returnBoard(1);
+		//player2Board.returnBoard(1);
+		player2Board.returnBoardEnum(2);
+
 
         // loop to add ships into ship array
         GameConfig.playerInputShips(shipArray2, player2Board, shipCount);
@@ -195,6 +199,15 @@ public class Game{
             // set each player's guess board to the other player's game board
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
+			
+			//@enum stuff
+			/*player1Board.setupGuessingBoard(player2Board.gameBoard);
+			player2Board.setupGuessingBoard(player1Board.gameBoard);
+			*/
+			player1Board.guessingBoard = player2Board.shipBoard;
+			player2Board.guessingBoard = player1Board.shipBoard;
+			
+
 
             // Player 1 turn
 			clearScreen();

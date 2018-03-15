@@ -89,19 +89,34 @@ public class GameConfig {
 		//check if all coordinates it occupies doesn't contain another ship
 		if (orientation == 'h'){
 			for (int x = changingCoord; x <= maxCoord; x++) {	
-				int value = board.gameBoard[row-1][x-1];
+				/* int value = board.gameBoard[row-1][x-1];
 				if (value != 0) {		
 					throw new IllegalArgumentException("The area contains another ship");
+				} */
+				//@enum
+				if(board.shipBoard[row-1][x-1] != BoardValue.EMPTY){
+					throw new IllegalArgumentException("The area contains another ship");
 				}
+				
 			}
+			
+			
 		} else if (orientation == 'v') {
 			for (int x = changingCoord; x <= maxCoord; x++) {	
-				int value = board.gameBoard[x-1][column-1];
+				/* int value = board.gameBoard[x-1][column-1];
 				if (value != 0) {			
+					throw new IllegalArgumentException("The area contains another ship");
+				} */
+				
+				//@enum
+				if(board.shipBoard[x-1][column-1] != BoardValue.EMPTY){
 					throw new IllegalArgumentException("The area contains another ship");
 				}
 			}
 		}
+		
+		
+		
 
 		if (length > Board.getMaxShipSize() || length < Board.getMinShipSize()) {  //check if ship is the supported size
 			throw new IllegalArgumentException("Ship size is not supported");
