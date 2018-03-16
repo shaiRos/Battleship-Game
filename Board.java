@@ -75,6 +75,7 @@ class Board{
             			System.out.print("\t" + board[row][column]);
 
             		}
+
             }
             // Another blank space
             System.out.println();
