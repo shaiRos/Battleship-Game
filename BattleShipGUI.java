@@ -40,10 +40,9 @@ public class BattleShipGUI extends Application
         int userShipCount = 2;
 
         String fileName = "map.txt";
+        Board.setBoardSize(userBoardSize);
         Board player1Board = new Board();
-        player1Board.setBoardSize(userBoardSize);
         Board player2Board = new Board();
-        player2Board.setBoardSize(userBoardSize);
 
         Game.mapFromFiles(fileName, player1Board);
         Game.mapFromFiles(fileName, player2Board);
@@ -60,7 +59,8 @@ public class BattleShipGUI extends Application
 		boolean winCondition = false;
 		
 		player1Board.guessBoard = player2Board.gameBoard;
-		player2Board.guessBoard = player1Board.gameBoard;	
+		player2Board.guessBoard = player1Board.gameBoard;
+	
 		Game.clearScreen();
 		System.out.println("Player 1 turn starting....");
             // Take the user coordinates and attack

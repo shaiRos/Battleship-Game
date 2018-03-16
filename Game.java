@@ -6,6 +6,14 @@ import java.io.*;
 
 public class Game{
 	
+    // Constructor for the game
+    // Uses a boolean to specify if the AI will be enabled
+    public Game(boolean specifyAIStatus) {
+        aiStatus = specifyAIStatus;
+        start();
+    }
+    
+
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
     
@@ -45,9 +53,7 @@ public class Game{
         // create a list to store our ships into
 		ArrayList<Ship> shipArray1 = new ArrayList<Ship>();
         // return the game board of current player
-		//@enum
-		//player1Board.returnBoard(1);
-		player1Board.returnBoardEnum(1);
+		player1Board.returnBoard(1);
 
         // loop to add ships into ship array
         GameConfig.playerInputShips(shipArray1, player1Board, shipCount);
@@ -61,8 +67,7 @@ public class Game{
         // create a list to store our ships into
 		ArrayList<Ship> shipArray2 = new ArrayList<Ship>();
         // return the game board of the current player
-		//player2Board.returnBoard(1);
-		player2Board.returnBoardEnum(2);
+		player2Board.returnBoard(2);
 
 
         // loop to add ships into ship array
@@ -75,12 +80,13 @@ public class Game{
 
 	}
 
-    // Check the board for remaining ships
+	
+	// Check the board for remaining ships
 	public static boolean winCondition(Board board) {
         int shipCounter = 0;
         for (int x = 0; x < board.getBoardSize(); x++) {
             for (int y = 0; y < board.getBoardSize(); y++) {
-                if (board.gameBoard[x][y] == 5) {
+                if (board.gameBoard[x][y] == BoardValue.SHIP) {
                     shipCounter++;
                 }
             }
@@ -140,17 +146,15 @@ public class Game{
     }
     
 
+
     /**
     *   Default board difficulties
-    *   Rules for specific ship lengths
     *   Use the AI thingy to setup random board placement
-    *   Research enum on sendAttack
-    *   Inheritance on the players
-    *   use readFile for default maps
     *   Implement Ship class features - ship sunk
     *   Fix board size constants
     **/
-   public static void main(String[] args) {
+    
+   public void start() {
    		// create boards for both the players
         // difficulty will rely on these settings - add user input to specify difficulty
         int userBoardSize = 5;
@@ -161,23 +165,23 @@ public class Game{
         // Initialize the boards and set the board sizes
         // WIP:
         //      - Re-create the board using the new boardSize values
+        Board.setBoardSize(userBoardSize);
         Board player1Board = new Board();
-        player1Board.setBoardSize(userBoardSize);
         Board player2Board = new Board();
-        player2Board.setBoardSize(userBoardSize);
-
         // populate boards with battleships
         
         // This will allow user to input coordinates and setup board
-		// setupBoard(player1Board, player2Board, userShipCount);
+        // setupBoard(player1Board, player2Board, userShipCount);
 
         // This will read a file and allow us to setup predefined board
         mapFromFiles(fileName, player1Board);
         mapFromFiles(fileName, player2Board);
 
         // instantiate our players
-		Player player1 = new HumanPlayer(player1Board);
-		Player player2 = null;
+        Player player1 = new HumanPlayer(player1Board);
+        // We don't know what our player 2 is at this point, just instantiate a generic player2
+        Player player2 = null;
+
 
 		// Create a new human that can access their boards
         /**
@@ -197,15 +201,10 @@ public class Game{
 		
 		do {
             // set each player's guess board to the other player's game board
+
+			
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
-			
-			//@enum stuff
-			/*player1Board.setupGuessingBoard(player2Board.gameBoard);
-			player2Board.setupGuessingBoard(player1Board.gameBoard);
-			*/
-			player1Board.guessingBoard = player2Board.shipBoard;
-			player2Board.guessingBoard = player1Board.shipBoard;
 			
 
 

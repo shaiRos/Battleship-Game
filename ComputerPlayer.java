@@ -37,7 +37,11 @@ public class ComputerPlayer extends Player{
 
 		return contains;
 	}
-	
+	// Long method, will check all four corners and all four sides of the board
+	// Adds to the queue based on the parameters
+	// NOTE
+	// 	This makes the AI miss ALOT.
+	//	NEEDS THE SUNK_SHIP BOOLEAN TO CLEAR THE QUEUE
 	public void makeQueue(int column, int row) {
 		int boardSize =  Board.getBoardSize();
 		if ((column + 1 > boardSize) && (row > 0 && row <= boardSize)) {
@@ -144,20 +148,25 @@ public class ComputerPlayer extends Player{
 
 		}
 	}
+	
+	// The procedure the AI will follow to complete their round
 	public void playerTurn() {
         boolean formatted = false;
         while (formatted != true) {
             try {
-
+            		
+            		// instantiate initial values first just in case
 	        		int row = randomCoordinate();
 	        		int column = randomCoordinate();	
 	        		
+	        		// if the queue is empty, then we'll just use the random values
 	        		if (queue.isEmpty()) {
 	            		while ((checkNotAttacked(coordToString(column, row)) != true)) {
 	            			row = randomCoordinate();
 	                		column = randomCoordinate();	                	
 	                		
 	            		}
+	            	// if there are values in the queue, use those instead of the randomly generated values
 	        		} else {
             			String[] values = queue.get(0).split(",");
             			row = Integer.parseInt(values[1]);
@@ -167,7 +176,7 @@ public class ComputerPlayer extends Player{
          		
             		
                 // check to make sure its a legit value
-                if ((row > playerBoard.getBoardSize()) || (column > playerBoard.getBoardSize()) || (row < 0) || (column < 0)) {
+                if ((row > Board.getBoardSize()) || (column > Board.getBoardSize()) || (row < 0) || (column < 0)) {
                     System.out.println("Invalid coordinates");
                     System.out.println(row);
                     System.out.println(column);
@@ -179,19 +188,23 @@ public class ComputerPlayer extends Player{
                     guessed.add(coordToString(column, row));
                     // Send the attack. Check if the attack hits or misses
                     
+                    // we assume the attack is successfully sent, remove the item from the queue
                     if (!queue.isEmpty()) {
                         queue.remove(0);
                     }
-                    //@enum
-                    if (sendAttackEnum(playerBoard, row, column) == true) {
+                    
+                    // if this is a hit, we want all the ships around the guessed ship to be added to the queue
+                    if (sendAttack(playerBoard, row, column) == true) {
                     		makeQueue(column, row);
                     }
                     
+                    // DEBUG
                     System.out.println("Current guessed values: ");
                     for (String values: guessed) {
                     		System.out.println(values);
                     }
                     
+                    // DEBUG
                     System.out.println("Current guessing queue: ");
                     for (String values: queue) {
                     		System.out.println(values);

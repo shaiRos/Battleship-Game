@@ -21,15 +21,13 @@ public class HumanPlayer extends Player {
             try {
                 System.out.println("Current game board");
                 // return the game board
-				//@enum
-                //playerBoard.returnBoard(1);
-				playerBoard.returnBoardEnum(1);
+				playerBoard.returnBoard(1);
 
                 System.out.println("\n");
                 System.out.println("Current guessing board");
                 // return the guessing board
                 //playerBoard.returnBoard(2);
-				playerBoard.returnBoardEnum(2);
+				playerBoard.returnBoard(2);
 
                 System.out.println("Enter coordinates to attack (row column): ");
 
@@ -53,7 +51,7 @@ public class HumanPlayer extends Player {
 
                     // Send the attack. Check if the attack hits or misses
                     //sendAttack(playerBoard, row, column);
-					sendAttackEnum(playerBoard,row,column);
+					sendAttack(playerBoard,row,column);
                 }
 
             }
