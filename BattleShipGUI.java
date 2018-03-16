@@ -33,17 +33,16 @@ public class BattleShipGUI extends Application
 		//enter setup stage
 		//SetupPhase setup = new SetupPhase(gameUI);
 		//setup.setupEnd().setOnMousePressed(new EndSetupHandler(gameUI));		
-		Game.enableAI(); 		
+		//Game.enableAI(); 		
 //================== Copied From Text Version main =================================================================================
        
 		int userBoardSize = 5;
         int userShipCount = 2;
 
         String fileName = "map.txt";
+        Board.setBoardSize(userBoardSize);
         Board player1Board = new Board();
-        player1Board.setBoardSize(userBoardSize);
         Board player2Board = new Board();
-        player2Board.setBoardSize(userBoardSize);
 
         Game.mapFromFiles(fileName, player1Board);
         Game.mapFromFiles(fileName, player2Board);

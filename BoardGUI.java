@@ -82,7 +82,6 @@ public class BoardGUI {
 		for (int x = 0; x < boardArray.length; x++) {
 			for (int y = 0; y < boardArray.length; y++) {
 				//add the object to this coordinate
-				//System.out.println(x + ", " + y);
 				BoardValue value = boardArray[y][x];
 
 				if (value != BoardValue.EMPTY) {
@@ -106,38 +105,6 @@ public class BoardGUI {
 							break;
 					} 
 				} 
-			}
-		}
-	}
-
-	public void addValuesFromArray(int[][] boardArray, String boardType) {
-		for (int x = 0; x < boardArray.length; x++) {
-			for (int y = 0; y < boardArray.length; y++) {
-				//add the object to this coordinate
-				//System.out.println(x + ", " + y);
-				int value = boardArray[y][x];
-
-				if (value != 0) {
-					
-					switch(value) {
-						
-						case 5:
-							if (boardType != "guessBoard") {
-								ImageView shipImage = getImage("images/Shipt.png");
-								board.add(shipImage, x, y);
-							}
-								break;
-							
-						case -1:
-							ImageView missImage = getImage("images/MissImage.png");							
-							board.add(missImage, x, y);
-							break;
-						case 1:
-							ImageView hitImage = getImage("images/HitImage.png");							
-							board.add(hitImage, x, y);		
-							break;
-					}
-				}	
 			}
 		}
 	}

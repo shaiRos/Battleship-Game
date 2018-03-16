@@ -33,24 +33,16 @@ public class AttackPhase  {
 		player1 = p1;
 		player2 = p2;
 		coordinates = coord;
-
-		//System.out.println("\ngameBoard: " + p1.getPlayerBoard().gameBoard.length + "  guessBoard: " + p1.getPlayerBoard().guessBoard.length);
-		System.out.println("\ngameBoard: " + p1.getPlayerBoard().gameBoard.length + "  guessBoard: " + p1.getPlayerBoard().guessBoard.length);
 		
 		if (attackingPlayer == "P1") {
 			ownBoard.addValuesFromArray(p1.getPlayerBoard().gameBoard, "gameBoard");
 			guessBoard.addValuesFromArray(p1.getPlayerBoard().guessBoard, "guessBoard");
-
 			}
-		else if (attackingPlayer == "P2") {
-
-				/* ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");	
-				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");		 */	
-				
+		else if (attackingPlayer == "P2") {	
 				ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");
-				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");
-				
+				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");		
 		}
+		
 		//Update the Display with the new changes
 		gameLayout = new BorderPane();
 		gameLayout.setCenter(centerPane());	
