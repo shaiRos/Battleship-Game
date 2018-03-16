@@ -1,14 +1,14 @@
 /**
 * created January 30, 2018
-* @author Betty Zhang
-* Blueprint for ship objects
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+*	Board object that will hold all values of our board
 */
 import java.util.Scanner;
 import java.util.Arrays;
 
 class Board{
 
-    // Remove duplicates of these, turn these into privates, create getter methods for these
+    // Instantiate these initial values. Some of these are hardcoded - will later be changed so we can have more flexibility in difficulty
 	private static int boardSize = 5;	
 	private static int maxShipSize = 5;
 	private static int minShipSize = 2;
@@ -16,12 +16,39 @@ class Board{
 	public BoardValue [][] guessBoard = new BoardValue[boardSize][boardSize];
 	public BoardValue[][] gameBoard = new BoardValue[boardSize][boardSize];
 
+	/**
+	*	getters and setters for board constants
+	*	
+	**/
+    public static int getBoardSize() {
+        return boardSize;
+    }
 
+    public static void setBoardSize(int size) {
+        boardSize = size;
+    }
+
+    public static int getMinShipSize() {
+        return minShipSize;
+    }
+
+    public static int getMaxShipSize() {
+        return maxShipSize;
+    }
+    
+    
+	/**
+	*	Default constructor for our board
+	*
+	**/
 	public Board(){
 		intializeGameBoard();
 
 	}
-	
+	/**
+	*	Populates the board with initial values
+	*
+	**/
 	private void intializeGameBoard(){
 		for (BoardValue[] row : gameBoard){
 			Arrays.fill(row, BoardValue.EMPTY);
@@ -29,7 +56,11 @@ class Board{
 		
 	}
 	
-	
+	/**
+	*	Returns a formatted version of the board.
+	*	@param boardType - Int that will specify whether the game shall display the gameBoard or guessBoard
+	*
+	**/
 	public void returnBoard(int boardType) {
 		//int[][] board = null;
 		BoardValue [][] board = null;
@@ -81,34 +112,15 @@ class Board{
             System.out.println();
         }
 	}
-	
-	
-    // getters and setters for our board and ships
-    public static int getBoardSize() {
-        return boardSize;
-    }
 
-    public static void setBoardSize(int size) {
-        boardSize = size;
-    }
-
-    public static int getMinShipSize() {
-        return minShipSize;
-    }
-
-    public static int getMaxShipSize() {
-        return maxShipSize;
-    }
-    
-    // constructor for our board
-	public void Board(){
-	}
-    
-	
-		
 	//addShip given all properties of the ship
 	//just make sure for horizontal indicate the left most coordinates
 	//and for vertical indicate the top most coordinate
+	/**
+	*	Adds ship directly to board. Will be called after all verification and checks are passed
+	*	@param int len, col, ro - Properties of the ship
+	*			char orient - Properties of the ship
+	**/
 	public void addShip(char orientation, int length, int column, int row){
 		switch(orientation) {
 			case 'h': {

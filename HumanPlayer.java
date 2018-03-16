@@ -1,20 +1,33 @@
 import java.util.Scanner;
 
-
+/**
+*   Holds the code the main player will utilize. Contains the logic necessary to execute a game 'turn'
+*
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+**/
 public class HumanPlayer extends Player {
     Board playerBoard = null;
 
-
+    /**
+    *   Main constructor for HumanPlayer object
+    *   @param board - Board object that will be linked to the current player
+    **/
     // constructor with board, human not suppose to touch board, change later on
     public HumanPlayer(Board board) {
         this.playerBoard = board;
     }
-	
+	/**
+    *   getter for playerBoard object
+    *   @return playerBoard - Board object linked to player
+    **/
 	public Board getPlayerBoard() {
 		return playerBoard;
 	}
 
-
+    /**
+    *   Main logic to execute a game 'turn'. Will include all prompts, input checks and validations required for a user to complete his attack
+    *   
+    **/
     public void playerTurn() {
         boolean formatted = false;
         while (formatted != true) {
