@@ -13,24 +13,24 @@ class Board{
 	private static int maxShipSize = 5;
 	private static int minShipSize = 2;
     private static boolean guessing = false;
-	public BoardValue [][] guessingBoard = new BoardValue[boardSize][boardSize];
-	public BoardValue[][] shipBoard = new BoardValue[boardSize][boardSize];
+	public BoardValue [][] guessBoard = new BoardValue[boardSize][boardSize];
+	public BoardValue[][] gameBoard = new BoardValue[boardSize][boardSize];
 
 
 	public Board(){
-		intializeShipBoard();
+		intializeGameBoard();
 
 	}
 	
-	private void intializeShipBoard(){
-		for (BoardValue[] row : shipBoard){
+	private void intializeGameBoard(){
+		for (BoardValue[] row : gameBoard){
 			Arrays.fill(row, BoardValue.EMPTY);
 		}
 		
 	}
 	
 	
-	public void returnBoardEnum(int boardType) {
+	public void returnBoard(int boardType) {
 		//int[][] board = null;
 		BoardValue [][] board = null;
 
@@ -43,10 +43,10 @@ class Board{
 
         // specify if this board is for game, or guessing
         if (boardType == 1) {
-            board = this.shipBoard;
+            board = this.gameBoard;
             guessing = false;
         } else if (boardType == 2) {
-            board = this.guessingBoard;
+            board = this.guessBoard;
             guessing = true;
         }
 
@@ -108,13 +108,13 @@ class Board{
 			case 'h': {
 				int maxColumn = column + (length-1); //right most coordinate of the ship					
 				for (int x = column; x <= maxColumn; x++) {	//changing the values of the coordinates it occupies.
-					shipBoard[row-1][x-1] = BoardValue.SHIP;
+					gameBoard[row-1][x-1] = BoardValue.SHIP;
 				}break;
 			}
 			case 'v': {
 				int maxRow = row + (length-1); //bottom most coordinate of the ship	
 				for (int x = row; x <= maxRow; x++) {	//change values
-						shipBoard[x-1][column-1] = BoardValue.SHIP;
+						gameBoard[x-1][column-1] = BoardValue.SHIP;
 
 				}break;
 			}

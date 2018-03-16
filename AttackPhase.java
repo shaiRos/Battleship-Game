@@ -35,14 +35,11 @@ public class AttackPhase  {
 		coordinates = coord;
 
 		//System.out.println("\ngameBoard: " + p1.getPlayerBoard().gameBoard.length + "  guessBoard: " + p1.getPlayerBoard().guessBoard.length);
-		System.out.println("\ngameBoard: " + p1.getPlayerBoard().shipBoard.length + "  guessBoard: " + p1.getPlayerBoard().guessingBoard.length);
+		System.out.println("\ngameBoard: " + p1.getPlayerBoard().gameBoard.length + "  guessBoard: " + p1.getPlayerBoard().guessBoard.length);
 		
 		if (attackingPlayer == "P1") {
-			//@enum
-			/* ownBoard.addValuesFromArray(p1.getPlayerBoard().gameBoard, "gameBoard");
-			guessBoard.addValuesFromArray(p1.getPlayerBoard().guessBoard, "guessBoard"); */
-			ownBoard.addValuesFromArrayEnum(p1.getPlayerBoard().shipBoard, "gameBoard");
-			guessBoard.addValuesFromArrayEnum(p1.getPlayerBoard().guessingBoard, "guessBoard");
+			ownBoard.addValuesFromArray(p1.getPlayerBoard().gameBoard, "gameBoard");
+			guessBoard.addValuesFromArray(p1.getPlayerBoard().guessBoard, "guessBoard");
 
 			}
 		else if (attackingPlayer == "P2") {
@@ -50,8 +47,8 @@ public class AttackPhase  {
 				/* ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");	
 				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");		 */	
 				
-				ownBoard.addValuesFromArrayEnum(p2.getPlayerBoard().shipBoard, "gameBoard");
-				guessBoard.addValuesFromArrayEnum(p2.getPlayerBoard().guessingBoard, "guessBoard");
+				ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");
+				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");
 				
 		}
 		//Update the Display with the new changes

@@ -64,8 +64,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		coordinate.setText(x + ", " + y);
 		coordinate.setFont(new Font(40));
 		
-		//boolean checkPrevHit = playerAttacked.checkPreviousHit(playerAttacking.getPlayerBoard(), x, y);	
-		//@enum
 		boolean checkPrevHit = playerAttacked.checkPreviousHitEnum(playerAttacking.getPlayerBoard(), x, y);	
 		
 		if (checkPrevHit == true) {													
@@ -73,8 +71,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);
 		} else {
 			//Send the attack of this player and change the boards
-			//@Enum
-			playerAttacking.sendAttackEnum(playerAttacking.getPlayerBoard(), x, y);	
+			playerAttacking.sendAttack(playerAttacking.getPlayerBoard(), x, y);	
 			//Win condition
 			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss

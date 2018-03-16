@@ -78,7 +78,7 @@ public class BoardGUI {
 	}
 		
 	
-	public void addValuesFromArrayEnum(BoardValue[][] boardArray, String boardType) {
+	public void addValuesFromArray(BoardValue[][] boardArray, String boardType) {
 		for (int x = 0; x < boardArray.length; x++) {
 			for (int y = 0; y < boardArray.length; y++) {
 				//add the object to this coordinate
