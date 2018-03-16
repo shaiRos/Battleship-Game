@@ -34,6 +34,7 @@ public class AttackPhase  {
 		player2 = p2;
 		coordinates = coord;
 
+		//System.out.println("\ngameBoard: " + p1.getPlayerBoard().gameBoard.length + "  guessBoard: " + p1.getPlayerBoard().guessBoard.length);
 		System.out.println("\ngameBoard: " + p1.getPlayerBoard().gameBoard.length + "  guessBoard: " + p1.getPlayerBoard().guessBoard.length);
 		
 		if (attackingPlayer == "P1") {
@@ -43,8 +44,11 @@ public class AttackPhase  {
 			}
 		else if (attackingPlayer == "P2") {
 
-				ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");	
-				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");			
+				/* ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");	
+				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");		 */	
+				
+				ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");
+				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");
 				
 		}
 		//Update the Display with the new changes

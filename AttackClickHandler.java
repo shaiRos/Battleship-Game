@@ -64,7 +64,8 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		coordinate.setText(x + ", " + y);
 		coordinate.setFont(new Font(40));
 		
-		boolean checkPrevHit = playerAttacked.checkPreviousHit(playerAttacking.getPlayerBoard(), x, y);	
+		boolean checkPrevHit = playerAttacked.checkPreviousHitEnum(playerAttacking.getPlayerBoard(), x, y);	
+		
 		if (checkPrevHit == true) {													
 			System.out.println("prevhit true, Please try again");
 			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);
