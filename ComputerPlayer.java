@@ -2,27 +2,46 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-
+/**
+*	Houses all of the core logic dedicated to the AI
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+**/
 public class ComputerPlayer extends Player{
 	
 	Board playerBoard = null;
 	private ArrayList<String> guessed = new ArrayList<String>();
 	private ArrayList<String> queue = new ArrayList<String>();
-
+	/**
+	*	Default constructor
+	*	@param board - links the provided board to the current ComputerPlayer object
+	**/
 	public ComputerPlayer(Board board) {
 		this.playerBoard = board;
 	}
 	
+	/**
+	*	getter returns board
+	*
+	**/
 	public Board getPlayerBoard() {
 		return playerBoard;
 	}
 	
+	/**
+	*	Generates random coordinates that are within the board's bounds
+	*	@return coordinate - Int between 1 - board size
+	**/
 	public int randomCoordinate() {
 		Random rand = new Random();
 		int coordinate = rand.nextInt(playerBoard.getBoardSize()) + 1;
 		return coordinate;
 	}
 	
+	/**
+	*	Compares the current attack to the AI's previously guessed values, stored within an ArrayList
+	*	@param coordinate - String formatted column,row value
+	*	@return contains - Boolean specifies whether the attack is valid
+	**/
 	public boolean checkNotAttacked(String coordinate) {
 		boolean contains = true;
 		if (guessed.isEmpty() == true) {
@@ -42,6 +61,10 @@ public class ComputerPlayer extends Player{
 	// NOTE
 	// 	This makes the AI miss ALOT.
 	//	NEEDS THE SUNK_SHIP BOOLEAN TO CLEAR THE QUEUE
+	/**
+	*	If the AI makes a hit, adds the hit to the current queue that will be processed during AI turn
+	*	@param int column, row - Int values of the column and row that has been successfully attacked
+	**/
 	public void makeQueue(int column, int row) {
 		int boardSize =  Board.getBoardSize();
 		if ((column + 1 > boardSize) && (row > 0 && row <= boardSize)) {
@@ -148,8 +171,11 @@ public class ComputerPlayer extends Player{
 
 		}
 	}
-	
-	// The procedure the AI will follow to complete their round
+
+	/**
+	*	The procedure the AI will follow to complete their round. Contains all of the logic required to make a guess and validate the guess values
+	*
+	**/
 	public void playerTurn() {
         boolean formatted = false;
         while (formatted != true) {
