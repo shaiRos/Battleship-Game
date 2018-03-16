@@ -30,7 +30,8 @@ public class BattleShipGUI extends Application
 
 		//enter setup stage
 		//SetupPhase setup = new SetupPhase(gameUI);
-		//setup.setupEnd().setOnMousePressed(new EndSetupHandler(gameUI));		
+		//setup.setupEnd().setOnMousePressed(new EndSetupHandler(gameUI));
+//============================= Uncomment this for PvP ===========================================================================		
 		Game.enableAI(); 		
 //================== Copied From Text Version main =================================================================================
        
