@@ -69,7 +69,12 @@ class Board{
             for (int column = 0 ; column < boardSize ; column++ ) {
 
 					//@ENUM
-					System.out.print("\t" + board[row][column]);
+            		if ((guessing == true) && (board[row][column] == BoardValue.SHIP)) {
+            			System.out.print("\t" + BoardValue.EMPTY);
+            		} else {
+            			System.out.print("\t" + board[row][column]);
+
+            		}
             }
             // Another blank space
             System.out.println();
