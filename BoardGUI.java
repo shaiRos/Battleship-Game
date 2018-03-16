@@ -78,6 +78,38 @@ public class BoardGUI {
 	}
 		
 	
+	public void addValuesFromArray(BoardValue[][] boardArray, String boardType) {
+		for (int x = 0; x < boardArray.length; x++) {
+			for (int y = 0; y < boardArray.length; y++) {
+				//add the object to this coordinate
+				//System.out.println(x + ", " + y);
+				BoardValue value = boardArray[y][x];
+
+				if (value != BoardValue.EMPTY) {
+					
+					switch(value) {
+						
+						case SHIP:
+							if (boardType != "guessBoard") {
+								ImageView shipImage = getImage("images/Shipt.png");
+								board.add(shipImage, x, y);
+							}
+								break;
+							
+						case MISS:
+							ImageView missImage = getImage("images/MissImage.png");							
+							board.add(missImage, x, y);
+							break;
+						case HIT:
+							ImageView hitImage = getImage("images/HitImage.png");							
+							board.add(hitImage, x, y);		
+							break;
+					} 
+				} 
+			}
+		}
+	}
+
 	public void addValuesFromArray(int[][] boardArray, String boardType) {
 		for (int x = 0; x < boardArray.length; x++) {
 			for (int y = 0; y < boardArray.length; y++) {
