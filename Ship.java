@@ -1,6 +1,6 @@
 /**
 * created January 30, 2018
-* @author Betty Zhang
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
 * Blueprint for ship objects
 */
 
@@ -10,6 +10,11 @@ class Ship{
 	private int column = 0;
 	private int row = 0;
 	
+	/**
+	*	getters of Ship properties
+	*	@return int column, row, length - properties of the ship
+	*			char orientation - properties of the ship
+	**/
 	public int getColumn() {
 		return this.column;
 	}
@@ -27,7 +32,12 @@ class Ship{
 	}
 	
 
-	// constructor for ship
+	/**
+	*	Main constructor of the Ship
+	*	@param int len, col, ro - Properties of the ship
+	*			char orient - Properties of the ship
+	*
+	**/
 	public Ship(char orient,int len, int col, int ro){
 		orientation = orient;
 		length = len;
@@ -37,7 +47,12 @@ class Ship{
 		// parts of the ship have and haven't been hit. Makes checking if it's sunken a lot easier too.
 		int[] shipPoints = new int [len];
 	}
-	
+
+	/**
+	*	Mass setter method that prepares the ship values
+	*	@param int len, col, ro - Properties of the ship
+	*			char orient - Properties of the ship
+	**/
 	public void setShipValues(char orient, int len, int col, int ro){
 		orientation = orient;
 		length = len;

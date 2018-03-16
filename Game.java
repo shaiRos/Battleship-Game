@@ -3,38 +3,55 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.io.*;
 
-
+/**
+*   Game implements the main controller that will call for the initialization of all our starting variables
+*   and contains the main logic for the game loop
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+*
+**/
 public class Game{
-	
-    // Constructor for the game
-    // Uses a boolean to specify if the AI will be enabled
+	// This will toggle if our game will let us fight another player or an AI
+    private static boolean aiStatus = false;
+
+
+    /**
+    *   The main constructor that will initialize the game. This will ruin the start() method for the current game object
+    *   @param specifyAIStatus - Boolean that signifies whether the game will implement Player vs Player or Player vs AI
+    **/
     public Game(boolean specifyAIStatus) {
         aiStatus = specifyAIStatus;
         start();
     }
     
-
-	// This will toggle if our game will let us fight another player or an AI
-    private static boolean aiStatus = false;
-    
+    /**
+    *   A toggle that will set the flag which enables the AI
+    *
+    **/
     public static void enableAI() {
     		aiStatus = true;
     }
-    
+    /**
+    *   A getter that returns the AI flag's status
+    *   @return aiStatus - Boolean that when true, indicates the AI has been selected
+    **/
     public static boolean getAIStatus() {
     		return aiStatus;
     }
-
+    /**
+    *   When ran on unix systems, will clear the console for improved output and management of the text version of the game
+    *
+    **/
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
-    // Debug tool while also hiding enemy boards!
 	public static void clearScreen() {
         // ASCII escape codes  
 	    System.out.print("\033[H\033[2J");  
 	    System.out.flush();  
 	}  
+    /**
+    *   When ran, will sleep the current thread for the milliseconds, effectively giving a transition frame
+    *   @param milliseconds - Int of milliseconds to pause execution
+    **/
 
-	// This will pause program execution - use what would be a reasonable
-	// delay for the user to read the console
 	public static void sleepThread(int milliseconds) {
         // Try sleeping for specified time given in ms
 		try {
@@ -43,8 +60,11 @@ public class Game{
 			e.printStackTrace();
 		}
 	}
-
-    // setup the initial board for gameplay
+    /**
+    *   Will setup the board when Player wishes to manually setup the boards. Contains error checking and validation to ensure the ship's added meet specification
+    *   @param player1Board - Board object that stores all of the information of the main player's board
+    *          player2Board - Board object that stores all of the information of the opposing player's board
+    **/
 	public static void setupBoard(Board player1Board, Board player2Board, int shipCount) {
 
 		int maxShips = shipCount;	//max number of ships for each board
@@ -80,7 +100,11 @@ public class Game{
 
 	}
 
-	
+	/**
+    *   A check that will be ran after every turn. Will scan the current and enemy player's boards for existing ships, and declares a winner if none are found
+    *   @param board - The board the win condition scan will be performed on
+    *   @return boolean - Will return a boolean to indicate whether the win conditions have been met
+    **/
 	// Check the board for remaining ships
 	public static boolean winCondition(Board board) {
         int shipCounter = 0;
@@ -99,7 +123,11 @@ public class Game{
 
     }
 
-
+    /**
+    *   Reads from a given file and creates the current board and ship placements based on line-by-line fed information
+    *   @param mapLevel - The final that contains the information required to build the level
+    *
+    **/
     public static void mapFromFiles(String mapLevel, Board board){
 
         //Initiate line for ship data from file 
@@ -153,7 +181,10 @@ public class Game{
     *   Implement Ship class features - ship sunk
     *   Fix board size constants
     **/
-    
+    /**
+    *   Starting method that will instantiate all of our variables and begin the game loop
+    *
+    **/
    public void start() {
    		// create boards for both the players
         // difficulty will rely on these settings - add user input to specify difficulty

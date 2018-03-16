@@ -1,8 +1,14 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-
+/**
+*   Simple Menu Screen that will display all of the available options, and toggles values that will be enabled with each menu selection
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+**/
 public class MenuScreen {
-
+    /**
+    *   Prints the basic board view and offers input sanitation to the user
+    *
+    **/
     // displays the start of the game menu
     public static void printMenu(String[] args) {
         boolean run = true;
@@ -52,7 +58,10 @@ public class MenuScreen {
             }
         } while (run == true);
     }
-
+    /**
+    *   Main method that will be called when this class is run. Will view the menu screen after being called
+    *
+    **/
     public static void main (String[] args) {
         printMenu(args);
     }
