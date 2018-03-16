@@ -1,4 +1,6 @@
-
+/**
+*	Settings for the game window
+*/
 
 public class Settings {
 

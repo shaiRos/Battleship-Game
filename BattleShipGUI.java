@@ -4,15 +4,13 @@ import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Button;
 
+/**
+* 	This is where application of java fx starts. 
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+**/
 
 public class BattleShipGUI extends Application
 {
-	
-	//DON'T TOUCH 	
-	final private int xWindowSize = 1040;
-	final private int yWindowSize = 920;
-	
-
 	private Stage primaryStage;
 	private Scene gameUI;	
 	private BorderPane mainMenu;
@@ -28,7 +26,7 @@ public class BattleShipGUI extends Application
 		
 		primaryStage = primaryStage;
 		mainMenu = new BorderPane();
-		gameUI = new Scene(mainMenu, xWindowSize, yWindowSize);
+		gameUI = new Scene(mainMenu, Settings.xWindowSize, Settings.yWindowSize);
 
 		//enter setup stage
 		//SetupPhase setup = new SetupPhase(gameUI);
@@ -60,23 +58,14 @@ public class BattleShipGUI extends Application
 		
 		player1Board.guessBoard = player2Board.gameBoard;
 		player2Board.guessBoard = player1Board.gameBoard;
-	
-		Game.clearScreen();
-		System.out.println("Player 1 turn starting....");
-            // Take the user coordinates and attack
-			// DO NOTE
-			// Currently, you need to typecast the type the player is to access the playerTurn method
-		//((HumanPlayer) player1).playerTurn();			
+			
 		
-		//Start attack Phase
-		AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1", null);
-		//send humanPlayer  
+		//Start attack Phase by calling the class AttackPhase where it changes the root of the scene. Player 1 always goes first
+		AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1", null); 
 		
 //=============================================================
-
-
-		primaryStage.setMaxHeight(yWindowSize);	
-		primaryStage.setMaxWidth(xWindowSize + 15);		
+		primaryStage.setMaxHeight(Settings.yWindowSize);	
+		primaryStage.setMaxWidth(Settings.xWindowSize + 15);		
 		primaryStage.setTitle("BattleShip");
 		primaryStage.setScene(gameUI);
 		primaryStage.show();

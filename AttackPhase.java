@@ -10,6 +10,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 
+/**
+* 	This class creates the user interface of the main game where players take turns to attack each other's ships 
+*	It's base layout is a BorderPane where only the center, bottom and left regions are used.
+*
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+**/
 
 public class AttackPhase  {
 
@@ -22,12 +28,22 @@ public class AttackPhase  {
 	private Player player2;
 	private Label coordinates = null;
 	
-	//constructor to display the attackPhase of a player and listens for input events
-	
-	public AttackPhase(Scene scenee, Player p1, Player p2, String player, Label coord) {
+	/**
+	*	The constructor of the AttackPhase. It creates the user interface depending on which player is currently attacking.
+	*	Using the three regions from BorderPane (center, bottom, left) it displays the current player's own board at the center 
+	*	(where the player sends attacks by clicking a section of the grid), their guess board at the very top of the right pane
+	* 	region and messages and stats on the bottom pane. 
+	*
+	*	@param 		scn - the Scene where the root will be changed to display the next player's attack phase
+	*	@param		p1 - a Player instance of the first player
+	*	@param		p2 - a Player instance of the second payer
+	*	@param		player - a String that indicates which player the display should accommodate
+	*	@param		coord - a Label where messages for the player are stored 
+	*/
+	public AttackPhase(Scene scn, Player p1, Player p2, String player, Label coord) {
 
 		attackingPlayer = player;
-		gameUI = scenee;	
+		gameUI = scn;	
 		ownBoard = new BoardGUI(p1.getPlayerBoard().getBoardSize(), Settings.smallGridWidth);
 		guessBoard = new BoardGUI(p2.getPlayerBoard().getBoardSize(), Settings.bigGridWidth);
 		player1 = p1;
@@ -53,12 +69,20 @@ public class AttackPhase  {
 		System.out.println("\nCurrent player: " + player);	
 	}
 
-	
+	/**
+	*	@return a BoardGUI instance of the guess board display
+	*/
 	public BoardGUI getBoardNode() {
 		return guessBoard;
 	}
 	
-
+	/**
+	*	The child node that will be placed in the center region of the main layout. The child node is a TilePane layout that contains a GridPane layout
+	*	(created in BoardGUI) which is the display of the player's guess board. This node has also been set as an event listener that calls
+	*	the AttackClickHandler class to take in mouse clicks from this node.
+	*	
+	*	@return 	a TilePane layout that displays the current player's guessing board
+	*/
 	public TilePane centerPane() {	
 		
 		TilePane centerSlot = new TilePane();
@@ -70,7 +94,10 @@ public class AttackPhase  {
 		return centerSlot; 	
 	}
 
-	
+	/**
+	*	The child node that will be placed in the right region of the main layout.
+	*	@return 	a TilePane layout
+	*/
 	public TilePane rightPanel() {
 		
 		TilePane rightPanel = new TilePane();
@@ -81,7 +108,10 @@ public class AttackPhase  {
 		return rightPanel;
 	}	
 	
-	
+	/**
+	*	The child node that will be placed in the bottom region of the main layout.
+	*	@return a GridPane layout
+	*/	
 	public GridPane botPanel() {
 		
 		GridPane botPanel = new GridPane(); 
