@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 
 
-public class AttackPhase extends Settings {
+public class AttackPhase  {
 
 	private Scene gameUI;	
 	private BorderPane gameLayout;
@@ -28,26 +28,21 @@ public class AttackPhase extends Settings {
 
 		attackingPlayer = player;
 		gameUI = scenee;	
-		ownBoard = new BoardGUI(gridSize, smallGridWidth);
-		guessBoard = new BoardGUI(gridSize, bigGridWidth);
+		ownBoard = new BoardGUI(p1.getPlayerBoard().getBoardSize(), Settings.smallGridWidth);
+		guessBoard = new BoardGUI(p2.getPlayerBoard().getBoardSize(), Settings.bigGridWidth);
 		player1 = p1;
 		player2 = p2;
 		coordinates = coord;
-
+		
 		if (attackingPlayer == "P1") {
-			ownBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.gameBoard, "gameBoard");
-			guessBoard.addValuesFromArray(((HumanPlayer)p1).playerBoard.guessBoard, "guessBoard");
-
+			ownBoard.addValuesFromArray(p1.getPlayerBoard().gameBoard, "gameBoard");
+			guessBoard.addValuesFromArray(p1.getPlayerBoard().guessBoard, "guessBoard");
 			}
-		else if (attackingPlayer == "P2") {
-
-				ownBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.gameBoard, "gameBoard");	
-				guessBoard.addValuesFromArray(((HumanPlayer) p2).playerBoard.guessBoard, "guessBoard");
-			/*} else {
-				ownBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGameBoard());	
-				guessBoard.addValuesFromArray(((ComputerPlayer) player2).playerBoard.getGuessBoard());	*/				
-				
+		else if (attackingPlayer == "P2") {	
+				ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");
+				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");		
 		}
+		
 		//Update the Display with the new changes
 		gameLayout = new BorderPane();
 		gameLayout.setCenter(centerPane());	
@@ -79,7 +74,7 @@ public class AttackPhase extends Settings {
 	public TilePane rightPanel() {
 		
 		TilePane rightPanel = new TilePane();
-		rightPanel.setPrefWidth(sidePanelWidth);
+		rightPanel.setPrefWidth(Settings.sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));	
 		rightPanel.getChildren().add(ownBoard.getBoardGrid());			
@@ -90,13 +85,12 @@ public class AttackPhase extends Settings {
 	public GridPane botPanel() {
 		
 		GridPane botPanel = new GridPane(); 
-		botPanel.setPrefHeight(botHeight);	
-		botPanel.setMaxHeight(botHeight);				
+		botPanel.setPrefHeight(Settings.botHeight);	
+		botPanel.setMaxHeight(Settings.botHeight);				
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
 		
 		if (coordinates != null) {
 			botPanel.getChildren().add(coordinates);
-			System.out.println("not null");
 		}
 		return botPanel;
 	}

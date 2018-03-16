@@ -14,13 +14,20 @@ public class Game{
 		start();
 	}
 	
+
+	
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
     
+
     // getter for AI state
     public static boolean getAIStatus() {
-    		return aiStatus;
+    	return aiStatus;
     }
+	
+	public static void enableAI() {
+		aiStatus = true;
+	}
 
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
     // Debug tool while also hiding enemy boards!
@@ -164,10 +171,9 @@ public class Game{
         // Initialize the boards and set the board sizes
         // WIP:
         //      - Re-create the board using the new boardSize values
+        Board.setBoardSize(userBoardSize);
         Board player1Board = new Board();
-        player1Board.setBoardSize(userBoardSize);
         Board player2Board = new Board();
-        player2Board.setBoardSize(userBoardSize);
 
         // populate boards with battleships
         
@@ -180,6 +186,7 @@ public class Game{
 
         // instantiate our players
 		Player player1 = new HumanPlayer(player1Board);
+		// We don't know what our player 2 is at this point, just instantiate a generic player2
 		Player player2 = null;
 
 		// Create a new human that can access their boards
@@ -207,9 +214,8 @@ public class Game{
 			clearScreen();
 			System.out.println("Player 1 turn starting....");
             // Take the user coordinates and attack
-			// DO NOTE
-			// Currently, you need to typecast the type the player is to access the playerTurn method
 			
+			// Before it was typecasted, changed Player to abstract and called it a day
 			player1.playerTurn();
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {

@@ -10,6 +10,10 @@ public class HumanPlayer extends Player {
         this.playerBoard = board;
     }
 
+	public Board getPlayerBoard() {
+		return playerBoard;
+	}
+
     // Main method for the player turn routine
     public void playerTurn() {
         boolean formatted = false;
