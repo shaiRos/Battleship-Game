@@ -185,8 +185,8 @@ public class ComputerPlayer extends Player{
             try {
             		
             		// instantiate initial values first just in case
-	        		int row = randomCoordinate();
-	        		int column = randomCoordinate();	
+	        		row = randomCoordinate();
+	        		column = randomCoordinate();	
 	        		
 	        		// if the queue is empty, then we'll just use the random values
 	        		if (queue.isEmpty()) {
