@@ -64,7 +64,7 @@ public class GameConfig {
 			}
 		}
 	}
-	
+
     /**
     *   Validates if the attack is valid, and changes board based on the information
     *   @param playerBoard - current Board object used
@@ -96,7 +96,6 @@ public class GameConfig {
         }
         
 	}
-	
 	
 	/**
 	*	Main loop that creates the user ships. Will run as long as the specified amount of ships has not been met

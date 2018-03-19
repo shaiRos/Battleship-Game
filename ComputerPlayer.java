@@ -176,6 +176,7 @@ public class ComputerPlayer extends Player{
 	*	The procedure the AI will follow to complete their round. Contains all of the logic required to make a guess and validate the guess values
 	*
 	**/
+
 	public String playerTurn() {
         boolean formatted = false;
         int column = -1;
@@ -184,8 +185,8 @@ public class ComputerPlayer extends Player{
             try {
             		
             		// instantiate initial values first just in case
-	        		row = randomCoordinate();
-	        		column = randomCoordinate();	
+	        		int row = randomCoordinate();
+	        		int column = randomCoordinate();	
 	        		
 	        		// if the queue is empty, then we'll just use the random values
 	        		if (queue.isEmpty()) {
@@ -220,8 +221,7 @@ public class ComputerPlayer extends Player{
                     if (!queue.isEmpty()) {
                         queue.remove(0);
                     }
-                    
-                    
+
                     // DEBUG
                     System.out.println("Current guessed values: ");
                     for (String values: guessed) {

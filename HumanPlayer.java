@@ -28,9 +28,11 @@ public class HumanPlayer extends Player {
     *   Main logic to execute a game 'turn'. Will include all prompts, input checks and validations required for a user to complete his attack
     *   
     **/
+
     public String playerTurn() {
     		int row = -1;
     		int column = -1;
+
         boolean formatted = false;
         while (formatted != true) {
             try {
