@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 public class BattleShipGUI extends Application
 {
 	private Stage primaryStage;
-	private Scene gameUI;	
+	private Scene gameUI;
 	private BorderPane mainMenu;
 
 	public static void main(String [] args)
@@ -29,12 +29,12 @@ public class BattleShipGUI extends Application
 		gameUI = new Scene(mainMenu, Settings.xWindowSize, Settings.yWindowSize);
 
 		//enter setup stage
-		//SetupPhase setup = new SetupPhase(gameUI);
+		SetupPhase setup = new SetupPhase(gameUI);
 		//setup.setupEnd().setOnMousePressed(new EndSetupHandler(gameUI));
 //============================= Uncomment this for PvP ===========================================================================		
 		Game.enableAI(); 		
 //================== Copied From Text Version main =================================================================================
-       
+    /*   
 		int userBoardSize = 5;
         int userShipCount = 2;
 
@@ -63,7 +63,7 @@ public class BattleShipGUI extends Application
 		
 		//Start attack Phase by calling the class AttackPhase where it changes the root of the scene. Player 1 always goes first
 		AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1", null); 
-		
+	*/	
 //=============================================================
 		primaryStage.setMaxHeight(Settings.yWindowSize);	
 		primaryStage.setMaxWidth(Settings.xWindowSize + 15);		

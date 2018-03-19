@@ -12,7 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
-
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.RowConstraints;
 
 
 
@@ -22,7 +23,7 @@ public class SetupPhase {
 	private BorderPane root;
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
-	private Button endSetup;
+
 	
 	
 	public SetupPhase(Scene scene) {
@@ -35,10 +36,7 @@ public class SetupPhase {
 
 	}
 	
-	
-	public Button setupEnd() {
-		return endSetup;
-	}
+
 
 	
 	public TilePane battleField() {	
@@ -49,12 +47,26 @@ public class SetupPhase {
 		return centerSlot; 	
 	}
 	
-	public TilePane rightPanel() {
+	public GridPane rightPanel() {
 		
-		TilePane rightPanel = new TilePane();
+		GridPane rightPanel = new GridPane();
 		rightPanel.setPrefWidth(Settings.sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));	
+
+		for (int x = 0; x < 4; x++) {
+			RowConstraints row = new RowConstraints();	
+			row.setPercentHeight(50);			
+			rightPanel.getRowConstraints().add(row);
+		}
+		ColumnConstraints column = new ColumnConstraints();		
+		column.setPercentWidth(100);		
+		rightPanel.getColumnConstraints().add(column);			
+		rightPanel.setGridLinesVisible(true);	
+
+		
+		Button fiveLen = new Button("Five");
+		rightPanel.add(fiveLen,0,0);
 	
 		//guessBoard = new BoardGUI(5, Settings.smallGridWidth);		
 		//rightPanel.getChildren().add(guessBoard.getBoardGrid());			
@@ -67,8 +79,7 @@ public class SetupPhase {
 		botPanel.setPrefHeight(Settings.botHeight);	
 		botPanel.setMaxHeight(Settings.botHeight);				
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
-		endSetup = new Button("Setup DONE");
-		botPanel.getChildren().add(endSetup);
+
 		return botPanel;
 	}	
 
