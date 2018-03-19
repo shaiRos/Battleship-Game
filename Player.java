@@ -1,39 +1,41 @@
+import java.util.ArrayList;
 
-public class Player {
-	// was thinking of moving stuff into here once it was working, but it doesnt
-    /**
-    *   We want to research enumeration for this method
+/**
+*   Parent Player of the players created. Will contain the methods each Player requires to complete game logic functionality
+*
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+**/
+public abstract class Player {
+
+	/**
+    *   Checks whether the ship has been previously hit by the player
+    *   @param playerBoard - current Board object
+    *           int row, column - Int form row and column attacked by player
+    *   @return boolean - Will specify whether the attack is new, or has been previously attacked
     **/
-	public void sendAttack(Board playerBoard, int row, int column) {
-        // check the value of the block specified, if the values match, change the values with
-        // a hit or a miss
-        int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
-        if (boardValue == 5) {
-            playerBoard.guessBoard[column - 1][row - 1] = 1;
-            System.out.println("Hit!");
-
-        } else if (boardValue == 0) {
-            playerBoard.guessBoard[column - 1][row - 1] = -1;
-            System.out.println("Miss!");
-
-        } else if (boardValue == -1) {
-            playerBoard.guessBoard[column - 1][row - 1] = -1;
-            System.out.println("Miss!");
-        // Should probably have a different check case for else
-        } else {
-            System.out.println("I broke something whoops");
-            System.out.println("Debuggies");
-            System.out.println(boardValue);
-        }
-
-	}
-	
-	public boolean checkPreviousHit(Board playerBoard, int row, int column) {
-		int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
-		if (boardValue == 1) {
+	public boolean checkPreviousHitEnum(Board playerBoard, int row, int column) {
+        BoardValue value = (playerBoard.guessBoard[column - 1][row - 1]);
+		if (value == BoardValue.HIT) {
+			return true;
+		} else if (value == BoardValue.MISS) {
 			return true;
 		}
 		return false;
 	}
+	
+	/**
+    *   Quickly convert two integers into a string for data storage
+    *   @param int row, column - Row and column that will be formatted
+    *   @return formattedString - String which will contain values in column,row format
+    **/
+	public String coordToString(int column, int row) {
+        String formattedString = Integer.toString(column) + "," + Integer.toString(row);
+        return formattedString;
+	}
+
+    // Abstract class that will enable us to differentiate human vs AI turns
+	public abstract String playerTurn();
+	
+	public abstract Board getPlayerBoard();
 
 }

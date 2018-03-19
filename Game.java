@@ -3,42 +3,68 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.io.*;
 
-
+/**
+*   Game implements the main controller that will call for the initialization of all our starting variables
+*   and contains the main logic for the game loop
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+*
+**/
 public class Game{
-	
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
-    
+    private static boolean hitSuccess = false;
+
 
     /**
-    *   Enables the AI 
-    */
+    *   The main constructor that will initialize the game. This will ruin the start() method for the current game object
+    *   @param specifyAIStatus - Boolean that signifies whether the game will implement Player vs Player or Player vs AI
+    **/
+    public Game(boolean specifyAIStatus) {
+        aiStatus = specifyAIStatus;
+        start();
+    }
+    
+    /**
+    *   A toggle that will set the flag which enables the AI
+    *
+    **/
     public static void enableAI() {
     		aiStatus = true;
     }
-    
-
     /**
-    *   Checks the status of the AI   
-    */
+    *   A getter that returns the AI flag's status
+    *   @return aiStatus - Boolean that when true, indicates the AI has been selected
+    **/
     public static boolean getAIStatus() {
     		return aiStatus;
     }
-
-	// https://stackoverflow.com/questions/2979383/java-clear-the-console
-    // Debug tool while also hiding enemy boards!
+    
     /**
-    *   Clears the screen for the game
-    *   Debug tool while also hiding enemy boards!
-    */
+     *	Returns a true or false based on whether the attack was successful or not
+     * @return hitSuccess - True for hit, false for miss and any other scenario
+     */
+    public static boolean getHitSuccess() {
+    		return hitSuccess;
+    }
+    
+	public static void setHitSuccess(boolean b) {
+		hitSuccess = b;
+	}
+    /**
+    *   When ran on unix systems, will clear the console for improved output and management of the text version of the game
+    *
+    **/
+	// https://stackoverflow.com/questions/2979383/java-clear-the-console
 	public static void clearScreen() {
         // ASCII escape codes  
 	    System.out.print("\033[H\033[2J");  
 	    System.out.flush();  
 	}  
+    /**
+    *   When ran, will sleep the current thread for the milliseconds, effectively giving a transition frame
+    *   @param milliseconds - Int of milliseconds to pause execution
+    **/
 
-	// This will pause program execution - use what would be a reasonable
-	// delay for the user to read the console
 	public static void sleepThread(int milliseconds) {
         // Try sleeping for specified time given in ms
 		try {
@@ -47,8 +73,11 @@ public class Game{
 			e.printStackTrace();
 		}
 	}
-
-    // setup the initial board for gameplay
+    /**
+    *   Will setup the board when Player wishes to manually setup the boards. Contains error checking and validation to ensure the ship's added meet specification
+    *   @param player1Board - Board object that stores all of the information of the main player's board
+    *          player2Board - Board object that stores all of the information of the opposing player's board
+    **/
 	public static void setupBoard(Board player1Board, Board player2Board, int shipCount) {
 
 		int maxShips = shipCount;	//max number of ships for each board
@@ -71,7 +100,8 @@ public class Game{
         // create a list to store our ships into
 		ArrayList<Ship> shipArray2 = new ArrayList<Ship>();
         // return the game board of the current player
-		player2Board.returnBoard(1);
+		player2Board.returnBoard(2);
+
 
         // loop to add ships into ship array
         GameConfig.playerInputShips(shipArray2, player2Board, shipCount);
@@ -83,12 +113,17 @@ public class Game{
 
 	}
 
-    // Check the board for remaining ships
+	/**
+    *   A check that will be ran after every turn. Will scan the current and enemy player's boards for existing ships, and declares a winner if none are found
+    *   @param board - The board the win condition scan will be performed on
+    *   @return boolean - Will return a boolean to indicate whether the win conditions have been met
+    **/
+	// Check the board for remaining ships
 	public static boolean winCondition(Board board) {
         int shipCounter = 0;
         for (int x = 0; x < board.getBoardSize(); x++) {
             for (int y = 0; y < board.getBoardSize(); y++) {
-                if (board.gameBoard[x][y] == 5) {
+                if (board.gameBoard[x][y] == BoardValue.SHIP) {
                     shipCounter++;
                 }
             }
@@ -100,8 +135,12 @@ public class Game{
         return false;
 
     }
-
-
+		
+    /**
+    *   Reads from a given file and creates the current board and ship placements based on line-by-line fed information
+    *   @param mapLevel - The final that contains the information required to build the level
+    *
+    **/
     public static void mapFromFiles(String mapLevel, Board board){
 
         //Initiate line for ship data from file 
@@ -148,17 +187,18 @@ public class Game{
     }
     
 
+
     /**
     *   Default board difficulties
-    *   Rules for specific ship lengths
     *   Use the AI thingy to setup random board placement
-    *   Research enum on sendAttack
-    *   Inheritance on the players
-    *   use readFile for default maps
     *   Implement Ship class features - ship sunk
     *   Fix board size constants
     **/
-   public static void main(String[] args) {
+    /**
+    *   Starting method that will instantiate all of our variables and begin the game loop
+    *
+    **/
+   public void start() {
    		// create boards for both the players
         // difficulty will rely on these settings - add user input to specify difficulty
         int userBoardSize = 5;
@@ -169,23 +209,23 @@ public class Game{
         // Initialize the boards and set the board sizes
         // WIP:
         //      - Re-create the board using the new boardSize values
+        Board.setBoardSize(userBoardSize);
         Board player1Board = new Board();
-        player1Board.setBoardSize(userBoardSize);
         Board player2Board = new Board();
-        player2Board.setBoardSize(userBoardSize);
-
         // populate boards with battleships
         
         // This will allow user to input coordinates and setup board
-		// setupBoard(player1Board, player2Board, userShipCount);
+        // setupBoard(player1Board, player2Board, userShipCount);
 
         // This will read a file and allow us to setup predefined board
         mapFromFiles(fileName, player1Board);
         mapFromFiles(fileName, player2Board);
 
         // instantiate our players
-		Player player1 = new HumanPlayer(player1Board);
-		Player player2 = null;
+        Player player1 = new HumanPlayer(player1Board);
+        // We don't know what our player 2 is at this point, just instantiate a generic player2
+        Player player2 = null;
+
 
 		// Create a new human that can access their boards
         /**
@@ -200,22 +240,30 @@ public class Game{
         // set the win condition
 		boolean winCondition = false;
 
-
         // Game loop
 		
 		do {
             // set each player's guess board to the other player's game board
+
+			
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
+			
+
 
             // Player 1 turn
 			clearScreen();
 			System.out.println("Player 1 turn starting....");
             // Take the user coordinates and attack
-			// DO NOTE
-			// Currently, you need to typecast the type the player is to access the playerTurn method
-			
-			((HumanPlayer)player1).playerTurn();
+
+			// Take coordinates from the player turn as col,row
+			// Convert back to usable values
+			String coord = player1.playerTurn();
+			String[] coordFormatted = coord.split(",");
+			int column1 = Integer.parseInt(coordFormatted[0]);
+			int row1 = Integer.parseInt(coordFormatted[1]);
+			// Send the attack to the board once properly formatted
+			GameConfig.sendAttack(player1Board,row1,column1);
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
 				System.out.println("Player 1 has won!");
@@ -231,13 +279,18 @@ public class Game{
 			clearScreen();
 			System.out.println("Player 2 turn starting....");
             // Take the user coordinates and attack
-			// DO NOTE
-			// Currently, you need to typecast the type the player is to access the playerTurn method
-			if (getAIStatus() == true) {
-				((ComputerPlayer) player2).playerTurn();
-			} else {
-				((HumanPlayer) player2).playerTurn();
-			}
+
+			// Take AI values as col,row
+			// Convert it back to usable values
+			String coordEnemy = player2.playerTurn();
+			String[] coordFormattedEnemy = coordEnemy.split(",");
+			int column2 = Integer.parseInt(coordFormattedEnemy[0]);
+			int row2 = Integer.parseInt(coordFormattedEnemy[1]);
+			GameConfig.sendAttack(player2Board,row2,column2);
+            // if this is a hit, we want all the ships around the guessed ship to be added to the queue
+            if (Game.getHitSuccess() == true) {
+            		((ComputerPlayer)player2).makeQueue(column2, row2);
+            }
             // Check for remaining ships on enemy board
 			if (winCondition(player1Board) == true) {
 				System.out.println("Player 2 has won!");

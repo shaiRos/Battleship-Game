@@ -8,6 +8,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+
+/**
+*	Creates the display of the boards. The display uses GridPane layout to visually show the players' boards.
+*	Also manages the size and adding contents into the grid.
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*/
 
 
 public class BoardGUI { 
@@ -19,7 +26,13 @@ public class BoardGUI {
 	private ImageView shipImage;
 	private double blockSize;	//width & height for each square in grid
 	
-	
+	/**
+	*	The constructor. Creates the Grid displays depending on the indicated size in the parameters. Also sets the constraints
+	*	and adjusts the sizes to accomodate for the window size.
+	*
+	*	@param 		gridSize - an integer indicating what board size to create
+	*	@param 		gridwidth - an integer indicating the width the display of the board occupies in the window.(Includes the margins) This is a final value set on Settings class.
+	*/
 	public BoardGUI(int gridsize, int gridwidth) {
 		
 		gridSize = gridsize;
@@ -30,9 +43,10 @@ public class BoardGUI {
 		board = new GridPane();
 		board.setPrefSize(gridWidth, gridWidth);	
 		board.setPadding(new Insets(5)); //margin for the slot the grid will be in
-		
-		//board.setBackground(new Background
-		board.setStyle("-fx-background-color: #b2e9f7;");	
+		//https://pngtree.com/freebackground/blue-watercolor-background-material_754790.html
+		Image bg = new Image("images/sea.jpg");
+		BackgroundImage bgImage = new BackgroundImage(bg,null,null,null,null);
+		board.setBackground(new Background(bgImage));
 		//sets the grid depending on size
 		for (int x = 0; x < gridSize; x++) {
 			//this sets the constraints for box size so the size doesn't automatically adjust to child inside
@@ -48,22 +62,42 @@ public class BoardGUI {
 		board.setGridLinesVisible(true);	
 	}
 	
+	/**
+	*	@return		the GridPane instance of this board display
+	*/
 	public GridPane getBoardGrid() {
 		return board;
 	}
 	
+	/**
+	*	@return		the grid size of this board display
+	*/	
 	public int getGridSize() {
 		return gridSize;
 	}
 	
+	/**
+	*	@return		the gridWidth (in pixels) of this board display. (Includes the margins)
+	*/	
 	public int getGridWidth() {
 		return gridWidth;
 	}
 	
+	/**
+	*	@return		the pixel size of one block of the grid of this board display
+	*/	
 	public double getGridBlockSize() {
 		return blockSize;
 	}
-	
+
+
+	/**
+	*	Creates an ImageView instance for the images that will be placed on each single block of the grid. This includes the image components of the ships,
+	*	the images for misses, and the images for hits. This formats the images' sizes to fit the block size of the current grid.
+	*
+	*	@param		image - a string referencing an image
+	*	@return		an ImageView instance that will be placed in the grid blocks
+	*/
 	public ImageView getImage(String image) {
 		
 		Image shippPic = new Image(image);
@@ -74,35 +108,41 @@ public class BoardGUI {
 		return shipImage;
 	}
 		
-	
-	public void addValuesFromArray(int[][] boardArray, String boardType) {
-	
-		for (int x = 0; x < gridSize; x++) {
-			for (int y = 0; y < gridSize; y++) {
-				//add the object to this coordinate
-				int value = boardArray[y][x];
 
-				if (value != 0) {
+	/**
+	*	Reads an array that represents a player's board and creates the visual representation of it. Using the getImage() method,
+	*	it adds the image representation of ships, hits and misses into the GridPane Layout display of the player's board.
+	*
+	*	@param 		boardArray - an array containing enum values of ships, hits and misses
+	*	@param		boardType - a String indicating what type this GridPane represents. ("gameBoard" or "guessBoard"). In guessBoard, the ships are hidden
+	*/
+	public void addValuesFromArray(BoardValue[][] boardArray, String boardType) {
+		for (int x = 0; x < boardArray.length; x++) {
+			for (int y = 0; y < boardArray.length; y++) {
+				//add the object to this coordinate
+				BoardValue value = boardArray[y][x];
+
+				if (value != BoardValue.EMPTY) {
 					
 					switch(value) {
 						
-						case 5:
+						case SHIP:
 							if (boardType != "guessBoard") {
 								ImageView shipImage = getImage("images/Shipt.png");
 								board.add(shipImage, x, y);
 							}
 								break;
 							
-						case -1:
+						case MISS:
 							ImageView missImage = getImage("images/MissImage.png");							
 							board.add(missImage, x, y);
 							break;
-						case 1:
+						case HIT:
 							ImageView hitImage = getImage("images/HitImage.png");							
 							board.add(hitImage, x, y);		
 							break;
-					}
-				}	
+					} 
+				} 
 			}
 		}
 	}
@@ -142,9 +182,6 @@ public class BoardGUI {
 				ImageView shipImage = getImage("RedCircle.png");					
 				board.add(shipImage,x , (y+coord));
 			}
-
-
-	
 		//need to rotate the image vertically here
 		//	shipImage.setFitHeight(blockSize * length);			
 		//	board.add(shipImage, x, y, 1, length);

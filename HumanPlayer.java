@@ -1,27 +1,49 @@
 import java.util.Scanner;
 
-
+/**
+*   Holds the code the main player will utilize. Contains the logic necessary to execute a game 'turn'
+*
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+**/
 public class HumanPlayer extends Player {
     Board playerBoard = null;
 
-
+    /**
+    *   Main constructor for HumanPlayer object
+    *   @param board - Board object that will be linked to the current player
+    **/
     // constructor with board, human not suppose to touch board, change later on
     public HumanPlayer(Board board) {
         this.playerBoard = board;
     }
+	/**
+    *   getter for playerBoard object
+    *   @return playerBoard - Board object linked to player
+    **/
+	public Board getPlayerBoard() {
+		return playerBoard;
+	}
 
-
-    public void playerTurn() {
+    /**
+    *   Main logic to execute a game 'turn'. Will include all prompts, input checks and validations required for a user to complete his attack
+    *   
+    **/
+    public String playerTurn() {
+    		int row = -1;
+    		int column = -1;
         boolean formatted = false;
         while (formatted != true) {
             try {
                 System.out.println("Current game board");
                 // return the game board
-                playerBoard.returnBoard(1);
+				playerBoard.returnBoard(1);
+
                 System.out.println("\n");
                 System.out.println("Current guessing board");
                 // return the guessing board
-                playerBoard.returnBoard(2);
+                //playerBoard.returnBoard(2);
+				playerBoard.returnBoard(2);
+
                 System.out.println("Enter coordinates to attack (row column): ");
 
                 // Stolen from other method - Take row and column from input
@@ -29,13 +51,13 @@ public class HumanPlayer extends Player {
                 String inputLine = input.nextLine();
                 String[] inputInfo = inputLine.split(" ");
                 char tempColumn = inputInfo[0].toUpperCase().charAt(0);
-                int column = (((int)(tempColumn) - 65 ) + 1);
-                int row = Integer.parseInt(inputInfo[1]);
+                column = (((int)(tempColumn) - 65 ) + 1);
+                row = Integer.parseInt(inputInfo[1]);
 
                 // check to make sure its a legit value
                 if ((row > playerBoard.getBoardSize()) || (column > playerBoard.getBoardSize()) || (row < 0) || (column < 0)) {
                     System.out.println("Invalid coordinates");
-                } else if (checkPreviousHit(playerBoard, row, column) == true) {
+                } else if (checkPreviousHitEnum(playerBoard, row, column) == true) {
                 		System.out.println("Previously guessed! Try again");
                 } else {
                     formatted = true;
@@ -43,7 +65,7 @@ public class HumanPlayer extends Player {
                     System.out.println("Sending attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
 
                     // Send the attack. Check if the attack hits or misses
-                    sendAttack(playerBoard, row, column);
+                    //sendAttack(playerBoard, row, column);
                 }
 
             }
@@ -58,7 +80,7 @@ public class HumanPlayer extends Player {
             
             }
         }
-
+        return (coordToString(column, row));
     }
 
 
