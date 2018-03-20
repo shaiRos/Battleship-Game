@@ -11,8 +11,8 @@ import javafx.scene.control.Button;
 
 public class BattleShipGUI extends Application
 {
-	private Stage primaryStage;
-	private Scene gameUI;	
+	public static Stage primaryStage;
+	private Scene gameUI;
 	private BorderPane mainMenu;
 
 	public static void main(String [] args)
@@ -25,16 +25,13 @@ public class BattleShipGUI extends Application
 	{
 		
 		primaryStage = primaryStage;
-		mainMenu = new BorderPane();
+		mainMenu = new BorderPane();	
 		gameUI = new Scene(mainMenu, Settings.xWindowSize, Settings.yWindowSize);
 
-		//enter setup stage
-		//SetupPhase setup = new SetupPhase(gameUI);
-		//setup.setupEnd().setOnMousePressed(new EndSetupHandler(gameUI));
-//============================= Uncomment this for PvP ===========================================================================		
-		Game.enableAI(); 		
-//================== Copied From Text Version main =================================================================================
-       
+
+		Game.enableAI(); 	
+
+
 		int userBoardSize = 5;
         int userShipCount = 2;
 
@@ -43,7 +40,7 @@ public class BattleShipGUI extends Application
         Board player1Board = new Board();
         Board player2Board = new Board();
 
-        Game.mapFromFiles(fileName, player1Board);
+        //Game.mapFromFiles(fileName, player1Board);
         Game.mapFromFiles(fileName, player2Board);
 
 		Player player1 = new HumanPlayer(player1Board);
@@ -59,10 +56,20 @@ public class BattleShipGUI extends Application
 		
 		player1Board.guessBoard = player2Board.gameBoard;
 		player2Board.guessBoard = player1Board.gameBoard;
-			
 		
+		
+		Settings.player11 = player1;
+		
+		//SETUP BOARD SIZE AND AMOUNT OF SHIPS TO SETUP BEFORE SETUP
+	
+		//enter setup stage
+		SetupPhase setup = new SetupPhase(gameUI, player1,3);
+
+	
+//===================================================================================================
+       
 		//Start attack Phase by calling the class AttackPhase where it changes the root of the scene. Player 1 always goes first
-		AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1", null); 
+		//AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1", null); 
 		
 //=============================================================
 		primaryStage.setMaxHeight(Settings.yWindowSize);	
@@ -71,6 +78,8 @@ public class BattleShipGUI extends Application
 		primaryStage.setScene(gameUI);
 		primaryStage.show();
 	}
+	
+
 	
 
 }	

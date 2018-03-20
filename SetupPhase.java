@@ -12,7 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
-
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.RowConstraints;
+import javafx.geometry.Pos;
 
 
 
@@ -20,44 +22,81 @@ public class SetupPhase {
 	
 	private Scene scene;
 	private BorderPane root;
-	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
-	private Button endSetup;
+	private Player player;
+	private int shipsToSet;
+
 	
 	
-	public SetupPhase(Scene scene) {
-	
+	public SetupPhase(Scene scn, Player playerSettingUp, int numOfShips) {
+		
+		scene = scn;
+		player = playerSettingUp;
+		shipsToSet = numOfShips;
+		ownBoard = new BoardGUI(player.getPlayerBoard().getBoardSize(), Settings.bigGridWidth);		
+		ownBoard.addValuesFromArray(player.getPlayerBoard().gameBoard, "gameBoard");		
 		root = new BorderPane();
 		root.setCenter(battleField());	
 		root.setBottom(botPanel());		
 		root.setRight(rightPanel());	
-		scene.setRoot(root);	
+		scene.setRoot(root);
+		
 
-	}
-	
-	
-	public Button setupEnd() {
-		return endSetup;
 	}
 
 	
 	public TilePane battleField() {	
 		
+<<<<<<< HEAD
 		TilePane centerSlot = new TilePane();
-		ownBoard = new BoardGUI(5, Settings.bigGridWidth); 	
+		ownBoard = new BoardGUI(Settings.gridSize, Settings.bigGridWidth); 	
+=======
+		TilePane centerSlot = new TilePane(); 	
+>>>>>>> d987446aab57a466c6e3a1a06871db19baeecbb7
 		centerSlot.getChildren().add(ownBoard.getBoardGrid());
 		return centerSlot; 	
 	}
 	
-	public TilePane rightPanel() {
+	public GridPane rightPanel() {
 		
-		TilePane rightPanel = new TilePane();
+		GridPane rightPanel = new GridPane();
 		rightPanel.setPrefWidth(Settings.sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));	
+<<<<<<< HEAD
 	
-		//guessBoard = new BoardGUI(5, Settings.smallGridWidth);		
-		//rightPanel.getChildren().add(guessBoard.getBoardGrid());			
+		guessBoard = new BoardGUI(Settings.gridSize, Settings.smallGridWidth);		
+		rightPanel.getChildren().add(guessBoard.getBoardGrid());			
+=======
+
+		for (int x = 0; x < 4; x++) {
+			RowConstraints row = new RowConstraints();	
+			row.setPercentHeight(50);			
+			rightPanel.getRowConstraints().add(row);
+		}
+		ColumnConstraints column = new ColumnConstraints();		
+		column.setPercentWidth(100);		
+		rightPanel.getColumnConstraints().add(column);			
+		rightPanel.setGridLinesVisible(true);	
+
+		
+		Button fiveLen = new Button("Five");
+		Button fourLen = new Button("Four");
+		Button threeLen = new Button("Three");
+		Button twoLen = new Button("Two");
+		
+		fiveLen.setOnMouseClicked(new SetupShipHandler(scene, 5, root, player, shipsToSet, ownBoard));
+		fourLen.setOnMouseClicked(new SetupShipHandler(scene, 4, root, player, shipsToSet, ownBoard));
+		threeLen.setOnMouseClicked(new SetupShipHandler(scene, 3, root, player, shipsToSet, ownBoard));	
+		twoLen.setOnMouseClicked(new SetupShipHandler(scene, 2, root, player, shipsToSet, ownBoard));			
+		
+		rightPanel.add(fiveLen,0,0);
+		rightPanel.add(fourLen,0,1);
+		rightPanel.add(threeLen,0,2);
+		rightPanel.add(twoLen,0,3);
+		
+		
+>>>>>>> d987446aab57a466c6e3a1a06871db19baeecbb7
 		return rightPanel;
 	}	
 	
@@ -67,8 +106,7 @@ public class SetupPhase {
 		botPanel.setPrefHeight(Settings.botHeight);	
 		botPanel.setMaxHeight(Settings.botHeight);				
 		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
-		endSetup = new Button("Setup DONE");
-		botPanel.getChildren().add(endSetup);
+
 		return botPanel;
 	}	
 

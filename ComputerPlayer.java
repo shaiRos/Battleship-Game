@@ -9,8 +9,8 @@ import java.util.Random;
 public class ComputerPlayer extends Player{
 	
 	Board playerBoard = null;
-	private ArrayList<String> guessed = new ArrayList<String>();
-	private ArrayList<String> queue = new ArrayList<String>();
+	private static ArrayList<String> guessed = new ArrayList<String>();
+	private static ArrayList<String> queue = new ArrayList<String>();
 	/**
 	*	Default constructor
 	*	@param board - links the provided board to the current ComputerPlayer object
@@ -33,7 +33,7 @@ public class ComputerPlayer extends Player{
 	**/
 	public int randomCoordinate() {
 		Random rand = new Random();
-		int coordinate = rand.nextInt(playerBoard.getBoardSize()) + 1;
+		int coordinate = rand.nextInt(Board.getBoardSize()) + 1;
 		return coordinate;
 	}
 	
@@ -44,10 +44,10 @@ public class ComputerPlayer extends Player{
 	**/
 	public boolean checkNotAttacked(String coordinate) {
 		boolean contains = true;
-		if (guessed.isEmpty() == true) {
+		if (getGuessed().isEmpty() == true) {
 			return true;
 		} else {
-			for (String coords : guessed) {
+			for (String coords : getGuessed()) {
 				if (coords.equals(coordinate)) {
 					contains = false;
 				}
@@ -67,126 +67,45 @@ public class ComputerPlayer extends Player{
 	**/
 	public void makeQueue(int column, int row) {
 		int boardSize =  Board.getBoardSize();
-		if ((column + 1 > boardSize) && (row > 0 && row <= boardSize)) {
-			System.out.println("col + 1 > size");
-			if (checkNotAttacked(coordToString(column, row + 1)) == true) {
-				queue.add(coordToString(column, row + 1));
 
-			}
-			if (checkNotAttacked(coordToString(column, row - 1)) == true) {
-				queue.add(coordToString(column, row - 1));
-
-			}
-			if (checkNotAttacked(coordToString(column - 1, row)) == true) {
-				queue.add(coordToString(column - 1, row));
-
-			}
-
-		} else if ((row + 1 > boardSize) && (column > 0 && column <= boardSize)) {
-			System.out.println("row + 1 > size");
-			if (checkNotAttacked(coordToString(column + 1, row)) == true) {
-				queue.add(coordToString(column + 1, row));
-
-			}
-			if (checkNotAttacked(coordToString(column, row - 1)) == true) {
-				queue.add(coordToString(column, row - 1));
-
-			}
-			if (checkNotAttacked(coordToString(column - 1, row)) == true) {
-				queue.add(coordToString(column - 1, row));
-
-			}
-
-		} else if ((column - 1 <= 0) && (row >= 1 && row <= boardSize)) {
-			System.out.println("col  - 1 <= 0");
-			if (checkNotAttacked(coordToString(column, row + 1)) == true) {
-				queue.add(coordToString(column, row + 1));
-
-			}
-//			if (checkNotAttacked(coordToString(column, row - 1)) == true) {
-//				queue.add(coordToString(column, row - 1));
-//
-//			}
-			if (checkNotAttacked(coordToString(column + 1, row)) == true) {
-				queue.add(coordToString(column + 1, row));
-
-			}
-
-		} else if ((row - 1 <= 0) && (column >= 1 && column <= boardSize)) {
-			System.out.println("row - 1 < 0");
-			if (checkNotAttacked(coordToString(column, row + 1)) == true) {
-				queue.add(coordToString(column, row + 1));
-
-			}
-			if (checkNotAttacked(coordToString(column + 1, row)) == true) {
-				queue.add(coordToString(column + 1, row));
-
-			}
-			if (checkNotAttacked(coordToString(column - 1, row)) == true) {
-				queue.add(coordToString(column - 1, row));
-
-			}
-
-		} else if (((column + 1) > boardSize) && ((row + 1) > boardSize)) {
-			System.out.println("col + 1 & row + 1 > size");
-			if (checkNotAttacked(coordToString(column, row - 1)) == true) {
-				queue.add(coordToString(column, row - 1));
-
-			}
-			if (checkNotAttacked(coordToString(column - 1, row)) == true) {
-				queue.add(coordToString(column - 1, row));
-
-			}
-
-		} else if (((column - 1) <= 0) && ((row - 1) <= 0)) {
-			System.out.println("col - 1 & row - 1 < 0");
-			if (checkNotAttacked(coordToString(column, row + 1)) == true) {
-				queue.add(coordToString(column, row + 1));
-
-			}
-			if (checkNotAttacked(coordToString(column + 1, row)) == true) {
-				queue.add(coordToString(column + 1, row));
-
-			}
-
-		} else {
-			System.out.println("else statement");
-			
-			if (checkNotAttacked(coordToString(column, row + 1)) == true) {
-				queue.add(coordToString(column, row + 1));
-
-			}
-			if (checkNotAttacked(coordToString(column, row - 1)) == true) {
-				queue.add(coordToString(column, row - 1));
-
-			}
-			if (checkNotAttacked(coordToString(column - 1, row)) == true) {
-				queue.add(coordToString(column - 1, row));
-
-			}
-			if (checkNotAttacked(coordToString(column + 1, row)) == true) {
-				queue.add(coordToString(column + 1, row));
-
-			}
+		if ((checkNotAttacked(coordToString(column, row + 1)) == true) && (row + 1 <= Board.getBoardSize())){
+			getQueue().add(coordToString(column, row + 1));
 
 		}
+		if ((checkNotAttacked(coordToString(column, row - 1)) == true) && (row - 1 > 0)) {
+			getQueue().add(coordToString(column, row - 1));
+
+		}
+		if ((checkNotAttacked(coordToString(column - 1, row)) == true) && (column - 1 > 0)) {
+			getQueue().add(coordToString(column - 1, row));
+
+		}
+		if ((checkNotAttacked(coordToString(column + 1, row)) == true) && (column + 1 <= Board.getBoardSize())){
+			getQueue().add(coordToString(column + 1, row));
+
+		}
+
+		
+		
 	}
 
 	/**
 	*	The procedure the AI will follow to complete their round. Contains all of the logic required to make a guess and validate the guess values
 	*
 	**/
-	public void playerTurn() {
+	public String playerTurn() {
         boolean formatted = false;
+        int column = -1;
+        int row = -1;
         while (formatted != true) {
             try {
             		
             		// instantiate initial values first just in case
-	        		int row = randomCoordinate();
-	        		int column = randomCoordinate();	
+	        		row = randomCoordinate();
+	        		column = randomCoordinate();	
 	        		
 	        		// if the queue is empty, then we'll just use the random values
-	        		if (queue.isEmpty()) {
+	        		if (getQueue().isEmpty()) {
 	            		while ((checkNotAttacked(coordToString(column, row)) != true)) {
 	            			row = randomCoordinate();
 	                		column = randomCoordinate();	                	
@@ -194,9 +113,9 @@ public class ComputerPlayer extends Player{
 	            		}
 	            	// if there are values in the queue, use those instead of the randomly generated values
 	        		} else {
-            			String[] values = queue.get(0).split(",");
-            			row = Integer.parseInt(values[1]);
-            			column = Integer.parseInt(values[0]);  
+            			String[] values = getQueue().get(0).split(",");
+            			row = Integer.parseInt(values[0]);
+            			column = Integer.parseInt(values[1]);  
 	        		}
 
          		
@@ -210,31 +129,27 @@ public class ComputerPlayer extends Player{
                 } else {
                     formatted = true;
                     // Specify where the attack has went
-                    System.out.println("AI sent attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
-                    guessed.add(coordToString(column, row));
+                    System.out.println("AI sent attack to (" + (char)((row + 65) - 1) + "," + column + ")" );
+                    getGuessed().add(coordToString(row, column));
                     // Send the attack. Check if the attack hits or misses
                     
                     // we assume the attack is successfully sent, remove the item from the queue
-                    if (!queue.isEmpty()) {
-                        queue.remove(0);
+                    if (!getQueue().isEmpty()) {
+                        getQueue().remove(0);
                     }
                     
-                    // if this is a hit, we want all the ships around the guessed ship to be added to the queue
-                    if (sendAttack(playerBoard, row, column) == true) {
-                    		makeQueue(column, row);
-                    }
                     
-                    // DEBUG
-                    System.out.println("Current guessed values: ");
-                    for (String values: guessed) {
-                    		System.out.println(values);
-                    }
-                    
-                    // DEBUG
-                    System.out.println("Current guessing queue: ");
-                    for (String values: queue) {
-                    		System.out.println(values);
-                    }
+//                    // DEBUG
+//                    System.out.println("Current guessed values: ");
+//                    for (String values: guessed) {
+//                    		System.out.println(values);
+//                    }
+//                    
+//                    // DEBUG
+//                    System.out.println("Current guessing queue: ");
+//                    for (String values: queue) {
+//                    		System.out.println(values);
+//                    }
                 }
 
             }
@@ -250,7 +165,24 @@ public class ComputerPlayer extends Player{
             
             }
         }
-
+        
+        return (coordToString(column, row));
     }
+
+	public static ArrayList<String> getGuessed() {
+		return guessed;
+	}
+
+	public void setGuessed(ArrayList<String> guessed) {
+		this.guessed = guessed;
+	}
+
+	public static ArrayList<String> getQueue() {
+		return queue;
+	}
+
+	public void setQueue(ArrayList<String> queue) {
+		this.queue = queue;
+	}
     
 }
