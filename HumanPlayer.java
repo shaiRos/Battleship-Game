@@ -28,7 +28,9 @@ public class HumanPlayer extends Player {
     *   Main logic to execute a game 'turn'. Will include all prompts, input checks and validations required for a user to complete his attack
     *   
     **/
-    public void playerTurn() {
+    public String playerTurn() {
+    		int row = -1;
+    		int column = -1;
         boolean formatted = false;
         while (formatted != true) {
             try {
@@ -49,8 +51,8 @@ public class HumanPlayer extends Player {
                 String inputLine = input.nextLine();
                 String[] inputInfo = inputLine.split(" ");
                 char tempColumn = inputInfo[0].toUpperCase().charAt(0);
-                int column = (((int)(tempColumn) - 65 ) + 1);
-                int row = Integer.parseInt(inputInfo[1]);
+                column = (((int)(tempColumn) - 65 ) + 1);
+                row = Integer.parseInt(inputInfo[1]);
 
                 // check to make sure its a legit value
                 if ((row > playerBoard.getBoardSize()) || (column > playerBoard.getBoardSize()) || (row < 0) || (column < 0)) {
@@ -64,7 +66,6 @@ public class HumanPlayer extends Player {
 
                     // Send the attack. Check if the attack hits or misses
                     //sendAttack(playerBoard, row, column);
-					sendAttack(playerBoard,row,column);
                 }
 
             }
@@ -79,7 +80,7 @@ public class HumanPlayer extends Player {
             
             }
         }
-
+        return (coordToString(column, row));
     }
 
 
