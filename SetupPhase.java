@@ -44,8 +44,7 @@ public class SetupPhase {
 	public TilePane battleField() {	
 		
 		TilePane centerSlot = new TilePane();
-
-		ownBoard = new BoardGUI(5, Settings.bigGridWidth); 	
+		ownBoard = new BoardGUI(Settings.gridSize, Settings.bigGridWidth); 	
 		centerSlot.getChildren().add(ownBoard.getBoardGrid());
 		return centerSlot; 	
 	}
@@ -57,9 +56,8 @@ public class SetupPhase {
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));	
 	
-
-		//guessBoard = new BoardGUI(5, Settings.smallGridWidth);		
-		//rightPanel.getChildren().add(guessBoard.getBoardGrid());			
+		guessBoard = new BoardGUI(Settings.gridSize, Settings.smallGridWidth);		
+		rightPanel.getChildren().add(guessBoard.getBoardGrid());			
 		return rightPanel;
 	}	
 	

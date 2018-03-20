@@ -34,9 +34,7 @@ public abstract class Player {
 	}
 
     // Abstract class that will enable us to differentiate human vs AI turns
-
 	public abstract String playerTurn();
-
 	
 	public abstract Board getPlayerBoard();
 
