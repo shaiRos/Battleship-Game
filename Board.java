@@ -15,7 +15,12 @@ class Board{
     private static boolean guessing = false;
 	public BoardValue [][] guessBoard = new BoardValue[boardSize][boardSize];
 	public BoardValue[][] gameBoard = new BoardValue[boardSize][boardSize];
-
+	private int numOfShips = 3;
+	private Ship [] shipArray;
+	private int [][] shipBoard = new int [boardSize][boardSize];
+	
+	
+	
 	/**
 	*	getters and setters for board constants
 	*	
@@ -43,6 +48,7 @@ class Board{
 	**/
 	public Board(){
 		intializeGameBoard();
+		shipArray = new Ship [numOfShips];
 
 	}
 	/**
@@ -62,7 +68,6 @@ class Board{
 	*
 	**/
 	public void returnBoard(int boardType) {
-		//int[][] board = null;
 		BoardValue [][] board = null;
 
         // our definitions
@@ -139,7 +144,63 @@ class Board{
 		}
 	}		
 	
-
+	//@betty replace addship When done
+	public void addShip1(int ID, int len, char orient, int ro, int col){
+		shipArray[ID] = new Ship(ID, len, orient, ro, col);
+		int [][] addCoordinates = shipArray[ID].getShipCoordinates();
+		for (int i = 0; i <addCoordinates.length; i++){
+			int r = addCoordinates[i][0];
+			int c = addCoordinates[i][1];
+			shipBoard[r][c] = ID+1;
+			gameBoard[r][c] = BoardValue.SHIP;
+		}
+		
+	}
+	
+	//@betty remove when done?
+	public void printShipBoard(){
+		for (int i = 0; i < shipBoard.length; i++){
+			for (int j =0; j < shipBoard[i].length; j++){
+				System.out.print(shipBoard[i][j]);
+			}
+			System.out.println(" ");
+		}
+	}
+	
+	//@betty remove when done?
+	public void printGameBoard(){
+		for (int i = 0; i < gameBoard.length; i++){
+			for (int j =0; j < gameBoard[i].length; j++){
+				System.out.print(gameBoard[i][j]);
+			}
+			System.out.println(" ");
+		}
+	}
+	
+	//@betty attackShip Stuff
+	public boolean aShipSunken(int rowAttacked, int columnAttacked){
+		int shipID = shipBoard[rowAttacked][columnAttacked];
+		System.out.println(shipID + "row  " +  rowAttacked + "col  " + columnAttacked);
+		if (shipID > 0 && shipID <= numOfShips){
+			shipArray[shipID-1].takeHit(rowAttacked, columnAttacked);
+			System.out.println(shipArray[shipID].checkShipIsSunken());
+			return(shipArray[shipID-1].checkShipIsSunken());
+		}
+		
+		return false;
+	}
+	
+	//@betty AttackShip Stuff
+	public boolean checkAllShipSunken(){
+		for (int i = 0; i < shipArray.length; i++){
+			if(shipArray[i].checkShipIsSunken() == false){
+				return false;
+			}
+		}
+		return true;
+	}	
+	
+	
 }
 
 				

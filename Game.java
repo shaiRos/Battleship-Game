@@ -38,7 +38,7 @@ public class Game{
     public static boolean getAIStatus() {
     		return aiStatus;
     }
-    
+
     /**
      *	Returns a true or false based on whether the attack was successful or not
      * @return hitSuccess - True for hit, false for miss and any other scenario
@@ -50,6 +50,7 @@ public class Game{
 	public static void setHitSuccess(boolean b) {
 		hitSuccess = b;
 	}
+
     /**
     *   When ran on unix systems, will clear the console for improved output and management of the text version of the game
     *
@@ -135,7 +136,7 @@ public class Game{
         return false;
 
     }
-		
+
     /**
     *   Reads from a given file and creates the current board and ship placements based on line-by-line fed information
     *   @param mapLevel - The final that contains the information required to build the level
@@ -145,6 +146,8 @@ public class Game{
 
         //Initiate line for ship data from file 
         String shipInfo = null;
+		int shipPlaced = 0;
+
         
         try {
             // FileReader reads text files
@@ -169,8 +172,10 @@ public class Game{
                 System.out.println(length);
                 System.out.println(row);
                 System.out.println(column);
-
-                board.addShip(orientation,length,row,column);
+				//@betty adjust board
+                //board.addShip(orientation,length,row,column);
+				board.addShip1(shipPlaced,length, orientation, row, column);
+				shipPlaced ++;
      
             }
             //Need to always close after done using it
@@ -248,22 +253,26 @@ public class Game{
 			
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
+			boolean shipSunk =false;
 			
 
 
             // Player 1 turn
 			clearScreen();
 			System.out.println("Player 1 turn starting....");
-            // Take the user coordinates and attack
 
 			// Take coordinates from the player turn as col,row
 			// Convert back to usable values
 			String coord = player1.playerTurn();
 			String[] coordFormatted = coord.split(",");
-			int column1 = Integer.parseInt(coordFormatted[0]);
-			int row1 = Integer.parseInt(coordFormatted[1]);
+			int row1 = Integer.parseInt(coordFormatted[0]);
+			int column1 = Integer.parseInt(coordFormatted[1]);
 			// Send the attack to the board once properly formatted
+			System.out.println("row " + row1 + "column " + column1);
 			GameConfig.sendAttack(player1Board,row1,column1);
+			shipSunk = GameConfig.checkSunken(player2Board,row1,column1);
+
+
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
 				System.out.println("Player 1 has won!");
@@ -284,24 +293,17 @@ public class Game{
 			// Convert it back to usable values
 			String coordEnemy = player2.playerTurn();
 			String[] coordFormattedEnemy = coordEnemy.split(",");
-			int column2 = Integer.parseInt(coordFormattedEnemy[0]);
-			int row2 = Integer.parseInt(coordFormattedEnemy[1]);
+			int row2 = Integer.parseInt(coordFormattedEnemy[0]);
+			int column2 = Integer.parseInt(coordFormattedEnemy[1]);
 			GameConfig.sendAttack(player2Board,row2,column2);
+			shipSunk = GameConfig.checkSunken(player1Board,row2,column2);
+
             // if this is a hit, we want all the ships around the guessed ship to be added to the queue
-            if (Game.getHitSuccess() == true && getAIStatus()) {
-            		((ComputerPlayer)player2).makeQueue(column2, row2);
+            if (Game.getHitSuccess() == true && getAIStatus() == true) {
+            	((ComputerPlayer)player2).makeQueue(column2, row2);
+
             }
-            // DEBUG
-            System.out.println("Current guessed values: ");
-            for (String values: ComputerPlayer.getGuessed()) {
-            		System.out.println(values);
-            }
-            
-            // DEBUG
-            System.out.println("Current guessing queue: ");
-            for (String values: ComputerPlayer.getQueue()) {
-            		System.out.println(values);
-            }
+
             // Check for remaining ships on enemy board
 			if (winCondition(player1Board) == true) {
 				System.out.println("Player 2 has won!");
