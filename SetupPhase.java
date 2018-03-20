@@ -39,7 +39,8 @@ public class SetupPhase {
 		root.setCenter(battleField());	
 		root.setBottom(botPanel());		
 		root.setRight(rightPanel());	
-		scene.setRoot(root);	
+		scene.setRoot(root);
+		
 
 	}
 

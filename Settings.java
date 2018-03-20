@@ -1,3 +1,6 @@
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 /**
 *	Settings for the game window
 */
@@ -11,6 +14,8 @@ public class Settings {
 	final public static int smallGridWidth = 250; //including margins
 	final public static int sidePanelWidth = 270;	
 	final public static int bigGridWidth = 770; //including margins	
+
 	
-}
+	
+}	
 	

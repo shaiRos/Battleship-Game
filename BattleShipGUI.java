@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 
 public class BattleShipGUI extends Application
 {
-	private Stage primaryStage;
+	public static Stage primaryStage;
 	private Scene gameUI;
 	private BorderPane mainMenu;
 
@@ -25,14 +25,14 @@ public class BattleShipGUI extends Application
 	{
 		
 		primaryStage = primaryStage;
-		mainMenu = new BorderPane();
+		mainMenu = new BorderPane();	
 		gameUI = new Scene(mainMenu, Settings.xWindowSize, Settings.yWindowSize);
 
 
 		Game.enableAI(); 	
 
 
-		int userBoardSize = 8;
+		int userBoardSize = 5;
         int userShipCount = 2;
 
         String fileName = "map.txt";
@@ -40,7 +40,7 @@ public class BattleShipGUI extends Application
         Board player1Board = new Board();
         Board player2Board = new Board();
 
-       // Game.mapFromFiles(fileName, player1Board);
+        //Game.mapFromFiles(fileName, player1Board);
         Game.mapFromFiles(fileName, player2Board);
 
 		Player player1 = new HumanPlayer(player1Board);
@@ -61,13 +61,14 @@ public class BattleShipGUI extends Application
 		//SETUP BOARD SIZE AND AMOUNT OF SHIPS TO SETUP BEFORE SETUP
 	
 		//enter setup stage
-		SetupPhase setup = new SetupPhase(gameUI, player1,3);	
+		SetupPhase setup = new SetupPhase(gameUI, player1,3);
+
 	
 //===================================================================================================
-    /*   
+       
 		//Start attack Phase by calling the class AttackPhase where it changes the root of the scene. Player 1 always goes first
-		AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1", null); 
-	*/	
+		//AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1", null); 
+		
 //=============================================================
 		primaryStage.setMaxHeight(Settings.yWindowSize);	
 		primaryStage.setMaxWidth(Settings.xWindowSize + 15);		
@@ -75,6 +76,8 @@ public class BattleShipGUI extends Application
 		primaryStage.setScene(gameUI);
 		primaryStage.show();
 	}
+	
+
 	
 
 }	

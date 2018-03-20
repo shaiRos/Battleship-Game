@@ -75,7 +75,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 				} 						
 				catch (IllegalArgumentException e) {
 				//input must meet the requirements. This is done in the validate methods. If it doesn't,the methods throws this
-				//exception, exits the loop, and asks the user for a new value that meets the requiremnts.
+				//exception, exits the loop, and asks the user for a new value that meets the requirements.
 				System.out.println(e.getMessage());
 				//formatted = false;	
 				}				
