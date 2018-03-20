@@ -97,7 +97,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);
 		} else {
 			//Send the attack of this player and change the boards
-			playerAttacking.sendAttack(playerAttacking.getPlayerBoard(), x, y);	
+			GameConfig.sendAttack(playerAttacking.getPlayerBoard(), x, y);	
 			//Win condition
 			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss
@@ -161,7 +161,13 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		Label message = new Label("AI is making a turn...");
 		message.setFont(new Font(50));
 		display.setCenter(message);
-		player2.playerTurn();
+		
+		String coordEnemy = player2.playerTurn();
+		String[] coordFormattedEnemy = coordEnemy.split(",");
+		int column2 = Integer.parseInt(coordFormattedEnemy[0]);
+		int row2 = Integer.parseInt(coordFormattedEnemy[1]);
+		GameConfig.sendAttack(player2.getPlayerBoard(),row2,column2);
+		
 		//https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
 		PauseTransition pause = new PauseTransition(Duration.seconds(.7));		
 		pause.setOnFinished(event -> {

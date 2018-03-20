@@ -14,7 +14,9 @@ public class Settings {
 	final public static int smallGridWidth = 250; //including margins
 	final public static int sidePanelWidth = 270;	
 	final public static int bigGridWidth = 770; //including margins	
-	public static Player player11;
+	public static Player p1;
+	public static Player p2;
+	public static int shipsToPlace;
 
 	
 	
