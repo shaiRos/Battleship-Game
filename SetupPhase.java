@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
+import javafx.geometry.Pos;
 
 
 
@@ -21,13 +22,19 @@ public class SetupPhase {
 	
 	private Scene scene;
 	private BorderPane root;
-	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;
+	private Player player;
+	private int shipsToSet;
 
 	
 	
-	public SetupPhase(Scene scene) {
-	
+	public SetupPhase(Scene scn, Player playerSettingUp, int numOfShips) {
+		
+		scene = scn;
+		player = playerSettingUp;
+		shipsToSet = numOfShips;
+		ownBoard = new BoardGUI(player.getPlayerBoard().getBoardSize(), Settings.bigGridWidth);		
+		ownBoard.addValuesFromArray(player.getPlayerBoard().gameBoard, "gameBoard");		
 		root = new BorderPane();
 		root.setCenter(battleField());	
 		root.setBottom(botPanel());		
@@ -35,14 +42,11 @@ public class SetupPhase {
 		scene.setRoot(root);	
 
 	}
-	
-
 
 	
 	public TilePane battleField() {	
 		
-		TilePane centerSlot = new TilePane();
-		ownBoard = new BoardGUI(5, Settings.bigGridWidth); 	
+		TilePane centerSlot = new TilePane(); 	
 		centerSlot.getChildren().add(ownBoard.getBoardGrid());
 		return centerSlot; 	
 	}
@@ -66,10 +70,21 @@ public class SetupPhase {
 
 		
 		Button fiveLen = new Button("Five");
+		Button fourLen = new Button("Four");
+		Button threeLen = new Button("Three");
+		Button twoLen = new Button("Two");
+		
+		fiveLen.setOnMouseClicked(new SetupShipHandler(scene, 5, root, player, shipsToSet, ownBoard));
+		fourLen.setOnMouseClicked(new SetupShipHandler(scene, 4, root, player, shipsToSet, ownBoard));
+		threeLen.setOnMouseClicked(new SetupShipHandler(scene, 3, root, player, shipsToSet, ownBoard));	
+		twoLen.setOnMouseClicked(new SetupShipHandler(scene, 2, root, player, shipsToSet, ownBoard));			
+		
 		rightPanel.add(fiveLen,0,0);
-	
-		//guessBoard = new BoardGUI(5, Settings.smallGridWidth);		
-		//rightPanel.getChildren().add(guessBoard.getBoardGrid());			
+		rightPanel.add(fourLen,0,1);
+		rightPanel.add(threeLen,0,2);
+		rightPanel.add(twoLen,0,3);
+		
+		
 		return rightPanel;
 	}	
 	
