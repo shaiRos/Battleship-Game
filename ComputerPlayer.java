@@ -114,8 +114,8 @@ public class ComputerPlayer extends Player{
 	            	// if there are values in the queue, use those instead of the randomly generated values
 	        		} else {
             			String[] values = getQueue().get(0).split(",");
-            			row = Integer.parseInt(values[1]);
-            			column = Integer.parseInt(values[0]);  
+            			row = Integer.parseInt(values[0]);
+            			column = Integer.parseInt(values[1]);  
 	        		}
 
          		
@@ -129,8 +129,8 @@ public class ComputerPlayer extends Player{
                 } else {
                     formatted = true;
                     // Specify where the attack has went
-                    System.out.println("AI sent attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
-                    getGuessed().add(coordToString(column, row));
+                    System.out.println("AI sent attack to (" + (char)((row + 65) - 1) + "," + column + ")" );
+                    getGuessed().add(coordToString(row, column));
                     // Send the attack. Check if the attack hits or misses
                     
                     // we assume the attack is successfully sent, remove the item from the queue
