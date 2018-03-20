@@ -1,9 +1,18 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
+/**
+*	A configurator that validates and sanitizes all input, and prepares the given values for game usage
+*
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+**/
 public class GameConfig {
 	
+	/**
+	*	Receives human and text file input, and creates boards based on the given information. Checks implemented to ensure the placements are not outside the scope of the given board
+	*	@param name - Ship object that will be used to store all information about the player's respective ships
+	*			board - Holds all of the information and game state of the current board
+	**/
 	// The main code for inserting ships on the other board
 	// Error checking, logic checking etc
 	public static void setupInput(Ship name, Board board) {
@@ -15,6 +24,8 @@ public class GameConfig {
 				System.out.print("\nIndicate (orientation length row column): ");
 				Scanner Setup = new Scanner(System.in);
 				String setup = Setup.nextLine();
+
+				//Scanner to test user input
 				//take the input that was converted into String and separate the info
 				String setupInfo[] = setup.split(" ");
 				//store info to designated variables and convert string to their types
@@ -24,6 +35,11 @@ public class GameConfig {
 				int row = (((int)(tempRow) - 65 ) + 1);
 				int column = Integer.parseInt(setupInfo[3]);
 
+				// TODO
+				/*	
+				*	POSSIBLE JUNIT TESTING 
+				*	
+				*/
 				//all checks
 				validateShipProperties(board,length,orientation,column,row);	//checks if ship properties meet the rules of the game
 				
@@ -48,7 +64,13 @@ public class GameConfig {
 			}
 		}
 	}
-
+	/**
+	*	Main loop that creates the user ships. Will run as long as the specified amount of ships has not been met
+	*	@param shipArray - ArrayList<Ship> that contains all of the ships created
+	*			playerBoard - Borad object which signifies the current board that is being set up
+	*			shipCount - Int that specifies the max amount of ships created per player
+	*
+	**/
 	public static void playerInputShips (ArrayList<Ship> shipArray, Board playerBoard, int shipCount) {
 		int maxShips = shipCount;	//max number of ships for each board
 
@@ -63,7 +85,13 @@ public class GameConfig {
             // At this point, the loop will restart, clearing the placeShips variables to 0.
 		}
 	}
-
+	/**
+	*	Checks whether the inputs all meet project criteria, organized in a manner that we may use the data at a later time
+	*	@param board - Board object that represents the current board
+	*			length, column, row - Int values that represent the properties of the given ships
+	*			char orientation - char that represents orientation of given ship
+	*
+	**/
 	//validates ship properties are reasonable depending on game rules
 	public static void validateShipProperties(Board board, int length, char orientation, int column, int row) {
 		int changingCoord = 'n';
@@ -82,19 +110,24 @@ public class GameConfig {
 		//check if all coordinates it occupies doesn't contain another ship
 		if (orientation == 'h'){
 			for (int x = changingCoord; x <= maxCoord; x++) {	
-				int value = board.gameBoard[row-1][x-1];
-				if (value != 0) {		
+				if(board.gameBoard[row-1][x-1] != BoardValue.EMPTY){
 					throw new IllegalArgumentException("The area contains another ship");
 				}
+				
 			}
+			
+			
 		} else if (orientation == 'v') {
 			for (int x = changingCoord; x <= maxCoord; x++) {	
-				int value = board.gameBoard[x-1][column-1];
-				if (value != 0) {			
+
+				if(board.gameBoard[x-1][column-1] != BoardValue.EMPTY){
 					throw new IllegalArgumentException("The area contains another ship");
 				}
 			}
 		}
+		
+		
+		
 
 		if (length > Board.getMaxShipSize() || length < Board.getMinShipSize()) {  //check if ship is the supported size
 			throw new IllegalArgumentException("Ship size is not supported");

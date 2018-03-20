@@ -3,20 +3,55 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.io.*;
 
-
+/**
+*   Game implements the main controller that will call for the initialization of all our starting variables
+*   and contains the main logic for the game loop
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+*
+**/
 public class Game{
+	// This will toggle if our game will let us fight another player or an AI
+    private static boolean aiStatus = false;
 
 
+    /**
+    *   The main constructor that will initialize the game. This will ruin the start() method for the current game object
+    *   @param specifyAIStatus - Boolean that signifies whether the game will implement Player vs Player or Player vs AI
+    **/
+    public Game(boolean specifyAIStatus) {
+        aiStatus = specifyAIStatus;
+        start();
+    }
+    
+    /**
+    *   A toggle that will set the flag which enables the AI
+    *
+    **/
+    public static void enableAI() {
+    		aiStatus = true;
+    }
+    /**
+    *   A getter that returns the AI flag's status
+    *   @return aiStatus - Boolean that when true, indicates the AI has been selected
+    **/
+    public static boolean getAIStatus() {
+    		return aiStatus;
+    }
+    /**
+    *   When ran on unix systems, will clear the console for improved output and management of the text version of the game
+    *
+    **/
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
-    // Debug tool while also hiding enemy boards!
 	public static void clearScreen() {
         // ASCII escape codes  
 	    System.out.print("\033[H\033[2J");  
 	    System.out.flush();  
 	}  
+    /**
+    *   When ran, will sleep the current thread for the milliseconds, effectively giving a transition frame
+    *   @param milliseconds - Int of milliseconds to pause execution
+    **/
 
-	// This will pause program execution - use what would be a reasonable
-	// delay for the user to read the console
 	public static void sleepThread(int milliseconds) {
         // Try sleeping for specified time given in ms
 		try {
@@ -25,8 +60,11 @@ public class Game{
 			e.printStackTrace();
 		}
 	}
-
-    // setup the initial board for gameplay
+    /**
+    *   Will setup the board when Player wishes to manually setup the boards. Contains error checking and validation to ensure the ship's added meet specification
+    *   @param player1Board - Board object that stores all of the information of the main player's board
+    *          player2Board - Board object that stores all of the information of the opposing player's board
+    **/
 	public static void setupBoard(Board player1Board, Board player2Board, int shipCount) {
 
 		int maxShips = shipCount;	//max number of ships for each board
@@ -49,7 +87,8 @@ public class Game{
         // create a list to store our ships into
 		ArrayList<Ship> shipArray2 = new ArrayList<Ship>();
         // return the game board of the current player
-		player2Board.returnBoard(1);
+		player2Board.returnBoard(2);
+
 
         // loop to add ships into ship array
         GameConfig.playerInputShips(shipArray2, player2Board, shipCount);
@@ -61,46 +100,17 @@ public class Game{
 
 	}
 
-
-	// was thinking of moving stuff into here once it was working, but it doesnt
-    /**
-    *   We want to research enumeration for this method
+	/**
+    *   A check that will be ran after every turn. Will scan the current and enemy player's boards for existing ships, and declares a winner if none are found
+    *   @param board - The board the win condition scan will be performed on
+    *   @return boolean - Will return a boolean to indicate whether the win conditions have been met
     **/
-	public static void sendAttack(Board playerBoard, int row, int column) {
-        // check the value of the block specified, if the values match, change the values with
-        // a hit or a miss
-        int boardValue = (playerBoard.guessBoard[column - 1][row - 1]);
-        if (boardValue == 5) {
-            playerBoard.guessBoard[column - 1][row - 1] = 1;
-            System.out.println("Hit!");
-
-        } else if (boardValue == 0) {
-            playerBoard.guessBoard[column - 1][row - 1] = -1;
-            System.out.println("Miss!");
-
-        } else if (boardValue == -1) {
-            playerBoard.guessBoard[column - 1][row - 1] = -1;
-            System.out.println("Miss!");
-        }
-
-         else if (boardValue == 1) {
-            System.out.println("Previously hit!");
-
-        // Should probably have a different check case for else
-        } else {
-            System.out.println("I broke something whoops");
-            System.out.println("Debuggies");
-            System.out.println(boardValue);
-        }
-
-	}
-
-    // Check the board for remaining ships
+	// Check the board for remaining ships
 	public static boolean winCondition(Board board) {
         int shipCounter = 0;
         for (int x = 0; x < board.getBoardSize(); x++) {
             for (int y = 0; y < board.getBoardSize(); y++) {
-                if (board.gameBoard[x][y] == 5) {
+                if (board.gameBoard[x][y] == BoardValue.SHIP) {
                     shipCounter++;
                 }
             }
@@ -113,7 +123,11 @@ public class Game{
 
     }
 
-
+    /**
+    *   Reads from a given file and creates the current board and ship placements based on line-by-line fed information
+    *   @param mapLevel - The final that contains the information required to build the level
+    *
+    **/
     public static void mapFromFiles(String mapLevel, Board board){
 
         //Initiate line for ship data from file 
@@ -158,18 +172,20 @@ public class Game{
         }
 
     }
+    
+
 
     /**
     *   Default board difficulties
-    *   Rules for specific ship lengths
     *   Use the AI thingy to setup random board placement
-    *   Research enum on sendAttack
-    *   Inheritance on the players
-    *   use readFile for default maps
     *   Implement Ship class features - ship sunk
     *   Fix board size constants
     **/
-   public static void main(String[] args) {
+    /**
+    *   Starting method that will instantiate all of our variables and begin the game loop
+    *
+    **/
+   public void start() {
    		// create boards for both the players
         // difficulty will rely on these settings - add user input to specify difficulty
         int userBoardSize = 5;
@@ -180,37 +196,56 @@ public class Game{
         // Initialize the boards and set the board sizes
         // WIP:
         //      - Re-create the board using the new boardSize values
+        Board.setBoardSize(userBoardSize);
         Board player1Board = new Board();
-        player1Board.setBoardSize(userBoardSize);
         Board player2Board = new Board();
-        player2Board.setBoardSize(userBoardSize);
-
         // populate boards with battleships
-		// setupBoard(player1Board, player2Board, userShipCount);
+        
+        // This will allow user to input coordinates and setup board
+        // setupBoard(player1Board, player2Board, userShipCount);
+
+        // This will read a file and allow us to setup predefined board
         mapFromFiles(fileName, player1Board);
         mapFromFiles(fileName, player2Board);
+
+        // instantiate our players
+        Player player1 = new HumanPlayer(player1Board);
+        // We don't know what our player 2 is at this point, just instantiate a generic player2
+        Player player2 = null;
+
 
 		// Create a new human that can access their boards
         /**
         *   Make the player an inheritance of a Player class
         **/
-		HumanPlayer player1 = new HumanPlayer(player1Board);
-		HumanPlayer player2 = new HumanPlayer(player2Board);
-		
+        if (getAIStatus() != true) {
+	    		player2 = new HumanPlayer(player2Board);
+        } else {
+        		player2 = new ComputerPlayer(player2Board);
+        }
+
         // set the win condition
 		boolean winCondition = false;
 
 
         // Game loop
+		
 		do {
             // set each player's guess board to the other player's game board
+
+			
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
+			
+
 
             // Player 1 turn
 			clearScreen();
 			System.out.println("Player 1 turn starting....");
             // Take the user coordinates and attack
+			// DO NOTE
+			// Currently, you need to typecast the type the player is to access the playerTurn method
+			
 			player1.playerTurn();
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
@@ -218,7 +253,8 @@ public class Game{
 				sleepThread(2500);
 				System.exit(0);
 			}
-			sleepThread(2500);
+			
+			sleepThread(1000);
 			
 			//check win conditions for every turn
 			
@@ -226,6 +262,8 @@ public class Game{
 			clearScreen();
 			System.out.println("Player 2 turn starting....");
             // Take the user coordinates and attack
+
+			// Before it was typecasted, changed Player to abstract and called it a day
 			player2.playerTurn();
             // Check for remaining ships on enemy board
 			if (winCondition(player1Board) == true) {
@@ -233,7 +271,7 @@ public class Game{
 				sleepThread(2500);
 				System.exit(0);
 			}
-			sleepThread(2500);
+			sleepThread(1000);
 			
 			//check win conditions maybe make this an exception. throws an exception if winning conditions are met, catches condition and exits loop.
 			
