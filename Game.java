@@ -6,7 +6,7 @@ import java.io.*;
 /**
 *   Game implements the main controller that will call for the initialization of all our starting variables
 *   and contains the main logic for the game loop
-*   @author Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
 *
 **/
 public class Game{
