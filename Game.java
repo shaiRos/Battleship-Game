@@ -12,6 +12,7 @@ import java.io.*;
 public class Game{
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
+    private static boolean hitSuccess = false;
 
 
     /**
@@ -37,6 +38,19 @@ public class Game{
     public static boolean getAIStatus() {
     		return aiStatus;
     }
+
+    /**
+     *	Returns a true or false based on whether the attack was successful or not
+     * @return hitSuccess - True for hit, false for miss and any other scenario
+     */
+    public static boolean getHitSuccess() {
+    		return hitSuccess;
+    }
+    
+	public static void setHitSuccess(boolean b) {
+		hitSuccess = b;
+	}
+
     /**
     *   When ran on unix systems, will clear the console for improved output and management of the text version of the game
     *
@@ -227,7 +241,6 @@ public class Game{
         // set the win condition
 		boolean winCondition = false;
 
-
         // Game loop
 		
 		do {
@@ -243,10 +256,16 @@ public class Game{
 			clearScreen();
 			System.out.println("Player 1 turn starting....");
             // Take the user coordinates and attack
-			// DO NOTE
-			// Currently, you need to typecast the type the player is to access the playerTurn method
-			
-			player1.playerTurn();
+
+			// Take coordinates from the player turn as col,row
+			// Convert back to usable values
+			String coord = player1.playerTurn();
+			String[] coordFormatted = coord.split(",");
+			int column1 = Integer.parseInt(coordFormatted[0]);
+			int row1 = Integer.parseInt(coordFormatted[1]);
+			// Send the attack to the board once properly formatted
+			GameConfig.sendAttack(player1Board,row1,column1);
+
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
 				System.out.println("Player 1 has won!");
@@ -263,8 +282,18 @@ public class Game{
 			System.out.println("Player 2 turn starting....");
             // Take the user coordinates and attack
 
-			// Before it was typecasted, changed Player to abstract and called it a day
-			player2.playerTurn();
+			// Take AI values as col,row
+			// Convert it back to usable values
+			String coordEnemy = player2.playerTurn();
+			String[] coordFormattedEnemy = coordEnemy.split(",");
+			int column2 = Integer.parseInt(coordFormattedEnemy[0]);
+			int row2 = Integer.parseInt(coordFormattedEnemy[1]);
+			GameConfig.sendAttack(player2Board,row2,column2);
+            // if this is a hit, we want all the ships around the guessed ship to be added to the queue
+            if (Game.getHitSuccess() == true) {
+            		((ComputerPlayer)player2).makeQueue(column2, row2);
+            }
+
             // Check for remaining ships on enemy board
 			if (winCondition(player1Board) == true) {
 				System.out.println("Player 2 has won!");

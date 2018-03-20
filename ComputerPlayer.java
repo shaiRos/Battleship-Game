@@ -33,7 +33,7 @@ public class ComputerPlayer extends Player{
 	**/
 	public int randomCoordinate() {
 		Random rand = new Random();
-		int coordinate = rand.nextInt(playerBoard.getBoardSize()) + 1;
+		int coordinate = rand.nextInt(Board.getBoardSize()) + 1;
 		return coordinate;
 	}
 	
@@ -176,14 +176,17 @@ public class ComputerPlayer extends Player{
 	*	The procedure the AI will follow to complete their round. Contains all of the logic required to make a guess and validate the guess values
 	*
 	**/
-	public void playerTurn() {
+
+	public String playerTurn() {
         boolean formatted = false;
+        int column = -1;
+        int row = -1;
         while (formatted != true) {
             try {
             		
             		// instantiate initial values first just in case
-	        		int row = randomCoordinate();
-	        		int column = randomCoordinate();	
+	        		row = randomCoordinate();
+	        		column = randomCoordinate();	
 	        		
 	        		// if the queue is empty, then we'll just use the random values
 	        		if (queue.isEmpty()) {
@@ -218,12 +221,7 @@ public class ComputerPlayer extends Player{
                     if (!queue.isEmpty()) {
                         queue.remove(0);
                     }
-                    
-                    // if this is a hit, we want all the ships around the guessed ship to be added to the queue
-                    if (sendAttack(playerBoard, row, column) == true) {
-                    		makeQueue(column, row);
-                    }
-                    
+
                     // DEBUG
                     System.out.println("Current guessed values: ");
                     for (String values: guessed) {
@@ -250,7 +248,8 @@ public class ComputerPlayer extends Player{
             
             }
         }
-
+        
+        return (coordToString(column, row));
     }
     
 }

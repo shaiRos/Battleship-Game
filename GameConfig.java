@@ -64,6 +64,39 @@ public class GameConfig {
 			}
 		}
 	}
+
+    /**
+    *   Validates if the attack is valid, and changes board based on the information
+    *   @param playerBoard - current Board object used
+    *           int row, column - Int form row and column specified by the player
+    *   @return boolean - Will return whether the attack successfully hit a ship or missed.
+    **/
+	public static void sendAttack(Board playerBoard, int row, int column) {
+        // check the value of the block specified, if the values match, change the values with
+        // a hit or a miss
+        BoardValue value = (playerBoard.guessBoard[column - 1][row - 1]);
+        if (value == BoardValue.SHIP) {
+            playerBoard.guessBoard[column - 1][row - 1] = BoardValue.HIT;
+            System.out.println("Hit!");
+            Game.setHitSuccess(true);
+        } else if (value == BoardValue.EMPTY) {
+            playerBoard.guessBoard[column - 1][row - 1] = BoardValue.MISS;
+            System.out.println("Miss!");
+            Game.setHitSuccess(false);
+        } else if (value == BoardValue.MISS) {
+            playerBoard.guessBoard[column - 1][row - 1] = BoardValue.MISS;
+            System.out.println("Miss!");
+            Game.setHitSuccess(false);
+        // Should probably have a different check case for else
+        } else {
+            System.out.println("I broke something whoops??");
+			System.out.println(playerBoard.guessBoard[column - 1][row - 1]);
+            System.out.println("Debuggies");
+            System.out.println(value);
+        }
+        
+	}
+	
 	/**
 	*	Main loop that creates the user ships. Will run as long as the specified amount of ships has not been met
 	*	@param shipArray - ArrayList<Ship> that contains all of the ships created
