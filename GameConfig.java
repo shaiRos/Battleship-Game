@@ -16,8 +16,9 @@ public class GameConfig {
 	// The main code for inserting ships on the other board
 	// Error checking, logic checking etc
 	public static void setupInput(Ship name, Board board) {
-		
+		int shipPlaced = 0;
 		boolean formatted = false;
+		
 		while (formatted != true){
 			try {
 				//asd for input for the variables needed to place ships
@@ -43,10 +44,12 @@ public class GameConfig {
 				//all checks
 				validateShipProperties(board,length,orientation,column,row);	//checks if ship properties meet the rules of the game
 				
+				//@betty addship 
 				// Adds ship to the grid
 				board.addShip(orientation,length,column,row);
-				//sets the values of the ship object
-				name.setShipValues(orientation,length,column,row); 				
+				board.addShip1(shipPlaced,length, orientation, row, column);
+				
+				shipPlaced ++;
 				formatted = true;
 				
 			}
@@ -64,7 +67,7 @@ public class GameConfig {
 			}
 		}
 	}
-	
+
     /**
     *   Validates if the attack is valid, and changes board based on the information
     *   @param playerBoard - current Board object used
@@ -74,36 +77,46 @@ public class GameConfig {
 	public static void sendAttack(Board playerBoard, int row, int column) {
         // check the value of the block specified, if the values match, change the values with
         // a hit or a miss
-        BoardValue value = (playerBoard.guessBoard[column - 1][row - 1]);
+        BoardValue value = (playerBoard.guessBoard[row - 1][column - 1]);
         if (value == BoardValue.SHIP) {
-            playerBoard.guessBoard[column - 1][row - 1] = BoardValue.HIT;
+            playerBoard.guessBoard[row - 1][column - 1] = BoardValue.HIT;
             System.out.println("Hit!");
             Game.setHitSuccess(true);
         } else if (value == BoardValue.EMPTY) {
-            playerBoard.guessBoard[column - 1][row - 1] = BoardValue.MISS;
+            playerBoard.guessBoard[row - 1][column - 1] = BoardValue.MISS;
             System.out.println("Miss!");
             Game.setHitSuccess(false);
         } else if (value == BoardValue.MISS) {
-            playerBoard.guessBoard[column - 1][row - 1] = BoardValue.MISS;
+            playerBoard.guessBoard[row - 1][column - 1] = BoardValue.MISS;
             System.out.println("Miss!");
             Game.setHitSuccess(false);
         // Should probably have a different check case for else
         } else {
             System.out.println("I broke something whoops??");
-			System.out.println(playerBoard.guessBoard[column - 1][row - 1]);
+			System.out.println(playerBoard.guessBoard[row - 1][column - 1]);
             System.out.println("Debuggies");
             System.out.println(value);
         }
         
 	}
 	
+	public static boolean checkSunken(Board playerBoard, int row, int column){
+		if(playerBoard.aShipSunken(row-1, column-1)){
+			
+			System.out.println("A ship is sunken.");
+			return true;
+		}
+		return false;
+	}
+
+
 	
 	/**
 	*	Main loop that creates the user ships. Will run as long as the specified amount of ships has not been met
 	*	@param shipArray - ArrayList<Ship> that contains all of the ships created
 	*			playerBoard - Borad object which signifies the current board that is being set up
 	*			shipCount - Int that specifies the max amount of ships created per player
-	*
+	*@betty remove when done
 	**/
 	public static void playerInputShips (ArrayList<Ship> shipArray, Board playerBoard, int shipCount) {
 		int maxShips = shipCount;	//max number of ships for each board

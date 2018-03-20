@@ -54,13 +54,7 @@ public class SetupPhase {
 
 	
 	public TilePane battleField() {	
-		
-<<<<<<< HEAD
-		TilePane centerSlot = new TilePane();
-		ownBoard = new BoardGUI(Settings.gridSize, Settings.bigGridWidth); 	
-=======
 		TilePane centerSlot = new TilePane(); 	
->>>>>>> d987446aab57a466c6e3a1a06871db19baeecbb7
 		centerSlot.getChildren().add(ownBoard.getBoardGrid());
 		return centerSlot; 	
 	}
@@ -71,11 +65,6 @@ public class SetupPhase {
 		rightPanel.setPrefWidth(Settings.sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));	
-<<<<<<< HEAD
-	
-		guessBoard = new BoardGUI(Settings.gridSize, Settings.smallGridWidth);		
-		rightPanel.getChildren().add(guessBoard.getBoardGrid());			
-=======
 
 		for (int x = 0; x < 4; x++) {
 			RowConstraints row = new RowConstraints();	
@@ -105,8 +94,6 @@ public class SetupPhase {
 			rightPanel.add(twoLen,0,3);
 		}
 		
-		
->>>>>>> d987446aab57a466c6e3a1a06871db19baeecbb7
 		return rightPanel;
 	}	
 	
