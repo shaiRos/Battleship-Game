@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 
 public class SetupShipHandler implements EventHandler<MouseEvent> {
@@ -24,13 +26,20 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	private Player player;
 	private int shipsToSet;
 	private BoardGUI boardDisplay;
+	private String thisPlayer;
 	
-	public SetupShipHandler(Scene scn, int shipLen, BorderPane rt, Player playerSettingUp, int numOfShips, BoardGUI bigBoard) {
+	public SetupShipHandler(Scene scn, int shipLen, BorderPane rt, String playerSettingUp, int numOfShips, BoardGUI bigBoard) {
 		
 		scene = scn;	
 		length = shipLen;
 		root = rt;
-		player = playerSettingUp;
+		thisPlayer = playerSettingUp;
+		
+		if (playerSettingUp == "P1") {
+			player = Settings.p1;
+		} else if (playerSettingUp == "P2") {
+			player = Settings.p2;
+		}		
 		shipsToSet = numOfShips;
 		boardDisplay = bigBoard;
 	}
@@ -70,9 +79,38 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 						System.out.println(x + ", " + y);
 						GameConfig.validateShipProperties(player.getPlayerBoard(),length,orientation,x,y);
 						player.getPlayerBoard().addShip(orientation,length,x,y);
-						SetupPhase nextShipSetup = new SetupPhase(scene,player,shipsToSet-1);							
+						
+						int shipsLeft = shipsToSet-1;
+						if (shipsLeft == 0) {
+							if (thisPlayer == "P1") {
+								if (Game.getAIStatus() == true) {
+									SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,true);
+									PauseTransition pause = new PauseTransition(Duration.seconds(1));
+									pause.setOnFinished(event -> scene.setRoot(startGameTransitionScreen()));
+									pause.play();
+								} else {
+
+									SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,true);
+									PauseTransition pause = new PauseTransition(Duration.seconds(1));
+									pause.setOnFinished(event -> scene.setRoot(p2Setup()));
+									pause.play();
+									
+									
+									
+								}
+							}	
+							else if (thisPlayer == "P2") {
+								SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,true);
+								PauseTransition pause = new PauseTransition(Duration.seconds(1));
+								pause.setOnFinished(event -> scene.setRoot(startGameTransitionScreen()));
+								pause.play();
+							}
+						}
+						else {							
+							SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,false);
+						}							
 					}
-				} 						
+				}					
 				catch (IllegalArgumentException e) {
 				//input must meet the requirements. This is done in the validate methods. If it doesn't,the methods throws this
 				//exception, exits the loop, and asks the user for a new value that meets the requirements.
@@ -116,13 +154,45 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 		rightPanel.add(orientLabel,0,0);
 		
 		cancelBt.setOnMouseClicked(event -> {
-			SetupPhase cancelShipSetup = new SetupPhase(scene,player,shipsToSet);
+			SetupPhase cancelShipSetup = new SetupPhase(scene,thisPlayer,shipsToSet,false);
 		});
 		return rightPanel;
 		
 		
 		
 	}
+	public BorderPane p2Setup() {
+
+		BorderPane display = new BorderPane();
+		Button continueButton = new Button("Continue");
+		display.setCenter(continueButton);
+		EventHandler<MouseEvent> eventHandlerTextField = new EventHandler<MouseEvent>() { 
+			@Override 
+			public void handle(MouseEvent event) { 
+				SetupPhase player2SetupPhase = new SetupPhase(scene,"P2",Settings.shipsToPlace,false);
+			}           
+		};
+		continueButton.setOnMouseClicked(eventHandlerTextField);
+		return display;
+	}
+
+	
+	public BorderPane startGameTransitionScreen() {
+
+		BorderPane display = new BorderPane();
+		Button continueButton = new Button("Player one ready?");
+		display.setCenter(continueButton);
+		EventHandler<MouseEvent> eventHandlerTextField = new EventHandler<MouseEvent>() { 
+			@Override 
+			public void handle(MouseEvent event) { 
+				AttackPhase startAttack = new AttackPhase(scene, Settings.p1, Settings.p2, "P1", null);
+			}           
+		};
+		continueButton.setOnMouseClicked(eventHandlerTextField);
+		return display;
+	}		
+	
+	
 		
 }
 		

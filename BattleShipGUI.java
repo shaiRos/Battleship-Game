@@ -34,14 +34,16 @@ public class BattleShipGUI extends Application
 
 		int userBoardSize = 5;
         int userShipCount = 2;
-
+		Settings.shipsToPlace = 1;
+		
+		
         String fileName = "map.txt";
         Board.setBoardSize(userBoardSize);
         Board player1Board = new Board();
         Board player2Board = new Board();
 
         //Game.mapFromFiles(fileName, player1Board);
-        Game.mapFromFiles(fileName, player2Board);
+        //Game.mapFromFiles(fileName, player2Board);
 
 		Player player1 = new HumanPlayer(player1Board);
 		Player player2 = null;
@@ -58,12 +60,13 @@ public class BattleShipGUI extends Application
 		player2Board.guessBoard = player1Board.gameBoard;
 		
 		
-		Settings.player11 = player1;
+		Settings.p1 = player1;
+		Settings.p2 = player2;
 		
 		//SETUP BOARD SIZE AND AMOUNT OF SHIPS TO SETUP BEFORE SETUP
 	
 		//enter setup stage
-		SetupPhase setup = new SetupPhase(gameUI, player1,3);
+		SetupPhase setup = new SetupPhase(gameUI, "P1",Settings.shipsToPlace,false);
 
 	
 //===================================================================================================
