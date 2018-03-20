@@ -25,13 +25,21 @@ public class SetupPhase {
 	private BoardGUI ownBoard;
 	private Player player;
 	private int shipsToSet;
+	private String thisPlayer;
+	private boolean displayOnly;
 
 	
 	
-	public SetupPhase(Scene scn, Player playerSettingUp, int numOfShips) {
+	public SetupPhase(Scene scn, String playerSettingUp, int numOfShips, boolean displayonly) {
 		
 		scene = scn;
-		player = playerSettingUp;
+		thisPlayer = playerSettingUp;
+		displayOnly = displayonly;
+		if (playerSettingUp == "P1") {
+			player = Settings.p1;
+		} else if (playerSettingUp == "P2") {
+			player = Settings.p2;
+		}
 		shipsToSet = numOfShips;
 		ownBoard = new BoardGUI(player.getPlayerBoard().getBoardSize(), Settings.bigGridWidth);		
 		ownBoard.addValuesFromArray(player.getPlayerBoard().gameBoard, "gameBoard");		
@@ -80,20 +88,22 @@ public class SetupPhase {
 		rightPanel.setGridLinesVisible(true);	
 
 		
-		Button fiveLen = new Button("Five");
-		Button fourLen = new Button("Four");
-		Button threeLen = new Button("Three");
-		Button twoLen = new Button("Two");
-		
-		fiveLen.setOnMouseClicked(new SetupShipHandler(scene, 5, root, player, shipsToSet, ownBoard));
-		fourLen.setOnMouseClicked(new SetupShipHandler(scene, 4, root, player, shipsToSet, ownBoard));
-		threeLen.setOnMouseClicked(new SetupShipHandler(scene, 3, root, player, shipsToSet, ownBoard));	
-		twoLen.setOnMouseClicked(new SetupShipHandler(scene, 2, root, player, shipsToSet, ownBoard));			
-		
-		rightPanel.add(fiveLen,0,0);
-		rightPanel.add(fourLen,0,1);
-		rightPanel.add(threeLen,0,2);
-		rightPanel.add(twoLen,0,3);
+		if (displayOnly == false) {
+			Button fiveLen = new Button("Five");
+			Button fourLen = new Button("Four");
+			Button threeLen = new Button("Three");
+			Button twoLen = new Button("Two");
+			
+			fiveLen.setOnMouseClicked(new SetupShipHandler(scene, 5, root, thisPlayer, shipsToSet, ownBoard));
+			fourLen.setOnMouseClicked(new SetupShipHandler(scene, 4, root, thisPlayer, shipsToSet, ownBoard));
+			threeLen.setOnMouseClicked(new SetupShipHandler(scene, 3, root, thisPlayer, shipsToSet, ownBoard));	
+			twoLen.setOnMouseClicked(new SetupShipHandler(scene, 2, root, thisPlayer, shipsToSet, ownBoard));			
+			
+			rightPanel.add(fiveLen,0,0);
+			rightPanel.add(fourLen,0,1);
+			rightPanel.add(threeLen,0,2);
+			rightPanel.add(twoLen,0,3);
+		}
 		
 		
 >>>>>>> d987446aab57a466c6e3a1a06871db19baeecbb7
