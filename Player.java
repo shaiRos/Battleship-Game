@@ -14,7 +14,7 @@ public abstract class Player {
     *   @return boolean - Will specify whether the attack is new, or has been previously attacked
     **/
 	public boolean checkPreviousHitEnum(Board playerBoard, int row, int column) {
-        BoardValue value = (playerBoard.guessBoard[column - 1][row - 1]);
+        BoardValue value = (playerBoard.guessBoard[row - 1][column - 1]);
 		if (value == BoardValue.HIT) {
 			return true;
 		} else if (value == BoardValue.MISS) {
@@ -28,8 +28,8 @@ public abstract class Player {
     *   @param int row, column - Row and column that will be formatted
     *   @return formattedString - String which will contain values in column,row format
     **/
-	public String coordToString(int column, int row) {
-        String formattedString = Integer.toString(column) + "," + Integer.toString(row);
+	public String coordToString(int row, int column) {
+        String formattedString = Integer.toString(row) + "," + Integer.toString(column);
         return formattedString;
 	}
 

@@ -54,7 +54,6 @@ public class SetupPhase {
 
 	
 	public TilePane battleField() {	
-		
 		TilePane centerSlot = new TilePane(); 	
 		centerSlot.getChildren().add(ownBoard.getBoardGrid());
 		return centerSlot; 	
@@ -94,7 +93,6 @@ public class SetupPhase {
 			rightPanel.add(threeLen,0,2);
 			rightPanel.add(twoLen,0,3);
 		}
-		
 		
 		return rightPanel;
 	}	

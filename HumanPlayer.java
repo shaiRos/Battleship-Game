@@ -38,7 +38,8 @@ public class HumanPlayer extends Player {
             try {
                 System.out.println("Current game board");
                 // return the game board
-				playerBoard.returnBoard(1);
+				playerBoard.returnBoard(1);		
+
 
                 System.out.println("\n");
                 System.out.println("Current guessing board");
@@ -52,9 +53,9 @@ public class HumanPlayer extends Player {
                 Scanner input = new Scanner(System.in);
                 String inputLine = input.nextLine();
                 String[] inputInfo = inputLine.split(" ");
-                char tempColumn = inputInfo[0].toUpperCase().charAt(0);
-                column = (((int)(tempColumn) - 65 ) + 1);
-                row = Integer.parseInt(inputInfo[1]);
+                char tempRow = inputInfo[0].toUpperCase().charAt(0);
+                row = (((int)(tempRow) - 65 ) + 1);
+                column = Integer.parseInt(inputInfo[1]);
 
                 // check to make sure its a legit value
                 if ((row > playerBoard.getBoardSize()) || (column > playerBoard.getBoardSize()) || (row < 0) || (column < 0)) {
@@ -64,7 +65,7 @@ public class HumanPlayer extends Player {
                 } else {
                     formatted = true;
                     // Specify where the attack has went
-                    System.out.println("Sending attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
+                    System.out.println("Sending attack to (" + (char)((row + 65) - 1) + "," + column + ")" );
 
                     // Send the attack. Check if the attack hits or misses
                     //sendAttack(playerBoard, row, column);
@@ -82,7 +83,7 @@ public class HumanPlayer extends Player {
             
             }
         }
-        return (coordToString(column, row));
+        return (coordToString(row, column));
     }
 
 
