@@ -56,7 +56,9 @@ public class BattleShipGUI extends Application
 		
 		player1Board.guessBoard = player2Board.gameBoard;
 		player2Board.guessBoard = player1Board.gameBoard;
-
+		
+		
+		Settings.player11 = player1;
 		
 		//SETUP BOARD SIZE AND AMOUNT OF SHIPS TO SETUP BEFORE SETUP
 	
