@@ -47,7 +47,7 @@ public class MainMenuGUI {
 		startButton.setPrefSize(200,60);
 		settingScreen.setHalignment(startButton,HPos.CENTER);
 		
-		startButton.setOnMousePressed(event -> {
+		startButton.setOnMouseClicked(event -> {
 			BattleShipGUI.gameSetup();
 		});			
 		
@@ -85,12 +85,12 @@ public class MainMenuGUI {
 		Button modeRightBt = new Button("=>");	
 		modeRightBt.setPrefSize(60,40);
 		
-		modeRightBt.setOnMousePressed(event -> {
+		modeRightBt.setOnMouseClicked(event -> {
 			Settings.switchMode();
 			modeLabel.setText(Settings.gameMode);
 		});	
 
-		modeLeftBt.setOnMousePressed(event -> {
+		modeLeftBt.setOnMouseClicked(event -> {
 			Settings.switchMode();
 			modeLabel.setText(Settings.gameMode);
 		});			
@@ -119,12 +119,12 @@ public class MainMenuGUI {
 		Button boardRightBt = new Button("=>");	
 		boardRightBt.setPrefSize(60,40);
 		
-		boardRightBt.setOnMousePressed(event -> {
+		boardRightBt.setOnMouseClicked(event -> {
 			Settings.setBoardSize(Settings.boardSize+1);
 			boardLabel.setText(Integer.toString(Settings.boardSize));
 		});
 		
-		boardLeftBt.setOnMousePressed(event -> {
+		boardLeftBt.setOnMouseClicked(event -> {
 			Settings.setBoardSize(Settings.boardSize-1);
 			boardLabel.setText(Integer.toString(Settings.boardSize));
 		});		
@@ -154,12 +154,12 @@ public class MainMenuGUI {
 		Button shipsRightBt = new Button("=>");	
 		shipsRightBt.setPrefSize(60,40);
 		
-		shipsRightBt.setOnMousePressed(event -> {
+		shipsRightBt.setOnMouseClicked(event -> {
 			Settings.setNumOfShips(Settings.shipsToPlace+1);
 			shipsLabel.setText(Integer.toString(Settings.shipsToPlace));
 		});
 		
-		shipsLeftBt.setOnMousePressed(event -> {
+		shipsLeftBt.setOnMouseClicked(event -> {
 			Settings.setNumOfShips(Settings.shipsToPlace-1);
 			shipsLabel.setText(Integer.toString(Settings.shipsToPlace));
 		});			

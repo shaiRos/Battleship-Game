@@ -97,7 +97,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 								} else {
 
 									SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,true);
-									PauseTransition pause = new PauseTransition(Duration.seconds(1));
+									PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
 									pause.setOnFinished(event -> scene.setRoot(p2Setup()));
 									pause.play();
 									

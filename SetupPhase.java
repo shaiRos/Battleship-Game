@@ -74,7 +74,7 @@ public class SetupPhase {
 		ColumnConstraints column = new ColumnConstraints();		
 		column.setPercentWidth(100);		
 		rightPanel.getColumnConstraints().add(column);			
-		rightPanel.setGridLinesVisible(true);	
+		//rightPanel.setGridLinesVisible(true);	
 
 		
 		if (displayOnly == false) {
