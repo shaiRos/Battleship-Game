@@ -90,14 +90,14 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		coordinate.setText(thisPlayer +" attacked coordinates: " + x + ", " + y);
 		coordinate.setFont(new Font(40));
 		
-		boolean checkPrevHit = playerAttacked.checkPreviousHitEnum(playerAttacking.getPlayerBoard(), x, y);	
+		boolean checkPrevHit = playerAttacked.checkPreviousHitEnum(playerAttacking.getPlayerBoard(), y, x);	
 		
 		if (checkPrevHit == true) {													
 			System.out.println("prevhit true, Please try again");
 			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);
 		} else {
 			//Send the attack of this player and change the boards
-			GameConfig.sendAttack(playerAttacking.getPlayerBoard(), x, y);	
+			GameConfig.sendAttack(playerAttacking.getPlayerBoard(), y,x);	
 			//Win condition
 			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss
