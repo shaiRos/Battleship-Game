@@ -270,7 +270,7 @@ public class Game{
 			// Send the attack to the board once properly formatted
 			System.out.println("row " + row1 + "column " + column1);
 			GameConfig.sendAttack(player1Board,row1,column1);
-			shipSunk = GameConfig. mj(player2Board,row1,column1);
+			shipSunk = GameConfig. checkSunken(player2Board,row1,column1);
 
 
             // Check for remaining ships on enemy board
