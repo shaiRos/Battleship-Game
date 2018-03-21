@@ -78,20 +78,26 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 						int y = (int)((myEvent.getY()-10)/boardDisplay.getGridBlockSize())+1;
 						System.out.println(x + ", " + y);
 						GameConfig.validateShipProperties(player.getPlayerBoard(),length,orientation,x,y);
-						player.getPlayerBoard().addShip(orientation,length,x,y);
-						
 						int shipsLeft = shipsToSet-1;
+						int idNum = Settings.shipsToPlace - shipsLeft - 1;
+
+
+						player.getPlayerBoard().addShip(orientation,length,x,y);
+						//player.getPlayerBoard().addShip1(idNum,length, orientation, y, x);
+						//id, len, orient, ro(y) , co(x)
+						
 						if (shipsLeft == 0) {
 							if (thisPlayer == "P1") {
 								if (Game.getAIStatus() == true) {
 									SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,true);
+									Game.mapFromFiles("map.txt", Settings.p2.getPlayerBoard());
 									PauseTransition pause = new PauseTransition(Duration.seconds(1));
 									pause.setOnFinished(event -> scene.setRoot(startGameTransitionScreen()));
 									pause.play();
 								} else {
 
 									SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,true);
-									PauseTransition pause = new PauseTransition(Duration.seconds(1));
+									PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
 									pause.setOnFinished(event -> scene.setRoot(p2Setup()));
 									pause.play();
 									

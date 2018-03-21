@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 public class BattleShipGUI extends Application
 {
 	public static Stage primaryStage;
-	private Scene gameUI;
+	public static Scene gameUI;
 	private BorderPane mainMenu;
 
 	public static void main(String [] args)
@@ -24,26 +24,25 @@ public class BattleShipGUI extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		
-		primaryStage = primaryStage;
-		mainMenu = new BorderPane();	
-		gameUI = new Scene(mainMenu, Settings.xWindowSize, Settings.yWindowSize);
-
-
-		Game.enableAI(); 	
-
-
-		int userBoardSize = 5;
-        int userShipCount = 2;
-		Settings.shipsToPlace = 1;
+		MainMenuGUI menu = new MainMenuGUI();
+		primaryStage = primaryStage;	
+		gameUI = new Scene(menu.getMenuRoot(), Settings.xWindowSize, Settings.yWindowSize);
 		
+		primaryStage.setMaxHeight(Settings.yWindowSize);	
+		primaryStage.setMaxWidth(Settings.xWindowSize + 15);		
+		primaryStage.setTitle("BattleShip");
+		primaryStage.setScene(gameUI);
+		primaryStage.show();
+	}
+	
+	public static void gameSetup() {
 		
-        String fileName = "map.txt";
-        Board.setBoardSize(userBoardSize);
+		if (Settings.gameMode == "Player vs Ai") {
+			Game.enableAI(); 
+		}
+        Board.setBoardSize(Settings.boardSize);
         Board player1Board = new Board();
         Board player2Board = new Board();
-
-        //Game.mapFromFiles(fileName, player1Board);
-        //Game.mapFromFiles(fileName, player2Board);
 
 		Player player1 = new HumanPlayer(player1Board);
 		Player player2 = null;
@@ -53,34 +52,16 @@ public class BattleShipGUI extends Application
         } else {
         		player2 = new ComputerPlayer(player2Board);
         }		
-
-		boolean winCondition = false;
+		Settings.p1 = player1;
+		Settings.p2 = player2;	
 		
 		player1Board.guessBoard = player2Board.gameBoard;
 		player2Board.guessBoard = player1Board.gameBoard;
-		
-		
-		Settings.p1 = player1;
-		Settings.p2 = player2;
-		
-		//SETUP BOARD SIZE AND AMOUNT OF SHIPS TO SETUP BEFORE SETUP
 	
-		//enter setup stage
 		SetupPhase setup = new SetupPhase(gameUI, "P1",Settings.shipsToPlace,false);
-
-	
-//===================================================================================================
-       
-		//Start attack Phase by calling the class AttackPhase where it changes the root of the scene. Player 1 always goes first
-		//AttackPhase startAttack = new AttackPhase(gameUI, player1, player2, "P1", null); 
-		
-//=============================================================
-		primaryStage.setMaxHeight(Settings.yWindowSize);	
-		primaryStage.setMaxWidth(Settings.xWindowSize + 15);		
-		primaryStage.setTitle("BattleShip");
-		primaryStage.setScene(gameUI);
-		primaryStage.show();
 	}
+	
+		
 	
 
 	

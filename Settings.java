@@ -16,9 +16,33 @@ public class Settings {
 	final public static int bigGridWidth = 770; //including margins	
 	public static Player p1;
 	public static Player p2;
-	public static int shipsToPlace;
-
+	public static int shipsToPlace = 2;
+	public static String gameMode = "Player vs Player";
+	public static int boardSize = 5;
 	
+	public static void setBoardSize(int value) {
+		if (value >= 5 && value <= 10) {
+			boardSize = value;
+		}
+		
+	}
+
+	public static void setNumOfShips(int value) {
+		if (value >= 1 && value <= 8) {
+			shipsToPlace = value;
+		}
+		
+	}
+	
+	
+	public static void switchMode() {
+		
+		if (gameMode == "Player vs Player") {
+			gameMode = "Player vs Ai";
+		} else if (gameMode == "Player vs Ai") {
+			gameMode = "Player vs Player";
+		}
+	}
 	
 }	
 	
