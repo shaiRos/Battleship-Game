@@ -21,7 +21,7 @@ public class Settings {
 	public static int boardSize = 5;
 	
 	public static void setBoardSize(int value) {
-		if (value >= 5 && value <= 10) {
+		if (value >= 5 && value <= 20) {
 			boardSize = value;
 		}
 		
