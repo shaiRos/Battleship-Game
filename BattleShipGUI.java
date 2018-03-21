@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 public class BattleShipGUI extends Application
 {
 	public static Stage primaryStage;
-	private Scene gameUI;
+	public static Scene gameUI;
 	private BorderPane mainMenu;
 
 	public static void main(String [] args)
@@ -24,26 +24,23 @@ public class BattleShipGUI extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		
+		MainMenuGUI menu = new MainMenuGUI();
 		primaryStage = primaryStage;
 		mainMenu = new BorderPane();	
-		gameUI = new Scene(mainMenu, Settings.xWindowSize, Settings.yWindowSize);
+		gameUI = new Scene(menu.getMenuRoot(), Settings.xWindowSize, Settings.yWindowSize);
 
-
-		//Game.enableAI(); 	
+/*
+		Game.enableAI(); 	
 
 
 		int userBoardSize = 5;
         int userShipCount = 2;
-		Settings.shipsToPlace = 1;
 		
 		
-        String fileName = "map.txt";
         Board.setBoardSize(userBoardSize);
         Board player1Board = new Board();
         Board player2Board = new Board();
 
-        //Game.mapFromFiles(fileName, player1Board);
-       // Game.mapFromFiles(fileName, player2Board);
 
 		Player player1 = new HumanPlayer(player1Board);
 		Player player2 = null;
@@ -61,12 +58,12 @@ public class BattleShipGUI extends Application
 		
 		
 		Settings.p1 = player1;
-		Settings.p2 = player2;
+		Settings.p2 = player2; */
 		
 		//SETUP BOARD SIZE AND AMOUNT OF SHIPS TO SETUP BEFORE SETUP
 	
 		//enter setup stage
-		SetupPhase setup = new SetupPhase(gameUI, "P1",Settings.shipsToPlace,false);
+		//SetupPhase setup = new SetupPhase(gameUI, "P1",Settings.shipsToPlace,false);
 
 		
 //=============================================================
@@ -76,6 +73,42 @@ public class BattleShipGUI extends Application
 		primaryStage.setScene(gameUI);
 		primaryStage.show();
 	}
+	
+	public static void gameSetup() {
+		
+		if (Settings.gameMode == "Player vs Ai") {
+			Game.enableAI(); 
+		}
+			
+		
+		
+        Board.setBoardSize(Settings.boardSize);
+        Board player1Board = new Board();
+        Board player2Board = new Board();
+
+
+		Player player1 = new HumanPlayer(player1Board);
+		Player player2 = null;
+		
+        if (Game.getAIStatus() != true) {
+	    		player2 = new HumanPlayer(player2Board);
+        } else {
+        		player2 = new ComputerPlayer(player2Board);
+        }		
+
+		boolean winCondition = false;
+		
+		player1Board.guessBoard = player2Board.gameBoard;
+		player2Board.guessBoard = player1Board.gameBoard;
+		
+		
+		Settings.p1 = player1;
+		Settings.p2 = player2;	
+		
+		SetupPhase setup = new SetupPhase(gameUI, "P1",Settings.shipsToPlace,false);
+	}
+	
+		
 	
 
 	
