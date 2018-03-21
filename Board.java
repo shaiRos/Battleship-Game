@@ -13,11 +13,11 @@ class Board{
 	private static int maxShipSize = 5;
 	private static int minShipSize = 2;
     private static boolean guessing = false;
-	public BoardValue [][] guessBoard;
-	public BoardValue[][] gameBoard;
+	public BoardValue [][] guessBoard = new BoardValue[boardSize][boardSize];
+	public BoardValue[][] gameBoard = new BoardValue[boardSize][boardSize];
 	private int numOfShips = 3;
 	private Ship [] shipArray;
-	private int [][] shipBoard;
+	private int [][] shipBoard = new int [boardSize][boardSize];
 	
 	
 	
@@ -47,12 +47,8 @@ class Board{
 	*
 	**/
 	public Board(){
-		guessBoard = new BoardValue[boardSize][boardSize];
-		gameBoard = new BoardValue[boardSize][boardSize];
-		shipBoard = new int [boardSize][boardSize];
-		shipArray = new Ship [numOfShips];
 		intializeGameBoard();
-
+		shipArray = new Ship [numOfShips];
 
 	}
 	/**
