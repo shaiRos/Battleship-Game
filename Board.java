@@ -183,7 +183,7 @@ class Board{
 		System.out.println(shipID + "row  " +  rowAttacked + "col  " + columnAttacked);
 		if (shipID > 0 && shipID <= numOfShips){
 			shipArray[shipID-1].takeHit(rowAttacked, columnAttacked);
-			System.out.println(shipArray[shipID].checkShipIsSunken());
+			System.out.println(shipArray[shipID - 1].checkShipIsSunken());
 			return(shipArray[shipID-1].checkShipIsSunken());
 		}
 		

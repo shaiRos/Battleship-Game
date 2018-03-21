@@ -38,7 +38,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	private int y;
 	private Scene scene;
 	private Label coordinate = new Label();
-	
+	private static Boolean shipSunk = false;
 	
 	
 	/**
@@ -84,10 +84,10 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		//find the col and row that was clicked
 		x = (int)((myEvent.getX()-10)/(blockSize))+1;
 		y = (int)((myEvent.getY()-10)/blockSize)+1;
-		System.out.println(x + ", " + y);
+		System.out.println(y + ", " + x);
 		//initiate attack
 		
-		coordinate.setText(thisPlayer +" attacked coordinates: " + x + ", " + y);
+		coordinate.setText(thisPlayer +" attacked coordinates: " + y + ", " + x);
 		coordinate.setFont(new Font(40));
 		
 		boolean checkPrevHit = playerAttacked.checkPreviousHitEnum(playerAttacking.getPlayerBoard(), y, x);	
@@ -97,7 +97,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);
 		} else {
 			//Send the attack of this player and change the boards
-			GameConfig.sendAttack(playerAttacking.getPlayerBoard(), y,x);	
+			boolean shipSunnk = GameConfig.sendAttack(playerAttacking.getPlayerBoard(), y, x);	
 			//Win condition
 			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss
@@ -164,10 +164,36 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		
 		String coordEnemy = player2.playerTurn();
 		String[] coordFormattedEnemy = coordEnemy.split(",");
-		int column2 = Integer.parseInt(coordFormattedEnemy[0]);
-		int row2 = Integer.parseInt(coordFormattedEnemy[1]);
-		GameConfig.sendAttack(player2.getPlayerBoard(),row2,column2);
-		
+		int column2 = Integer.parseInt(coordFormattedEnemy[1]);
+		int row2 = Integer.parseInt(coordFormattedEnemy[0]);
+		shipSunk = GameConfig.sendAttack(player2.getPlayerBoard(),row2,column2);
+        // if this is a hit, we want all the ships around the guessed ship to be added to the queue
+        if (Game.getHitSuccess() == true && Game.getAIStatus() == true) {
+        		((ComputerPlayer)player2).makeQueue(row2, column2);
+        } 
+        if (shipSunk == true) {
+    			((ComputerPlayer) player2).clearQueue();
+    			System.out.println("Cleared the queue because ship has been sunk");
+    			shipSunk = false;
+        }
+        System.out.println("shipSunk Value: " + shipSunk);
+        System.out.println("Row2 value: " + row2);
+        System.out.println("Col2 value: " + column2);
+        
+        // DEBUG
+        System.out.println("Current guessed values: ");
+        for (String values: ComputerPlayer.getGuessed()) {
+        		System.out.println(values);
+        }
+        
+        // DEBUG
+        System.out.println("Current guessing queue: ");
+        for (String values: ComputerPlayer.getQueue()) {
+        		System.out.println(values);
+        }
+
+        
+        
 		//https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
 		PauseTransition pause = new PauseTransition(Duration.seconds(.7));		
 		pause.setOnFinished(event -> {

@@ -13,6 +13,7 @@ public class Game{
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
     private static boolean hitSuccess = false;
+	private static boolean shipSunk = false;
 
 
     /**
@@ -252,9 +253,7 @@ public class Game{
 
 			
 			player1Board.guessBoard = player2Board.gameBoard;
-			player2Board.guessBoard = player1Board.gameBoard;
-			boolean shipSunk =false;
-			
+			player2Board.guessBoard = player1Board.gameBoard;			
 
 
             // Player 1 turn
@@ -270,9 +269,7 @@ public class Game{
 			// Send the attack to the board once properly formatted
 			System.out.println("row " + row1 + "column " + column1);
 			GameConfig.sendAttack(player1Board,row1,column1);
-			shipSunk = GameConfig.checkSunken(player2Board,row1,column1);
-
-
+			shipSunk = GameConfig. checkSunken(player2Board,row1,column1);
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
 				System.out.println("Player 1 has won!");
@@ -295,14 +292,29 @@ public class Game{
 			String[] coordFormattedEnemy = coordEnemy.split(",");
 			int row2 = Integer.parseInt(coordFormattedEnemy[0]);
 			int column2 = Integer.parseInt(coordFormattedEnemy[1]);
-			GameConfig.sendAttack(player2Board,row2,column2);
-			shipSunk = GameConfig.checkSunken(player1Board,row2,column2);
+			shipSunk = GameConfig.sendAttack(player2Board,row2,column2);
 
             // if this is a hit, we want all the ships around the guessed ship to be added to the queue
             if (Game.getHitSuccess() == true && getAIStatus() == true) {
-            	((ComputerPlayer)player2).makeQueue(column2, row2);
-
+            		((ComputerPlayer)player2).makeQueue(row2, column2);
             }
+            if (shipSunk == true) {
+            		((ComputerPlayer) player2).clearQueue();
+            		System.out.println("Cleared the queue because ship has been sunk");
+            		//reset the flag
+            		shipSunk = false;
+            }
+          // DEBUG
+          System.out.println("Current guessed values: ");
+          for (String values: ComputerPlayer.getGuessed()) {
+          		System.out.println(values);
+          }
+          
+          // DEBUG
+          System.out.println("Current guessing queue: ");
+          for (String values: ComputerPlayer.getQueue()) {
+          		System.out.println(values);
+          }
 
             // Check for remaining ships on enemy board
 			if (winCondition(player1Board) == true) {
@@ -317,6 +329,55 @@ public class Game{
 		} while (winCondition != true);
 
 	
+    }
+   
+   public static void main (String[] args) {
+        boolean run = true;
+        boolean userSelect = true;
+
+        do {
+
+            int userChoice = 0;
+            // open user input
+            Scanner input = new Scanner(System.in);
+            // make sure the user enters a valid input
+            while (userSelect != false) {
+                System.out.println("Select an option: \n1.) Player vs Player\n2.) Player vs AI\n3.) Exit");
+                try {
+                    userChoice = input.nextInt();
+                    userSelect = false;
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Try again.");
+                    input.next();
+                }
+            }
+
+            switch (userChoice) {
+                case 1:
+                    System.out.println("Player vs Player");
+                    // arg is a boolean indicating if AI will be activated
+                    
+                    Game game = new Game(false);
+                    game.start();
+                    run = false;
+                    break;
+                case 2:
+                    System.out.println("Player vs AI");
+                    // arg is a boolean indicating if AI will be activated
+                    
+                    Game aiGame = new Game(true);
+                    aiGame.start();
+                    run = false;
+                    break;
+                case 3:
+                    System.out.println("Exit.");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Exiting...");
+                    System.exit(0);
+            }
+        } while (run == true);
     }
 }
 	
