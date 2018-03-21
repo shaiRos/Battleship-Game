@@ -74,7 +74,7 @@ public class GameConfig {
     *           int row, column - Int form row and column specified by the player
     *   @return boolean - Will return whether the attack successfully hit a ship or missed.
     **/
-	public static boolean sendAttack(Board playerBoard, int row, int column) {
+	public static void sendAttack(Board playerBoard, int row, int column) {
         // check the value of the block specified, if the values match, change the values with
         // a hit or a miss
         BoardValue value = (playerBoard.guessBoard[row - 1][column - 1]);
@@ -102,7 +102,7 @@ public class GameConfig {
             Game.setHitSuccess(false);
         }
         
-        return shipSunk;
+       
         
 	}
 	

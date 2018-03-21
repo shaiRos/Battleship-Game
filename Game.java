@@ -269,7 +269,7 @@ public class Game{
 			// Send the attack to the board once properly formatted
 			System.out.println("row " + row1 + "column " + column1);
 			GameConfig.sendAttack(player1Board,row1,column1);
-			shipSunk = GameConfig. checkSunken(player2Board,row1,column1);
+			shipSunk = GameConfig.checkSunken(player2Board,row1,column1);
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
 				System.out.println("Player 1 has won!");
@@ -292,7 +292,8 @@ public class Game{
 			String[] coordFormattedEnemy = coordEnemy.split(",");
 			int row2 = Integer.parseInt(coordFormattedEnemy[0]);
 			int column2 = Integer.parseInt(coordFormattedEnemy[1]);
-			shipSunk = GameConfig.sendAttack(player2Board,row2,column2);
+			GameConfig.sendAttack(player2Board,row2,column2);
+			shipSunk = GameConfig.checkSunken(player1Board,row1,column1);
 
             // if this is a hit, we want all the ships around the guessed ship to be added to the queue
             if (Game.getHitSuccess() == true && getAIStatus() == true) {

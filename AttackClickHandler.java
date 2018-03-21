@@ -99,6 +99,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			//Send the attack of this player and change the boards
 			GameConfig.sendAttack(playerAttacking.getPlayerBoard(), y, x);	
 			//Win condition
+			shipSunk = GameConfig.checkSunken(playerAttacked.getPlayerBoard(),y,x);
 			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss
 				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, coordinate);
@@ -166,7 +167,8 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		String[] coordFormattedEnemy = coordEnemy.split(",");
 		int column2 = Integer.parseInt(coordFormattedEnemy[1]);
 		int row2 = Integer.parseInt(coordFormattedEnemy[0]);
-		shipSunk = GameConfig.sendAttack(player2.getPlayerBoard(),row2,column2);
+		GameConfig.sendAttack(player2.getPlayerBoard(),row2,column2);
+		shipSunk = GameConfig.checkSunken(player1.getPlayerBoard(),row2,column2);
         // if this is a hit, we want all the ships around the guessed ship to be added to the queue
         if (Game.getHitSuccess() == true && Game.getAIStatus() == true) {
         		((ComputerPlayer)player2).makeQueue(row2, column2);
