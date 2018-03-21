@@ -44,8 +44,8 @@ public class AttackPhase  {
 
 		attackingPlayer = player;
 		gameUI = scn;	
-		ownBoard = new BoardGUI(p1.getPlayerBoard().getBoardSize(), Settings.smallGridWidth);
-		guessBoard = new BoardGUI(p2.getPlayerBoard().getBoardSize(), Settings.bigGridWidth);
+		ownBoard = new BoardGUI(Board.getBoardSize(), Settings.smallGridWidth);
+		guessBoard = new BoardGUI(Board.getBoardSize(), Settings.bigGridWidth);
 		player1 = p1;
 		player2 = p2;
 		coordinates = coord;

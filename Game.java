@@ -123,8 +123,8 @@ public class Game{
 	// Check the board for remaining ships
 	public static boolean winCondition(Board board) {
         int shipCounter = 0;
-        for (int x = 0; x < board.getBoardSize(); x++) {
-            for (int y = 0; y < board.getBoardSize(); y++) {
+        for (int x = 0; x < Board.getBoardSize(); x++) {
+            for (int y = 0; y < Board.getBoardSize(); y++) {
                 if (board.gameBoard[x][y] == BoardValue.SHIP) {
                     shipCounter++;
                 }

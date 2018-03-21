@@ -58,7 +58,7 @@ public class HumanPlayer extends Player {
                 column = Integer.parseInt(inputInfo[1]);
 
                 // check to make sure its a legit value
-                if ((row > playerBoard.getBoardSize()) || (column > playerBoard.getBoardSize()) || (row < 0) || (column < 0)) {
+                if ((row > Board.getBoardSize()) || (column > Board.getBoardSize()) || (row < 0) || (column < 0)) {
                     System.out.println("Invalid coordinates");
                 } else if (checkPreviousHitEnum(playerBoard, row, column) == true) {
                 		System.out.println("Previously guessed! Try again");
