@@ -15,6 +15,10 @@ public class Game{
     private static boolean hitSuccess = false;
 	private static boolean shipSunk = false;
 
+    //Default constructor for junit
+    public Game(){
+
+    }
 
     /**
     *   The main constructor that will initialize the game. This will ruin the start() method for the current game object
@@ -204,11 +208,15 @@ public class Game{
     *   Starting method that will instantiate all of our variables and begin the game loop
     *
     **/
+
+    public int userBoardSize = 10;
+    public int userShipCount = 2;
+
    public void start() {
    		// create boards for both the players
         // difficulty will rely on these settings - add user input to specify difficulty
-        int userBoardSize = 10;
-        int userShipCount = 2;
+        //int userBoardSize = 10;
+        //int userShipCount = 2;
 
         String fileName = "map.txt";
 
@@ -331,6 +339,35 @@ public class Game{
 
 	
     }
-   
+
+    
+    //Method to check the start() method variables 
+    public void startCheck(){
+        // create boards for both the players
+        // difficulty will rely on these settings - add user input to specify difficulty
+        //int userBoardSize = 5;
+        //int userShipCount = 2;
+
+        String fileName = "map.txt";
+
+        // Initialize the boards and set the board sizes
+        // WIP:
+        //      - Re-create the board using the new boardSize values
+        Board.setBoardSize(userBoardSize);
+    }
+
+
+    public int getUserBoardSize(){
+        return userBoardSize;
+    }
+
+
+    public int getShipCount(){
+        return userShipCount;
+    }
+
+
+
+
 }
 	
