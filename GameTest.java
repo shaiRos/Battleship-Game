@@ -11,21 +11,21 @@ public class GameTest{
 
 	@Test
 	public void test_enableAI(){
-		Game g = new Game(false);
+		Game g = new Game();
 		g.enableAI();
 		assertTrue("Enabled the AI", g.getAIStatus());		
 	}
 
 	@Test 
 	public void test_startCheck(){
-		Game g = new Game(true);
+		Game g = new Game();
 		g.startCheck();
 		assertEquals("Correct board size", 10, g.getUserBoardSize());
 	}
 
 	@Test
 	public void test_startCheck2(){
-		Game g = new Game(true);
+		Game g = new Game();
 		g.startCheck();
 		assertEquals("Correct ship count", 2, g.getShipCount());
 

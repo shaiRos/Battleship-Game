@@ -15,6 +15,10 @@ public class Game{
     private static boolean hitSuccess = false;
 	private static boolean shipSunk = false;
 
+    //Default constructor for junit
+    public Game(){
+
+    }
 
     /**
     *   The main constructor that will initialize the game. This will ruin the start() method for the current game object
@@ -207,7 +211,7 @@ public class Game{
 
     public int userBoardSize = 10;
     public int userShipCount = 2;
-    
+
    public void start() {
    		// create boards for both the players
         // difficulty will rely on these settings - add user input to specify difficulty
