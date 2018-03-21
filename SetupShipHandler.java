@@ -27,6 +27,8 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	private int shipsToSet;
 	private BoardGUI boardDisplay;
 	private String thisPlayer;
+	private static int idNum = 0;
+
 	
 	public SetupShipHandler(Scene scn, int shipLen, BorderPane rt, String playerSettingUp, int numOfShips, BoardGUI bigBoard) {
 		
@@ -70,6 +72,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 			
 			@Override
 			public void handle(MouseEvent myEvent) {
+
 				try {				
 					if (myEvent.isPrimaryButtonDown()){
 						
@@ -84,6 +87,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 						//player.getPlayerBoard().addShip(orientation,length,x,y);
 						player.getPlayerBoard().addShip1(idNum,length, orientation, y, x);
 						//id, len, orient, ro(y) , co(x)
+						idNum++;
 						
 						if (shipsLeft == 0) {
 							if (thisPlayer == "P1") {
