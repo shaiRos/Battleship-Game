@@ -41,7 +41,7 @@ public class SetupPhase {
 			player = Settings.p2;
 		}
 		shipsToSet = numOfShips;
-		ownBoard = new BoardGUI(player.getPlayerBoard().getBoardSize(), Settings.bigGridWidth);		
+		ownBoard = new BoardGUI(Board.getBoardSize(), Settings.bigGridWidth);		
 		ownBoard.addValuesFromArray(player.getPlayerBoard().gameBoard, "gameBoard");		
 		root = new BorderPane();
 		root.setCenter(battleField());	

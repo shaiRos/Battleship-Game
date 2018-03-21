@@ -123,8 +123,8 @@ public class Game{
 	// Check the board for remaining ships
 	public static boolean winCondition(Board board) {
         int shipCounter = 0;
-        for (int x = 0; x < board.getBoardSize(); x++) {
-            for (int y = 0; y < board.getBoardSize(); y++) {
+        for (int x = 0; x < Board.getBoardSize(); x++) {
+            for (int y = 0; y < Board.getBoardSize(); y++) {
                 if (board.gameBoard[x][y] == BoardValue.SHIP) {
                     shipCounter++;
                 }
@@ -207,7 +207,7 @@ public class Game{
    public void start() {
    		// create boards for both the players
         // difficulty will rely on these settings - add user input to specify difficulty
-        int userBoardSize = 5;
+        int userBoardSize = 10;
         int userShipCount = 2;
 
         String fileName = "map.txt";
@@ -329,55 +329,6 @@ public class Game{
 		} while (winCondition != true);
 
 	
-    }
-   
-   public static void main (String[] args) {
-        boolean run = true;
-        boolean userSelect = true;
-
-        do {
-
-            int userChoice = 0;
-            // open user input
-            Scanner input = new Scanner(System.in);
-            // make sure the user enters a valid input
-            while (userSelect != false) {
-                System.out.println("Select an option: \n1.) Player vs Player\n2.) Player vs AI\n3.) Exit");
-                try {
-                    userChoice = input.nextInt();
-                    userSelect = false;
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Try again.");
-                    input.next();
-                }
-            }
-
-            switch (userChoice) {
-                case 1:
-                    System.out.println("Player vs Player");
-                    // arg is a boolean indicating if AI will be activated
-                    
-                    Game game = new Game(false);
-                    game.start();
-                    run = false;
-                    break;
-                case 2:
-                    System.out.println("Player vs AI");
-                    // arg is a boolean indicating if AI will be activated
-                    
-                    Game aiGame = new Game(true);
-                    aiGame.start();
-                    run = false;
-                    break;
-                case 3:
-                    System.out.println("Exit.");
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Invalid choice. Exiting...");
-                    System.exit(0);
-            }
-        } while (run == true);
     }
 }
 	
