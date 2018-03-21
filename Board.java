@@ -50,9 +50,8 @@ class Board{
 		guessBoard = new BoardValue[boardSize][boardSize];
 		gameBoard = new BoardValue[boardSize][boardSize];
 		shipBoard = new int [boardSize][boardSize];
-		shipArray = new Ship [numOfShips];
 		intializeGameBoard();
-
+		shipArray = new Ship [numOfShips];
 
 	}
 	/**
