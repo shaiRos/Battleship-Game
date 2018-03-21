@@ -129,7 +129,7 @@ public class ComputerPlayer extends Player{
                 } else {
                     formatted = true;
                     // Specify where the attack has went
-                    System.out.println("AI sent attack to (" + (char)((row + 65) - 1) + "," + column + ")" );
+                    System.out.println("AI sent attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
                     getGuessed().add(coordToString(row, column));
                     // Send the attack. Check if the attack hits or misses
                     
