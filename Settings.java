@@ -17,7 +17,7 @@ public class Settings {
 	public static Player p1;
 	public static Player p2;
 	public static int shipsToPlace = 2;
-	public static String gameMode = "Player vs Player";
+	public static String gameMode = "Player vs Ai";
 	public static int boardSize = 5;
 	
 	public static void setBoardSize(int value) {
