@@ -97,7 +97,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);
 		} else {
 			//Send the attack of this player and change the boards
-			GameConfig.sendAttack(playerAttacking.getPlayerBoard(), y, x);	
+			boolean shipSunnk = GameConfig.sendAttack(playerAttacking.getPlayerBoard(), y, x);	
 			//Win condition
 			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss
