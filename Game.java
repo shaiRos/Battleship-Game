@@ -13,6 +13,7 @@ public class Game{
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
     private static boolean hitSuccess = false;
+	private static boolean shipSunk = false;
 
 
     /**
@@ -252,9 +253,7 @@ public class Game{
 
 			
 			player1Board.guessBoard = player2Board.gameBoard;
-			player2Board.guessBoard = player1Board.gameBoard;
-			boolean shipSunk =false;
-			
+			player2Board.guessBoard = player1Board.gameBoard;			
 
 
             // Player 1 turn
@@ -270,8 +269,6 @@ public class Game{
 			// Send the attack to the board once properly formatted
 			System.out.println("row " + row1 + "column " + column1);
 			GameConfig.sendAttack(player1Board,row1,column1);
-			shipSunk = GameConfig.checkSunken(player2Board,row1,column1);
-
 
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
@@ -295,13 +292,17 @@ public class Game{
 			String[] coordFormattedEnemy = coordEnemy.split(",");
 			int row2 = Integer.parseInt(coordFormattedEnemy[0]);
 			int column2 = Integer.parseInt(coordFormattedEnemy[1]);
-			GameConfig.sendAttack(player2Board,row2,column2);
-			shipSunk = GameConfig.checkSunken(player1Board,row2,column2);
+			shipSunk = GameConfig.sendAttack(player2Board,row2,column2);
 
             // if this is a hit, we want all the ships around the guessed ship to be added to the queue
             if (Game.getHitSuccess() == true && getAIStatus() == true) {
-            		((ComputerPlayer)player2).makeQueue(column2, row2);
-
+            		((ComputerPlayer)player2).makeQueue(row2, column2);
+            }
+            if (shipSunk == true) {
+            		((ComputerPlayer) player2).clearQueue();
+            		System.out.println("Cleared the queue because ship has been sunk");
+            		//reset the flag
+            		shipSunk = false;
             }
           // DEBUG
           System.out.println("Current guessed values: ");
