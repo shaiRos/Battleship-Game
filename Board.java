@@ -40,6 +40,15 @@ class Board{
     public static int getMaxShipSize() {
         return maxShipSize;
     }
+
+    public static void setMinShipSize(int size) {
+    	minShipSize = size;
+    }
+
+    public static void setMaxShipSize(int size) {
+    	maxShipSize = size;
+    }
+
     
     
 	/**
@@ -202,6 +211,36 @@ class Board{
 	}	
 	
 	
+
+    //Method to check if correct board type for JUnit testing
+    public void setBoardType(int boardType) {
+    	//int[][] board = null;
+		BoardValue [][] board = null;
+
+        // our definitions
+//        char hidden = '~';
+//        char miss = '*';
+//        char hit = 'X';
+//        char ship = 'S';    
+//        char downed = 'Z';  
+
+        // specify if this board is for game, or guessing
+        if (boardType == 1) {
+            board = this.gameBoard;
+            guessing = false;
+        } else if (boardType == 2) {
+            board = this.guessBoard;
+            guessing = true;
+        }
+    }
+
+    //Getter method for board type for JUnit testing
+    public boolean getBoardType(){
+    	return guessing;
+    }
+
+
+
 }
 
 				
