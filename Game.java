@@ -300,9 +300,20 @@ public class Game{
 
             // if this is a hit, we want all the ships around the guessed ship to be added to the queue
             if (Game.getHitSuccess() == true && getAIStatus() == true) {
-            	((ComputerPlayer)player2).makeQueue(column2, row2);
+            		((ComputerPlayer)player2).makeQueue(column2, row2);
 
             }
+          // DEBUG
+          System.out.println("Current guessed values: ");
+          for (String values: ComputerPlayer.getGuessed()) {
+          		System.out.println(values);
+          }
+          
+          // DEBUG
+          System.out.println("Current guessing queue: ");
+          for (String values: ComputerPlayer.getQueue()) {
+          		System.out.println(values);
+          }
 
             // Check for remaining ships on enemy board
 			if (winCondition(player1Board) == true) {
