@@ -77,6 +77,7 @@ public class Ship {
 		for (int i = 0; i < shipCoordinates.length; i++) {
 			if (shipCoordinates[i][0] == rowAttacked && shipCoordinates[i][1] == colAttacked) {
 				isHit[i] = true;
+				printHitBoard();
 				return true;
 			}
 		}
