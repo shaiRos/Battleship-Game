@@ -101,8 +101,8 @@ public class GameConfig {
 			playerBoard.guessBoard[row - 1][column - 1] = BoardValue.HIT;
 			System.out.println("Hit!");
 			Game.setHitSuccess(true);
-			shipSunk = GameConfig.checkSunken(playerBoard, row, column);
-			System.out.println("shipSunk in sendAttack: " + shipSunk);
+			//shipSunk = GameConfig.checkSunken(playerBoard, row, column);
+			//System.out.println("shipSunk in sendAttack: " + shipSunk);
 		} else if (value == BoardValue.EMPTY) {
 			playerBoard.guessBoard[row - 1][column - 1] = BoardValue.MISS;
 			System.out.println("Miss!");
