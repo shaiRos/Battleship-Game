@@ -236,7 +236,7 @@ public class Game {
 	public void start() {
 		// create boards for both the players
 		// difficulty will rely on these settings - add user input to specify difficulty
-		int userBoardSize = 10;
+		int userBoardSize = 5;
 		int userShipCount = 2;
 
 		String fileName = "map.txt";
