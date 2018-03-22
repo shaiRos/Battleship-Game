@@ -67,6 +67,39 @@ public class MenuScreen {
     }
 
 
+    //add
+
+    public boolean run = true;
+    public boolean userSelect = true;
+    public int userChoice = 0;
+
+//Method to check for correct input for JUnit testing
+    public void setInput(int num){
+        while (userSelect != false) {
+                //userChoice = num;
+                setUserChoice(num);
+                if (getUserChoice() == 1 || getUserChoice() == 2 || getUserChoice() == 3){
+                    userSelect = false;
+                } else {
+                    System.out.println("Invalid input. Try again.");
+                }
+        }
+    }
+
+//add
+    public void setUserChoice(int num){
+        userChoice = num;
+    }
+
+    public boolean getUserSelect(){
+        //System.out.println(userSelect);
+        return userSelect;
+    }
+
+    public int getUserChoice(){
+        return userChoice;
+    }
+
 
 
 
