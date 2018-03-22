@@ -320,13 +320,13 @@ public class Game {
 			int row2 = Integer.parseInt(coordFormattedEnemy[0]);
 			int column2 = Integer.parseInt(coordFormattedEnemy[1]);
 			GameConfig.sendAttack(player2Board, row2, column2);
-			shipSunk = GameConfig.checkSunken(player1Board, row1, column1);
+			shipSunk = GameConfig.checkSunken(player1Board, row2, column2);
 			// if this is a hit, we want all the ships around the guessed ship to be added
 			// to the queue
 			if (Game.getHitSuccess() == true && getAIStatus() == true) {
 				((ComputerPlayer) player2).makeQueue(row2, column2);
 			}
-			if (shipSunk == true) {
+			if (shipSunk == true && getAIStatus() == true) {
 				((ComputerPlayer) player2).clearQueue();
 				System.out.println("Cleared the queue because ship has been sunk");
 				// reset the flag
