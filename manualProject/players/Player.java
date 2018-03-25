@@ -50,5 +50,7 @@ public abstract class Player {
 	public abstract String playerTurn();
 
 	public abstract Board getPlayerBoard();
+	
+	public abstract String playerSetup();
 
 }

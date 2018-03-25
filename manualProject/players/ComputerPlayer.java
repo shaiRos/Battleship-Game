@@ -51,6 +51,24 @@ public class ComputerPlayer extends Player {
 		int coordinate = rand.nextInt(Board.getBoardSize()) + 1;
 		return coordinate;
 	}
+	
+	private char randomOrientation(){
+		Random rand = new Random();
+		int orientationNum = rand.nextInt(2);
+		if (orientationNum == 0){
+			return 'h';
+		}else{
+			return 'v';
+		}
+	}
+	
+	public String playerSetup(){
+		char orientation = randomOrientation();
+		int col = randomCoordinate();
+		int row = randomCoordinate();
+		String setupMessage = orientation + " " + row + " " + col;
+		return setupMessage;
+	}
 
 	/**
 	 * Compares the current attack to the AI's previously guessed values, stored
