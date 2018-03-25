@@ -13,11 +13,11 @@ class Board{
 	private static int maxShipSize = 5;
 	private static int minShipSize = 2;
     private static boolean guessing = false;
-	public BoardValue [][] guessBoard = new BoardValue[boardSize][boardSize];
-	public BoardValue[][] gameBoard = new BoardValue[boardSize][boardSize];
+	public BoardValue [][] guessBoard;
+	public BoardValue[][] gameBoard;
 	private int numOfShips = 3;
 	private Ship [] shipArray;
-	private int [][] shipBoard = new int [boardSize][boardSize];
+	private int [][] shipBoard;
 	
 	
 	
@@ -40,6 +40,15 @@ class Board{
     public static int getMaxShipSize() {
         return maxShipSize;
     }
+
+    public static void setMinShipSize(int size) {
+    	minShipSize = size;
+    }
+
+    public static void setMaxShipSize(int size) {
+    	maxShipSize = size;
+    }
+
     
     
 	/**
@@ -47,6 +56,9 @@ class Board{
 	*
 	**/
 	public Board(){
+		guessBoard = new BoardValue[boardSize][boardSize];
+		gameBoard = new BoardValue[boardSize][boardSize];
+		shipBoard = new int [boardSize][boardSize];
 		intializeGameBoard();
 		shipArray = new Ship [numOfShips];
 
@@ -142,7 +154,7 @@ class Board{
 				}break;
 			}
 		}
-	}		 
+	}		
 	
 	//@betty replace addship When done
 	public void addShip1(int ID, int len, char orient, int ro, int col){
@@ -180,10 +192,8 @@ class Board{
 	//@betty attackShip Stuff
 	public boolean aShipSunken(int rowAttacked, int columnAttacked){
 		int shipID = shipBoard[rowAttacked][columnAttacked];
-		System.out.println(shipID + "row  " +  rowAttacked + "col  " + columnAttacked);
 		if (shipID > 0 && shipID <= numOfShips){
 			shipArray[shipID-1].takeHit(rowAttacked, columnAttacked);
-			System.out.println(shipArray[shipID-1].checkShipIsSunken());
 			return(shipArray[shipID-1].checkShipIsSunken());
 		}
 		
@@ -201,6 +211,36 @@ class Board{
 	}	
 	
 	
+
+    //Method to check if correct board type for JUnit testing
+    public void setBoardType(int boardType) {
+    	//int[][] board = null;
+		BoardValue [][] board = null;
+
+        // our definitions
+//        char hidden = '~';
+//        char miss = '*';
+//        char hit = 'X';
+//        char ship = 'S';    
+//        char downed = 'Z';  
+
+        // specify if this board is for game, or guessing
+        if (boardType == 1) {
+            board = this.gameBoard;
+            guessing = false;
+        } else if (boardType == 2) {
+            board = this.guessBoard;
+            guessing = true;
+        }
+    }
+
+    //Getter method for board type for JUnit testing
+    public boolean getBoardType(){
+    	return guessing;
+    }
+
+
+
 }
 
 				

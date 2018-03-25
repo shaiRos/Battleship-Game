@@ -27,6 +27,11 @@ public class ComputerPlayer extends Player{
 		return playerBoard;
 	}
 	
+	public void clearQueue() {
+		queue.clear();
+	}
+	
+	
 	/**
 	*	Generates random coordinates that are within the board's bounds
 	*	@return coordinate - Int between 1 - board size
@@ -65,28 +70,27 @@ public class ComputerPlayer extends Player{
 	*	If the AI makes a hit, adds the hit to the current queue that will be processed during AI turn
 	*	@param int column, row - Int values of the column and row that has been successfully attacked
 	**/
-	public void makeQueue(int column, int row) {
+	public void makeQueue(int row, int column) {
 		int boardSize =  Board.getBoardSize();
 
-		if ((checkNotAttacked(coordToString(column, row + 1)) == true) && (row + 1 <= Board.getBoardSize())){
-			getQueue().add(coordToString(column, row + 1));
-
+		if ((checkNotAttacked(coordToString(row, column + 1)) == true) && (column + 1 <= Board.getBoardSize())){
+			queue.add(coordToString(row, column + 1));
 		}
-		if ((checkNotAttacked(coordToString(column, row - 1)) == true) && (row - 1 > 0)) {
-			getQueue().add(coordToString(column, row - 1));
-
+		
+		if ((checkNotAttacked(coordToString(row + 1, column)) == true) && (row + 1 <= Board.getBoardSize())){
+			queue.add(coordToString(row + 1, column));
 		}
-		if ((checkNotAttacked(coordToString(column - 1, row)) == true) && (column - 1 > 0)) {
-			getQueue().add(coordToString(column - 1, row));
-
-		}
-		if ((checkNotAttacked(coordToString(column + 1, row)) == true) && (column + 1 <= Board.getBoardSize())){
-			getQueue().add(coordToString(column + 1, row));
-
-		}
-
 		
 		
+		if ((checkNotAttacked(coordToString(row, column - 1)) == true) && (column - 1 > 0)) {
+			queue.add(coordToString(row, column - 1));
+
+		}
+		if ((checkNotAttacked(coordToString(row - 1, column)) == true) && (row - 1 > 0)) {
+			queue.add(coordToString(row - 1, column));
+
+		}
+
 	}
 
 	/**
@@ -105,15 +109,15 @@ public class ComputerPlayer extends Player{
 	        		column = randomCoordinate();	
 	        		
 	        		// if the queue is empty, then we'll just use the random values
-	        		if (getQueue().isEmpty()) {
-	            		while ((checkNotAttacked(coordToString(column, row)) != true)) {
+	        		if (queue.isEmpty()) {
+	            		while ((checkNotAttacked(coordToString(row, column)) != true)) {
 	            			row = randomCoordinate();
 	                		column = randomCoordinate();	                	
 	                		
 	            		}
 	            	// if there are values in the queue, use those instead of the randomly generated values
 	        		} else {
-            			String[] values = getQueue().get(0).split(",");
+            			String[] values = queue.get(0).split(",");
             			row = Integer.parseInt(values[0]);
             			column = Integer.parseInt(values[1]);  
 	        		}
@@ -129,13 +133,13 @@ public class ComputerPlayer extends Player{
                 } else {
                     formatted = true;
                     // Specify where the attack has went
-                    System.out.println("AI sent attack to (" + (char)((column + 65) - 1) + "," + row + ")" );
+                    System.out.println("AI sent attack to (" + (char)((row + 65) - 1) + "," + column + ")" );
                     getGuessed().add(coordToString(row, column));
                     // Send the attack. Check if the attack hits or misses
                     
                     // we assume the attack is successfully sent, remove the item from the queue
-                    if (!getQueue().isEmpty()) {
-                        getQueue().remove(0);
+                    if (!queue.isEmpty()) {
+                    		queue.remove(0);
                     }
                     
                     
@@ -166,7 +170,7 @@ public class ComputerPlayer extends Player{
             }
         }
         
-        return (coordToString(column, row));
+        return (coordToString(row, column));
     }
 
 	public static ArrayList<String> getGuessed() {

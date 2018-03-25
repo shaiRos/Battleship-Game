@@ -13,7 +13,12 @@ public class Game{
 	// This will toggle if our game will let us fight another player or an AI
     private static boolean aiStatus = false;
     private static boolean hitSuccess = false;
+	private static boolean shipSunk = false;
 
+    //Default constructor for junit
+    public Game(){
+
+    }
 
     /**
     *   The main constructor that will initialize the game. This will ruin the start() method for the current game object
@@ -122,8 +127,8 @@ public class Game{
 	// Check the board for remaining ships
 	public static boolean winCondition(Board board) {
         int shipCounter = 0;
-        for (int x = 0; x < board.getBoardSize(); x++) {
-            for (int y = 0; y < board.getBoardSize(); y++) {
+        for (int x = 0; x < Board.getBoardSize(); x++) {
+            for (int y = 0; y < Board.getBoardSize(); y++) {
                 if (board.gameBoard[x][y] == BoardValue.SHIP) {
                     shipCounter++;
                 }
@@ -203,11 +208,15 @@ public class Game{
     *   Starting method that will instantiate all of our variables and begin the game loop
     *
     **/
+
+    public int userBoardSize = 10;
+    public int userShipCount = 2;
+
    public void start() {
    		// create boards for both the players
         // difficulty will rely on these settings - add user input to specify difficulty
-        int userBoardSize = 5;
-        int userShipCount = 2;
+        //int userBoardSize = 10;
+        //int userShipCount = 2;
 
         String fileName = "map.txt";
 
@@ -252,9 +261,7 @@ public class Game{
 
 			
 			player1Board.guessBoard = player2Board.gameBoard;
-			player2Board.guessBoard = player1Board.gameBoard;
-			boolean shipSunk =false;
-			
+			player2Board.guessBoard = player1Board.gameBoard;			
 
 
             // Player 1 turn
@@ -270,9 +277,7 @@ public class Game{
 			// Send the attack to the board once properly formatted
 			System.out.println("row " + row1 + "column " + column1);
 			GameConfig.sendAttack(player1Board,row1,column1);
-			shipSunk = GameConfig. checkSunken(player2Board,row1,column1);
-
-
+			shipSunk = GameConfig.checkSunken(player2Board,row1,column1);
             // Check for remaining ships on enemy board
 			if (winCondition(player2Board) == true) {
 				System.out.println("Player 1 has won!");
@@ -296,13 +301,29 @@ public class Game{
 			int row2 = Integer.parseInt(coordFormattedEnemy[0]);
 			int column2 = Integer.parseInt(coordFormattedEnemy[1]);
 			GameConfig.sendAttack(player2Board,row2,column2);
-			shipSunk = GameConfig.checkSunken(player1Board,row2,column2);
+			shipSunk = GameConfig.checkSunken(player1Board,row1,column1);
 
             // if this is a hit, we want all the ships around the guessed ship to be added to the queue
             if (Game.getHitSuccess() == true && getAIStatus() == true) {
-            	((ComputerPlayer)player2).makeQueue(column2, row2);
-
+            		((ComputerPlayer)player2).makeQueue(row2, column2);
             }
+            if (shipSunk == true) {
+            		((ComputerPlayer) player2).clearQueue();
+            		System.out.println("Cleared the queue because ship has been sunk");
+            		//reset the flag
+            		shipSunk = false;
+            }
+          // DEBUG
+          System.out.println("Current guessed values: ");
+          for (String values: ComputerPlayer.getGuessed()) {
+          		System.out.println(values);
+          }
+          
+          // DEBUG
+          System.out.println("Current guessing queue: ");
+          for (String values: ComputerPlayer.getQueue()) {
+          		System.out.println(values);
+          }
 
             // Check for remaining ships on enemy board
 			if (winCondition(player1Board) == true) {
@@ -318,5 +339,35 @@ public class Game{
 
 	
     }
+
+    
+    //Method to check the start() method variables 
+    public void startCheck(){
+        // create boards for both the players
+        // difficulty will rely on these settings - add user input to specify difficulty
+        //int userBoardSize = 5;
+        //int userShipCount = 2;
+
+        String fileName = "map.txt";
+
+        // Initialize the boards and set the board sizes
+        // WIP:
+        //      - Re-create the board using the new boardSize values
+        Board.setBoardSize(userBoardSize);
+    }
+
+
+    public int getUserBoardSize(){
+        return userBoardSize;
+    }
+
+
+    public int getShipCount(){
+        return userShipCount;
+    }
+
+
+
+
 }
 	

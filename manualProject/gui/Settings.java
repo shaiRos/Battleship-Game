@@ -1,5 +1,7 @@
+package gui;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import players.Player;
 
 /**
 *	Settings for the game window

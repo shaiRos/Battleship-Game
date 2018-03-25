@@ -1,3 +1,4 @@
+package gui;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -6,8 +7,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import game.Game;
+import game.GameConfig;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
+import players.ComputerPlayer;
+import players.Player;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 
@@ -99,7 +104,9 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			//Send the attack of this player and change the boards
 			GameConfig.sendAttack(playerAttacking.getPlayerBoard(), y, x);	
 			//Win condition
-			shipSunk = GameConfig.checkSunken(playerAttacked.getPlayerBoard(),y,x);
+			
+            shipSunk = GameConfig.checkSunken(playerAttacked.getPlayerBoard(),y,x);
+			
 			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss
 				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, coordinate);

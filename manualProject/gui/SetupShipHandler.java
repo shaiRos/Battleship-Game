@@ -1,3 +1,4 @@
+package gui;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,8 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
+import game.Game;
+import game.GameConfig;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
+import players.Player;
 
 
 public class SetupShipHandler implements EventHandler<MouseEvent> {
@@ -27,7 +31,6 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	private int shipsToSet;
 	private BoardGUI boardDisplay;
 	private String thisPlayer;
-	private static int idNum = 0;
 
 	
 	public SetupShipHandler(Scene scn, int shipLen, BorderPane rt, String playerSettingUp, int numOfShips, BoardGUI bigBoard) {
@@ -82,8 +85,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 						System.out.println(x + ", " + y);
 						GameConfig.validateShipProperties(player.getPlayerBoard(),length,orientation,x,y);
 						int shipsLeft = shipsToSet-1;
-						int idNum = Settings.shipsToPlace - shipsLeft - 1;
-
+						int idNum = Settings.shipsToPlace - shipsLeft - 1;	
 						//player.getPlayerBoard().addShip(orientation,length,x,y);
 						player.getPlayerBoard().addShip1(idNum,length, orientation, y, x);
 						//id, len, orient, ro(y) , co(x)
@@ -121,10 +123,10 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 					}
 				}					
 				catch (IllegalArgumentException e) {
-					//input must meet the requirements. This is done in the validate methods. If it doesn't,the methods throws this
-					//exception, exits the loop, and asks the user for a new value that meets the requirements.
-					System.out.println(e.getMessage());
-					//formatted = false;	
+				//input must meet the requirements. This is done in the validate methods. If it doesn't,the methods throws this
+				//exception, exits the loop, and asks the user for a new value that meets the requirements.
+				System.out.println(e.getMessage());
+				//formatted = false;	
 				}				
 				
 			}

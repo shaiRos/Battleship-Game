@@ -1,8 +1,15 @@
+package gui;
+import board.Board;
+import game.Game;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import players.ComputerPlayer;
+import players.HumanPlayer;
+import players.Player;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Button;
+import players.*;
 
 /**
 * 	This is where application of java fx starts. 

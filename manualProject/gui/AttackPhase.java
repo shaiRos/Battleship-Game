@@ -1,3 +1,4 @@
+package gui;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -5,8 +6,10 @@ import javafx.scene.layout.TilePane;
 import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
+import board.Board;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
+import players.Player;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 

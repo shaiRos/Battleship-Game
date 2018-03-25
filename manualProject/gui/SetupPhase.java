@@ -1,5 +1,7 @@
+package gui;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import players.Player;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
@@ -11,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
+import board.Board;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
