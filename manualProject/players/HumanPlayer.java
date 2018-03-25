@@ -32,6 +32,29 @@ public class HumanPlayer extends Player {
 	public Board getPlayerBoard() {
 		return playerBoard;
 	}
+	
+	public String playerSetup(){
+		boolean formatted = false;
+		String setup = " ";
+		while(formatted != true){
+			try {
+				System.out.print("\nIndicate (orientation row column): ");
+				Scanner Setup = new Scanner(System.in);
+				setup = Setup.nextLine();
+				String setupInfo[] = setup.split(" ");
+				char tempRow = setupInfo[1].toUpperCase().charAt(0);
+				int row = (((int) (tempRow) - 65) + 1);
+				setup = setupInfo[0] + " " + row + " " + setupInfo[2];
+				formatted = true;
+			} catch (NumberFormatException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+					// possible errors when doing the conversions of the string input
+					System.out.println("Wrong format, example: h A 1");
+					formatted = false;
+			}
+		}
+		return setup;
+
+	}
 
 	/**
 	 * Main logic to execute a game 'turn'. Will include all prompts, input checks

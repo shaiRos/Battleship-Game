@@ -20,7 +20,7 @@ public class Board {
 	private static boolean guessing = false;
 	public BoardValue[][] guessBoard;
 	public BoardValue[][] gameBoard;
-	private int numOfShips = 3;
+	private static int numOfShips = 3;
 	private Ship[] shipArray;
 	private int[][] shipBoard;
 
@@ -72,6 +72,34 @@ public class Board {
 			board = this.guessBoard;
 			guessing = true;
 		}
+	}
+	
+	/**
+	* Determine the number of ships and sizes base on the size of the boardSize
+	* @return shipsToAdd an array of ship sizes to be placed on the board
+	*/
+	public static int[] generateShipsToAdd(){
+		
+		int shipSize = Math.min(numOfShips, maxShipSize);
+		int [] shipsToAdd = new int[numOfShips];
+		
+		for(int i = 0; i < numOfShips; i++){	
+			if(shipSize > 3){
+				//only allow one of each ship with size larger than 3
+				shipsToAdd[i] = shipSize;
+				shipSize--;
+			}else if(i < (numOfShips - 2)){
+				//rest of the ships are size 3 except for the last 2
+				shipsToAdd[i] = 3;
+			}else{ 
+				//last two ships are size 2 (minimum ship size)
+				shipsToAdd[i] = minShipSize;
+			}
+	
+		}
+		
+		return shipsToAdd;
+		
 	}
 
 	// Getter method for board type for JUnit testing
