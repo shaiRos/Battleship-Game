@@ -109,7 +109,7 @@ public class Game {
 	 *            player's board player2Board - Board object that stores all of the
 	 *            information of the opposing player's board
 	 **/
-	public static void setupBoard(Board player1Board, Board player2Board, int shipCount) {
+	public static void setupBoard1(Board player1Board, Board player2Board, int shipCount) {
 
 		int maxShips = shipCount; // max number of ships for each board
 
@@ -140,6 +140,86 @@ public class Game {
 		sleepThread(1000);
 		clearScreen();
 
+	}	
+	
+	public static void setupBoard(Board player1Board, Player player1, Board player2Board, Player player2) {
+
+		System.out.println("Player 1 setup phase: ");
+
+		// loop to add ships into ship array
+		userPlaceShip(player1Board, player1);
+
+		System.out.println("Player 1 game board successfully set. Player 2 standby...");
+		sleepThread(1000);
+		clearScreen();
+
+		System.out.println("Player 2 setup phase: ");
+
+		// loop to add ships into ship array
+		userPlaceShip(player2Board, player2);
+		
+
+		System.out.println("Player 2 game board successfully set.");
+
+		sleepThread(1000);
+		clearScreen();
+
+	}
+	
+	public static void userPlaceShip(Board playerBoard, Player currentPlayer){
+		int [] typeOfShipToAdd = Board.generateShipsToAdd();
+		int maxShips = typeOfShipToAdd.length; // max number of ships for each board
+		
+		for(int shipNumber = 0; shipNumber < maxShips; shipNumber++){
+			int shipLength = typeOfShipToAdd[shipNumber];
+		
+			setupInput(playerBoard, currentPlayer, shipLength, shipNumber);
+			
+			if (currentPlayer instanceof HumanPlayer)
+			{
+			playerBoard.returnBoard(1);
+			System.out.println((maxShips - (shipNumber + 1)) + " ships left to place");
+			}
+			
+		}
+	}
+	
+		public static void setupInput(Board board, Player currentPlayer, int shipLength, int shipCount){
+		boolean formatted = false;
+
+		while (formatted != true) {
+			try {
+				System.out.println("Placing a length " + shipLength);
+				String setup = currentPlayer.playerSetup();
+				// take the input that was converted into String and separate the info
+				String setupInfo[] = setup.split(" ");
+				// store info to designated variables and convert string to their types
+				char orientation = setupInfo[0].toLowerCase().charAt(0);
+				int row = Integer.parseInt(setupInfo[1]);
+				int column = Integer.parseInt(setupInfo[2]);
+
+				GameConfig.validateShipProperties(board, shipLength, orientation, column, row); 
+
+				// Adds ship to the grid
+				board.addShip1(shipCount, shipLength, orientation, row, column);
+
+				formatted = true;
+
+			} catch (NumberFormatException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+				// possible errors when doing the conversions of the string input
+				if(currentPlayer instanceof HumanPlayer){
+					System.out.println("Wrong format, example: h A 1");
+				}
+				formatted = false;
+			} catch (IllegalArgumentException e) {
+				// input must meet the requirements. This is done in the validate methods.
+				if(currentPlayer instanceof HumanPlayer){
+					System.out.println(e.getMessage());
+				}
+				formatted = false;
+
+			}
+		}
 	}
 
 	/**
@@ -236,7 +316,7 @@ public class Game {
 	public void start() {
 		// create boards for both the players
 		// difficulty will rely on these settings - add user input to specify difficulty
-		int userBoardSize = 10;
+		int userBoardSize = 5;
 		int userShipCount = 2;
 
 		String fileName = "map.txt";
@@ -253,8 +333,8 @@ public class Game {
 		// setupBoard(player1Board, player2Board, userShipCount);
 
 		// This will read a file and allow us to setup predefined board
-		mapFromFiles(fileName, player1Board);
-		mapFromFiles(fileName, player2Board);
+		//mapFromFiles(fileName, player1Board);
+		//mapFromFiles(fileName, player2Board);
 
 		// instantiate our players
 		Player player1 = new HumanPlayer(player1Board);
@@ -276,6 +356,9 @@ public class Game {
 		boolean winCondition = false;
 
 		// Game loop
+		
+		setupBoard(player1Board, player1, player2Board, player2);
+
 
 		do {
 			// set each player's guess board to the other player's game board

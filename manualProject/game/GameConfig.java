@@ -28,7 +28,7 @@ public class GameConfig {
 	 **/
 	// The main code for inserting ships on the other board
 	// Error checking, logic checking etc
-	public static void setupInput(Ship name, Board board) {
+	public static void setupInput1(Ship name, Board board) {
 		int shipPlaced = 0;
 		boolean formatted = false;
 
@@ -69,6 +69,52 @@ public class GameConfig {
 			} catch (NumberFormatException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
 				// possible errors when doing the conversions of the string input
 				System.out.println("Wrong format");
+				formatted = false;
+			} catch (IllegalArgumentException e) {
+				// input must meet the requirements. This is done in the validate methods. If it
+				// doesn't,the methods throws this
+				// exception, exits the loop, and asks the user for a new value that meets the
+				// requiremnts.
+				System.out.println(e.getMessage());
+				formatted = false;
+
+			}
+		}
+	}
+	public static void setupInput(Board board, int shipLength, int shipCount){
+		boolean formatted = false;
+
+		while (formatted != true) {
+			try {
+				System.out.println("Placing a length " + shipLength);
+
+				String setup= "h 2 1";
+				
+				// Scanner to test user input
+				// take the input that was converted into String and separate the info
+				String setupInfo[] = setup.split(" ");
+				// store info to designated variables and convert string to their types
+				char orientation = setupInfo[0].toLowerCase().charAt(0);
+				char tempRow = setupInfo[1].toUpperCase().charAt(0);
+				int row = (((int) (tempRow) - 65) + 1);
+				int column = Integer.parseInt(setupInfo[2]);
+
+				// TODO
+				/*
+				 * POSSIBLE JUNIT TESTING
+				 * 
+				 */
+				 //check that the ship being placed meet the rules of the game
+				validateShipProperties(board, shipLength, orientation, column, row); 
+
+				// Adds ship to the grid
+				board.addShip1(shipCount, shipLength, orientation, row, column);
+
+				formatted = true;
+
+			} catch (NumberFormatException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+				// possible errors when doing the conversions of the string input
+				System.out.println("Wrong format, example: h A 1");
 				formatted = false;
 			} catch (IllegalArgumentException e) {
 				// input must meet the requirements. This is done in the validate methods. If it
@@ -143,14 +189,14 @@ public class GameConfig {
 	 * @betty remove when done
 	 **/
 	public static void playerInputShips(ArrayList<Ship> shipArray, Board playerBoard, int shipCount) {
-		int maxShips = shipCount; // max number of ships for each board
+		int maxShips = shipCount;
 
 		for (int numOfShips = 1; numOfShips <= maxShips; numOfShips++) {
 			// creates the ship object first with 0 values...will be set in placeShips.
 			shipArray.add(new Ship('n', 0, 0, 0));
 			// Place the ships into the grid, this is important step because all of the
 			// orientation, values of row and column are still saved
-			GameConfig.setupInput(shipArray.get(numOfShips - 1), playerBoard);
+			GameConfig.setupInput1(shipArray.get(numOfShips - 1), playerBoard);
 			// return player 1 board
 			playerBoard.returnBoard(1);
 			System.out.println("\n" + (maxShips - numOfShips) + " more ships to place");
