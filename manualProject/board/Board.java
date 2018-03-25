@@ -234,25 +234,6 @@ public class Board {
 
 	}
 
-	// @betty remove when done?
-	public void printShipBoard() {
-		for (int i = 0; i < shipBoard.length; i++) {
-			for (int j = 0; j < shipBoard[i].length; j++) {
-				System.out.print(shipBoard[i][j]);
-			}
-			System.out.println(" ");
-		}
-	}
-
-	// @betty remove when done?
-	public void printGameBoard() {
-		for (int i = 0; i < gameBoard.length; i++) {
-			for (int j = 0; j < gameBoard[i].length; j++) {
-				System.out.print(gameBoard[i][j]);
-			}
-			System.out.println(" ");
-		}
-	}
 
 	// @betty attackShip Stuff
 	public boolean aShipSunken(int rowAttacked, int columnAttacked) {
