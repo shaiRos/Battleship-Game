@@ -66,32 +66,6 @@ public class GameConfig {
 		return false;
 	}
 
-	/**
-	 * Main loop that creates the user ships. Will run as long as the specified
-	 * amount of ships has not been met
-	 * 
-	 * @param shipArray
-	 *            - ArrayList<Ship> that contains all of the ships created
-	 *            playerBoard - Borad object which signifies the current board that
-	 *            is being set up shipCount - Int that specifies the max amount of
-	 *            ships created per player
-	 * @betty remove when done
-	 **/
-	public static void playerInputShips(ArrayList<Ship> shipArray, Board playerBoard, int shipCount) {
-		int maxShips = shipCount;
-
-		for (int numOfShips = 1; numOfShips <= maxShips; numOfShips++) {
-			// creates the ship object first with 0 values...will be set in placeShips.
-			shipArray.add(new Ship('n', 0, 0, 0));
-			// Place the ships into the grid, this is important step because all of the
-			// orientation, values of row and column are still saved
-			GameConfig.setupInput1(shipArray.get(numOfShips - 1), playerBoard);
-			// return player 1 board
-			playerBoard.returnBoard(1);
-			System.out.println("\n" + (maxShips - numOfShips) + " more ships to place");
-			// At this point, the loop will restart, clearing the placeShips variables to 0.
-		}
-	}
 
 	/**
 	 * Checks whether the inputs all meet project criteria, organized in a manner
