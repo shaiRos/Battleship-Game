@@ -109,39 +109,6 @@ public class Game {
 	 *            player's board player2Board - Board object that stores all of the
 	 *            information of the opposing player's board
 	 **/
-	public static void setupBoard1(Board player1Board, Board player2Board, int shipCount) {
-
-		int maxShips = shipCount; // max number of ships for each board
-
-		System.out.println("Player 1 setup phase: ");
-		// create a list to store our ships into
-		ArrayList<Ship> shipArray1 = new ArrayList<Ship>();
-		// return the game board of current player
-		player1Board.returnBoard(1);
-
-		// loop to add ships into ship array
-		GameConfig.playerInputShips(shipArray1, player1Board, shipCount);
-
-		System.out.println("Player 1 game board successfully set. Player 2 standby...");
-		sleepThread(1000);
-		clearScreen();
-
-		System.out.println("Player 2 setup phase: ");
-		// create a list to store our ships into
-		ArrayList<Ship> shipArray2 = new ArrayList<Ship>();
-		// return the game board of the current player
-		player2Board.returnBoard(2);
-
-		// loop to add ships into ship array
-		GameConfig.playerInputShips(shipArray2, player2Board, shipCount);
-
-		System.out.println("Player 2 game board successfully set.");
-
-		sleepThread(1000);
-		clearScreen();
-
-	}	
-	
 	public static void setupBoard(Board player1Board, Player player1, Board player2Board, Player player2) {
 
 		System.out.println("Player 1 setup phase: ");
@@ -184,7 +151,19 @@ public class Game {
 		}
 	}
 	
-		public static void setupInput(Board board, Player currentPlayer, int shipLength, int shipCount){
+	/**
+	 * Receives human and text file input, and creates boards based on the given
+	 * information. Checks implemented to ensure the placements are not outside the
+	 * scope of the given board
+	 * 
+	 * @param name
+	 *            - Ship object that will be used to store all information about the
+	 *            player's respective ships board - Holds all of the information and
+	 *            game state of the current board
+	 **/
+	// The main code for inserting ships on the other board
+	// Error checking, logic checking etc
+	public static void setupInput(Board board, Player currentPlayer, int shipLength, int shipCount){
 		boolean formatted = false;
 
 		while (formatted != true) {
@@ -457,11 +436,4 @@ public class Game {
 		//Board.setBoardSize(userBoardSize);
 	}
 
-//	public int getUserBoardSize() {
-//		return userBoardSize;
-//	}
-//
-//	public int getShipCount() {
-//		return userShipCount;
-//	}
 }
