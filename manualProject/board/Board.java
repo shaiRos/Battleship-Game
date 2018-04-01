@@ -23,6 +23,7 @@ public class Board {
 	private static int numOfShips = 3;
 	private Ship[] shipArray;
 	private int[][] shipBoard;
+	private static int[] generatedShips;
 
 	/**
 	 * getters and setters for board constants
@@ -34,6 +35,8 @@ public class Board {
 
 	public static void setBoardSize(int size) {
 		boardSize = size;
+		//change numOfShips here
+		generatedShips = generateShipsToAdd();
 	}
 
 	public static int getMinShipSize() {

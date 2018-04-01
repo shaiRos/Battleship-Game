@@ -128,17 +128,17 @@ public class BoardGUI {
 						
 						case SHIP:
 							if (boardType != "guessBoard") {
-								ImageView shipImage = getImage("images/Shipt.png");
+								ImageView shipImage = getImage("images/ShipBody.png");
 								board.add(shipImage, x, y);
 							}
 								break;
 							
 						case MISS:
-							ImageView missImage = getImage("images/MissImage.png");							
+							ImageView missImage = getImage("images/ShipHead.png");							
 							board.add(missImage, x, y);
 							break;
 						case HIT:
-							ImageView hitImage = getImage("images/HitImage.png");							
+							ImageView hitImage = getImage("images/ShipTail.png");							
 							board.add(hitImage, x, y);		
 							break;
 					} 
