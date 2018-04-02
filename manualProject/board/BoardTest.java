@@ -23,25 +23,6 @@ public class BoardTest {
 		}
 	}
 
-	@Test
-	public void test_setMinShipSize() {
-		Board b = new Board();
-		try {
-			b.setMinShipSize(Integer.parseInt("k"));
-		} catch (Exception e) {
-			assertEquals("Invalid board size", 2, b.getMinShipSize());
-		}
-	}
-
-	@Test
-	public void test_setMaxShipSize() {
-		Board b = new Board();
-		try {
-			b.setMaxShipSize(Integer.parseInt("k"));
-		} catch (Exception e) {
-			assertEquals("Invalid board size", 5, b.getMaxShipSize());
-		}
-	}
 
 	// Possible change!
 	@Test
