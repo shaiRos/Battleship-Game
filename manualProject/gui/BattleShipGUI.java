@@ -48,6 +48,7 @@ public class BattleShipGUI extends Application
 			Game.enableAI(); 
 		}
         Board.setBoardSize(Settings.boardSize);
+		Settings.shipsToPlace = Board.getNumOfShips();
         Board player1Board = new Board();
         Board player2Board = new Board();
 
@@ -67,12 +68,6 @@ public class BattleShipGUI extends Application
 	
 		SetupPhase setup = new SetupPhase(gameUI, "P1",Settings.shipsToPlace,false);
 	}
-	
-		
-	
-
-	
-
 }	
 	
 	
