@@ -80,17 +80,30 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 				try {				
 					if (myEvent.isPrimaryButtonDown()){
 						
-						//find the col and row that was clicked
+						//find the col and row that was clicked and setup the properties of the ship currently held
 						int x = (int)((myEvent.getX()-10)/boardDisplay.getGridBlockSize())+1;
 						int y = (int)((myEvent.getY()-10)/boardDisplay.getGridBlockSize())+1;
 						System.out.println(x + ", " + y);
+						//all checks are done here
 						GameConfig.validateShipProperties(player.getPlayerBoard(),length,orientation,x,y);
 						int shipsLeft = shipsToSet-1;
 						int idNum = Settings.shipsToPlace - shipsLeft - 1;	
-						//player.getPlayerBoard().addShip(orientation,length,x,y);
+						
+						
+						//will continue to addShip which updates the board and ships left to setup if it gets past the checks above
 						player.getPlayerBoard().addShip1(idNum,length, orientation, y, x);
-						//id, len, orient, ro(y) , co(x)
-						idNum++;
+						
+						//need to update the ship count of this length
+						switch(length) {
+							case 2: Settings.len2Ships -= 1;
+								break;
+							case 3: Settings.len3Ships -= 1;
+								break;
+							case 4: Settings.len4Ships -= 1;
+								break;
+							case 5: Settings.len5Ships -= 1;
+								break;
+						}
 						
 						if (shipsLeft == 0) {
 							if (thisPlayer == "P1") {

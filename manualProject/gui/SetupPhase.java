@@ -81,21 +81,24 @@ public class SetupPhase {
 
 		
 		if (displayOnly == false) {
-			Button fiveLen = new Button("Five");
-			Button fourLen = new Button("Four");
-			Button threeLen = new Button("Three");
-			Button twoLen = new Button("Two");
-			
-			fiveLen.setOnMouseClicked(new SetupShipHandler(scene, 5, root, thisPlayer, shipsToSet, ownBoard));
-			fourLen.setOnMouseClicked(new SetupShipHandler(scene, 4, root, thisPlayer, shipsToSet, ownBoard));
-			threeLen.setOnMouseClicked(new SetupShipHandler(scene, 3, root, thisPlayer, shipsToSet, ownBoard));	
-			twoLen.setOnMouseClicked(new SetupShipHandler(scene, 2, root, thisPlayer, shipsToSet, ownBoard));			
+			Button fiveLen = buttonForShipLen("Five", Settings.len5Ships,5);
+			Button fourLen = buttonForShipLen("Four", Settings.len4Ships,4);
+			Button threeLen = buttonForShipLen("Three", Settings.len3Ships,3);
+			Button twoLen = buttonForShipLen("Two", Settings.len2Ships,2);		
 			
 			rightPanel.addColumn(0,fiveLen,fourLen,threeLen,twoLen);
 		}
 		
 		return rightPanel;
-	}	
+	}
+
+	public Button buttonForShipLen(String wordLen,int shipLenCount, int len) {
+		Button makeButton = new Button(wordLen + ",  x" + shipLenCount);
+		if (shipLenCount != 0) {
+			makeButton.setOnMouseClicked(new SetupShipHandler(scene, len, root, thisPlayer, shipsToSet, ownBoard));
+		}return makeButton;
+		
+	}
 	
 	public TilePane botPanel() {
 		
