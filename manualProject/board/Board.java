@@ -13,9 +13,9 @@ import java.util.Arrays;
 */
 public class Board {
 
-	private static int boardSize = 5;
-	private static int maxShipSize = 5;
-	private static int minShipSize = 2;
+	private static int boardSize;
+	private final static int MAXSHIPSIZE = 5;
+	private final static int MINSHIPSIZE = 2;
 	private static boolean guessing = false;
 	public BoardValue[][] guessBoard;
 	public BoardValue[][] gameBoard;
@@ -24,52 +24,76 @@ public class Board {
 	private int[][] shipBoard;
 	private static int[] listOfShipSizes;
 	
+
 	
-	public Board( int boardSize){
-		boardSize = boardSize;
-		listOfShipSizes = generateShipsToAdd();
+
+	/**
+	 * Default constructor for our board
+	 * initialize all arrays and variables base on boardSize
+	 */
+	public Board() {
+		guessBoard = new BoardValue[boardSize][boardSize];
+		gameBoard = new BoardValue[boardSize][boardSize];
+		shipBoard = new int[boardSize][boardSize];
+		initializeGameBoard();
+		shipArray = new Ship[numOfShips];
+
 	}
 
 	/**
-	 * getters and setters for board constants
-	 * 
+	 * Populates the board with initial values
+	 *
+	 */
+	private void initializeGameBoard() {
+		for (BoardValue[] row : gameBoard) {
+			Arrays.fill(row, BoardValue.EMPTY);
+		}
+
+	}
+	
+	/**
+	 * getters for board size
+	 * @return boardsize the static variable boardsize
 	 */
 	public static int getBoardSize() {
 		return boardSize;
 	}
-
+	
+	/**
+	* Setter method for setting board size
+	*/
 	public static void setBoardSize(int size) {
 		boardSize = size;
-		listOfShipSizes = generateShipsToAdd();
 		numOfShips = (int)(Math.ceil(size/2.0));
+		listOfShipSizes = generateShipsToAdd();
 	}
 	
+
+	
+	/**
+	* getter method for the variable numOfShips
+	*/
 	public static int getNumOfShips() {
 		return numOfShips;
 	}
-	
+
 	public static int[] getGeneratedShips() {
 		return listOfShipSizes;
 	}
 
+	/**
+	* getter method for the constant MINSHIPSIZE
+	*/
 	public static int getMinShipSize() {
-		return minShipSize;
+		return MINSHIPSIZE;
 	}
 
 	public static int getMaxShipSize() {
-		return maxShipSize;
+		return MAXSHIPSIZE;
 	}
 	
 	public Ship[] getShipArray() {
 		return shipArray;
-	}
-
-	public static void setMinShipSize(int size) {
-		minShipSize = size;
-	}
-
-	public static void setMaxShipSize(int size) {
-		maxShipSize = size;
 	}
 
 	// Method to check if correct board type for JUnit testing
@@ -92,7 +116,7 @@ public class Board {
 	*/
 	public static int[] generateShipsToAdd(){
 		
-		int shipSize = Math.min(numOfShips, maxShipSize);
+		int shipSize = Math.min(numOfShips, MAXSHIPSIZE);
 		int [] shipsToAdd = new int[numOfShips];
 		
 		for(int i = 0; i < numOfShips; i++){	
@@ -105,7 +129,7 @@ public class Board {
 				shipsToAdd[i] = 3;
 			}else{ 
 				//last two ships are size 2 (minimum ship size)
-				shipsToAdd[i] = minShipSize;
+				shipsToAdd[i] = MINSHIPSIZE;
 			}
 	
 		}
@@ -119,29 +143,6 @@ public class Board {
 		return guessing;
 	}
 
-	/**
-	 * Default constructor for our board
-	 *
-	 **/
-	public Board() {
-		guessBoard = new BoardValue[boardSize][boardSize];
-		gameBoard = new BoardValue[boardSize][boardSize];
-		shipBoard = new int[boardSize][boardSize];
-		intializeGameBoard();
-		shipArray = new Ship[numOfShips];
-
-	}
-
-	/**
-	 * Populates the board with initial values
-	 *
-	 **/
-	private void intializeGameBoard() {
-		for (BoardValue[] row : gameBoard) {
-			Arrays.fill(row, BoardValue.EMPTY);
-		}
-
-	}
 
 	/**
 	 * Returns a formatted version of the board.
