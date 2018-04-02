@@ -66,7 +66,6 @@ public class Board {
 		boardSize = size;
 		numOfShips = (int)(Math.ceil(size/2.0));
 		listOfShipSizes = generateShipsToAdd();
-		numOfShips = (int)(Math.ceil(size/2.0));
 	}
 	
 
