@@ -175,17 +175,17 @@ public class BoardGUI {
 					if (body == 0) {
 						int[] front = coords[0];
 						//different images for front and back ships
-						addShipImage("/images/Shipt.png", boardArray, front[0], front[1], ships.getOrientation());
+						addShipImage("/images/ShipHead.png", boardArray, front[0], front[1], ships.getOrientation());
 						
 					//BACK of the ship has different image	
-					} else if (body == ships.getLength()) {
+					} else if (body == (ships.getLength()-1)) {
 						int[] back = coords[body];
-						addShipImage("/images/Shipt.png", boardArray, back[0], back[1], ships.getOrientation());			
+						addShipImage("/images/ShipTail.png", boardArray, back[0], back[1], ships.getOrientation());			
 						
 					//BODY of the ship	
 					} else {
 						int[] coordinate = coords[body];
-						addShipImage("/images/Shipt.png", boardArray, coordinate[0], coordinate[1], ships.getOrientation());			
+						addShipImage("/images/ShipBody.png", boardArray, coordinate[0], coordinate[1], ships.getOrientation());			
 					}
 				}
 			}
@@ -207,7 +207,7 @@ public class BoardGUI {
 			ImageView shipImg = getImage(imgPath);
 			//have to rotate image if vertical
 			if (orientation == 'h') {
-				shipImg.setRotate(90);
+				shipImg.setRotate(-90);
 			}
 			board.add(shipImg, col, row);
 		}
