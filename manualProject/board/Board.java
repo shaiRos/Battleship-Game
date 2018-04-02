@@ -1,15 +1,16 @@
 package board;
 
-/**
-* created January 30, 2018
-*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
-*	Board object that will hold all values of our board
-*/
+
 import java.util.Scanner;
 import board.*;
 
 import java.util.Arrays;
 
+/**
+* created January 30, 2018
+*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+*	Board object that will hold all values of our board
+*/
 public class Board {
 
 	private static int boardSize = 5;
@@ -24,13 +25,8 @@ public class Board {
 	private static int[] listOfShipSizes;
 	
 	
-	public Board(){
-		boardSize = size;
-		listOfShipSizes = generateShipsToAdd();
-	}
-	
 	public Board( int boardSize){
-		boardSize = size;
+		boardSize = boardSize;
 		listOfShipSizes = generateShipsToAdd();
 	}
 
