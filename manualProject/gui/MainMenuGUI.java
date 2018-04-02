@@ -55,7 +55,7 @@ public class MainMenuGUI {
 
 		settingScreen.add(modeSection(),0,1);
 		settingScreen.add(boardSizeSection(),0,2);
-		settingScreen.add(shipsSection(),0,3);
+		//settingScreen.add(shipsSection(),0,3);
 		settingScreen.add(startButton,0,4);		
 
 		
@@ -141,7 +141,7 @@ public class MainMenuGUI {
 		return boardVSection;
 	}
 
-	public VBox shipsSection() {
+/* 	public VBox shipsSection() {
 
 		VBox shipsVSection = new VBox(10);
 		HBox shipsHSection = new HBox(160);
@@ -174,7 +174,7 @@ public class MainMenuGUI {
 		
 		return shipsVSection;
 	}
-	
+	 */
 }
 
 

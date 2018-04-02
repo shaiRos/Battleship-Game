@@ -27,8 +27,6 @@ public class AttackPhase  {
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;	
 	private String attackingPlayer;
-	private Player player1;
-	private Player player2;
 	private Label coordinates = null;
 	
 	/**
@@ -49,18 +47,27 @@ public class AttackPhase  {
 		gameUI = scn;	
 		ownBoard = new BoardGUI(Board.getBoardSize(), Settings.smallGridWidth);
 		guessBoard = new BoardGUI(Board.getBoardSize(), Settings.bigGridWidth);
-		player1 = p1;
-		player2 = p2;
 		coordinates = coord;
-		
+
 		if (attackingPlayer == "P1") {
+			ownBoard.addValuesFromArray(Settings.p1, "gameBoard");
+			guessBoard.addValuesFromArray(Settings.p1, "guessBoard");
+			}
+		else if (attackingPlayer == "P2") {	
+				ownBoard.addValuesFromArray(Settings.p2, "gameBoard");
+				guessBoard.addValuesFromArray(Settings.p2, "guessBoard");		
+		}
+
+
+		
+	/*	if (attackingPlayer == "P1") {
 			ownBoard.addValuesFromArray(p1.getPlayerBoard().gameBoard, "gameBoard");
 			guessBoard.addValuesFromArray(p1.getPlayerBoard().guessBoard, "guessBoard");
 			}
 		else if (attackingPlayer == "P2") {	
 				ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");
 				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");		
-		}
+		}*/
 		
 		//Update the Display with the new changes
 		gameLayout = new BorderPane();
@@ -91,7 +98,7 @@ public class AttackPhase  {
 		TilePane centerSlot = new TilePane();
 		//attack handler on the big board
 		if (coordinates == null) {
-			guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, player1, player2, attackingPlayer));
+			guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, Settings.p1, Settings.p2, attackingPlayer));
 		}
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 		return centerSlot; 	
@@ -120,7 +127,7 @@ public class AttackPhase  {
 		GridPane botPanel = new GridPane(); 
 		botPanel.setPrefHeight(Settings.botHeight);	
 		botPanel.setMaxHeight(Settings.botHeight);				
-		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
+		botPanel.setStyle("-fx-background-color: #ebcd98;");	//Hex color		
 		
 		if (coordinates != null) {
 			botPanel.getChildren().add(coordinates);
