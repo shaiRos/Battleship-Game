@@ -38,7 +38,7 @@ public class HumanPlayer extends Player {
 		String setup = " ";
 		while(formatted != true){
 			try {
-				System.out.print("\nIndicate (orientation row column): ");
+				System.out.print("Indicate (orientation row column): ");
 				Scanner Setup = new Scanner(System.in);
 				setup = Setup.nextLine();
 				String setupInfo[] = setup.split(" ");
@@ -48,7 +48,7 @@ public class HumanPlayer extends Player {
 				formatted = true;
 			} catch (NumberFormatException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
 					// possible errors when doing the conversions of the string input
-					System.out.println("Wrong format, example: h A 1");
+					System.out.println("\nWrong format, example: h A 1");
 					formatted = false;
 			}
 		}

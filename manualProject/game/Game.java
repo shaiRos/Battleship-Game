@@ -5,7 +5,6 @@ import java.util.Scanner;
 import board.*;
 import players.*;
 import board.Ship.*;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.io.*;
@@ -25,7 +24,7 @@ public class Game {
 
 	/**
 	* default constructor to create a game object
-	* default to player vs. player mode if called
+	* default to player vs player mode if called
 	*/
 	public Game() {
 		start();
@@ -55,7 +54,7 @@ public class Game {
 	/**
 	 * A getter that returns the AI flag's status
 	 * 
-	 * @return aiStatus - Boolean that when true, indicates the AI has been selected
+	 * @return aiStatus Boolean that when true, indicates the AI has been selected
 	 */
 	public static boolean getAIStatus() {
 		return aiStatus;
@@ -64,14 +63,14 @@ public class Game {
 	/**
 	 * Returns a true or false based on whether the attack was successful or not
 	 * 
-	 * @return hitSuccess - True for hit, false for miss and any other scenario
+	 * @return hitSuccess True for hit, false for miss and any other scenario
 	 */
 	public static boolean getHitSuccess() {
 		return hitSuccess;
 	}
 	
 	/**
-	* @Brandon what does this dod
+	* setter for hitSuccess
 	*/
 	public static void setHitSuccess(boolean b) {
 		hitSuccess = b;
@@ -156,7 +155,7 @@ public class Game {
 			if (currentPlayer instanceof HumanPlayer)
 			{
 			playerBoard.returnBoard(1);
-			System.out.println((maxShips - (shipNumber + 1)) + " ships left to place");
+			System.out.println("\n" + (maxShips - (shipNumber + 1)) + " ship(s) left to place");
 			}
 			
 		}
@@ -168,7 +167,7 @@ public class Game {
 	 * scope of the given board
 	 * 
 	 * @param name
-	 *            - Ship object that will be used to store all information about the
+	 *            Ship object that will be used to store all information about the
 	 *            player's respective ships board - Holds all of the information and
 	 *            game state of the current board
 	 */
@@ -179,7 +178,7 @@ public class Game {
 
 		while (formatted != true) {
 			try {
-				System.out.println("\nPlacing a length " + shipLength + " ship");
+				System.out.println("Placing a length " + shipLength + " ship");
 				String setup = currentPlayer.playerSetup();
 				// take the input that was converted into String and separate the info
 				String setupInfo[] = setup.split(" ");
@@ -218,7 +217,7 @@ public class Game {
 	 * 
 	 * @param board
 	 *            - The board the win condition scan will be performed on
-	 * @return boolean - Will return a boolean to indicate whether the win
+	 * @return  Will return a boolean to indicate whether the win
 	 *         conditions have been met
 	 */
 	// Check the board for remaining ships
@@ -244,7 +243,7 @@ public class Game {
 	 * based on line-by-line fed information
 	 * 
 	 * @param mapLevel
-	 *            - The final that contains the information required to build the
+	 *            The final that contains the information required to build the
 	 *            level
 	 * @param board the board being setup
 	 *
