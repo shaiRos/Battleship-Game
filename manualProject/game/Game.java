@@ -5,7 +5,6 @@ import java.util.Scanner;
 import board.*;
 import players.*;
 import board.Ship.*;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.io.*;
@@ -16,15 +15,19 @@ import java.io.*;
  * 
  * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
  *
- **/
+ */
 public class Game {
 	// This will toggle if our game will let us fight another player or an AI
 	private static boolean aiStatus = false;
 	private static boolean hitSuccess = false;
 	private static boolean shipSunk = false;
 
+	/**
+	* default constructor to create a game object
+	* default to player vs player mode if called
+	*/
 	public Game() {
-
+		start();
 	}
 
 	/**
@@ -34,7 +37,7 @@ public class Game {
 	 * @param specifyAIStatus
 	 *            - Boolean that signifies whether the game will implement Player vs
 	 *            Player or Player vs AI
-	 **/
+	 */
 	public Game(boolean specifyAIStatus) {
 		aiStatus = specifyAIStatus;
 		start();
@@ -43,7 +46,7 @@ public class Game {
 	/**
 	 * A toggle that will set the flag which enables the AI
 	 *
-	 **/
+	 */
 	public static void enableAI() {
 		aiStatus = true;
 	}
@@ -51,8 +54,8 @@ public class Game {
 	/**
 	 * A getter that returns the AI flag's status
 	 * 
-	 * @return aiStatus - Boolean that when true, indicates the AI has been selected
-	 **/
+	 * @return aiStatus Boolean that when true, indicates the AI has been selected
+	 */
 	public static boolean getAIStatus() {
 		return aiStatus;
 	}
@@ -60,12 +63,16 @@ public class Game {
 	/**
 	 * Returns a true or false based on whether the attack was successful or not
 	 * 
-	 * @return hitSuccess - True for hit, false for miss and any other scenario
+	 * @return hitSuccess True for hit, false for miss and any other scenario
 	 */
 	public static boolean getHitSuccess() {
 		return hitSuccess;
 	}
-
+	
+	/**
+	* setter for hitSuccess
+	* @param b boolean for resetting hit success each round
+	*/
 	public static void setHitSuccess(boolean b) {
 		hitSuccess = b;
 	}
@@ -74,7 +81,7 @@ public class Game {
 	 * When ran on unix systems, will clear the console for improved output and
 	 * management of the text version of the game
 	 *
-	 **/
+	 */
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
 	public static void clearScreen() {
 		// ASCII escape codes
@@ -88,8 +95,7 @@ public class Game {
 	 * 
 	 * @param milliseconds
 	 *            - Int of milliseconds to pause execution
-	 **/
-
+	 */
 	public static void sleepThread(int milliseconds) {
 		// Try sleeping for specified time given in ms
 		try {
@@ -105,10 +111,13 @@ public class Game {
 	 * specification
 	 * 
 	 * @param player1Board
-	 *            - Board object that stores all of the information of the main
-	 *            player's board player2Board - Board object that stores all of the
+	 *            Board object that stores all of the information of the main
+	 *            player's board 
+	 * @param player2Board Board object that stores all of the
 	 *            information of the opposing player's board
-	 **/
+	 * @param player1 player object linked to player1Board
+	 * @param player2 player object linked to player2Board
+	 */
 	public static void setupBoard(Board player1Board, Player player1, Board player2Board, Player player2) {
 
 		System.out.println("Player 1 setup phase: ");
@@ -133,6 +142,11 @@ public class Game {
 
 	}
 	
+	/**
+	* the main function used for the players to setup their ship placements
+	* @param playerBoard the Board object of the player setting the ship
+	* @param currentPlayer the current player
+	*/
 	public static void userPlaceShip(Board playerBoard, Player currentPlayer){
 		int [] typeOfShipToAdd = Board.generateShipsToAdd();
 		int maxShips = typeOfShipToAdd.length; // max number of ships for each board
@@ -145,7 +159,7 @@ public class Game {
 			if (currentPlayer instanceof HumanPlayer)
 			{
 			playerBoard.returnBoard(1);
-			System.out.println((maxShips - (shipNumber + 1)) + " ships left to place");
+			System.out.println("\n" + (maxShips - (shipNumber + 1)) + " ship(s) left to place");
 			}
 			
 		}
@@ -156,11 +170,11 @@ public class Game {
 	 * information. Checks implemented to ensure the placements are not outside the
 	 * scope of the given board
 	 * 
-	 * @param name
-	 *            - Ship object that will be used to store all information about the
-	 *            player's respective ships board - Holds all of the information and
-	 *            game state of the current board
-	 **/
+	 * @param board the current board being set up
+	 * @param currentPlayer the current player connected to the board
+	 * @param shipLength length of the ship
+	 * @param shipCount the current ship being placed
+	 */
 	// The main code for inserting ships on the other board
 	// Error checking, logic checking etc
 	public static void setupInput(Board board, Player currentPlayer, int shipLength, int shipCount){
@@ -168,7 +182,7 @@ public class Game {
 
 		while (formatted != true) {
 			try {
-				System.out.println("Placing a length " + shipLength);
+				System.out.println("Placing a length " + shipLength + " ship");
 				String setup = currentPlayer.playerSetup();
 				// take the input that was converted into String and separate the info
 				String setupInfo[] = setup.split(" ");
@@ -179,7 +193,7 @@ public class Game {
 
 				GameConfig.validateShipProperties(board, shipLength, orientation, column, row); 
 
-				// Adds ship to the grid
+				// Adds ship to the board
 				board.addShip1(shipCount, shipLength, orientation, row, column);
 
 				formatted = true;
@@ -187,7 +201,7 @@ public class Game {
 			} catch (NumberFormatException | StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
 				// possible errors when doing the conversions of the string input
 				if(currentPlayer instanceof HumanPlayer){
-					System.out.println("Wrong format, example: h A 1");
+					System.out.println("\nWrong format, example: h A 1");
 				}
 				formatted = false;
 			} catch (IllegalArgumentException e) {
@@ -207,9 +221,9 @@ public class Game {
 	 * 
 	 * @param board
 	 *            - The board the win condition scan will be performed on
-	 * @return boolean - Will return a boolean to indicate whether the win
+	 * @return  Will return a boolean to indicate whether the win
 	 *         conditions have been met
-	 **/
+	 */
 	// Check the board for remaining ships
 	public static boolean winCondition(Board board) {
 		int shipCounter = 0;
@@ -233,10 +247,11 @@ public class Game {
 	 * based on line-by-line fed information
 	 * 
 	 * @param mapLevel
-	 *            - The final that contains the information required to build the
+	 *            The final that contains the information required to build the
 	 *            level
+	 * @param board the board being setup
 	 *
-	 **/
+	 */
 	public static void mapFromFiles(String mapLevel, Board board) {
 
 		// Initiate line for ship data from file
@@ -262,12 +277,6 @@ public class Game {
 				int row = (((int) (tempRow) - 65) + 1);
 				int column = Integer.parseInt(line[3]);
 
-				System.out.println(orientation);
-				System.out.println(length);
-				System.out.println(row);
-				System.out.println(column);
-				// @betty adjust board
-				// board.addShip(orientation,length,row,column);
 				board.addShip1(shipPlaced, length, orientation, row, column);
 				shipPlaced++;
 
@@ -286,34 +295,32 @@ public class Game {
 	/**
 	 * Default board difficulties Use the AI thingy to setup random board placement
 	 * Implement Ship class features - ship sunk Fix board size constants
-	 **/
-	/**
 	 * Starting method that will instantiate all of our variables and begin the game
 	 * loop
-	 *
-	 **/
+	 */
 	public void start() {
 		// create boards for both the players
 		// difficulty will rely on these settings - add user input to specify difficulty
 		int userBoardSize = 5;
 		int userShipCount = 2;
+		boolean winCondition = false;
 
-		String fileName = "map.txt";
 
 		// Initialize the boards and set the board sizes
 		// WIP:
 		// - Re-create the board using the new boardSize values
 		Board.setBoardSize(userBoardSize);
+		Board.setShipNum(shipCount);
 		Board player1Board = new Board();
 		Board player2Board = new Board();
 		// populate boards with battleships
 
-		// This will allow user to input coordinates and setup board
-		// setupBoard(player1Board, player2Board, userShipCount);
 
-		// This will read a file and allow us to setup predefined board
-		//mapFromFiles(fileName, player1Board);
-		//mapFromFiles(fileName, player2Board);
+		/* This will read a file and allow us to setup predefined board
+		String fileName = "map.txt";
+		mapFromFiles(fileName, player1Board);
+		mapFromFiles(fileName, player2Board);
+		*/
 
 		// instantiate our players
 		Player player1 = new HumanPlayer(player1Board);
@@ -322,26 +329,21 @@ public class Game {
 		Player player2 = null;
 
 		// Create a new human that can access their boards
-		/**
+		/*
 		 * Make the player an inheritance of a Player class
-		 **/
+		 */
 		if (getAIStatus() != true) {
 			player2 = new HumanPlayer(player2Board);
 		} else {
 			player2 = new ComputerPlayer(player2Board);
 		}
 
-		// set the win condition
-		boolean winCondition = false;
-
-		// Game loop
-		
+		// This will allow user to input coordinates and setup board
 		setupBoard(player1Board, player1, player2Board, player2);
 
-
+		// Game loop
 		do {
 			// set each player's guess board to the other player's game board
-
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
 
@@ -407,20 +409,21 @@ public class Game {
 			}
 
 			// Check for remaining ships on enemy board
-			if (winCondition(player1Board) == true) {
 				System.out.println("Player 2 has won!");
+			if (winCondition(player1Board) == true) {
 				sleepThread(2500);
 				System.exit(0);
 			}
 			sleepThread(1000);
 
-			// check win conditions maybe make this an exception. throws an exception if
-			// winning conditions are met, catches condition and exits loop.
+			/*check win conditions maybe make this an exception. throws an exception if
+			* winning conditions are met, catches condition and exits loop. */
 
 		} while (winCondition != true);
 
 	}
 
+	//@brandon or @charlene??
 	// Method to check the start() method variables
 	public void startCheck() {
 		// create boards for both the players
