@@ -82,7 +82,7 @@ public class Board {
 	/**
 	* getter method for the list of 
 	*/
-	public static int[] getlistOfShipSizes() {
+	public static int[] getGeneratedShips() {
 		return listOfShipSizes;
 	}
 
