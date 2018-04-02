@@ -424,6 +424,7 @@ public class Game {
 
 	}
 
+	//@brandon or @charlene??
 	// Method to check the start() method variables
 	public void startCheck() {
 		// create boards for both the players
