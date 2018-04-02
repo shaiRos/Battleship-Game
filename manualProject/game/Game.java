@@ -300,9 +300,8 @@ public class Game {
 	 */
 	public void start() {
 		// create boards for both the players
-		// difficulty will rely on these settings - add user input to specify difficulty
+		// difficulty will rely on these settings (will be used in gui version)
 		int userBoardSize = 5;
-		int userShipCount = 2;
 		boolean winCondition = false;
 
 
@@ -310,7 +309,6 @@ public class Game {
 		// WIP:
 		// - Re-create the board using the new boardSize values
 		Board.setBoardSize(userBoardSize);
-		Board.setShipNum(shipCount);
 		Board player1Board = new Board();
 		Board player2Board = new Board();
 		// populate boards with battleships
@@ -423,7 +421,6 @@ public class Game {
 
 	}
 
-	//@brandon or @charlene??
 	// Method to check the start() method variables
 	public void startCheck() {
 		// create boards for both the players
