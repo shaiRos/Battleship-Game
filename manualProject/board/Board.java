@@ -66,6 +66,7 @@ public class Board {
 		boardSize = size;
 		numOfShips = (int)(Math.ceil(size/2.0));
 		listOfShipSizes = generateShipsToAdd();
+		numOfShips = (int)(Math.ceil(size/2.0));
 	}
 	
 
@@ -76,7 +77,11 @@ public class Board {
 	public static int getNumOfShips() {
 		return numOfShips;
 	}
-	
+
+	public static int[] getGeneratedShips() {
+		return generatedShips;
+	}
+
 	/**
 	* getter method for the constant MINSHIPSIZE
 	*/

@@ -91,10 +91,7 @@ public class SetupPhase {
 			threeLen.setOnMouseClicked(new SetupShipHandler(scene, 3, root, thisPlayer, shipsToSet, ownBoard));	
 			twoLen.setOnMouseClicked(new SetupShipHandler(scene, 2, root, thisPlayer, shipsToSet, ownBoard));			
 			
-			rightPanel.add(fiveLen,0,0);
-			rightPanel.add(fourLen,0,1);
-			rightPanel.add(threeLen,0,2);
-			rightPanel.add(twoLen,0,3);
+			rightPanel.addColumn(0,fiveLen,fourLen,threeLen,twoLen);
 		}
 		
 		return rightPanel;
