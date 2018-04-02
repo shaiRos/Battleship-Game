@@ -61,6 +61,7 @@ public class Board {
 	
 	/**
 	* Setter method for setting board size
+	* @param size user indicated size for the size of the Board
 	*/
 	public static void setBoardSize(int size) {
 		boardSize = size;
@@ -71,14 +72,18 @@ public class Board {
 
 	
 	/**
-	* getter method for the variable numOfShips
+	* getter method for the number of ships each player has
+	* @return numOfShips the static variable numOfShips
 	*/
 	public static int getNumOfShips() {
 		return numOfShips;
 	}
 
-	public static int[] getGeneratedShips() {
-		return generatedShips;
+	/**
+	* getter method for the list of 
+	*/
+	public static int[] getlistOfShipSizes() {
+		return listOfShipSizes;
 	}
 
 	/**
