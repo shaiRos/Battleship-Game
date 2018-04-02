@@ -49,7 +49,7 @@ public class Board {
 	}
 	
 	public static int[] getGeneratedShips() {
-		return generatedShips;
+		return listOfShipSizes;
 	}
 
 	public static int getMinShipSize() {
