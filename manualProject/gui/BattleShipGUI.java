@@ -49,8 +49,10 @@ public class BattleShipGUI extends Application
 		}
         Board.setBoardSize(Settings.boardSize);
 		Settings.shipsToPlace = Board.getNumOfShips();
+		Settings.setGeneratedShips(Board.getGeneratedShips());
         Board player1Board = new Board();
         Board player2Board = new Board();
+		
 
 		Player player1 = new HumanPlayer(player1Board);
 		Player player2 = null;

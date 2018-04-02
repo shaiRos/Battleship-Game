@@ -18,6 +18,7 @@ import game.GameConfig;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import players.Player;
+import javafx.geometry.Pos;
 
 
 public class SetupShipHandler implements EventHandler<MouseEvent> {
@@ -142,7 +143,8 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 		GridPane rightPanel = new GridPane();
 		rightPanel.setPrefWidth(Settings.sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
-		rightPanel.setPadding(new Insets(10));	
+		rightPanel.setPadding(new Insets(10));
+
 
 		for (int x = 0; x < 4; x++) {
 			RowConstraints row = new RowConstraints();	
@@ -151,19 +153,20 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 		}
 		ColumnConstraints column = new ColumnConstraints();		
 		column.setPercentWidth(100);		
-		rightPanel.getColumnConstraints().add(column);			
-		rightPanel.setGridLinesVisible(true);	
+		rightPanel.getColumnConstraints().add(column);				
 		
 		Label orientLabel = new Label("orientation: " + orient);
 		orientLabel.setFont(new Font(20));
 		orientLabel.setTextFill(Color.WHITE);
+		//orientLabel.setAlignment(Pos.CENTER);
 		
 		//cancel button
 		Button cancelBt = new Button("Cancel");
-		
+		rightPanel.setAlignment(Pos.CENTER);		
 		rightPanel.add(cancelBt,0,3);
 		rightPanel.add(orientLabel,0,0);
-		
+
+		rightPanel.setGridLinesVisible(true);		
 		cancelBt.setOnMouseClicked(event -> {
 			SetupPhase cancelShipSetup = new SetupPhase(scene,thisPlayer,shipsToSet,false);
 		});

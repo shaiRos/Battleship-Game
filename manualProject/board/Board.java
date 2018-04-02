@@ -19,7 +19,7 @@ public class Board {
 	private static boolean guessing = false;
 	public BoardValue[][] guessBoard;
 	public BoardValue[][] gameBoard;
-	private static int numOfShips = 3;
+	private static int numOfShips;
 	private Ship[] shipArray;
 	private int[][] shipBoard;
 	private static int[] listOfShipSizes;
@@ -41,10 +41,15 @@ public class Board {
 	public static void setBoardSize(int size) {
 		boardSize = size;
 		listOfShipSizes = generateShipsToAdd();
+		numOfShips = (int)(Math.ceil(size/2.0));
 	}
 	
 	public static int getNumOfShips() {
 		return numOfShips;
+	}
+	
+	public static int[] getGeneratedShips() {
+		return generatedShips;
 	}
 
 	public static int getMinShipSize() {
