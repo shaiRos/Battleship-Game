@@ -58,17 +58,18 @@ public class Settings {
 			switch(shipListByLen){
 				case 2:
 					len2Ships += 1;
+					break;
 				case 3:
 					len3Ships += 1;
+					break;
 				case 4:
 					len4Ships += 1;
+					break;
 				case 5:
 					len5Ships += 1;
+					break;
 			}
-					
 		}
-		
 	}
-	
 }	
 	
