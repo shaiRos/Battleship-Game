@@ -46,6 +46,10 @@ public class Board {
 		boardSize = size;
 		listOfShipSizes = generateShipsToAdd();
 	}
+	
+	public static int getNumOfShips() {
+		return numOfShips;
+	}
 
 	public static int getMinShipSize() {
 		return minShipSize;
@@ -53,6 +57,10 @@ public class Board {
 
 	public static int getMaxShipSize() {
 		return maxShipSize;
+	}
+	
+	public Ship[] getShipArray() {
+		return shipArray;
 	}
 
 	public static void setMinShipSize(int size) {
