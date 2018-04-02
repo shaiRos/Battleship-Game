@@ -71,6 +71,7 @@ public class Game {
 	
 	/**
 	* setter for hitSuccess
+	* @param b boolean for resetting hit success each round
 	*/
 	public static void setHitSuccess(boolean b) {
 		hitSuccess = b;
@@ -110,9 +111,12 @@ public class Game {
 	 * specification
 	 * 
 	 * @param player1Board
-	 *            - Board object that stores all of the information of the main
-	 *            player's board player2Board - Board object that stores all of the
+	 *            Board object that stores all of the information of the main
+	 *            player's board 
+	 * @param player2Board Board object that stores all of the
 	 *            information of the opposing player's board
+	 * @param player1 player object linked to player1Board
+	 * @param player2 player object linked to player2Board
 	 */
 	public static void setupBoard(Board player1Board, Player player1, Board player2Board, Player player2) {
 
@@ -166,10 +170,10 @@ public class Game {
 	 * information. Checks implemented to ensure the placements are not outside the
 	 * scope of the given board
 	 * 
-	 * @param name
-	 *            Ship object that will be used to store all information about the
-	 *            player's respective ships board - Holds all of the information and
-	 *            game state of the current board
+	 * @param board the current board being set up
+	 * @param currentPlayer the current player connected to the board
+	 * @param shipLength length of the ship
+	 * @param shipCount the current ship being placed
 	 */
 	// The main code for inserting ships on the other board
 	// Error checking, logic checking etc
@@ -189,7 +193,7 @@ public class Game {
 
 				GameConfig.validateShipProperties(board, shipLength, orientation, column, row); 
 
-				// Adds ship to the grid
+				// Adds ship to the board
 				board.addShip1(shipCount, shipLength, orientation, row, column);
 
 				formatted = true;
@@ -273,12 +277,6 @@ public class Game {
 				int row = (((int) (tempRow) - 65) + 1);
 				int column = Integer.parseInt(line[3]);
 
-				System.out.println(orientation);
-				System.out.println(length);
-				System.out.println(row);
-				System.out.println(column);
-				// @betty adjust board
-				// board.addShip(orientation,length,row,column);
 				board.addShip1(shipPlaced, length, orientation, row, column);
 				shipPlaced++;
 
@@ -312,15 +310,17 @@ public class Game {
 		// WIP:
 		// - Re-create the board using the new boardSize values
 		Board.setBoardSize(userBoardSize);
+		Board.setShipNum(shipCount);
 		Board player1Board = new Board();
 		Board player2Board = new Board();
 		// populate boards with battleships
 
 
-		// This will read a file and allow us to setup predefined board
-		//String fileName = "map.txt";
-		//mapFromFiles(fileName, player1Board);
-		//mapFromFiles(fileName, player2Board);
+		/* This will read a file and allow us to setup predefined board
+		String fileName = "map.txt";
+		mapFromFiles(fileName, player1Board);
+		mapFromFiles(fileName, player2Board);
+		*/
 
 		// instantiate our players
 		Player player1 = new HumanPlayer(player1Board);
