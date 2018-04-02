@@ -26,9 +26,8 @@ public class BoardGUI {
 	private GridPane board;
 	private int gridSize;
 	private int gridWidth; //including margins
-	private double actualWidth;
 	private ImageView shipImage;
-	private double blockSize;	//width & height for each square in grid
+	final private double blockSize;	//width & height for each square in grid
 	
 	/**
 	*	The constructor. Creates the Grid displays depending on the indicated size in the parameters. Also sets the constraints
@@ -41,7 +40,7 @@ public class BoardGUI {
 		
 		gridSize = gridsize;
 		gridWidth = gridwidth;
-		actualWidth = (double)(gridWidth-10);
+		double actualWidth = (double)(gridWidth-15);
 		blockSize = (actualWidth/(double)gridSize);  
 	
 		board = new GridPane();

@@ -16,14 +16,21 @@ public class Settings {
 	final public static int smallGridWidth = 250; //including margins
 	final public static int sidePanelWidth = 270;	
 	final public static int bigGridWidth = 770; //including margins	
+
 	public static Player p1;
 	public static Player p2;
-	public static int shipsToPlace = 2;
+
 	public static String gameMode = "Player vs Ai";
 	public static int boardSize = 5;
+	public static int shipsToPlace = 2;
+	public static int len2Ships;
+	public static int len3Ships;
+	public static int len4Ships;
+	public static int len5Ships;	
+	
 	
 	public static void setBoardSize(int value) {
-		if (value >= 5 && value <= 20) {
+		if (value >= 5 && value <= 15) {
 			boardSize = value;
 		}
 		
@@ -44,6 +51,10 @@ public class Settings {
 		} else if (gameMode == "Player vs Ai") {
 			gameMode = "Player vs Player";
 		}
+	}
+	
+	public static void setGeneratedShips(int[] generatedShipsArray){
+		
 	}
 	
 }	
