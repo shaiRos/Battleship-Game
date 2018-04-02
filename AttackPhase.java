@@ -117,7 +117,7 @@ public class AttackPhase  {
 		GridPane botPanel = new GridPane(); 
 		botPanel.setPrefHeight(Settings.botHeight);	
 		botPanel.setMaxHeight(Settings.botHeight);				
-		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
+		botPanel.setStyle("-fx-background-color: #ebcd98;");	//Hex color		
 		
 		if (coordinates != null) {
 			botPanel.getChildren().add(coordinates);

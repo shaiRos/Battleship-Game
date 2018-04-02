@@ -63,7 +63,7 @@ public class SetupPhase {
 		
 		GridPane rightPanel = new GridPane();
 		rightPanel.setPrefWidth(Settings.sidePanelWidth);
-        rightPanel.setStyle("-fx-background-color: #0066CC;");	
+        rightPanel.setStyle("-fx-background-color: #52d5f3;");	
 		rightPanel.setPadding(new Insets(10));	
 
 		for (int x = 0; x < 4; x++) {
@@ -102,7 +102,7 @@ public class SetupPhase {
 		TilePane botPanel = new TilePane(); 
 		botPanel.setPrefHeight(Settings.botHeight);	
 		botPanel.setMaxHeight(Settings.botHeight);				
-		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
+		botPanel.setStyle("-fx-background-color: #f6ce97;");	//Hex color		
 
 		return botPanel;
 	}	
