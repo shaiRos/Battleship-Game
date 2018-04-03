@@ -333,7 +333,6 @@ public class Game {
 		// Initialize the boards and set the board sizes
 		// WIP:
 		// - Re-create the board using the new boardSize values
-		//Board.setBoardSize(userBoardSize);
 		Board player1Board = new Board(userBoardSize);
 		Board player2Board = new Board(userBoardSize);
 		// populate boards with battleships
