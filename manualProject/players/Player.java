@@ -10,18 +10,18 @@ import board.BoardValue;
  * requires to complete game logic functionality
  *
  * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
- **/
+ */
 public abstract class Player {
 
 	/**
 	 * Checks whether the ship has been previously hit by the player
 	 * 
 	 * @param playerBoard
-	 *            - current Board object int row, column - Int form row and column
+	 *            current Board object int row, column - Int form row and column
 	 *            attacked by player
-	 * @return boolean - Will specify whether the attack is new, or has been
+	 * @return boolean Will specify whether the attack is new, or has been
 	 *         previously attacked
-	 **/
+	 */
 	public boolean checkPreviousHitEnum(Board playerBoard, int row, int column) {
 		BoardValue value = (playerBoard.guessBoard[row - 1][column - 1]);
 		if (value == BoardValue.HIT) {
@@ -35,22 +35,32 @@ public abstract class Player {
 	/**
 	 * Quickly convert two integers into a string for data storage
 	 * 
-	 * @param int
-	 *            row, column - Row and column that will be formatted
+	 * @param row int that will be formatted into a string
+	 * @param column int that will be formatted into a string
 	 * @return formattedString - String which will contain values in column,row
-	 *         format
-	 **/
+	 */
 	public String coordToString(int row, int column) {
 		String formattedString = Integer.toString(row) + "," + Integer.toString(column);
 		return formattedString;
 	}
 
-	// Abstract class that will enable us to differentiate human vs AI turns
 
+	/**
+	* Abstract method where the player returns a string indicating the 
+	* position they have chosen to attack
+	*/
 	public abstract String playerTurn();
 
+	/**
+	* Abstract method, getter for player board,for JUNIT testing purpose 
+	* @return playerBoard board being used by the player
+	*/
 	public abstract Board getPlayerBoard();
 	
+	/**
+	* Abstract method where the players return a string 
+	* indicating the orientation and position they have chosen to attack
+	*/
 	public abstract String playerSetup();
 
 }

@@ -40,7 +40,7 @@ public class BoardGUI {
 		
 		gridSize = gridsize;
 		gridWidth = gridwidth;
-		double actualWidth = (double)(gridWidth-15);
+		double actualWidth = (double)(gridWidth-20);
 		blockSize = (actualWidth/(double)gridSize);  
 	
 		board = new GridPane();

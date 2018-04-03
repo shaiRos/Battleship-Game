@@ -12,7 +12,6 @@ import java.util.Arrays;
 *	Board object that will hold all values of our board
 */
 public class Board {
-
 	private static int boardSize;
 	private final static int MAXSHIPSIZE = 5;
 	private final static int MINSHIPSIZE = 2;
@@ -25,7 +24,6 @@ public class Board {
 	private static int[] listOfShipSizes;
 	
 
-	
 
 	/**
 	 * Default constructor for our board
@@ -61,43 +59,69 @@ public class Board {
 	
 	/**
 	* Setter method for setting board size
+	* @param size user indicated size for the size of the Board
 	*/
 	public static void setBoardSize(int size) {
 		boardSize = size;
 		numOfShips = (int)(Math.ceil(size/2.0));
 		listOfShipSizes = generateShipsToAdd();
-		numOfShips = (int)(Math.ceil(size/2.0));
 	}
 	
 
 	
 	/**
-	* getter method for the variable numOfShips
+	* getter method for the number of ships each player has
+	* @return numOfShips the static variable numOfShips
 	*/
 	public static int getNumOfShips() {
 		return numOfShips;
 	}
 
+	/**
+	* getter method for the array that stores the number of each ships 
+	* to be added
+	* @return listOfShipSizes an int array in the class
+	*/
 	public static int[] getGeneratedShips() {
-		return generatedShips;
+		return listOfShipSizes;
 	}
 
 	/**
-	* getter method for the constant MINSHIPSIZE
+	* getter method for the minimum ship size allowed
+	* @return MINSHIPSIZE class constant 
 	*/
 	public static int getMinShipSize() {
 		return MINSHIPSIZE;
 	}
 
+	/**
+	* getter method for the maximum ship size allowed
+	* @return MAXSHIPSIZE class constant
+	*/
 	public static int getMaxShipSize() {
 		return MAXSHIPSIZE;
 	}
 	
+	/**
+	* getter method for the array of ships stored in each board
+	* mainly for JUNIT testing purposes
+	* @shipArray an array of ship objects in the board
+	*/
 	public Ship[] getShipArray() {
 		return shipArray;
 	}
 
-	// Method to check if correct board type for JUnit testing
+	/*
+	* Getter method for board type for JUnit testing
+	*/
+	public boolean getBoardType() {
+		return guessing;
+	}
+	
+	/**
+	* Method to check if correct board type for JUnit testing
+	* @param boardType gameBoard correspond to int 1, int 2 means guessBoard
+	*/
 	public void setBoardType(int boardType) {
 		BoardValue[][] board = null;
 
@@ -139,20 +163,17 @@ public class Board {
 		
 	}
 
-	// Getter method for board type for JUnit testing
-	public boolean getBoardType() {
-		return guessing;
-	}
+	
 
 
 	/**
-	 * Returns a formatted version of the board.
+	 * Prints a formatted version of the board.
 	 * 
 	 * @param boardType
-	 *            - Int that will specify whether the game shall display the
+	 *            Int that will specify whether the game shall display the
 	 *            gameBoard or guessBoard
 	 *
-	 **/
+	 */
 	public void returnBoard(int boardType) {
 		BoardValue[][] board = null;
 
@@ -202,18 +223,24 @@ public class Board {
 	 * Will be called after all verification and checks
 	 * are passed
 	 * 
-	 * @param int
-	 *            len, col, ro - Properties of the ship char orient - Properties of
-	 *            the ship
-	 **/
+	 * @param len length of the ship
+	 * @param ID a assigned ID that is used to identify each ship through its index in the ship array
+	 * @param orient character indicating the orientation of the ship
+	 * @param ro row, most top coordinate
+	 * @param col column, most left coordinate
+	 */
 	
-	public void addShip1(int ID, int len, char orient, int ro, int col) {
+	public void addShip(int ID, int len, char orient, int ro, int col) {
 		shipArray[ID] = new Ship(ID, len, orient, ro, col);
+		//determine the coordinates of each ship
 		int[][] addCoordinates = shipArray[ID].getShipCoordinates();
 		for (int i = 0; i < addCoordinates.length; i++) {
 			int r = addCoordinates[i][0];
 			int c = addCoordinates[i][1];
-			shipBoard[r][c] = ID + 1;
+			//add 1 to ID on the array because of int array default value (0)
+			shipBoard[r][c] = ID + 1; 
+			
+			//add each ship's coordinate on the board
 			gameBoard[r][c] = BoardValue.SHIP;
 		}
 

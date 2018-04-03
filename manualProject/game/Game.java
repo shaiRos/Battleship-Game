@@ -194,7 +194,7 @@ public class Game {
 				GameConfig.validateShipProperties(board, shipLength, orientation, column, row); 
 
 				// Adds ship to the board
-				board.addShip1(shipCount, shipLength, orientation, row, column);
+				board.addShip(shipCount, shipLength, orientation, row, column);
 
 				formatted = true;
 
@@ -277,7 +277,7 @@ public class Game {
 				int row = (((int) (tempRow) - 65) + 1);
 				int column = Integer.parseInt(line[3]);
 
-				board.addShip1(shipPlaced, length, orientation, row, column);
+				board.addShip(shipPlaced, length, orientation, row, column);
 				shipPlaced++;
 
 			}
@@ -327,9 +327,6 @@ public class Game {
 		Player player2 = null;
 
 		// Create a new human that can access their boards
-		/*
-		 * Make the player an inheritance of a Player class
-		 */
 		if (getAIStatus() != true) {
 			player2 = new HumanPlayer(player2Board);
 		} else {
@@ -356,7 +353,6 @@ public class Game {
 			int row1 = Integer.parseInt(coordFormatted[0]);
 			int column1 = Integer.parseInt(coordFormatted[1]);
 			// Send the attack to the board once properly formatted
-			System.out.println("row " + row1 + "column " + column1);
 			GameConfig.sendAttack(player1Board, row1, column1);
 			shipSunk = GameConfig.checkSunken(player2Board, row1, column1);
 			// Check for remaining ships on enemy board

@@ -28,7 +28,7 @@ import javafx.scene.text.Font;
 	
 	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
 
-**/
+*/
 
 public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
@@ -99,7 +99,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		
 		if (checkPrevHit == true) {													
 			System.out.println("prevhit true, Please try again");
-			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, null);
+			AttackPhase testUI = new AttackPhase(scene,player1,player2, thisPlayer, false);
 		} else {
 			//Send the attack of this player and change the boards
 			GameConfig.sendAttack(playerAttacking.getPlayerBoard(), y, x);	
@@ -109,7 +109,8 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			
 			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss
-				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, coordinate);
+				Settings.changeMessage(thisPlayer +" attacked coordinates: " + y + ", " + x);
+				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, true);
 				//Pause transition to display that waits for prompt for next player turn, or AI making a turn loading screen
 				PauseTransition pause = new PauseTransition(Duration.seconds(1));
 				//Pause transition differ between each mode
@@ -124,7 +125,8 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			} else {
 				System.out.println(thisPlayer + " has won"); 
 				coordinate.setText("You Win!");
-				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, coordinate);				
+				Settings.changeMessage("You Win!");
+				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, true);				
 			}
 		}			
 				
@@ -146,7 +148,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		EventHandler<MouseEvent> eventHandlerTextField = new EventHandler<MouseEvent>() { 
 			@Override 
 			public void handle(MouseEvent event) { 
-				AttackPhase nextDisplay = new AttackPhase(scene,player1,player2, nextPlayer, null);
+				AttackPhase nextDisplay = new AttackPhase(scene,player1,player2, nextPlayer, false);
 			}           
 		};
 		continueButton.setOnMouseClicked(eventHandlerTextField);
@@ -164,7 +166,8 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	*	@return a new root for the scene to transition into for the pause for each turn
 	*/	
 	public BorderPane aiTurnTransition() {
-
+		
+		Settings.changeMessage("");
 		BorderPane display = new BorderPane();
 		Label message = new Label("AI is making a turn...");
 		message.setFont(new Font(50));
@@ -207,11 +210,12 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		PauseTransition pause = new PauseTransition(Duration.seconds(.7));		
 		pause.setOnFinished(event -> {
 			if ((Game.winCondition(player1.getPlayerBoard())) == false) {			
-				AttackPhase nextDisplay = new AttackPhase(scene,player1,player2, thisPlayer, null); 
+				AttackPhase nextDisplay = new AttackPhase(scene,player1,player2, thisPlayer, false); 
 			} else {
 				System.out.println(thisPlayer + " has won"); //it stops the display but clicking still works...		
 				coordinate.setText("You Lose!");
-				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, coordinate);				
+				Settings.changeMessage("You Lose!");
+				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, true);				
 			} 
 		}
 		);			
