@@ -126,7 +126,7 @@ public class Game {
 		userPlaceShip(player1Board, player1);
 
 		System.out.println("Player 1 game board successfully set. Player 2 standby...");
-		sleepThread(1000);
+		sleepThread(300);
 		clearScreen();
 
 		System.out.println("Player 2 setup phase: ");
@@ -137,7 +137,7 @@ public class Game {
 
 		System.out.println("Player 2 game board successfully set.");
 
-		sleepThread(1000);
+		sleepThread(300);
 		clearScreen();
 
 	}
@@ -308,9 +308,9 @@ public class Game {
 		// Initialize the boards and set the board sizes
 		// WIP:
 		// - Re-create the board using the new boardSize values
-		Board.setBoardSize(userBoardSize);
-		Board player1Board = new Board();
-		Board player2Board = new Board();
+		//Board.setBoardSize(userBoardSize);
+		Board player1Board = new Board(userBoardSize);
+		Board player2Board = new Board(userBoardSize);
 		// populate boards with battleships
 
 
