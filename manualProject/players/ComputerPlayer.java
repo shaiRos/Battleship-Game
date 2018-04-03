@@ -71,7 +71,8 @@ public class ComputerPlayer extends Player {
 	}
 	
 	/**
-	*
+	* AI generates information necessary for setting up a ship
+	* @return a string consisting of randomly generated orientation, row, and column
 	*/
 	public String playerSetup(){
 		char orientation = randomOrientation();

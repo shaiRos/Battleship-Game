@@ -158,8 +158,10 @@ public class Game {
 			
 			if (currentPlayer instanceof HumanPlayer)
 			{
-			playerBoard.returnBoard(1);
-			System.out.println("\n" + (maxShips - (shipNumber + 1)) + " ship(s) left to place");
+				playerBoard.returnBoard(1);
+				System.out.println("\n" + (maxShips - (shipNumber + 1)) + " ship(s) left to place");
+				System.out.println("Placing a length " + shipLength + " ship");
+
 			}
 			
 		}
@@ -182,7 +184,6 @@ public class Game {
 
 		while (formatted != true) {
 			try {
-				System.out.println("Placing a length " + shipLength + " ship");
 				String setup = currentPlayer.playerSetup();
 				// take the input that was converted into String and separate the info
 				String setupInfo[] = setup.split(" ");
