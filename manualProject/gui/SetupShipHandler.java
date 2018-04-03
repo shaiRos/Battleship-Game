@@ -71,9 +71,8 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 			}
 		});
 		
-		//event handler for placing ships and checks
+		//this activates an event listener for the displayed board (the big one)
 		boardDisplay.getBoardGrid().setOnMousePressed(new EventHandler<MouseEvent>() {
-			
 			@Override
 			public void handle(MouseEvent myEvent) {
 
@@ -93,7 +92,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 						//will continue to addShip which updates the board and ships left to setup if it gets past the checks above
 						player.getPlayerBoard().addShip1(idNum,length, orientation, y, x);
 						
-						//need to update the ship count of this length
+						//need to update the ship count of this length since player placed one ship of this length
 						switch(length) {
 							case 2: Settings.len2Ships -= 1;
 								break;
@@ -114,7 +113,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 									pause.setOnFinished(event -> scene.setRoot(startGameTransitionScreen()));
 									pause.play();
 								} else {
-
+									Settings.setGeneratedShips(player.getPlayerBoard().getGeneratedShips());
 									SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,true);
 									PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
 									pause.setOnFinished(event -> scene.setRoot(p2Setup()));
@@ -140,17 +139,19 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 				//input must meet the requirements. This is done in the validate methods. If it doesn't,the methods throws this
 				//exception, exits the loop, and asks the user for a new value that meets the requirements.
 				System.out.println(e.getMessage());
-				//formatted = false;	
+				Settings.changeMessage(e.getMessage());
+					
 				}				
-				
 			}
 		});			
-         		
-
-	
 	}
 	
-	//different layout for right panel
+	/**
+	*	different layout for right panel when ship is picked. has an indicator for orientation and a cancel button
+	*	When cancel button is clicked, it displays the setup phase with no changes on the board and the ship count.
+	*
+	*	@return		a GridPane layout that is setup to display the orientation of the currently held ship and also adds a cancel button to cancel the ship choice
+	*/
 	public GridPane rightPanel() {
 		
 		GridPane rightPanel = new GridPane();
@@ -188,6 +189,14 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 		
 		
 	}
+	
+	
+	/**
+	*	Only for PvP. When player 1 setup phase is done, the display changes into another screen with a button at the center. This is to prevent the second player from
+	*	seeing the previous player's board setup. When ready, player two clicks the button the enter his/her own setup phase
+	*
+	*	@return		a BorderPane layout that displays the transition screen after player one's setup phase is done.
+	*/
 	public BorderPane p2Setup() {
 
 		BorderPane display = new BorderPane();
@@ -211,8 +220,9 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 		display.setCenter(continueButton);
 		EventHandler<MouseEvent> eventHandlerTextField = new EventHandler<MouseEvent>() { 
 			@Override 
-			public void handle(MouseEvent event) { 
-				AttackPhase startAttack = new AttackPhase(scene, Settings.p1, Settings.p2, "P1", null);
+			public void handle(MouseEvent event) {
+				Settings.changeMessage("");
+				AttackPhase startAttack = new AttackPhase(scene, Settings.p1, Settings.p2, "P1", false);
 			}           
 		};
 		continueButton.setOnMouseClicked(eventHandlerTextField);

@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.geometry.Pos;
+import javafx.scene.text.Font;
 
 
 
@@ -77,7 +78,7 @@ public class SetupPhase {
 		ColumnConstraints column = new ColumnConstraints();		
 		column.setPercentWidth(100);		
 		rightPanel.getColumnConstraints().add(column);			
-		//rightPanel.setGridLinesVisible(true);	
+		rightPanel.setGridLinesVisible(true);	
 
 		
 		if (displayOnly == false) {
@@ -105,8 +106,12 @@ public class SetupPhase {
 		TilePane botPanel = new TilePane(); 
 		botPanel.setPrefHeight(Settings.botHeight);	
 		botPanel.setMaxHeight(Settings.botHeight);				
-		botPanel.setStyle("-fx-background-color: #CC6600;");	//Hex color		
-
+		botPanel.setStyle("-fx-background-color: #ebcd98;");	//Hex color		
+		Settings.changeMessage("Ships to set: " + shipsToSet);
+		botPanel.getChildren().add(Settings.message);
+		
+		
+		
 		return botPanel;
 	}	
 
