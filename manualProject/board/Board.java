@@ -29,10 +29,14 @@ public class Board {
 	 * Default constructor for our board
 	 * initialize all arrays and variables base on boardSize
 	 */
-	public Board() {
-		guessBoard = new BoardValue[boardSize][boardSize];
-		gameBoard = new BoardValue[boardSize][boardSize];
-		shipBoard = new int[boardSize][boardSize];
+	public Board(int boardValue) {
+		setBoardSize(boardValue);
+		guessBoard = new BoardValue[boardValue][boardValue];
+		gameBoard = new BoardValue[boardValue][boardValue];
+		shipBoard = new int[boardValue][boardValue];
+		
+		numOfShips = (int)(Math.ceil(boardValue/2.0));
+		listOfShipSizes = generateShipsToAdd();
 		initializeGameBoard();
 		shipArray = new Ship[numOfShips];
 
@@ -61,10 +65,10 @@ public class Board {
 	* Setter method for setting board size
 	* @param size user indicated size for the size of the Board
 	*/
-	public static void setBoardSize(int size) {
+	private static void setBoardSize(int size) {
 		boardSize = size;
-		numOfShips = (int)(Math.ceil(size/2.0));
-		listOfShipSizes = generateShipsToAdd();
+//		numOfShips = (int)(Math.ceil(size/2.0));
+//		listOfShipSizes = generateShipsToAdd();
 	}
 	
 

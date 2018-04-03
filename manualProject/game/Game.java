@@ -126,7 +126,7 @@ public class Game {
 		userPlaceShip(player1Board, player1);
 
 		System.out.println("Player 1 game board successfully set. Player 2 standby...");
-		sleepThread(1000);
+		sleepThread(300);
 		clearScreen();
 
 		System.out.println("Player 2 setup phase: ");
@@ -137,7 +137,7 @@ public class Game {
 
 		System.out.println("Player 2 game board successfully set.");
 
-		sleepThread(1000);
+		sleepThread(300);
 		clearScreen();
 
 	}
@@ -309,9 +309,9 @@ public class Game {
 		// Initialize the boards and set the board sizes
 		// WIP:
 		// - Re-create the board using the new boardSize values
-		Board.setBoardSize(userBoardSize);
-		Board player1Board = new Board();
-		Board player2Board = new Board();
+		//Board.setBoardSize(userBoardSize);
+		Board player1Board = new Board(userBoardSize);
+		Board player2Board = new Board(userBoardSize);
 		// populate boards with battleships
 
 
@@ -373,7 +373,6 @@ public class Game {
 			// Take the user coordinates and attack
 
 			// Take AI values as col,row
-			// Convert it back to usable values
 			String coordEnemy = player2.playerTurn();
 			String[] coordFormattedEnemy = coordEnemy.split(",");
 			int row2 = Integer.parseInt(coordFormattedEnemy[0]);
@@ -391,28 +390,15 @@ public class Game {
 				// reset the flag
 				shipSunk = false;
 			}
-			// DEBUG
-			System.out.println("Current guessed values: ");
-			for (String values : ComputerPlayer.getGuessed()) {
-				System.out.println(values);
-			}
-
-			// DEBUG
-			System.out.println("Current guessing queue: ");
-			for (String values : ComputerPlayer.getQueue()) {
-				System.out.println(values);
-			}
+			
 
 			// Check for remaining ships on enemy board
-				System.out.println("Player 2 has won!");
 			if (winCondition(player1Board) == true) {
+				System.out.println("Player 2 has won!");
 				sleepThread(2500);
 				System.exit(0);
 			}
 			sleepThread(1000);
-
-			/*check win conditions maybe make this an exception. throws an exception if
-			* winning conditions are met, catches condition and exits loop. */
 
 		} while (winCondition != true);
 
