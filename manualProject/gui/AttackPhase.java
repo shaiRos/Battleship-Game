@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 *	It's base layout is a BorderPane where only the center, bottom and left regions are used.
 *
 *	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
-**/
+*/
 
 public class AttackPhase  {
 

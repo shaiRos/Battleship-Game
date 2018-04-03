@@ -18,25 +18,14 @@ public class Ship {
 	private int[][] shipCoordinates;
 
 	/**
-	 * Main constructor of the Ship
+	 * Main constructor of the Ship, given the properties of the ship
 	 * 
-	 * @param int
-	 *            len, col, ro - Properties of the ship char orient - Properties of
-	 *            the ship
-	 *
-	 **/
-	public Ship(char orient, int len, int col, int ro) {
-		orientation = orient;
-		length = len;
-		column = col;
-		row = ro;
-		// We should store the points that the ship takes up, so we can check exactly
-		// which
-		// parts of the ship have and haven't been hit. Makes checking if it's sunken a
-		// lot easier too.
-		int[] shipPoints = new int[len];
-	}
-
+	 * @param ID an int that is unique to each ship, tied its index in the ship array
+	 * @param orient orientation of the ship representated by 'h' or 'v'
+	 * @param len number of coordinate of the ship(length)
+	 * @param col smallest x value of the coordinate
+	 * @param ro smallest y value of the coordinate
+	 */
 	public Ship(int ID, int len, char orient, int ro, int col) {
 		shipID = ID;
 		length = len;
@@ -68,16 +57,58 @@ public class Ship {
 		}
 
 	}
+	
+	/**
+	 * getters of Ship properties
+	 * @return column ship's smallest x coordinate
+	 */
+	public int getColumn() {
+		return this.column;
+	}
+
+	/**
+	 * getters of Ship properties
+	 * @return row ship's smallest y coordinate
+	 */
+	public int getRow() {
+		return this.row;
+	}
+
+	/**
+	 * getters of Ship properties
+	 * @return the ship's orientation represented by a char
+	 */
+	public char getOrientation() {
+		return this.orientation;
+	}
+
+	/**
+	 * getters of Ship properties
+	 * @return the ship's length
+	 */
+	public int getLength() {
+		return this.length;
+	}
+
+	/**
+	 * getters of Ship properties
+	 * @return shipCoordinates an 2D array of the ship's coordinate on the board
+	 */
+	public int[][] getShipCoordinates() {
+		return shipCoordinates;
+	}
 
 	/*
 	 * take in the coordinate being attacked and update boolean board if it had been
 	 * hit
+	 * @param rowAttacked y coordinate of the position player attacked
+	 * @param colAttacked x coordinate of the position being attacked
+	 * @return true if a ship has been hit
 	 */
 	public boolean takeHit(int rowAttacked, int colAttacked) {
 		for (int i = 0; i < shipCoordinates.length; i++) {
 			if (shipCoordinates[i][0] == rowAttacked && shipCoordinates[i][1] == colAttacked) {
 				isHit[i] = true;
-				printHitBoard();
 				return true;
 			}
 		}
@@ -87,6 +118,7 @@ public class Ship {
 
 	/*
 	 * check if a ship is sunken
+	 * @return if all of the ship's coordinate has been hit, also update the variable isSunken
 	 */
 	public boolean checkShipIsSunken() {
 		if (this.isSunken != true) {
@@ -100,68 +132,6 @@ public class Ship {
 		return this.isSunken;
 	}
 
-	/**
-	 * Mass setter method that prepares the ship values
-	 * 
-	 * @param int
-	 *            len, col, ro - Properties of the ship char orient - Properties of
-	 *            the ship
-	 **/
-	public void setShipValues(char orient, int len, int col, int ro) {
-		orientation = orient;
-		length = len;
-		column = col;
-		row = ro;
-	}
 
-	/**
-	 * getters of Ship properties
-	 * 
-	 * @return int column, row, length - properties of the ship char orientation -
-	 *         properties of the ship
-	 **/
-	public int getColumn() {
-		return this.column;
-	}
-
-	public int getRow() {
-		return this.row;
-	}
-
-	public char getOrientation() {
-		return this.orientation;
-	}
-
-	public int getLength() {
-		return this.length;
-	}
-
-	public int[][] getShipCoordinates() {
-		return shipCoordinates;
-	}
-
-	/**
-	 * temporary methods for checking purpose
-	 **/
-
-	public String toString() {
-		String info = shipID + "," + orientation + "," + length + "," + row + "," + column;
-		return info;
-	}
-
-	public void printCoordinates() {
-		for (int x = 0; x < shipCoordinates.length; x++) {
-			for (int y = 0; y < shipCoordinates[x].length; y++) {
-				System.out.print(shipCoordinates[x][y]);
-			}
-			System.out.println(",");
-		}
-	}
-
-	public void printHitBoard() {
-		for (int i = 0; i < isHit.length; i++) {
-			System.out.println(isHit[i]);
-		}
-	}
 
 }

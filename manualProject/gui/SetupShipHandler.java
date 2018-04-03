@@ -87,11 +87,8 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 						GameConfig.validateShipProperties(player.getPlayerBoard(),length,orientation,x,y);
 						int shipsLeft = shipsToSet-1;
 						int idNum = Settings.shipsToPlace - shipsLeft - 1;	
-						
-						
-						//will continue to addShip which updates the board and ships left to setup if it gets past the checks above
-						player.getPlayerBoard().addShip1(idNum,length, orientation, y, x);
-						
+						//player.getPlayerBoard().addShip(orientation,length,x,y);
+						player.getPlayerBoard().addShip(idNum,length, orientation, y, x);
 						//need to update the ship count of this length since player placed one ship of this length
 						switch(length) {
 							case 2: Settings.len2Ships -= 1;
