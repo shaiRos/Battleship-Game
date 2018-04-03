@@ -1,4 +1,6 @@
 package gui;
+import javafx.scene.text.Font;
+import javafx.scene.control.Label;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import players.Player;
@@ -22,11 +24,13 @@ public class Settings {
 
 	public static String gameMode = "Player vs Ai";
 	public static int boardSize = 5;
-	public static int shipsToPlace = 2;
+	public static int shipsToPlace;
 	public static int len2Ships;
 	public static int len3Ships;
 	public static int len4Ships;
-	public static int len5Ships;	
+	public static int len5Ships;
+
+	public static Label message = msgLabel();
 	
 	
 	public static void setBoardSize(int value) {
@@ -35,12 +39,9 @@ public class Settings {
 		}
 		
 	}
-
-	public static void setNumOfShips(int value) {
-		if (value >= 1 && value <= 8) {
-			shipsToPlace = value;
-		}
-		
+	
+	public static void changeMessage(String msg) {
+		message.setText(msg);
 	}
 	
 	
@@ -53,9 +54,30 @@ public class Settings {
 		}
 	}
 	
-	public static void setGeneratedShips(int[] generatedShipsArray){
+	public static Label msgLabel() {
 		
+		Label message = new Label("");
+		message.setFont(new Font(40));
+		return message;
 	}
 	
+	public static void setGeneratedShips(int[] generatedShipsArray){
+		for (int shipListByLen : generatedShipsArray) {
+			switch(shipListByLen){
+				case 2:
+					len2Ships += 1;
+					break;
+				case 3:
+					len3Ships += 1;
+					break;
+				case 4:
+					len4Ships += 1;
+					break;
+				case 5:
+					len5Ships += 1;
+					break;
+			}
+		}
+	}
 }	
 	

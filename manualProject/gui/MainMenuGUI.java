@@ -55,7 +55,6 @@ public class MainMenuGUI {
 
 		settingScreen.add(modeSection(),0,1);
 		settingScreen.add(boardSizeSection(),0,2);
-		//settingScreen.add(shipsSection(),0,3);
 		settingScreen.add(startButton,0,4);		
 
 		
@@ -140,41 +139,6 @@ public class MainMenuGUI {
 		
 		return boardVSection;
 	}
-
-/* 	public VBox shipsSection() {
-
-		VBox shipsVSection = new VBox(10);
-		HBox shipsHSection = new HBox(160);
-		Button shipsLeftBt = new Button("<=");
-		shipsLeftBt.setPrefSize(60,40);
-		Label shipsLabel = new Label(Integer.toString(Settings.shipsToPlace));
-		shipsLabel.setFont(new Font(20));
-		
-		Label shipsTitle = sectionTitle("Number of Ships");
-		
-		Button shipsRightBt = new Button("=>");	
-		shipsRightBt.setPrefSize(60,40);
-		
-		shipsRightBt.setOnMouseClicked(event -> {
-			Settings.setNumOfShips(Settings.shipsToPlace+1);
-			shipsLabel.setText(Integer.toString(Settings.shipsToPlace));
-		});
-		
-		shipsLeftBt.setOnMouseClicked(event -> {
-			Settings.setNumOfShips(Settings.shipsToPlace-1);
-			shipsLabel.setText(Integer.toString(Settings.shipsToPlace));
-		});			
-		
-		
-		shipsHSection.getChildren().addAll(shipsLeftBt,shipsLabel,shipsRightBt);
-		shipsHSection.setAlignment(Pos.CENTER);
-		shipsVSection.setAlignment(Pos.CENTER);
-		shipsVSection.getChildren().addAll(shipsTitle,shipsHSection);		
-		
-		
-		return shipsVSection;
-	}
-	 */
 }
 
 
