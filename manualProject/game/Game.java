@@ -373,7 +373,6 @@ public class Game {
 			// Take the user coordinates and attack
 
 			// Take AI values as col,row
-			// Convert it back to usable values
 			String coordEnemy = player2.playerTurn();
 			String[] coordFormattedEnemy = coordEnemy.split(",");
 			int row2 = Integer.parseInt(coordFormattedEnemy[0]);
@@ -391,28 +390,15 @@ public class Game {
 				// reset the flag
 				shipSunk = false;
 			}
-			// DEBUG
-			System.out.println("Current guessed values: ");
-			for (String values : ComputerPlayer.getGuessed()) {
-				System.out.println(values);
-			}
-
-			// DEBUG
-			System.out.println("Current guessing queue: ");
-			for (String values : ComputerPlayer.getQueue()) {
-				System.out.println(values);
-			}
+			
 
 			// Check for remaining ships on enemy board
-				System.out.println("Player 2 has won!");
 			if (winCondition(player1Board) == true) {
+				System.out.println("Player 2 has won!");
 				sleepThread(2500);
 				System.exit(0);
 			}
 			sleepThread(1000);
-
-			/*check win conditions maybe make this an exception. throws an exception if
-			* winning conditions are met, catches condition and exits loop. */
 
 		} while (winCondition != true);
 
