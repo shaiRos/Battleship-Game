@@ -105,7 +105,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 							if (thisPlayer == "P1") {
 								if (Game.getAIStatus() == true) {
 									SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,true);
-									Game.mapFromFiles("map.txt", Settings.p2.getPlayerBoard());
+									Game.userPlaceShip(Settings.p2.getPlayerBoard(), Settings.p2);
 									PauseTransition pause = new PauseTransition(Duration.seconds(1));
 									pause.setOnFinished(event -> scene.setRoot(startGameTransitionScreen()));
 									pause.play();
@@ -142,6 +142,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 			}
 		});			
 	}
+	
 	
 	/**
 	*	different layout for right panel when ship is picked. has an indicator for orientation and a cancel button
