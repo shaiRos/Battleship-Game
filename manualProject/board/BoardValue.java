@@ -1,15 +1,27 @@
 package board;
 
+/**
+ * state of each grid displayed on the board
+ * 
+ * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+ */
 public enum BoardValue {
-	HIT("Previously Attacked"), MISS("Previously Attacked!"), EMPTY("Miss!"), SHIP("Hit!");
-
-	private String message;
-
-	BoardValue(String message) {
-		this.message = message;
-	}
-
-	public String getMessage() {
-		return message;
-	}
+	/**
+	* attacked an area containing a ship
+	*/
+	HIT, 
+	
+	/**
+	* attacked an area that does not contain a ship
+	*/
+	MISS, 
+	/**
+	* default value of board, no action taken
+	*/
+	EMPTY, 
+	/**
+	* for the users to view their own game board only, displays
+	* where they placed their ships
+	*/
+	SHIP;
 }

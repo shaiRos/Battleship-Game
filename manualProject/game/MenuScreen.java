@@ -90,7 +90,9 @@ public class MenuScreen {
 		}
 	}
 
-	// add
+	/**
+	* setter method
+	*/
 	public void setUserChoice(int num) {
 		userChoice = num;
 	}

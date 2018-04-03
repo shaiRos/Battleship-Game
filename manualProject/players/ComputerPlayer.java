@@ -12,7 +12,7 @@ import java.util.Random;
  * Houses all of the core logic dedicated to the AI
  * 
  * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
- **/
+ */
 public class ComputerPlayer extends Player {
 
 	Board playerBoard = null;
@@ -23,8 +23,8 @@ public class ComputerPlayer extends Player {
 	 * Default constructor
 	 * 
 	 * @param board
-	 *            - links the provided board to the current ComputerPlayer object
-	 **/
+	 *            links the provided board to the current ComputerPlayer object
+	 */
 	public ComputerPlayer(Board board) {
 		this.playerBoard = board;
 	}
@@ -32,11 +32,15 @@ public class ComputerPlayer extends Player {
 	/**
 	 * getter returns board
 	 *
-	 **/
+	 */
 	public Board getPlayerBoard() {
 		return playerBoard;
 	}
 
+	/**
+	* Clear the AI's guessing Queue once a ship has been sunken
+	* so AI randomly attacks a position
+	*/
 	public void clearQueue() {
 		queue.clear();
 	}
@@ -45,13 +49,17 @@ public class ComputerPlayer extends Player {
 	 * Generates random coordinates that are within the board's bounds
 	 * 
 	 * @return coordinate - Int between 1 - board size
-	 **/
+	 */
 	public int randomCoordinate() {
 		Random rand = new Random();
 		int coordinate = rand.nextInt(Board.getBoardSize()) + 1;
 		return coordinate;
 	}
 	
+	/**
+	* Generate a random orientation for setting up the ships on the board
+	* @return char 'h' or 'v' to represent horizaontal or vertical
+	*/
 	private char randomOrientation(){
 		Random rand = new Random();
 		int orientationNum = rand.nextInt(2);
@@ -62,6 +70,9 @@ public class ComputerPlayer extends Player {
 		}
 	}
 	
+	/**
+	*
+	*/
 	public String playerSetup(){
 		char orientation = randomOrientation();
 		int col = randomCoordinate();
@@ -77,7 +88,7 @@ public class ComputerPlayer extends Player {
 	 * @param coordinate
 	 *            - String formatted column,row value
 	 * @return contains - Boolean specifies whether the attack is valid
-	 **/
+	 */
 	public boolean checkNotAttacked(String coordinate) {
 		boolean contains = true;
 		if (getGuessed().isEmpty() == true) {
@@ -93,11 +104,7 @@ public class ComputerPlayer extends Player {
 		return contains;
 	}
 
-	// Long method, will check all four corners and all four sides of the board
-	// Adds to the queue based on the parameters
-	// NOTE
-	// This makes the AI miss ALOT.
-	// NEEDS THE SUNK_SHIP BOOLEAN TO CLEAR THE QUEUE
+
 	/**
 	 * If the AI makes a hit, adds the hit to the current queue that will be
 	 * processed during AI turn
@@ -105,7 +112,7 @@ public class ComputerPlayer extends Player {
 	 * @param int
 	 *            column, row - Int values of the column and row that has been
 	 *            successfully attacked
-	 **/
+	 */
 	public void makeQueue(int row, int column) {
 		int boardSize = Board.getBoardSize();
 
@@ -132,7 +139,7 @@ public class ComputerPlayer extends Player {
 	 * The procedure the AI will follow to complete their round. Contains all of the
 	 * logic required to make a guess and validate the guess values
 	 *
-	 **/
+	 */
 	public String playerTurn() {
 		boolean formatted = false;
 		int column = -1;
@@ -177,17 +184,6 @@ public class ComputerPlayer extends Player {
 						queue.remove(0);
 					}
 
-					// // DEBUG
-					// System.out.println("Current guessed values: ");
-					// for (String values: guessed) {
-					// System.out.println(values);
-					// }
-					//
-					// // DEBUG
-					// System.out.println("Current guessing queue: ");
-					// for (String values: queue) {
-					// System.out.println(values);
-					// }
 				}
 
 			}
