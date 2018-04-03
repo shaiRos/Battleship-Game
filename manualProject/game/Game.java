@@ -366,7 +366,7 @@ public class Game {
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
 
-			//the following array and ints are used to switch turns between players
+			//the following arrays and ints are used to switch turns between players
 			Board [] boards = new Board[]{player1Board, player2Board};
 			Player [] players = new Player[]{player1,player2};
 			int currentPlayerNum = 0;
