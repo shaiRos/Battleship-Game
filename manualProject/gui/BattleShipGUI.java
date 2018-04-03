@@ -14,7 +14,7 @@ import players.*;
 /**
 * 	This is where application of java fx starts. 
 *	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
-**/
+*/
 
 public class BattleShipGUI extends Application
 {
@@ -42,6 +42,10 @@ public class BattleShipGUI extends Application
 		primaryStage.show();
 	}
 	
+	/**
+	* Initialize objects required for the game and get information for 
+	* setting up the boards
+	*/
 	public static void gameSetup() {
 		
 		if (Settings.gameMode == "Player vs Ai") {

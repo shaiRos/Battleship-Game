@@ -88,7 +88,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 						int shipsLeft = shipsToSet-1;
 						int idNum = Settings.shipsToPlace - shipsLeft - 1;	
 						//player.getPlayerBoard().addShip(orientation,length,x,y);
-						player.getPlayerBoard().addShip1(idNum,length, orientation, y, x);
+						player.getPlayerBoard().addShip(idNum,length, orientation, y, x);
 						//id, len, orient, ro(y) , co(x)
 						idNum++;
 						

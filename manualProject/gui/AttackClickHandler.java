@@ -28,7 +28,7 @@ import javafx.scene.text.Font;
 	
 	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
 
-**/
+*/
 
 public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
