@@ -101,13 +101,14 @@ public class SetupPhase {
 		
 	}
 	
-	public TilePane botPanel() {
+	public GridPane botPanel() {
 		
-		TilePane botPanel = new TilePane(); 
+		GridPane botPanel = new GridPane(); 
 		botPanel.setPrefHeight(Settings.botHeight);	
 		botPanel.setMaxHeight(Settings.botHeight);				
 		botPanel.setStyle("-fx-background-color: #ebcd98;");	//Hex color		
 		Settings.changeMessage("Ships to set: " + shipsToSet);
+		botPanel.setAlignment(Pos.CENTER);
 		botPanel.getChildren().add(Settings.message);
 		
 		

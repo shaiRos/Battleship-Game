@@ -129,13 +129,10 @@ public class MainMenuGUI {
 			boardLabel.setText(Integer.toString(Settings.boardSize));
 		});		
 		
-		
-		
 		boardHSection.getChildren().addAll(boardLeftBt,boardLabel,boardRightBt);
 		boardHSection.setAlignment(Pos.CENTER);
 		boardVSection.setAlignment(Pos.CENTER);
 		boardVSection.getChildren().addAll(boardTitle,boardHSection);		
-		
 		
 		return boardVSection;
 	}

@@ -194,7 +194,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	*
 	*	@return		a BorderPane layout that displays the transition screen after player one's setup phase is done.
 	*/
-	public BorderPane p2Setup() {
+/* 	public BorderPane p2Setup() {
 
 		BorderPane display = new BorderPane();
 		Button continueButton = new Button("Continue");
@@ -207,7 +207,24 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 		};
 		continueButton.setOnMouseClicked(eventHandlerTextField);
 		return display;
-	}
+	} */
+	
+	public GridPane p2Setup() {
+
+		GridPane display = new GridPane();
+		Button continueButton = new Button("Continue");
+		display.setAlignment(Pos.CENTER);
+		EventHandler<MouseEvent> eventHandlerTextField = new EventHandler<MouseEvent>() { 
+			@Override 
+			public void handle(MouseEvent event) { 
+				SetupPhase player2SetupPhase = new SetupPhase(scene,"P2",Settings.shipsToPlace,false);
+			}           
+		};
+		continueButton.setOnMouseClicked(eventHandlerTextField);
+		display.add(continueButton,0,1);
+		return display;
+	}	
+	
 
 	
 	public BorderPane startGameTransitionScreen() {
