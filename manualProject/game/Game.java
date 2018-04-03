@@ -346,85 +346,57 @@ public class Game {
 		*/
 
 		// instantiate our players
-		Player player1 = new HumanPlayer(player1Board);
+		Player player1 = new HumanPlayer(player1Board, "player 1");
 		// We don't know what our player 2 is at this point, just instantiate a generic
 		// player2
 		Player player2 = null;
 
 		// Create a new human that can access their boards
 		if (getAIStatus() != true) {
-			player2 = new HumanPlayer(player2Board);
+			player2 = new HumanPlayer(player2Board, "player 2");
 		} else {
 			player2 = new ComputerPlayer(player2Board);
 		}
 
 		// This will allow user to input coordinates and setup board
 		setupBoard(player1Board, player1, player2Board, player2);
-		int currentPlayerNum = 0;
+
 		// Game loop
 		do {
 			// set each player's guess board to the other player's game board
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
 
+			//the following array and ints are used to switch turns between players
 			Board [] boards = new Board[]{player1Board, player2Board};
-			Player [] playres = new Player[]{player1,player2};
-			// Player 1 turn
+			Player [] players = new Player[]{player1,player2};
+			int currentPlayerNum = 0;
+			int swtichTurn = 1;
+
 			clearScreen();
-			System.out.println("Player 1 turn starting....");
+			System.out.println(players[currentPlayerNum].getName() + " turn starting....");
 
 			// Take coordinates from the player turn as col,row
 			// Convert back to usable values
-			String coord = player1.playerTurn();
+			String coord = players[currentPlayerNum].playerTurn();
 			String[] coordFormatted = coord.split(",");
 			int row1 = Integer.parseInt(coordFormatted[0]);
 			int column1 = Integer.parseInt(coordFormatted[1]);
 			// Send the attack to the board once properly formatted
-			GameConfig.sendAttack(player1Board, row1, column1);
-			shipSunk = GameConfig.checkSunken(player2Board, row1, column1);
+			GameConfig.sendAttack(boards[currentPlayerNum], row1, column1);
+
 			// Check for remaining ships on enemy board
-			if (winCondition(player2Board) == true) {
-				System.out.println("Player 1 has won!");
+			shipSunk = GameConfig.checkSunken(boards[currentPlayerNum+swtichTurn], row1, column1);
+			if (winCondition(boards[currentPlayerNum+swtichTurn]) == true) {
+				System.out.println(players[currentPlayerNum].getName() +  "has won!");
 				sleepThread(2500);
 				System.exit(0);
 			}
 
 			sleepThread(1000);
-
-			// check win conditions for every turn
-
-			// Player 2 turn
-			clearScreen();
-			System.out.println("Player 2 turn starting....");
-			// Take the user coordinates and attack
-
-			// Take AI values as col,row
-			String coordEnemy = player2.playerTurn();
-			String[] coordFormattedEnemy = coordEnemy.split(",");
-			int row2 = Integer.parseInt(coordFormattedEnemy[0]);
-			int column2 = Integer.parseInt(coordFormattedEnemy[1]);
-			GameConfig.sendAttack(player2Board, row2, column2);
-			shipSunk = GameConfig.checkSunken(player1Board, row1, column1);
-			// if this is a hit, we want all the ships around the guessed ship to be added
-			// to the queue
-			if (Game.getHitSuccess() == true && getAIStatus() == true) {
-				((ComputerPlayer) player2).makeQueue(row2, column2);
-			}
-			if (shipSunk == true) {
-				((ComputerPlayer) player2).clearQueue();
-				System.out.println("Cleared the queue because ship has been sunk");
-				// reset the flag
-				shipSunk = false;
-			}
-			
-
-			// Check for remaining ships on enemy board
-			if (winCondition(player1Board) == true) {
-				System.out.println("Player 2 has won!");
-				sleepThread(2500);
-				System.exit(0);
-			}
-			sleepThread(1000);
+			//switch player
+			currentPlayerNum += swtichTurn;
+			swtichTurn *= -1;
 
 		} while (winCondition != true);
 
