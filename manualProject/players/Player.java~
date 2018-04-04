@@ -12,16 +12,6 @@ import board.BoardValue;
  * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
  */
 public abstract class Player {
-	String name;	
-	
-	
-	/**
-	* Constructor allows user to set the name of the player
-	* @param playerName the name of the Player
-	*/
-	public Player(String playerName){
-		this.name = playerName;
-	}
 
 	/**
 	 * Checks whether the ship has been previously hit by the player
@@ -40,14 +30,6 @@ public abstract class Player {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * getter funciton for the name of the player
-	 * @return namm in a string
-	 */
-	public String getName(){
-		return this.name;
 	}
 
 	/**
