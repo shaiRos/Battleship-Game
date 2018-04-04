@@ -44,7 +44,7 @@ public abstract class Player {
 
 	/**
 	 * getter funciton for the name of the player
-	 * @return namm in a string
+	 * @return player name in a string
 	 */
 	public String getName(){
 		return this.name;
