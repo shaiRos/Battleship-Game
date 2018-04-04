@@ -19,6 +19,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.geometry.Pos;
 import javafx.scene.text.Font;
+import javafx.scene.paint.Color;
 
 
 
@@ -78,26 +79,46 @@ public class SetupPhase {
 		ColumnConstraints column = new ColumnConstraints();		
 		column.setPercentWidth(100);		
 		rightPanel.getColumnConstraints().add(column);			
-		rightPanel.setGridLinesVisible(true);	
+		//rightPanel.setGridLinesVisible(true);	
+		
+		
+
 
 		
 		if (displayOnly == false) {
-			Button fiveLen = buttonForShipLen("Five", Settings.len5Ships,5);
-			Button fourLen = buttonForShipLen("Four", Settings.len4Ships,4);
-			Button threeLen = buttonForShipLen("Three", Settings.len3Ships,3);
-			Button twoLen = buttonForShipLen("Two", Settings.len2Ships,2);		
+			VBox fiveLen = buttonForShipLen("Five", Settings.len5Ships,5);
+			VBox fourLen = buttonForShipLen("Four", Settings.len4Ships,4);
+			VBox threeLen = buttonForShipLen("Three", Settings.len3Ships,3);
+			VBox twoLen = buttonForShipLen("Two", Settings.len2Ships,2);		
 			
+
+
+
+
+
+
 			rightPanel.addColumn(0,fiveLen,fourLen,threeLen,twoLen);
 		}
 		
 		return rightPanel;
 	}
 
-	public Button buttonForShipLen(String wordLen,int shipLenCount, int len) {
-		Button makeButton = new Button(wordLen + ",  x" + shipLenCount);
+	public VBox buttonForShipLen(String wordLen,int shipLenCount, int len) {
+		Button makeButton = new Button(wordLen);
 		if (shipLenCount != 0) {
 			makeButton.setOnMouseClicked(new SetupShipHandler(scene, len, root, thisPlayer, shipsToSet, ownBoard));
-		}return makeButton;
+		}
+			
+		VBox section = new VBox(20);
+		section.setAlignment(Pos.CENTER);
+		Label label = new Label("x" + shipLenCount);
+		label.setFont(new Font(40));
+		label.setTextFill(Color.WHITE);
+		
+		section.getChildren().addAll(label,makeButton);			
+			
+		
+		return section;
 		
 	}
 	
@@ -107,8 +128,8 @@ public class SetupPhase {
 		botPanel.setPrefHeight(Settings.botHeight);	
 		botPanel.setMaxHeight(Settings.botHeight);				
 		botPanel.setStyle("-fx-background-color: #ebcd98;");	//Hex color		
-		Settings.changeMessage("Ships to set: " + shipsToSet);
-		botPanel.setAlignment(Pos.CENTER);
+		Settings.changeMessage("Ships remaining: " + shipsToSet);
+		botPanel.setAlignment(Pos.TOP_CENTER);
 		botPanel.getChildren().add(Settings.message);
 		
 		

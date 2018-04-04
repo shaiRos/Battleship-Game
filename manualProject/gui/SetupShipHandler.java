@@ -173,8 +173,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 		//orientLabel.setAlignment(Pos.CENTER);
 		
 		//cancel button
-		Button cancelBt = new Button("Cancel");
-		rightPanel.setAlignment(Pos.CENTER);		
+		Button cancelBt = new Button("Cancel");	
 		rightPanel.add(cancelBt,0,3);
 		rightPanel.add(orientLabel,0,0);
 
@@ -195,21 +194,6 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	*
 	*	@return		a BorderPane layout that displays the transition screen after player one's setup phase is done.
 	*/
-/* 	public BorderPane p2Setup() {
-
-		BorderPane display = new BorderPane();
-		Button continueButton = new Button("Continue");
-		display.setCenter(continueButton);
-		EventHandler<MouseEvent> eventHandlerTextField = new EventHandler<MouseEvent>() { 
-			@Override 
-			public void handle(MouseEvent event) { 
-				SetupPhase player2SetupPhase = new SetupPhase(scene,"P2",Settings.shipsToPlace,false);
-			}           
-		};
-		continueButton.setOnMouseClicked(eventHandlerTextField);
-		return display;
-	} */
-	
 	public GridPane p2Setup() {
 
 		GridPane display = new GridPane();

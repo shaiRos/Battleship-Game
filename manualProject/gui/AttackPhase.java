@@ -13,6 +13,9 @@ import players.Player;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
+import javafx.scene.text.Font;
+import javafx.scene.paint.Color;
+
 
 /**
 * 	This class creates the user interface of the main game where players take turns to attack each other's ships 
@@ -106,9 +109,16 @@ public class AttackPhase  {
 		rightPanel.setPrefWidth(Settings.sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));
+		
+		VBox secondTile = new VBox();
+		secondTile.setAlignment(Pos.TOP_CENTER);
 		String whichPlayer = attackingPlayer + "'s turn";
-		Label thisPlayer = new Label("");
-		rightPanel.getChildren().add(ownBoard.getBoardGrid());			
+		Label thisPlayerTurn = new Label(whichPlayer);
+		thisPlayerTurn.setFont(new Font(30));
+		thisPlayerTurn.setTextFill(Color.WHITE);
+		
+		secondTile.getChildren().add(thisPlayerTurn);
+		rightPanel.getChildren().addAll(ownBoard.getBoardGrid(),secondTile);			
 		return rightPanel;
 	}	
 	
@@ -122,7 +132,7 @@ public class AttackPhase  {
 		botPanel.setPrefHeight(Settings.botHeight);	
 		botPanel.setMaxHeight(Settings.botHeight);				
 		botPanel.setStyle("-fx-background-color: #ebcd98;");	//Hex color		
-		botPanel.setAlignment(Pos.CENTER);
+		botPanel.setAlignment(Pos.TOP_CENTER);
 		botPanel.getChildren().add(Settings.message);
 		
 		return botPanel;
