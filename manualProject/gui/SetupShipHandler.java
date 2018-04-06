@@ -19,6 +19,9 @@ import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import players.Player;
 import javafx.geometry.Pos;
+import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 public class SetupShipHandler implements EventHandler<MouseEvent> {
@@ -172,12 +175,20 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 		orientLabel.setTextFill(Color.WHITE);
 		//orientLabel.setAlignment(Pos.CENTER);
 		
+		HBox orientHBox = new HBox(10);
+		Image rClick = new Image("/images/RightClickImg.png");
+		ImageView rClickView = new ImageView();
+		rClickView.setImage(rClick);
+		rClickView.setFitWidth(40);
+		rClickView.setFitHeight(40);
+		orientHBox.getChildren().addAll(rClickView,orientLabel);
+		
 		//cancel button
 		Button cancelBt = new Button("Cancel");	
 		rightPanel.add(cancelBt,0,3);
-		rightPanel.add(orientLabel,0,0);
+		rightPanel.add(orientHBox,0,0);
 
-		rightPanel.setGridLinesVisible(true);		
+		//rightPanel.setGridLinesVisible(true);		
 		cancelBt.setOnMouseClicked(event -> {
 			SetupPhase cancelShipSetup = new SetupPhase(scene,thisPlayer,shipsToSet,false);
 		});
