@@ -20,6 +20,19 @@ public class HumanPlayer extends Player {
 	 *             Board object that will be linked to the current player
 	 */
 	public HumanPlayer(Board board) {
+		super("human"); //default name
+		this.playerBoard = board;
+	}
+
+	/**
+	 * constructor
+	 * 
+	 * @param board
+	 *            links the provided board to the current ComputerPlayer object
+	 * @param playerName a name to the player
+	 */
+	public HumanPlayer(Board board, String playerName) {
+		super(playerName);
 		this.playerBoard = board;
 	}
 
