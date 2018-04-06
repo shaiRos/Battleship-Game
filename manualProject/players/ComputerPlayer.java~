@@ -26,12 +26,12 @@ public class ComputerPlayer extends Player {
 	 *            links the provided board to the current ComputerPlayer object
 	 */
 	public ComputerPlayer(Board board) {
-		super("Computer"); //default name
+		super("Computer");
 		this.playerBoard = board;
 	}
 	
 	/**
-	 * constructor
+	 * Default constructor
 	 * 
 	 * @param board
 	 *            links the provided board to the current ComputerPlayer object

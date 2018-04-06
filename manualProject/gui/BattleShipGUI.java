@@ -51,12 +51,12 @@ public class BattleShipGUI extends Application
 		if (Settings.gameMode == "Player vs Ai") {
 			Game.enableAI(); 
 		}
-        Board.setBoardSize(Settings.boardSize);
+        //Board.setBoardSize(Settings.boardSize);
+        Board player1Board = new Board(Settings.boardSize);
+        Board player2Board = new Board(Settings.boardSize);
 		Settings.shipsToPlace = Board.getNumOfShips();
 		Settings.setGeneratedShips(Board.getGeneratedShips());
-        Board player1Board = new Board();
-        Board player2Board = new Board();
-		
+
 
 		Player player1 = new HumanPlayer(player1Board);
 		Player player2 = null;
