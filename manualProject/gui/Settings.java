@@ -1,6 +1,7 @@
 package gui;
 import javafx.scene.text.Font;
 import javafx.scene.control.Label;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import players.Player;
@@ -57,7 +58,9 @@ public class Settings {
 	public static Label msgLabel() {
 		
 		Label message = new Label("");
-		message.setFont(new Font(40));
+		message.setFont(new Font(30));
+		//message.setStyle("-fx-background-color: #fcfeff;");
+		message.setPadding(new Insets(10));
 		return message;
 	}
 	

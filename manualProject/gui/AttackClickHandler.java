@@ -110,6 +110,9 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
 				//First Display if it Hit or miss
 				Settings.changeMessage(thisPlayer +" attacked coordinates: " + y + ", " + x);
+				if (shipSunk == true) {
+					Settings.changeMessage("you sunk a ship!");
+				}
 				AttackPhase displayOnly = new AttackPhase(scene,player1,player2, thisPlayer, true);
 				//Pause transition to display that waits for prompt for next player turn, or AI making a turn loading screen
 				PauseTransition pause = new PauseTransition(Duration.seconds(1));
@@ -185,7 +188,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
         } 
         if (shipSunk == true) {
     			((ComputerPlayer) player2).clearQueue();
-    			System.out.println("Cleared the queue because ship has been sunk");
+    			//Settings.changeMessage("a ship has sunk");
     			shipSunk = false;
         }
         System.out.println("shipSunk Value: " + shipSunk);
