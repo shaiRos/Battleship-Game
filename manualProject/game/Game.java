@@ -292,31 +292,7 @@ public class Game {
 		}
 
 	}
-/* 
-	private void takeTurn(Player currentPlayer, Board currentBoard, String userName){
-			clearScreen();
-			System.out.println(userName + " turn starting....");
 
-			// Take coordinates from the player turn as col,row
-			// Convert back to usable values
-			String coord = currentPlayer.playerTurn();
-			String[] coordFormatted = coord.split(",");
-			int row1 = Integer.parseInt(coordFormatted[0]);
-			int column1 = Integer.parseInt(coordFormatted[1]);
-			// Send the attack to the board once properly formatted
-			GameConfig.sendAttack(player1Board, row1, column1);
-			shipSunk = GameConfig.checkSunken(player2Board, row1, column1);
-			// Check for remaining ships on enemy board
-			if (winCondition(player2Board) == true) {
-				System.out.println(userName + " has won!");
-				sleepThread(2500);
-				System.exit(0);
-			}
-
-			sleepThread(1000);
-
-	}
- */
 	/**
 	 * Default board difficulties Use the AI thingy to setup random board placement
 	 * Implement Ship class features - ship sunk Fix board size constants
