@@ -1,5 +1,6 @@
 package gui;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Button;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.geometry.Pos;
 import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
+import javafx.geometry.HPos;
 
 
 /**
@@ -46,7 +48,7 @@ public class AttackPhase  {
 	*	@param		player - a String that indicates which player the display should accommodate
 	*	@param		displayonly - a boolean indicating if this layout out should be display only with no event handlers on the guess board
 	*/
-	public AttackPhase(Scene scn, Player p1, Player p2, String player, boolean displayonly) {
+	public AttackPhase(Scene scn, String player, boolean displayonly) {
 
 		attackingPlayer = player;
 		gameUI = scn;	
@@ -70,8 +72,6 @@ public class AttackPhase  {
 		gameLayout.setBottom(botPanel());		
 		gameLayout.setRight(rightPanel());	
 		gameUI.setRoot(gameLayout);	
-
-		System.out.println("\nCurrent player: " + player);	
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class AttackPhase  {
 		TilePane centerSlot = new TilePane();
 		//attack handler on the big board
 		if (displayOnly == false) {
-			guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, Settings.p1, Settings.p2, attackingPlayer));
+			guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, attackingPlayer));
 		}
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 		return centerSlot; 	
@@ -109,15 +109,32 @@ public class AttackPhase  {
 		rightPanel.setPrefWidth(Settings.sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
 		rightPanel.setPadding(new Insets(10));
-		
-		VBox secondTile = new VBox();
+
+		//this is the second tile below the mini board at the right pane
+		// contains messages and buttons
+		VBox secondTile = new VBox(30);
 		secondTile.setAlignment(Pos.TOP_CENTER);
 		String whichPlayer = attackingPlayer + "'s turn";
 		Label thisPlayerTurn = new Label(whichPlayer);
 		thisPlayerTurn.setFont(new Font(30));
 		thisPlayerTurn.setTextFill(Color.WHITE);
+
+		//button to go to main menu in game. Also the play again button 
+		Button mainMenuBt = new Button("Quit");
+		mainMenuBt.setOnMouseClicked(event -> {
+			Settings.reset();
+			MainMenuGUI menu = new MainMenuGUI();
+			gameUI.setRoot(menu.getMenuRoot());
+		});
 		
-		secondTile.getChildren().add(thisPlayerTurn);
+		
+		Button saveGameBt = new Button("Save");
+		
+		
+		secondTile.getChildren().addAll(thisPlayerTurn,saveGameBt, mainMenuBt);
+		if(Settings.getMessage() == "You Lose!" || Settings.getMessage() == "You Win!") {
+			mainMenuBt.setText("Play again");
+		}
 		rightPanel.getChildren().addAll(ownBoard.getBoardGrid(),secondTile);			
 		return rightPanel;
 	}	
@@ -133,8 +150,7 @@ public class AttackPhase  {
 		botPanel.setMaxHeight(Settings.botHeight);				
 		botPanel.setStyle("-fx-background-color: #ebcd98;");	//Hex color		
 		botPanel.setAlignment(Pos.TOP_CENTER);
-		botPanel.getChildren().add(Settings.message);
-		
+		botPanel.add(Settings.message,0,0);
 		return botPanel;
 	}
 }			

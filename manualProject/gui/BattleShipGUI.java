@@ -74,6 +74,19 @@ public class BattleShipGUI extends Application
 	
 		SetupPhase setup = new SetupPhase(gameUI, "P1",Settings.shipsToPlace,false);
 	}
+	
+	public static void loadGame(Player p1, Player p2) {
+		
+		//player objects must be setup. both their own board and guess boards
+		
+		Settings.p1 = p1;
+		Settings.p2 = p2;
+		
+		if (p2 instanceof ComputerPlayer) {
+			Game.enableAI();
+		}
+		AttackPhase startAttack = new AttackPhase(gameUI, "P1", false);
+	}
 }	
 	
 	
