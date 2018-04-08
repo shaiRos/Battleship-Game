@@ -79,24 +79,12 @@ public class SetupPhase {
 		ColumnConstraints column = new ColumnConstraints();		
 		column.setPercentWidth(100);		
 		rightPanel.getColumnConstraints().add(column);			
-		//rightPanel.setGridLinesVisible(true);	
-		
-		
-
-
 		
 		if (displayOnly == false) {
 			VBox fiveLen = buttonForShipLen("Five", Settings.len5Ships,5);
 			VBox fourLen = buttonForShipLen("Four", Settings.len4Ships,4);
 			VBox threeLen = buttonForShipLen("Three", Settings.len3Ships,3);
 			VBox twoLen = buttonForShipLen("Two", Settings.len2Ships,2);		
-			
-
-
-
-
-
-
 			rightPanel.addColumn(0,fiveLen,fourLen,threeLen,twoLen);
 		}
 		
@@ -131,8 +119,6 @@ public class SetupPhase {
 		Settings.changeMessage("Ships remaining: " + shipsToSet);
 		botPanel.setAlignment(Pos.TOP_CENTER);
 		botPanel.getChildren().add(Settings.message);
-		
-		
 		
 		return botPanel;
 	}	

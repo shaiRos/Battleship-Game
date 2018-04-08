@@ -33,6 +33,13 @@ public class Settings {
 
 	public static Label message = msgLabel();
 	
+	public static void reset() {
+		p1 = null;
+		p2 = null;
+		boardSize = 5;
+		message = msgLabel();
+	}
+	
 	
 	public static void setBoardSize(int value) {
 		if (value >= 5 && value <= 15) {
@@ -43,6 +50,10 @@ public class Settings {
 	
 	public static void changeMessage(String msg) {
 		message.setText(msg);
+	}
+	
+	public static String getMessage() {
+		return message.getText(); 
 	}
 	
 	
@@ -62,6 +73,10 @@ public class Settings {
 		//message.setStyle("-fx-background-color: #fcfeff;");
 		message.setPadding(new Insets(10));
 		return message;
+	}
+	
+	public static void makeMsgLarger() {
+		message.setFont(new Font(50));
 	}
 	
 	public static void setGeneratedShips(int[] generatedShipsArray){
