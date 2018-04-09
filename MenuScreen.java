@@ -69,9 +69,9 @@ public class MenuScreen {
 
     //add
 
-    public boolean run = true;
-    public boolean userSelect = true;
-    public int userChoice = 0;
+    private boolean run = true;
+    private boolean userSelect = true;
+    private int userChoice = 0;
 
 //Method to check for correct input for JUnit testing
     public void setInput(int num){

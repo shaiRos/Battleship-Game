@@ -27,6 +27,23 @@ public class AttackPhase  {
 	private Player player1;
 	private Player player2;
 	private Label coordinates = null;
+
+
+	/**
+	*	Current turn getter for SAVEGAME
+	*/
+
+	public String getCurrentPlayer(){
+		return attackingPlayer;
+	}
+
+	public void setCurrentPlayer(String player){
+		attackingPlayer = player;
+	}
+
+
+
+
 	
 	/**
 	*	The constructor of the AttackPhase. It creates the user interface depending on which player is currently attacking.
@@ -68,6 +85,20 @@ public class AttackPhase  {
 
 		System.out.println("\nCurrent player: " + player);	
 	}
+
+	//SAVEGAMEGUI
+	public void setPlayer1(Player p1){
+		player1 = p1;
+	}
+
+	public Player getPlayer1(){
+		return player1;
+	}
+
+
+
+
+
 
 	/**
 	*	@return a BoardGUI instance of the guess board display

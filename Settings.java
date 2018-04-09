@@ -44,5 +44,12 @@ public class Settings {
 		}
 	}
 	
+/**
+*	Current game mode for SAVEGAME 
+*/
+	public static String getCurrentMode(){
+		return gameMode;
+	}
+
 }	
 	

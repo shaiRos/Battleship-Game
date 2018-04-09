@@ -1,0 +1,4 @@
+Board Size: 5
+
+Current Game ModePlayer vs Ai
+

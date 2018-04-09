@@ -189,4 +189,73 @@ public class BoardGUI {
 	
 	}
 		
+
+	/**	
+	* 	For SAVEGAME
+	*	Storing values FOR THE BOARD for saving game purposes  
+	*	1: ship
+	*	2: miss
+	*	3: hit
+	*	4: empty
+	*	current turn/player is gameboard then other is guessboard
+	*/
+
+	public int[][] boardValuesGUI = null;
+
+	public void setBoardValuesGUI(BoardValue[][] boardArray, String boardType){
+		this.setBoardSizeGUI(boardArray);
+
+		for (int x = 0; x < boardArray.length; x++) {
+			for (int y = 0; y < boardArray.length; y++) {
+				//add the object to this coordinate
+				BoardValue value = boardArray[y][x];
+
+				if (value != BoardValue.EMPTY) {
+					
+					switch(value) {
+						
+						case SHIP:
+							if (boardType != "guessBoard") {
+								//board.add(shipImage, x, y);
+								boardValuesGUI[y][x] = 1;
+							}
+								break;
+							
+						case MISS:					
+							boardValuesGUI[y][x] = 2;	
+							//board.add(missImage, x, y);
+							//
+							break;
+						case HIT:			
+							boardValuesGUI[y][x] = 3;		
+							//board.add(hitImage, x, y);		
+							break;
+					}
+				} else {
+					boardValuesGUI[y][x] = 4;
+					break;
+				}
+			}
+
+		}
+	}
+
+	public int[][] getBoardValuesGUI(){
+		return boardValuesGUI;
+	}
+
+
+	//FOLLOWING 2 METHODS FOR SAVE GAME TO GET BOARD SIZE 
+	public int boardSizeGUI;
+
+	public void setBoardSizeGUI(BoardValue[][] boardArray){
+		boardSizeGUI = boardArray.length;
+	}
+
+	public int getBoardSizeGUI(){
+		return boardSizeGUI;
+	}
+	
+
+
 }	
