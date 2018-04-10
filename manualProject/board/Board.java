@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 /**
 * created January 30, 2018
-*   @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+*   @author Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
 *	Board object that will hold all values of our board
 */
 public class Board {
