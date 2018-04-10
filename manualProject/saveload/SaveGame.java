@@ -7,6 +7,7 @@ import java.io.*;
 import board.Board;
 import gui.Settings;
 import board.Ship;
+import gui.AttackPhase;
 
 
 
@@ -19,7 +20,7 @@ public class SaveGame{
 		saveBoard();
 	}
 	
-	public static void saveProgress(Board currentPlayerBoard, Board otherPlayerBoard){
+	public static void saveProgress(Board P1Board, Board P2Board){
 		String boardFile = "boards.txt";
 
 		try{
@@ -33,12 +34,13 @@ public class SaveGame{
    			writer.println("Board Size: " + Board.getBoardSize());
 
             writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
+            writer.println(AttackPhase.currentPlayer);
             
 				//save the ship placements of current ship board
 				writer.println("PLAYER1SHIP");
-				Ship [] currentPlayerShips = currentPlayerBoard.getShipArray();   
-            for (int i = 0; i < currentPlayerShips.length; i++){
-            	writer.println(currentPlayerShips[i].toString());
+				Ship [] P1Ships = P1Board.getShipArray();   
+            for (int i = 0; i < P1Ships.length; i++){
+            	writer.println(P1Ships[i].toString());
             }
 				            
             

@@ -376,7 +376,7 @@ public class Game {
 			// Check for remaining ships on enemy board
 			shipSunk = GameConfig.checkSunken(boards[currentPlayerNum+swtichTurn], row1, column1);
 			if (winCondition(boards[currentPlayerNum+swtichTurn]) == true) {
-				System.out.println(players[currentPlayerNum].getName() +  "has won!");
+				System.out.println(players[currentPlayerNum].getName() +  " has won!");
 				sleepThread(2500);
 				System.exit(0);
 			}
@@ -390,19 +390,6 @@ public class Game {
 
 	}
 
-	// Method to check the start() method variables
-	public void startCheck() {
-		// create boards for both the players
-		// difficulty will rely on these settings - add user input to specify difficulty
-		// int userBoardSize = 5;
-		// int userShipCount = 2;
 
-		String fileName = "map.txt";
-
-		// Initialize the boards and set the board sizes
-		// WIP:
-		// - Re-create the board using the new boardSize values
-		//Board.setBoardSize(userBoardSize);
-	}
 
 }
