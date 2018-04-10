@@ -12,62 +12,120 @@ import java.util.Arrays;
 *	Board object that will hold all values of our board
 */
 public class Board {
-
-	private static int boardSize = 5;
-	private static int maxShipSize = 5;
-	private static int minShipSize = 2;
+	private static int boardSize;
+	private final static int MAXSHIPSIZE = 5;
+	private final static int MINSHIPSIZE = 2;
 	private static boolean guessing = false;
 	public BoardValue[][] guessBoard;
 	public BoardValue[][] gameBoard;
-	private static int numOfShips = 3;
+	private static int numOfShips;
 	private Ship[] shipArray;
 	private int[][] shipBoard;
 	private static int[] listOfShipSizes;
 	
-	
-	public Board( int boardSize){
-		boardSize = boardSize;
+
+
+	/**
+	 * Default constructor for our board
+	 * initialize all arrays and variables base on boardSize
+	 */
+	public Board(int boardValue) {
+		setBoardSize(boardValue);
+		guessBoard = new BoardValue[boardValue][boardValue];
+		gameBoard = new BoardValue[boardValue][boardValue];
+		shipBoard = new int[boardValue][boardValue];
+		
+		numOfShips = (int)(Math.ceil(boardValue/2.0));
 		listOfShipSizes = generateShipsToAdd();
+		initializeGameBoard();
+		shipArray = new Ship[numOfShips];
+
 	}
 
 	/**
-	 * getters and setters for board constants
-	 * 
+	 * Populates the board with initial values
+	 *
+	 */
+	private void initializeGameBoard() {
+		for (BoardValue[] row : gameBoard) {
+			Arrays.fill(row, BoardValue.EMPTY);
+		}
+
+	}
+	
+	/**
+	 * getters for board size
+	 * @return boardsize the static variable boardsize
 	 */
 	public static int getBoardSize() {
 		return boardSize;
 	}
-
-	public static void setBoardSize(int size) {
+	
+	/**
+	* Setter method for setting board size
+	* @param size user indicated size for the size of the Board
+	*/
+	private static void setBoardSize(int size) {
 		boardSize = size;
-		listOfShipSizes = generateShipsToAdd();
+//		numOfShips = (int)(Math.ceil(size/2.0));
+//		listOfShipSizes = generateShipsToAdd();
 	}
 	
+
+	
+	/**
+	* getter method for the number of ships each player has
+	* @return numOfShips the static variable numOfShips
+	*/
 	public static int getNumOfShips() {
 		return numOfShips;
 	}
 
-	public static int getMinShipSize() {
-		return minShipSize;
+	/**
+	* getter method for the array that stores the number of each ships 
+	* to be added
+	* @return listOfShipSizes an int array in the class
+	*/
+	public static int[] getGeneratedShips() {
+		return listOfShipSizes;
 	}
 
+	/**
+	* getter method for the minimum ship size allowed
+	* @return MINSHIPSIZE class constant 
+	*/
+	public static int getMinShipSize() {
+		return MINSHIPSIZE;
+	}
+
+	/**
+	* getter method for the maximum ship size allowed
+	* @return MAXSHIPSIZE class constant
+	*/
 	public static int getMaxShipSize() {
-		return maxShipSize;
+		return MAXSHIPSIZE;
 	}
 	
+	/**
+	* getter method for the array of ships stored in each board
+	* mainly for JUNIT testing purposes
+	* @shipArray an array of ship objects in the board
+	*/
 	public Ship[] getShipArray() {
 		return shipArray;
 	}
 
-	public static void setMinShipSize(int size) {
-		minShipSize = size;
+	/*
+	* Getter method for board type for JUnit testing
+	*/
+	public boolean getBoardType() {
+		return guessing;
 	}
-
-	public static void setMaxShipSize(int size) {
-		maxShipSize = size;
-	}
-
-	// Method to check if correct board type for JUnit testing
+	
+	/**
+	* Method to check if correct board type for JUnit testing
+	* @param boardType gameBoard correspond to int 1, int 2 means guessBoard
+	*/
 	public void setBoardType(int boardType) {
 		BoardValue[][] board = null;
 
@@ -87,7 +145,7 @@ public class Board {
 	*/
 	public static int[] generateShipsToAdd(){
 		
-		int shipSize = Math.min(numOfShips, maxShipSize);
+		int shipSize = Math.min(numOfShips, MAXSHIPSIZE);
 		int [] shipsToAdd = new int[numOfShips];
 		
 		for(int i = 0; i < numOfShips; i++){	
@@ -100,7 +158,7 @@ public class Board {
 				shipsToAdd[i] = 3;
 			}else{ 
 				//last two ships are size 2 (minimum ship size)
-				shipsToAdd[i] = minShipSize;
+				shipsToAdd[i] = MINSHIPSIZE;
 			}
 	
 		}
@@ -109,43 +167,17 @@ public class Board {
 		
 	}
 
-	// Getter method for board type for JUnit testing
-	public boolean getBoardType() {
-		return guessing;
-	}
+	
+
 
 	/**
-	 * Default constructor for our board
-	 *
-	 **/
-	public Board() {
-		guessBoard = new BoardValue[boardSize][boardSize];
-		gameBoard = new BoardValue[boardSize][boardSize];
-		shipBoard = new int[boardSize][boardSize];
-		intializeGameBoard();
-		shipArray = new Ship[numOfShips];
-
-	}
-
-	/**
-	 * Populates the board with initial values
-	 *
-	 **/
-	private void intializeGameBoard() {
-		for (BoardValue[] row : gameBoard) {
-			Arrays.fill(row, BoardValue.EMPTY);
-		}
-
-	}
-
-	/**
-	 * Returns a formatted version of the board.
+	 * Prints a formatted version of the board.
 	 * 
 	 * @param boardType
-	 *            - Int that will specify whether the game shall display the
+	 *            Int that will specify whether the game shall display the
 	 *            gameBoard or guessBoard
 	 *
-	 **/
+	 */
 	public void returnBoard(int boardType) {
 		BoardValue[][] board = null;
 
@@ -195,18 +227,24 @@ public class Board {
 	 * Will be called after all verification and checks
 	 * are passed
 	 * 
-	 * @param int
-	 *            len, col, ro - Properties of the ship char orient - Properties of
-	 *            the ship
-	 **/
+	 * @param len length of the ship
+	 * @param ID a assigned ID that is used to identify each ship through its index in the ship array
+	 * @param orient character indicating the orientation of the ship
+	 * @param ro row, most top coordinate
+	 * @param col column, most left coordinate
+	 */
 	
-	public void addShip1(int ID, int len, char orient, int ro, int col) {
+	public void addShip(int ID, int len, char orient, int ro, int col) {
 		shipArray[ID] = new Ship(ID, len, orient, ro, col);
+		//determine the coordinates of each ship
 		int[][] addCoordinates = shipArray[ID].getShipCoordinates();
 		for (int i = 0; i < addCoordinates.length; i++) {
 			int r = addCoordinates[i][0];
 			int c = addCoordinates[i][1];
-			shipBoard[r][c] = ID + 1;
+			//add 1 to ID on the array because of int array default value (0)
+			shipBoard[r][c] = ID + 1; 
+			
+			//add each ship's coordinate on the board
 			gameBoard[r][c] = BoardValue.SHIP;
 		}
 

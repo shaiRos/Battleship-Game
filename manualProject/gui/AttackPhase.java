@@ -1,5 +1,6 @@
 package gui;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Button;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
@@ -12,13 +13,18 @@ import javafx.scene.layout.VBox;
 import players.Player;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
+import javafx.geometry.Pos;
+import javafx.scene.text.Font;
+import javafx.scene.paint.Color;
+import javafx.geometry.HPos;
+
 
 /**
 * 	This class creates the user interface of the main game where players take turns to attack each other's ships 
 *	It's base layout is a BorderPane where only the center, bottom and left regions are used.
 *
 *	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
-**/
+*/
 
 public class AttackPhase  {
 
@@ -26,12 +32,13 @@ public class AttackPhase  {
 	private BorderPane gameLayout;
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;	
-	private String attackingPlayer;
+	public static String currentPlayer;
 	private Label coordinates = null;
+	private boolean displayOnly;	
 	
 	/**
 	*	The constructor of the AttackPhase. It creates the user interface depending on which player is currently attacking.
-	*	Using the three regions from BorderPane (center, bottom, left) it displays the current player's own board at the center 
+	*	Using the three regions from BorderPane (center, bottom, right) it displays the current player's guess board at the center 
 	*	(where the player sends attacks by clicking a section of the grid), their guess board at the very top of the right pane
 	* 	region and messages and stats on the bottom pane. 
 	*
@@ -39,35 +46,25 @@ public class AttackPhase  {
 	*	@param		p1 - a Player instance of the first player
 	*	@param		p2 - a Player instance of the second payer
 	*	@param		player - a String that indicates which player the display should accommodate
-	*	@param		coord - a Label where messages for the player are stored 
+	*	@param		displayonly - a boolean indicating if this layout out should be display only with no event handlers on the guess board
 	*/
-	public AttackPhase(Scene scn, Player p1, Player p2, String player, Label coord) {
+	public AttackPhase(Scene scn, String player, boolean displayonly) {
 
-		attackingPlayer = player;
+		currentPlayer = player;
 		gameUI = scn;	
 		ownBoard = new BoardGUI(Board.getBoardSize(), Settings.smallGridWidth);
 		guessBoard = new BoardGUI(Board.getBoardSize(), Settings.bigGridWidth);
-		coordinates = coord;
+		//coordinates = coord;
+		displayOnly = displayonly;
 
-		if (attackingPlayer == "P1") {
+		if (currentPlayer == "P1") {
 			ownBoard.addValuesFromArray(Settings.p1, "gameBoard");
 			guessBoard.addValuesFromArray(Settings.p1, "guessBoard");
 			}
-		else if (attackingPlayer == "P2") {	
+		else if (currentPlayer == "P2") {	
 				ownBoard.addValuesFromArray(Settings.p2, "gameBoard");
 				guessBoard.addValuesFromArray(Settings.p2, "guessBoard");		
 		}
-
-
-		
-	/*	if (attackingPlayer == "P1") {
-			ownBoard.addValuesFromArray(p1.getPlayerBoard().gameBoard, "gameBoard");
-			guessBoard.addValuesFromArray(p1.getPlayerBoard().guessBoard, "guessBoard");
-			}
-		else if (attackingPlayer == "P2") {	
-				ownBoard.addValuesFromArray(p2.getPlayerBoard().gameBoard, "gameBoard");
-				guessBoard.addValuesFromArray(p2.getPlayerBoard().guessBoard, "guessBoard");		
-		}*/
 		
 		//Update the Display with the new changes
 		gameLayout = new BorderPane();
@@ -75,16 +72,10 @@ public class AttackPhase  {
 		gameLayout.setBottom(botPanel());		
 		gameLayout.setRight(rightPanel());	
 		gameUI.setRoot(gameLayout);	
-
-		System.out.println("\nCurrent player: " + player);	
+		
 	}
+	
 
-	/**
-	*	@return a BoardGUI instance of the guess board display
-	*/
-	public BoardGUI getBoardNode() {
-		return guessBoard;
-	}
 	
 	/**
 	*	The child node that will be placed in the center region of the main layout. The child node is a TilePane layout that contains a GridPane layout
@@ -97,8 +88,8 @@ public class AttackPhase  {
 		
 		TilePane centerSlot = new TilePane();
 		//attack handler on the big board
-		if (coordinates == null) {
-			guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, Settings.p1, Settings.p2, attackingPlayer));
+		if (displayOnly == false) {
+			guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, currentPlayer));
 		}
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 		return centerSlot; 	
@@ -113,8 +104,34 @@ public class AttackPhase  {
 		TilePane rightPanel = new TilePane();
 		rightPanel.setPrefWidth(Settings.sidePanelWidth);
         rightPanel.setStyle("-fx-background-color: #0066CC;");	
-		rightPanel.setPadding(new Insets(10));	
-		rightPanel.getChildren().add(ownBoard.getBoardGrid());			
+		rightPanel.setPadding(new Insets(10));
+
+		//this is the second tile below the mini board at the right pane
+		// contains messages and buttons
+		VBox secondTile = new VBox(30);
+		secondTile.setAlignment(Pos.TOP_CENTER);
+		String whichPlayer = currentPlayer + "'s turn";
+		Label thisPlayerTurn = new Label(whichPlayer);
+		thisPlayerTurn.setFont(new Font(30));
+		thisPlayerTurn.setTextFill(Color.WHITE);
+
+		//button to go to main menu in game. Also the play again button 
+		Button mainMenuBt = new Button("Quit");
+		mainMenuBt.setOnMouseClicked(event -> {
+			Settings.reset();
+			MainMenuGUI menu = new MainMenuGUI();
+			gameUI.setRoot(menu.getMenuRoot());
+		});
+		
+		
+		Button saveGameBt = new Button("Save");
+		
+		
+		secondTile.getChildren().addAll(thisPlayerTurn,saveGameBt, mainMenuBt);
+		if(Settings.getMessage() == "You Lose!" || Settings.getMessage() == "You Win!") {
+			mainMenuBt.setText("Play again");
+		}
+		rightPanel.getChildren().addAll(ownBoard.getBoardGrid(),secondTile);			
 		return rightPanel;
 	}	
 	
@@ -128,10 +145,8 @@ public class AttackPhase  {
 		botPanel.setPrefHeight(Settings.botHeight);	
 		botPanel.setMaxHeight(Settings.botHeight);				
 		botPanel.setStyle("-fx-background-color: #ebcd98;");	//Hex color		
-		
-		if (coordinates != null) {
-			botPanel.getChildren().add(coordinates);
-		}
+		botPanel.setAlignment(Pos.TOP_CENTER);
+		botPanel.add(Settings.message,0,0);
 		return botPanel;
 	}
 }			

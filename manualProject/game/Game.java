@@ -52,6 +52,13 @@ public class Game {
 	}
 
 	/**
+	 * A toggle that will set the flag which disables the AI
+	 *
+	 */	
+	public static void disableAI() {
+		aiStatus = false;
+	}
+	/**
 	 * A getter that returns the AI flag's status
 	 * 
 	 * @return aiStatus Boolean that when true, indicates the AI has been selected
@@ -71,6 +78,7 @@ public class Game {
 	
 	/**
 	* setter for hitSuccess
+	* @param b boolean for resetting hit success each round
 	*/
 	public static void setHitSuccess(boolean b) {
 		hitSuccess = b;
@@ -110,9 +118,12 @@ public class Game {
 	 * specification
 	 * 
 	 * @param player1Board
-	 *            - Board object that stores all of the information of the main
-	 *            player's board player2Board - Board object that stores all of the
+	 *            Board object that stores all of the information of the main
+	 *            player's board 
+	 * @param player2Board Board object that stores all of the
 	 *            information of the opposing player's board
+	 * @param player1 player object linked to player1Board
+	 * @param player2 player object linked to player2Board
 	 */
 	public static void setupBoard(Board player1Board, Player player1, Board player2Board, Player player2) {
 
@@ -122,7 +133,7 @@ public class Game {
 		userPlaceShip(player1Board, player1);
 
 		System.out.println("Player 1 game board successfully set. Player 2 standby...");
-		sleepThread(1000);
+		sleepThread(300);
 		clearScreen();
 
 		System.out.println("Player 2 setup phase: ");
@@ -133,7 +144,7 @@ public class Game {
 
 		System.out.println("Player 2 game board successfully set.");
 
-		sleepThread(1000);
+		sleepThread(300);
 		clearScreen();
 
 	}
@@ -154,8 +165,10 @@ public class Game {
 			
 			if (currentPlayer instanceof HumanPlayer)
 			{
-			playerBoard.returnBoard(1);
-			System.out.println("\n" + (maxShips - (shipNumber + 1)) + " ship(s) left to place");
+				playerBoard.returnBoard(1);
+				System.out.println("\n" + (maxShips - (shipNumber + 1)) + " ship(s) left to place");
+				System.out.println("Placing a length " + shipLength + " ship");
+
 			}
 			
 		}
@@ -166,10 +179,10 @@ public class Game {
 	 * information. Checks implemented to ensure the placements are not outside the
 	 * scope of the given board
 	 * 
-	 * @param name
-	 *            Ship object that will be used to store all information about the
-	 *            player's respective ships board - Holds all of the information and
-	 *            game state of the current board
+	 * @param board the current board being set up
+	 * @param currentPlayer the current player connected to the board
+	 * @param shipLength length of the ship
+	 * @param shipCount the current ship being placed
 	 */
 	// The main code for inserting ships on the other board
 	// Error checking, logic checking etc
@@ -178,7 +191,6 @@ public class Game {
 
 		while (formatted != true) {
 			try {
-				System.out.println("Placing a length " + shipLength + " ship");
 				String setup = currentPlayer.playerSetup();
 				// take the input that was converted into String and separate the info
 				String setupInfo[] = setup.split(" ");
@@ -189,8 +201,8 @@ public class Game {
 
 				GameConfig.validateShipProperties(board, shipLength, orientation, column, row); 
 
-				// Adds ship to the grid
-				board.addShip1(shipCount, shipLength, orientation, row, column);
+				// Adds ship to the board
+				board.addShip(shipCount, shipLength, orientation, row, column);
 
 				formatted = true;
 
@@ -273,13 +285,7 @@ public class Game {
 				int row = (((int) (tempRow) - 65) + 1);
 				int column = Integer.parseInt(line[3]);
 
-				System.out.println(orientation);
-				System.out.println(length);
-				System.out.println(row);
-				System.out.println(column);
-				// @betty adjust board
-				// board.addShip(orientation,length,row,column);
-				board.addShip1(shipPlaced, length, orientation, row, column);
+				board.addShip(shipPlaced, length, orientation, row, column);
 				shipPlaced++;
 
 			}
@@ -302,38 +308,34 @@ public class Game {
 	 */
 	public void start() {
 		// create boards for both the players
-		// difficulty will rely on these settings - add user input to specify difficulty
+		// difficulty will rely on these settings (will be used in gui version)
 		int userBoardSize = 5;
-		int userShipCount = 2;
 		boolean winCondition = false;
 
 
 		// Initialize the boards and set the board sizes
 		// WIP:
 		// - Re-create the board using the new boardSize values
-		Board.setBoardSize(userBoardSize);
-		Board player1Board = new Board();
-		Board player2Board = new Board();
+		Board player1Board = new Board(userBoardSize);
+		Board player2Board = new Board(userBoardSize);
 		// populate boards with battleships
 
 
-		// This will read a file and allow us to setup predefined board
-		//String fileName = "map.txt";
-		//mapFromFiles(fileName, player1Board);
-		//mapFromFiles(fileName, player2Board);
+		/* This will read a file and allow us to setup predefined board
+		String fileName = "map.txt";
+		mapFromFiles(fileName, player1Board);
+		mapFromFiles(fileName, player2Board);
+		*/
 
 		// instantiate our players
-		Player player1 = new HumanPlayer(player1Board);
+		Player player1 = new HumanPlayer(player1Board, "player 1");
 		// We don't know what our player 2 is at this point, just instantiate a generic
 		// player2
 		Player player2 = null;
 
 		// Create a new human that can access their boards
-		/*
-		 * Make the player an inheritance of a Player class
-		 */
 		if (getAIStatus() != true) {
-			player2 = new HumanPlayer(player2Board);
+			player2 = new HumanPlayer(player2Board, "player 2");
 		} else {
 			player2 = new ComputerPlayer(player2Board);
 		}
@@ -347,83 +349,41 @@ public class Game {
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
 
-			// Player 1 turn
+			//the following arrays and ints are used to switch turns between players
+			Board [] boards = new Board[]{player1Board, player2Board};
+			Player [] players = new Player[]{player1,player2};
+			int currentPlayerNum = 0;
+			int swtichTurn = 1;
+
 			clearScreen();
-			System.out.println("Player 1 turn starting....");
+			System.out.println(players[currentPlayerNum].getName() + " turn starting....");
 
 			// Take coordinates from the player turn as col,row
 			// Convert back to usable values
-			String coord = player1.playerTurn();
+			String coord = players[currentPlayerNum].playerTurn();
 			String[] coordFormatted = coord.split(",");
 			int row1 = Integer.parseInt(coordFormatted[0]);
 			int column1 = Integer.parseInt(coordFormatted[1]);
 			// Send the attack to the board once properly formatted
-			System.out.println("row " + row1 + "column " + column1);
-			GameConfig.sendAttack(player1Board, row1, column1);
-			shipSunk = GameConfig.checkSunken(player2Board, row1, column1);
+			GameConfig.sendAttack(boards[currentPlayerNum], row1, column1);
+
 			// Check for remaining ships on enemy board
-			if (winCondition(player2Board) == true) {
-				System.out.println("Player 1 has won!");
+			shipSunk = GameConfig.checkSunken(boards[currentPlayerNum+swtichTurn], row1, column1);
+			if (winCondition(boards[currentPlayerNum+swtichTurn]) == true) {
+				System.out.println(players[currentPlayerNum].getName() +  "has won!");
 				sleepThread(2500);
 				System.exit(0);
 			}
 
 			sleepThread(1000);
-
-			// check win conditions for every turn
-
-			// Player 2 turn
-			clearScreen();
-			System.out.println("Player 2 turn starting....");
-			// Take the user coordinates and attack
-
-			// Take AI values as col,row
-			// Convert it back to usable values
-			String coordEnemy = player2.playerTurn();
-			String[] coordFormattedEnemy = coordEnemy.split(",");
-			int row2 = Integer.parseInt(coordFormattedEnemy[0]);
-			int column2 = Integer.parseInt(coordFormattedEnemy[1]);
-			GameConfig.sendAttack(player2Board, row2, column2);
-			shipSunk = GameConfig.checkSunken(player1Board, row1, column1);
-			// if this is a hit, we want all the ships around the guessed ship to be added
-			// to the queue
-			if (Game.getHitSuccess() == true && getAIStatus() == true) {
-				((ComputerPlayer) player2).makeQueue(row2, column2);
-			}
-			if (shipSunk == true) {
-				((ComputerPlayer) player2).clearQueue();
-				System.out.println("Cleared the queue because ship has been sunk");
-				// reset the flag
-				shipSunk = false;
-			}
-			// DEBUG
-			System.out.println("Current guessed values: ");
-			for (String values : ComputerPlayer.getGuessed()) {
-				System.out.println(values);
-			}
-
-			// DEBUG
-			System.out.println("Current guessing queue: ");
-			for (String values : ComputerPlayer.getQueue()) {
-				System.out.println(values);
-			}
-
-			// Check for remaining ships on enemy board
-				System.out.println("Player 2 has won!");
-			if (winCondition(player1Board) == true) {
-				sleepThread(2500);
-				System.exit(0);
-			}
-			sleepThread(1000);
-
-			/*check win conditions maybe make this an exception. throws an exception if
-			* winning conditions are met, catches condition and exits loop. */
+			//switch player
+			currentPlayerNum += swtichTurn;
+			swtichTurn *= -1;
 
 		} while (winCondition != true);
 
 	}
 
-	//@brandon or @charlene??
 	// Method to check the start() method variables
 	public void startCheck() {
 		// create boards for both the players

@@ -8,13 +8,12 @@ import java.util.InputMismatchException;
  * toggles values that will be enabled with each menu selection
  * 
  * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
- **/
+ */
 public class MenuScreen {
 	/**
 	 * Prints the basic board view and offers input sanitation to the user
 	 *
-	 **/
-	// displays the start of the game menu
+	 */
 	public static void printMenu(String[] args) {
 		boolean run = true;
 		boolean userSelect = true;
@@ -68,7 +67,7 @@ public class MenuScreen {
 	 * Main method that will be called when this class is run. Will view the menu
 	 * screen after being called
 	 *
-	 **/
+	 */
 	public static void main(String[] args) {
 		printMenu(args);
 	}
@@ -78,7 +77,6 @@ public class MenuScreen {
 	public boolean run = true;
 	public boolean userSelect = true;
 	public int userChoice = 0;
-
 	// Method to check for correct input for JUnit testing
 	public void setInput(int num) {
 		while (userSelect != false) {
@@ -92,7 +90,9 @@ public class MenuScreen {
 		}
 	}
 
-	// add
+	/**
+	* setter method
+	*/
 	public void setUserChoice(int num) {
 		userChoice = num;
 	}

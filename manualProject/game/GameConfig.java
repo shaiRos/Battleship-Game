@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * values for game usage
  *
  * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
- **/
+ */
 public class GameConfig {
 
 
@@ -21,11 +21,10 @@ public class GameConfig {
 	 * Validates if the attack is valid, and changes board based on the information
 	 * 
 	 * @param playerBoard
-	 *            - current Board object used int row, column - Int form row and
-	 *            column specified by the player
-	 * @return boolean - Will return whether the attack successfully hit a ship or
-	 *         missed.
-	 **/
+	 *            current Board object used 
+	 * @param row Int form row specified by the player
+	 * @param column in form column specified by player 
+	 */
 	public static void sendAttack(Board playerBoard, int row, int column) {
 		// check the value of the block specified, if the values match, change the
 		// values with
@@ -36,8 +35,6 @@ public class GameConfig {
 			playerBoard.guessBoard[row - 1][column - 1] = BoardValue.HIT;
 			System.out.println("Hit!");
 			Game.setHitSuccess(true);
-			shipSunk = GameConfig.checkSunken(playerBoard, row, column);
-			System.out.println("shipSunk in sendAttack: " + shipSunk);
 		} else if (value == BoardValue.EMPTY) {
 			playerBoard.guessBoard[row - 1][column - 1] = BoardValue.MISS;
 			System.out.println("Miss!");
@@ -46,7 +43,6 @@ public class GameConfig {
 			playerBoard.guessBoard[row - 1][column - 1] = BoardValue.MISS;
 			System.out.println("Miss!");
 			Game.setHitSuccess(false);
-			// Should probably have a different check case for else
 		} else {
 			System.out.println("I broke something whoops??");
 			System.out.println(playerBoard.guessBoard[row - 1][column - 1]);
@@ -57,6 +53,14 @@ public class GameConfig {
 
 	}
 
+	/**
+	* A method used to check if a ship has been sunken after a attack
+	* @param playerBoard the board of the player being attacked on
+	* @param row row of the coordinate being attacked one
+	* @param column column of the coordinate being attacked on
+	* @return true if a ship is sunken
+	* 
+	*/
 	public static boolean checkSunken(Board playerBoard, int row, int column) {
 		if (playerBoard.aShipSunken(row - 1, column - 1)) {
 
@@ -69,15 +73,15 @@ public class GameConfig {
 
 	/**
 	 * Checks whether the inputs all meet project criteria, organized in a manner
-	 * that we may use the data at a later time
+	 * that we may use the data at a later time (throw exception of criteria not met)
 	 * 
 	 * @param board
-	 *            - Board object that represents the current board length, column,
-	 *            row - Int values that represent the properties of the given ships
-	 *            char orientation - char that represents orientation of given ship
-	 *
-	 **/
-	// validates ship properties are reasonable depending on game rules
+	 *            Board object that represents the current board 
+	 * @param length length of the ship
+	 * @param orientation char representing orientation of the ship
+	 * @param column most right position of the ship
+	 * @param row most top position of the ship
+	 */
 	public static void validateShipProperties(Board board, int length, char orientation, int column, int row) {
 		int changingCoord = 'n';
 		if (orientation == 'h') {
