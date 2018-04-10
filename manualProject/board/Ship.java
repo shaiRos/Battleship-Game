@@ -133,7 +133,8 @@ public class Ship {
 	}
 	
 	public String toString(){
-		return (shipPlaced + " " + length  + " " +  orientation  + " " +  row  + " " +  column)
+		return (shipID + " " + length  + " " +  orientation  + " " +  
+		row  + " " +  column);
 	}
 
 
