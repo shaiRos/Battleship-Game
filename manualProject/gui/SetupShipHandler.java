@@ -1,5 +1,4 @@
 package gui;
-
 import game.Game;
 import game.GameConfig;
 import players.Player;
@@ -31,7 +30,10 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 
-
+/**
+* 	 
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*/
 public class SetupShipHandler implements EventHandler<MouseEvent> {
 	
 	private Scene scene;

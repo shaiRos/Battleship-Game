@@ -36,7 +36,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
 	private Player playerAttacking;	
 	private Player playerAttacked;
-	private String thisPlayer;
 	private String nextPlayer;	
 	private double blockSize;	
 	private int x;
@@ -64,14 +63,12 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		if (attackingPlayer == "P1") {
 			
 			playerAttacking = Settings.p1;
-			thisPlayer = "P1";
 			playerAttacked = Settings.p2;
 			nextPlayer = "P2";	
 			
 		}else if (attackingPlayer == "P2") {
 			
 			playerAttacking = Settings.p2;
-			thisPlayer = "P2";
 			playerAttacked = Settings.p1;
 			nextPlayer = "P1";
 						
@@ -89,44 +86,47 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		y = (int)((myEvent.getY()-10)/blockSize)+1;
 		//initiate attack
 		
-		coordinate.setText(thisPlayer +" attacked coordinates: " + y + ", " + x);
-		coordinate.setFont(new Font(40));
-		
-		boolean checkPrevHit = playerAttacked.checkPreviousHitEnum(playerAttacking.getPlayerBoard(), y, x);	
-		
-		if (checkPrevHit == true) {													
-			AttackPhase testUI = new AttackPhase(scene, thisPlayer, false);
-		} else {
-			//Send the attack of this player and change the boards
-			GameConfig.sendAttack(playerAttacking.getPlayerBoard(), y, x);	
-			//Win condition
+		if (x >= 1 && x <= Settings.boardSize && y >= 1 && y <= Settings.boardSize) {
 			
-            shipSunk = GameConfig.checkSunken(playerAttacked.getPlayerBoard(),y,x);
+			coordinate.setText(playerAttacking.getName() +" attacked coordinates: " + y + ", " + x);
+			coordinate.setFont(new Font(40));
 			
-			if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
-				//First Display if it Hit or miss
-				Settings.changeMessage(thisPlayer +" attacked coordinates: " + y + ", " + x);
-				if (shipSunk == true) {
-					Settings.changeMessage("you sunk a ship!");
-				}
-				AttackPhase displayOnly = new AttackPhase(scene, thisPlayer, true);
-				//Pause transition to display that waits for prompt for next player turn, or AI making a turn loading screen
-				PauseTransition pause = new PauseTransition(Duration.seconds(1));
-				//Pause transition differ between each mode
-				if (Game.getAIStatus() == false) {
-					pause.setOnFinished(event -> scene.setRoot(pvpTurnTransition()));
-				}
-				else {	
-					pause.setOnFinished(event -> scene.setRoot(aiTurnTransition()));
-				}
-				pause.play();
-					
+			boolean checkPrevHit = playerAttacked.checkPreviousHitEnum(playerAttacking.getPlayerBoard(), y, x);	
+			
+			if (checkPrevHit == true) {		
+				Settings.changeMessage("Previously hit");
 			} else {
-				Settings.makeMsgLarger();
-				coordinate.setText("You Win!");
-				Settings.changeMessage("You Win!");
-				AttackPhase displayOnly = new AttackPhase(scene, thisPlayer, true);				
-			}
+				//Send the attack of this player and change the boards
+				GameConfig.sendAttack(playerAttacking.getPlayerBoard(), y, x);	
+				//Win condition
+				
+				shipSunk = GameConfig.checkSunken(playerAttacked.getPlayerBoard(),y,x);
+				
+				if ((Game.winCondition(playerAttacked.getPlayerBoard())) == false) {
+					//First Display if it Hit or miss
+					Settings.changeMessage(playerAttacking.getName() +" attacked coordinates: " + y + ", " + x);
+					if (shipSunk == true) {
+						Settings.changeMessage("You sunk a ship!");
+					}
+					AttackPhase displayOnly = new AttackPhase(scene, playerAttacking.getName(), true);
+					//Pause transition to display that waits for prompt for next player turn, or AI making a turn loading screen
+					PauseTransition pause = new PauseTransition(Duration.seconds(1));
+					//Pause transition differ between each mode
+					if (Game.getAIStatus() == false) {
+						pause.setOnFinished(event -> scene.setRoot(pvpTurnTransition()));
+					}
+					else {	
+						pause.setOnFinished(event -> scene.setRoot(aiTurnTransition()));
+					}
+					pause.play();
+						
+				} else {
+					Settings.makeMsgLarger();
+					coordinate.setText("You Win!");
+					Settings.changeMessage("You Win!");
+					AttackPhase displayOnly = new AttackPhase(scene, playerAttacking.getName(), true);				
+				}
+			}	
 		}			
 				
 	}
@@ -190,7 +190,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
         } 
         if (shipSunk == true) {
     			((ComputerPlayer) Settings.p2).clearQueue();
-    			//Settings.changeMessage("a ship has sunk");
     			shipSunk = false;
         }
 
@@ -200,12 +199,12 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		PauseTransition pause = new PauseTransition(Duration.seconds(.7));		
 		pause.setOnFinished(event -> {
 			if ((Game.winCondition(Settings.p1.getPlayerBoard())) == false) {			
-				AttackPhase nextDisplay = new AttackPhase(scene, thisPlayer, false); 
+				AttackPhase nextDisplay = new AttackPhase(scene, playerAttacking.getName(), false); 
 			} else {
 				Settings.makeMsgLarger();
 				coordinate.setText("You Lose!"); //if changing this msg, change condition on playAgainBt in AttackPhase 
 				Settings.changeMessage("You Lose!");
-				AttackPhase displayOnly = new AttackPhase(scene, thisPlayer, true);				
+				AttackPhase displayOnly = new AttackPhase(scene, playerAttacking.getName(), true);				
 			} 
 		}
 		);			

@@ -15,56 +15,75 @@ import javafx.geometry.HPos;
 import javafx.scene.text.Font;
 
 
-
+/**
+* 	The GUI of the game starts at the main menu where the players are prompted to set the settings of the game.
+*	They also have the option to load a game from a save file. 
+*	<p> 
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*/
 public class MainMenuGUI {
 	
 	public GridPane root;
 	
+	
+	/**
+	*	The constructor creates the layout of the display of the main menu screen. the layout consists of a grid pane with 5 rows and one column
+	*	Each row contains a setting, a start button on the 4th row, and a load button at the 5th row.
+	*/
 	public MainMenuGUI() {
 		
-		root = new GridPane();
-		root.setPrefSize(Settings.xWindowSize,Settings.yWindowSize);
-		setSettingsRoot();
-	}
-	
-	public GridPane getMenuRoot() { 
-		return root;
-	}
-	
-	public void setSettingsRoot() {
 		
-		GridPane settingScreen = new GridPane();
+		root = new GridPane();
 		root.setPrefSize(Settings.xWindowSize,Settings.yWindowSize);		
 		for (int x = 0; x < 5; x++) {
 			RowConstraints row = new RowConstraints();	
 			row.setPercentHeight(50);			
-			settingScreen.getRowConstraints().add(row);
+			root.getRowConstraints().add(row);
 		}
 		ColumnConstraints column = new ColumnConstraints();		
 		column.setPercentWidth(100);		
-		settingScreen.getColumnConstraints().add(column);	
+		root.getColumnConstraints().add(column);	
 
+		//LOAD BUTTON
 		Button loadButton = new Button("Load from save file");
 		loadButton.setPrefSize(200,60);
-		settingScreen.setHalignment(loadButton,HPos.CENTER);		
+		root.setHalignment(loadButton,HPos.CENTER);	
 		
-		
+		loadButton.setOnMouseClicked(event -> {
+			//read file and get p1 and p2 instance and string currentPlayer P1 or P2
 
+			//BattleShipGUI.loadGame(player1,player2,currentPlayer);  *currentPlayer and player2 instances of player with boards already setup and all....
+		});
+		
+		
+		//START BUTTON
 		Button startButton = new Button("Start");
 		startButton.setPrefSize(200,60);
-		settingScreen.setHalignment(startButton,HPos.CENTER);
+		root.setHalignment(startButton,HPos.CENTER);
 		
 		startButton.setOnMouseClicked(event -> {
 			BattleShipGUI.gameSetup();
 		});			
-		settingScreen.add(modeSection(),0,1);
-		settingScreen.add(boardSizeSection(),0,2);
-		settingScreen.add(startButton,0,3);
-		settingScreen.add(loadButton,0,4);
+		root.add(modeSection(),0,1);
+		root.add(boardSizeSection(),0,2);
+		root.add(startButton,0,3);
+		root.add(loadButton,0,4);				
+	}
+	
+	/**
+	*	gets the GridPane layout of the main menu
+	*
+	*	@return 	a GridPane instance of the main menu layout
+	*/
+	public GridPane getMenuRoot() { 
+		return root;
+	}
 		
-		root = settingScreen;
-	}	
-		
+	/**
+	*	creates a label of the section title of a specific setting
+	*
+	*	@return		a Label instance of the title of a specific setting 
+	*/
 	public Label sectionTitle(String section) {
 		
 		Label modeTitle = new Label(section);
@@ -73,11 +92,12 @@ public class MainMenuGUI {
 	}
 	
 	/**
-	*		This section has two parts. The section Title at the top, and the left and right buttons with the changing
+	*		The section of the game mode settings in the GridPane layout of the main menu.This section has two parts. 
+	*		The section Title at the top, and at the bottom, the left and right buttons with the changing
 	*		values in between. The left and right buttons respond to actions which switches the game mode between
 	*		player vs player and player vs ai. 
 	*
-	*		@return		a VBox layout which represents the Game mode settings in the settings menu screen.
+	*		@return		a VBox layout which represents the Game mode settings in the menu screen.
 	*/
 	public VBox modeSection() {
 		
@@ -109,6 +129,13 @@ public class MainMenuGUI {
 		return modeVSection;
 	}	
 
+	/**
+	*		The section of the board size settings in the GridPane layout of the main menu.This section has two parts. 
+	*		The section Title at the top, and at the bottom, the left and right buttons with the changing
+	*		values in between. The left and right buttons respond to actions which increases or decreases the board size.
+	*
+	*		@return		a VBox layout which represents the Board size settings in the menu screen.
+	*/	
 	public VBox boardSizeSection() {
 		
 		
