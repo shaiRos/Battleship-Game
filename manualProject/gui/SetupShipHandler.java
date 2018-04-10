@@ -31,7 +31,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 
 /**
-* 	 
+* 	Called when player clicks a button in the right panel.
+*	<p>
 *	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
 */
 public class SetupShipHandler implements EventHandler<MouseEvent> {
@@ -47,6 +48,12 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	private String thisPlayer;
 
 	
+	/**
+	*	When a button is clicked from the right pane of the setup display, it sets the info of the ship based on what button was clicked. 
+	*	(each button has different values for each parameter of this constructor) The display of the right pane is also changed. The default
+	*	orientation is horizontal but players can switch to vertical by right clicking. It also activates a mouse listener in the large board
+	*	so that players can place the ship they're currently 'holding'. All chacks are done so that ships can be placed with no conglicts.
+	*/
 	public SetupShipHandler(Scene scn, int shipLen, BorderPane rt, String playerSettingUp, int numOfShips, BoardGUI bigBoard) {
 		
 		scene = scn;	

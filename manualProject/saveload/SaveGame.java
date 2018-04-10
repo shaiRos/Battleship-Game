@@ -7,6 +7,8 @@ import java.io.*;
 import board.Board;
 import board.BoardValue;
 import gui.Settings;
+import board.Ship;
+import gui.AttackPhase;
 
 
 
@@ -19,7 +21,54 @@ public class SaveGame{
 		saveBoard();
 	}
 	
-	
+	public static void saveProgress(Board P1Board, Board P2Board){
+		String boardFile = "boards.txt";
+
+		try{
+			  // Assume default encoding.
+            FileWriter fileWriter = new FileWriter(boardFile);
+
+            // Always wrap FileWriter in BufferedWriter.
+            PrintWriter writer = new PrintWriter(new BufferedWriter(fileWriter));
+
+          
+   			writer.println("Board Size: " + Board.getBoardSize());
+
+            writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
+            writer.println(AttackPhase.currentPlayer);
+            
+				//save the ship placements of current ship board
+				writer.println("PLAYER1SHIP");
+				Ship [] P1Ships = P1Board.getShipArray();   
+            for (int i = 0; i < P1Ships.length; i++){
+            	writer.println(P1Ships[i].toString());
+            }
+				            
+            
+     
+            /*
+            *	Need to fix
+            */
+   		//writer.print(AttackPhase.getCurrentPlayer() + "\n\n);
+    
+
+            /*Last type of data to store due to varying size of boards 
+            *but if we save player including the boards then  youre set
+            *SAVE BOARD, SHIP, ARRAYS 
+			*/
+
+    //	writer.print(this.getGameBoard());
+  
+            // Always close files.
+            writer.flush();
+            writer.close();
+        }
+        catch(IOException ex) {
+            System.out.println("Error writing to file '" + boardFile + "'");
+            // Or we could just do this:
+            // ex.printStackTrace();
+        }
+	}
 
 	public static void saveBoard(){
 		String boardFile = "boards.txt";
@@ -33,9 +82,17 @@ public class SaveGame{
 
           
    			writer.println("Board Size: " + Board.getBoardSize());
+<<<<<<< HEAD
 
             writer.println("Current Game Mode: " + (Settings.getCurrentMode());
      
+=======
+
+            writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
+			
+			//AttackPhase.currentPlayer
+
+>>>>>>> 08bba65c38397057094ada9e7f5d4df5d88ec1cf
             /*
             *	Need to fix
             */
@@ -46,7 +103,7 @@ public class SaveGame{
             *but if we save player including the boards then  youre set
             *SAVE BOARD, SHIP, ARRAYS 
 			*/
-
+			
     //	writer.print(this.getGameBoard());
   
             // Always close files.
