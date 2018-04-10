@@ -52,6 +52,13 @@ public class Game {
 	}
 
 	/**
+	 * A toggle that will set the flag which disables the AI
+	 *
+	 */	
+	public static void disableAI() {
+		aiStatus = false;
+	}
+	/**
 	 * A getter that returns the AI flag's status
 	 * 
 	 * @return aiStatus Boolean that when true, indicates the AI has been selected
