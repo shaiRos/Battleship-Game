@@ -46,5 +46,9 @@ public class Settings {
 		}
 	}
 	
+	public static String getCurrentMode(){
+		return gameMode;
+	}
+
 }	
 	
