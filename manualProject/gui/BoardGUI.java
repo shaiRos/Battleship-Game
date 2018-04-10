@@ -1,18 +1,19 @@
 package gui;
+import board.Ship;
+import players.Player;
+import board.BoardValue;
+
 import javafx.scene.layout.GridPane;
+
+import javafx.geometry.Insets;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.control.Label;
-import board.BoardValue;
-import board.Ship;
-import javafx.geometry.Insets;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
-import players.Player;
+
 
 /**
 *	Creates the display of the boards. The display uses GridPane layout to visually show the players' boards.
@@ -160,8 +161,7 @@ public class BoardGUI {
 	*	@param 		array - a Ship array containing a player's ships in his/her current gameboard
 	*				boardArray - An array of a player containg boardvalues.
 	*/
-	public void setShipArrays(Ship[] array, BoardValue[][] boardArray) {
-			
+	public void setShipArrays(Ship[] array, BoardValue[][] boardArray) {		
 
  		for (Ship ships : array) {
 			if (ships != null){

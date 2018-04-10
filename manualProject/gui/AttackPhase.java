@@ -32,13 +32,13 @@ public class AttackPhase  {
 	private BorderPane gameLayout;
 	private BoardGUI guessBoard;
 	private BoardGUI ownBoard;	
-	private String attackingPlayer;
+	public static String currentPlayer;
 	private Label coordinates = null;
 	private boolean displayOnly;	
 	
 	/**
 	*	The constructor of the AttackPhase. It creates the user interface depending on which player is currently attacking.
-	*	Using the three regions from BorderPane (center, bottom, left) it displays the current player's own board at the center 
+	*	Using the three regions from BorderPane (center, bottom, right) it displays the current player's guess board at the center 
 	*	(where the player sends attacks by clicking a section of the grid), their guess board at the very top of the right pane
 	* 	region and messages and stats on the bottom pane. 
 	*
@@ -50,18 +50,18 @@ public class AttackPhase  {
 	*/
 	public AttackPhase(Scene scn, String player, boolean displayonly) {
 
-		attackingPlayer = player;
+		currentPlayer = player;
 		gameUI = scn;	
 		ownBoard = new BoardGUI(Board.getBoardSize(), Settings.smallGridWidth);
 		guessBoard = new BoardGUI(Board.getBoardSize(), Settings.bigGridWidth);
 		//coordinates = coord;
 		displayOnly = displayonly;
 
-		if (attackingPlayer == "P1") {
+		if (currentPlayer == "P1") {
 			ownBoard.addValuesFromArray(Settings.p1, "gameBoard");
 			guessBoard.addValuesFromArray(Settings.p1, "guessBoard");
 			}
-		else if (attackingPlayer == "P2") {	
+		else if (currentPlayer == "P2") {	
 				ownBoard.addValuesFromArray(Settings.p2, "gameBoard");
 				guessBoard.addValuesFromArray(Settings.p2, "guessBoard");		
 		}
@@ -72,14 +72,10 @@ public class AttackPhase  {
 		gameLayout.setBottom(botPanel());		
 		gameLayout.setRight(rightPanel());	
 		gameUI.setRoot(gameLayout);	
+		
 	}
+	
 
-	/**
-	*	@return a BoardGUI instance of the guess board display
-	*/
-	public BoardGUI getBoardNode() {
-		return guessBoard;
-	}
 	
 	/**
 	*	The child node that will be placed in the center region of the main layout. The child node is a TilePane layout that contains a GridPane layout
@@ -93,7 +89,7 @@ public class AttackPhase  {
 		TilePane centerSlot = new TilePane();
 		//attack handler on the big board
 		if (displayOnly == false) {
-			guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, attackingPlayer));
+			guessBoard.getBoardGrid().setOnMousePressed(new AttackClickHandler(guessBoard.getGridBlockSize(), gameUI, currentPlayer));
 		}
 		centerSlot.getChildren().add(guessBoard.getBoardGrid());
 		return centerSlot; 	
@@ -114,7 +110,7 @@ public class AttackPhase  {
 		// contains messages and buttons
 		VBox secondTile = new VBox(30);
 		secondTile.setAlignment(Pos.TOP_CENTER);
-		String whichPlayer = attackingPlayer + "'s turn";
+		String whichPlayer = currentPlayer + "'s turn";
 		Label thisPlayerTurn = new Label(whichPlayer);
 		thisPlayerTurn.setFont(new Font(30));
 		thisPlayerTurn.setTextFill(Color.WHITE);
