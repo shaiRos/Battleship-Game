@@ -363,7 +363,12 @@ public class Game {
 			// Take coordinates from the player turn as col,row
 			// Convert back to usable values
 			String coord = players[currentPlayerNum].playerTurn();
-				
+			
+			//@save game test
+			if(coord == "save"){
+				SaveGame.saveBoard();
+				System.exit(0);
+			}			
 			
 			String[] coordFormatted = coord.split(",");
 			int row1 = Integer.parseInt(coordFormatted[0]);
