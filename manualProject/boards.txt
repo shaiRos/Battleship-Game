@@ -1,2 +1,2 @@
-Board Size: 10
+Board Size: 5
 Current Game Mode: Player vs Ai
