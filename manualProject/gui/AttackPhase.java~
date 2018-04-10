@@ -127,7 +127,7 @@ public class AttackPhase  {
 		
 		Button saveGameBt = new Button("Save");
 		saveGameBt.setOnMouseClicked(event -> {
-			SaveGame.saveProgress(Settings.p1.getPlayerBoard(),Settings.p2.getPlayerBoard());
+			SaveGame.saveBoard(Settings.p1.getPlayerBoard(),Settings.p2.getPlayerBoard());
 			Settings.changeMessage("Saved");	
 		});
 		
