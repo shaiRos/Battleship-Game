@@ -1,4 +1,5 @@
 package gui;
+import game.Game;
 import players.Player;
 
 import javafx.scene.Scene;
@@ -48,6 +49,7 @@ public class Settings {
 	public static void reset() {
 		p1 = null;
 		p2 = null;
+		Game.disableAI();
 		gameMode = "Player vs Ai";
 		boardSize = 5;
 		message = msgLabel();
