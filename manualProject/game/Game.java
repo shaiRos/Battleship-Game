@@ -343,6 +343,8 @@ public class Game {
 
 		// This will allow user to input coordinates and setup board
 		setupBoard(player1Board, player1, player2Board, player2);
+		
+		//index for switching turns in player and game board array 
 		int currentPlayerNum = 0;
 		int swtichTurn = 1;
 
@@ -352,7 +354,7 @@ public class Game {
 			player1Board.guessBoard = player2Board.gameBoard;
 			player2Board.guessBoard = player1Board.gameBoard;
 
-			//the following arrays and ints are used to switch turns between players
+			//the following arrays are used to switch turns between players
 			Board [] boards = new Board[]{player1Board, player2Board};
 			Player [] players = new Player[]{player1,player2};
 			
