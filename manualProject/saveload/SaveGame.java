@@ -79,9 +79,9 @@ public class SaveGame{
    			writer.println("Board Size: " + Board.getBoardSize());
 
             writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
-            
-            
-     
+			
+			//AttackPhase.currentPlayer
+
             /*
             *	Need to fix
             */
@@ -92,7 +92,7 @@ public class SaveGame{
             *but if we save player including the boards then  youre set
             *SAVE BOARD, SHIP, ARRAYS 
 			*/
-
+			
     //	writer.print(this.getGameBoard());
   
             // Always close files.
