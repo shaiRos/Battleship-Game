@@ -5,6 +5,7 @@ import java.io.Reader;
 import java.io.BufferedReader;
 import java.io.*;
 import board.Board;
+import board.BoardValue;
 import gui.Settings;
 
 
@@ -31,9 +32,9 @@ public class SaveGame{
             PrintWriter writer = new PrintWriter(new BufferedWriter(fileWriter));
 
           
-   			writer.print("Board Size: " + Board.getBoardSize() + "\n\n");
+   			writer.println("Board Size: " + Board.getBoardSize());
 
-            writer.print("Current Game Mode: " + (Settings.getCurrentMode()) + "\n\n");
+            writer.println("Current Game Mode: " + (Settings.getCurrentMode());
      
             /*
             *	Need to fix
@@ -63,13 +64,13 @@ public class SaveGame{
 
 	//We are able to get the board and all from the player....... then ad valyues from array 
 	//SAve  each enum between spaces 
-
-	/*public int[][] getGameBoard(){
-		int[][] boardValues = BoardGUI.getBoardValuesGUI();
+	/*
+	public BoardValue[][] getGameBoard(){
+		BoardValue][] boardValues = BoardValue[][] 
 		return boardValues;
 
-	}*/
-
+	}
+	*/
 
 
 
