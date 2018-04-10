@@ -17,6 +17,7 @@ import javafx.geometry.Pos;
 import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
 import javafx.geometry.HPos;
+import saveload.*;
 
 
 /**
@@ -125,6 +126,10 @@ public class AttackPhase  {
 		
 		
 		Button saveGameBt = new Button("Save");
+		saveGameBt.setOnMouseClicked(event -> {
+			SaveGame.saveBoard();
+			Settings.changeMessage("Saved");	
+		});
 		
 		
 		secondTile.getChildren().addAll(thisPlayerTurn,saveGameBt, mainMenuBt);

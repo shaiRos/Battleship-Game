@@ -31,10 +31,11 @@ public class SaveGame{
             PrintWriter writer = new PrintWriter(new BufferedWriter(fileWriter));
 
           
-   			writer.print("Board Size: " + Board.getBoardSize() + "\n\n");
+   			writer.println("Board Size: " + Board.getBoardSize());
 
-            writer.print("Current Game Mode: " + (Settings.getCurrentMode()) + "\n\n");
-     
+            writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
+			
+			//AttackPhase.currentPlayer
             /*
             *	Need to fix
             */
@@ -45,7 +46,7 @@ public class SaveGame{
             *but if we save player including the boards then  youre set
             *SAVE BOARD, SHIP, ARRAYS 
 			*/
-
+			
     //	writer.print(this.getGameBoard());
   
             // Always close files.
