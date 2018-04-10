@@ -34,9 +34,10 @@ public class SaveGame{
 
             writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
             
+				//save the ship placements of current ship board
 				Ship [] currentPlayerShips = currentPlayerBoard.getShipArray();   
             for (int i = 0; i < currentPlayerShips.length; i++){
-            	writer.println(currentPlayerShips[i].toString);
+            	writer.println(currentPlayerShips[i].toString());
             }
 				            
             
@@ -44,7 +45,7 @@ public class SaveGame{
             /*
             *	Need to fix
             */
-   		//writer.print(AttackPhase.getCurrentPlayer() + "\n\n");
+   		//writer.print(AttackPhase.getCurrentPlayer() + "\n\n);
     
 
             /*Last type of data to store due to varying size of boards 
@@ -79,9 +80,9 @@ public class SaveGame{
    			writer.println("Board Size: " + Board.getBoardSize());
 
             writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
-            
-            
-     
+			
+			//AttackPhase.currentPlayer
+
             /*
             *	Need to fix
             */
@@ -92,7 +93,7 @@ public class SaveGame{
             *but if we save player including the boards then  youre set
             *SAVE BOARD, SHIP, ARRAYS 
 			*/
-
+			
     //	writer.print(this.getGameBoard());
   
             // Always close files.
