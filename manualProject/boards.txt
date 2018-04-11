@@ -1,7 +1,10 @@
-Board Size: 7
+
+Board Size: 8
 Current Game Mode: Player vs Ai
+P1
 PLAYER1SHIP
-0 3 v 3 2
-1 2 h 7 5
-2 2 h 3 5
-3 4 v 4 4
+0 2 h 7 1
+1 2 h 7 6
+2 3 h 6 4
+3 4 h 3 3
+
