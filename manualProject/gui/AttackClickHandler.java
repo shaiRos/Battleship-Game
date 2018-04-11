@@ -41,7 +41,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	private int x;
 	private int y;
 	private Scene scene;
-	private Label coordinate = new Label();
 	private static Boolean shipSunk = false;
 	
 	
@@ -88,9 +87,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		
 		if (x >= 1 && x <= Settings.boardSize && y >= 1 && y <= Settings.boardSize) {
 			
-			coordinate.setText(playerAttacking.getName() +" attacked coordinates: " + y + ", " + x);
-			coordinate.setFont(new Font(40));
-			
 			boolean checkPrevHit = playerAttacked.checkPreviousHitEnum(playerAttacking.getPlayerBoard(), y, x);	
 			
 			if (checkPrevHit == true) {		
@@ -122,7 +118,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 						
 				} else {
 					Settings.makeMsgLarger();
-					coordinate.setText("You Win!");
 					Settings.changeMessage("You Win!");
 					AttackPhase displayOnly = new AttackPhase(scene, playerAttacking.getName(), true);				
 				}
@@ -202,7 +197,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 				AttackPhase nextDisplay = new AttackPhase(scene, playerAttacking.getName(), false); 
 			} else {
 				Settings.makeMsgLarger();
-				coordinate.setText("You Lose!"); //if changing this msg, change condition on playAgainBt in AttackPhase 
 				Settings.changeMessage("You Lose!");
 				AttackPhase displayOnly = new AttackPhase(scene, playerAttacking.getName(), true);				
 			} 
