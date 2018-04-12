@@ -187,9 +187,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
     			((ComputerPlayer) Settings.p2).clearQueue();
     			shipSunk = false;
         }
-
-        
-        
 		//https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
 		PauseTransition pause = new PauseTransition(Duration.seconds(.7));		
 		pause.setOnFinished(event -> {
