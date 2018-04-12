@@ -83,6 +83,10 @@ public class Board {
 		return numOfShips;
 	}
 
+	public static void setNumOfShips(int num) {
+		numOfShips = num;
+	}
+
 	/**
 	* getter method for the array that stores the number of each ships 
 	* to be added

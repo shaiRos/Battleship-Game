@@ -36,33 +36,54 @@ public class SaveGame{
             // Always wrap FileWriter in BufferedWriter.
             PrintWriter writer = new PrintWriter(new BufferedWriter(fileWriter));
 
-          
-   			writer.println("Board Size: " + Board.getBoardSize());
+          	
+   			writer.println("Board Size:");
+   			writer.println(Board.getBoardSize());
 
-            writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
+   			writer.println("Number of Ships:");
+   			writer.println(Board.getNumOfShips());
+
+            writer.println("Current Game Mode:");
+           	writer.println((Settings.getCurrentMode()));
+
+            writer.println("Current Turn:");
             writer.println(AttackPhase.currentPlayer);
             
 				//save the ship placements of current ship board
-				writer.println("PLAYER1SHIP");
+				writer.println("PLAYER1SHIP:");
 				Ship [] P1Ships = P1Board.getShipArray();   
             for (int i = 0; i < P1Ships.length; i++){
             	writer.println(P1Ships[i].toString());
             }
-				            
-            
-     
-            /*
-            *	Need to fix
-            */
-   		//writer.print(AttackPhase.getCurrentPlayer() + "\n\n);
-    
+				          
+            	writer.println("PLAYER1BOARD:");
+             for (int row = 0; row < Board.getBoardSize(); row++){
+             	for (int column = 0; column < Board.getBoardSize(); column++){
+             		if (column == (Board.getBoardSize() - 1)){
+             			writer.println((P1Board.gameBoard[row][column]) + " ");
+             		} else {
+             			writer.append((P1Board.gameBoard[row][column]) + " ");
+             		}
+             	}
+             }
 
-            /*Last type of data to store due to varying size of boards 
-            *but if we save player including the boards then  youre set
-            *SAVE BOARD, SHIP, ARRAYS 
-			*/
-
-    //	writer.print(this.getGameBoard());
+             	writer.println("PLAYER2SHIP:");
+     			Ship [] P2Ships = P2Board.getShipArray();   
+            for (int i = 0; i < P2Ships.length; i++){
+            	writer.println(P2Ships[i].toString());
+            }
+				          
+            	writer.println("PLAYER2BOARD:");
+             for (int row = 0; row < Board.getBoardSize(); row++){
+             	for (int column = 0; column < Board.getBoardSize(); column++){
+             		if (column == (Board.getBoardSize() - 1)){
+             			writer.println((P2Board.gameBoard[row][column]) + " ");
+             		} else {
+             			writer.append((P2Board.gameBoard[row][column]) + " ");
+             		}
+             	}
+             }
+           
   
             // Always close files.
             writer.flush();
@@ -90,7 +111,6 @@ public class SaveGame{
 
 
             writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
-     
 
             /*
             *	Need to fix
@@ -161,6 +181,7 @@ public class SaveGame{
 		player2Board.guessBoard = player1Board.gameBoard;		
 		
 	}
+
 
 
 
