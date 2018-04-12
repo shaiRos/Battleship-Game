@@ -28,6 +28,7 @@ public class Board {
 	/**
 	 * Default constructor for our board
 	 * initialize all arrays and variables base on boardSize
+	 * @param boardValue the determined size of the board
 	 */
 	public Board(int boardValue) {
 		setBoardSize(boardValue);
@@ -67,8 +68,7 @@ public class Board {
 	*/
 	private static void setBoardSize(int size) {
 		boardSize = size;
-//		numOfShips = (int)(Math.ceil(size/2.0));
-//		listOfShipSizes = generateShipsToAdd();
+
 	}
 	
 

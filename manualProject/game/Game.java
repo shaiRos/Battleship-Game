@@ -96,7 +96,7 @@ public class Game {
 	 * @param milliseconds
 	 *            - Int of milliseconds to pause execution
 	 */
-	public static void sleepThread(int milliseconds) {
+	private static void sleepThread(int milliseconds) {
 		// Try sleeping for specified time given in ms
 		try {
 			Thread.sleep(milliseconds);
@@ -113,10 +113,9 @@ public class Game {
 	 * @param player1Board
 	 *            Board object that stores all of the information of the main
 	 *            player's board 
-	 * @param player2Board Board object that stores all of the
-	 *            information of the opposing player's board
+	 * @param player2Board
 	 * @param player1 player object linked to player1Board
-	 * @param player2 player object linked to player2Board
+	 * @param player2 
 	 */
 	public static void setupBoard(Board player1Board, Player player1, Board player2Board, Player player2) {
 
@@ -145,7 +144,7 @@ public class Game {
 	/**
 	* the main function used for the players to setup their ship placements
 	* @param playerBoard the Board object of the player setting the ship
-	* @param currentPlayer the current player
+	* @param currentPlayer
 	*/
 	public static void userPlaceShip(Board playerBoard, Player currentPlayer){
 		int [] typeOfShipToAdd = Board.generateShipsToAdd();
@@ -177,8 +176,6 @@ public class Game {
 	 * @param shipLength length of the ship
 	 * @param shipCount the current ship being placed
 	 */
-	// The main code for inserting ships on the other board
-	// Error checking, logic checking etc
 	public static void setupInput(Board board, Player currentPlayer, int shipLength, int shipCount){
 		boolean formatted = false;
 
@@ -313,13 +310,6 @@ public class Game {
 		Board player2Board = new Board(userBoardSize);
 		// populate boards with battleships
 
-
-		/* This will read a file and allow us to setup predefined board
-		String fileName = "map.txt";
-		mapFromFiles(fileName, player1Board);
-		mapFromFiles(fileName, player2Board);
-		*/
-
 		// instantiate our players
 		Player player1 = new HumanPlayer(player1Board, "player 1");
 		// We don't know what our player 2 is at this point, just instantiate a generic
@@ -375,21 +365,6 @@ public class Game {
 
 		} while (winCondition != true);
 
-	}
-
-	// Method to check the start() method variables
-	public void startCheck() {
-		// create boards for both the players
-		// difficulty will rely on these settings - add user input to specify difficulty
-		// int userBoardSize = 5;
-		// int userShipCount = 2;
-
-		String fileName = "map.txt";
-
-		// Initialize the boards and set the board sizes
-		// WIP:
-		// - Re-create the board using the new boardSize values
-		//Board.setBoardSize(userBoardSize);
 	}
 
 }

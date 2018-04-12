@@ -191,23 +191,8 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
     			//Settings.changeMessage("a ship has sunk");
     			shipSunk = false;
         }
-        System.out.println("shipSunk Value: " + shipSunk);
-        System.out.println("Row2 value: " + row2);
-        System.out.println("Col2 value: " + column2);
         
-        // DEBUG
-        System.out.println("Current guessed values: ");
-        for (String values: ComputerPlayer.getGuessed()) {
-        		System.out.println(values);
-        }
-        
-        // DEBUG
-        System.out.println("Current guessing queue: ");
-        for (String values: ComputerPlayer.getQueue()) {
-        		System.out.println(values);
-        }
-
-        
+       
         
 		//https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
 		PauseTransition pause = new PauseTransition(Duration.seconds(.7));		
