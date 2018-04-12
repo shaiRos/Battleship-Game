@@ -183,8 +183,6 @@ public class ComputerPlayer extends Player {
 				// check to make sure its a legit value
 				if ((row > Board.getBoardSize()) || (column > Board.getBoardSize()) || (row < 0) || (column < 0)) {
 					System.out.println("Invalid coordinates");
-					System.out.println(row);
-					System.out.println(column);
 					System.exit(0);
 				} else {
 					formatted = true;

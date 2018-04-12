@@ -74,10 +74,9 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		}		
 	}
 
-	/**	Finds Column and row clicked, checks if it was previously hit (display doesn't continue if it is)
+	/**	Finds Column and row clicked, checks if it was previously hit )
 	*	Sends Attack which updates the player's guessBoard and enemy gameBoard
-	*	Checks for win condition, if false, displays the outcome of the action first (hit or miss) then 
-	*	displays transition modes.
+	*	Checks for win condition then displays transition modes.
 	*/	
 	public void handle(MouseEvent myEvent) {
 		//find the col and row that was clicked
@@ -129,8 +128,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	
 	/**	
 	*	Transition in PvP mode to hide previous player's display since both players shouldn't 
-	* 	see the other player's boards. It also makes a button so that the display doesn't automatically
-	*	go to the next player's attack phase until he/she clicks the button. 
+	* 	see the other player's boards. 
 	*	
 	*	@return a new root for the scene to transition into for the pause for each turn. (with a button)
 	*/
@@ -161,7 +159,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 	*	Transition in P-v-AI mode to let the player know that the AI is making a move
 	* 	initiates playerTurn for AI which makes the attack for the AI and updates the boards.
 	* 	After a few seconds, the display returns to the Human player's attack phase with the updated boards.
-	*	The class AttackPhase is called to display 
 	*
 	*	@return a new root for the scene to transition into for the pause for each turn
 	*/	
@@ -187,6 +184,7 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
     			((ComputerPlayer) Settings.p2).clearQueue();
     			shipSunk = false;
         }
+
 		//https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
 		PauseTransition pause = new PauseTransition(Duration.seconds(.7));		
 		pause.setOnFinished(event -> {
