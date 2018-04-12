@@ -1,5 +1,9 @@
+package saveload;
+
 import java.io.*;
 import java.util.Scanner;
+import board.Board;
+import board.BoardValue;
 
 /**
 *	Temporary class - to be implemented later in gameConfig or
@@ -9,12 +13,15 @@ import java.util.Scanner;
 */
 public class LoadGame{
 
+    private String[][] p1Board = null;
+    private String[][] p2Board = null;
 
-      public static void loadBoard()
+    public static void loadBoard()
     {
         //Initiate which file to read
         String fileToRead = "boards.txt";
 
+        
         //Initiate line for ship data from file 
         String line = null;
          try {
@@ -23,14 +30,77 @@ public class LoadGame{
             // Wrap FileReader in BufferedReader to efficiently read chars, lines, etc. (lines in this case)
             BufferedReader reader = new BufferedReader(fileReader);
 
-            while(line = reader.readLine()) != null){
 
-                if ((line == "Number of Ships:"){
+            while((line = reader.readLine()) != null){
+
+                if (line.equals("Board Size:")){
+                    //System.out.println(line);
                     String data = reader.readLine();
+                    //System.out.println(data);
+                    int boardSize = Integer.parseInt(data);
+
+                    
+
+                } else if (line.equals("Number of Ships:")) {
+                    //System.out.println("after " + line );
+                    String data = reader.readLine();
+                    //System.out.println(data);
                     int numShips = Integer.parseInt(data);
+                    Board.setNumOfShips(numShips);
+
+                } else if (line.equals("PLAYER1BOARD")){
+                    for (int row = 0; row < boardSize; row++){
+                        String rowLine = reader.readLine();
+                        String[] rowData = rowLine.split(" ");
+                        for (int column = 0; column < boardSize; column++){
+                            p1Board[row][column] = rowData[column];
+                        }
+                    }
+
+                } else if (line.equals("PLAYER2BOARD")){
+                    for (int row = 0; row < boardSize; row++){
+                        String rowLine = reader.readLine();
+                        String[] rowData = rowLine.split(" ");
+                        for (int column = 0; column < boardSize; column++){
+                            p2Board[row][column] = rowData[column];
+                        }
+                    }
+
+
+                } else if (line.equals("PLAYER1SHIP:")){
+                    for (int ship = 0; ship < numShips; ship++){
+                        String shipLine = reader.readLine();
+                        String[] shipData = shipLine.split(" ");
+                        int ID = Integer.parseInt(shipData[0]);
+                        int len = Integer.parseInt(shipData[1]);
+                        char orient = shipData[2].charAt(0);
+                        int row = Integer.parseInt(shipData[3]);
+                        int column = Integer.parseInt(shipData[4]);
+                        //board object
+                        p1Board.addShip(ID, len, orient, row, column);
+                    }
+
                 }
 
+            }
 
+
+            /*
+            while (line != null){
+
+                if (line == "PLAYER1BOARD"){
+                    for (int row = 0; row < Board.getBoardSize(); row++){
+                    for (int column = 0; column < Board.getBoardSize(); column++){
+                        if (column == (Board.getBoardSize() - 1)){
+                            writer.println((P1Board.gameBoard[row][column]) + " ");
+                        } else {
+                            writer.append((P1Board.gameBoard[row][column]) + " ");
+                        }
+                    }
+                    }
+                }
+
+            } */
                 //will need to make setBoardSize public
                 /* if ((line = reader.readLine()) == "PLAYER1SHIP:"){
                     String data = reader.readLine();
@@ -39,14 +109,12 @@ public class LoadGame{
                         
                     }
 
-                */
+                
 
                 if  (line == "Current Game Mode:"){
                     
-                }
+                } */
 
-
-            }
 
             reader.close();         
         }

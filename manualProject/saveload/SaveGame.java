@@ -9,11 +9,16 @@ import board.BoardValue;
 import gui.Settings;
 import board.Ship;
 import gui.AttackPhase;
+import players.Player;
+import players.HumanPlayer;
+import players.ComputerPlayer;
 
 
 
 public class SaveGame{
-
+	
+	public Player p1 = null;
+	public Player p2 = null;
 
 
 	public static void main(String[] args){
@@ -104,13 +109,8 @@ public class SaveGame{
           
    			writer.println("Board Size: " + Board.getBoardSize());
 
-            writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
-     
-            writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
-			
-			//AttackPhase.currentPlayer
 
-
+            writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
 
             /*
             *	Need to fix
@@ -146,7 +146,41 @@ public class SaveGame{
 		return boardValues;
 
 	}
+	*/ /*//when loading from txt file, MAKE the p1 GAMEBOARD and p2 GAMEBOARD
+			
+			new constructor on Board?...
+			Board p1Board = new Board(boardSize, shipArray, gameBoard)
+			Board p2Board = new Board(boardSize, shipArray, gameBoard)
+			
+			then call vvv that method
+	
+	
+	
+	/**
+	*	Makes the player instances for the game to load from 
+	*
+	*	@param		p1Board - a Board instance of player 1's board. gameBoard and shipArray is set (not guessBoard)
+	*	@param 		p2Board - a Board instance of player 2's board. gameBoard and shipArray is set (not guessBoard)
+	*	@param 		gameMode - the gameMode that is read from the file 
 	*/
+	public void makeThePlayersForLoad(Board p1Board, Board p2Board, String gameMode) {
+		
+        Board player1Board = p1Board;
+        Board player2Board = p2Board;
+
+		Player player1 = new HumanPlayer(player1Board,"P1");
+		Player player2 = null;
+		
+        if (gameMode == "Player vs Ai") {
+	    		player2 = new ComputerPlayer(player2Board,"P2");
+        } else {
+        		player2 = new HumanPlayer(player2Board,"P2");
+        }			
+		
+		player1Board.guessBoard = player2Board.gameBoard;
+		player2Board.guessBoard = player1Board.gameBoard;		
+		
+	}
 
 
 

@@ -49,10 +49,14 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 
 	
 	/**
-	*	When a button is clicked from the right pane of the setup display, it sets the info of the ship based on what button was clicked. 
-	*	(each button has different values for each parameter of this constructor) The display of the right pane is also changed. The default
-	*	orientation is horizontal but players can switch to vertical by right clicking. It also activates a mouse listener in the large board
-	*	so that players can place the ship they're currently 'holding'. All chacks are done so that ships can be placed with no conglicts.
+	*	Sets up the instance variables of this class depending on which player is in the setup phase
+	*
+	*	@param 		scn - The scene of the game. changes the root as the display changes.
+	*	@param 		shipLen - an integer of the ship length of the button clicked in the setup phase
+	*	@param 		rt - a BorderPane layout. This is the layout made in SetupPhase class 
+	*	@param 		playerSettingUp - a String indicating which player is setting up
+	*	@param		numOfShips - an integer indicating the number of ships left to setup. 
+	*	@param		bigBoard - a BoardGUI instance of the large board representing the player's own board 
 	*/
 	public SetupShipHandler(Scene scn, int shipLen, BorderPane rt, String playerSettingUp, int numOfShips, BoardGUI bigBoard) {
 		
@@ -70,6 +74,14 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 		boardDisplay = bigBoard;
 	}
 	
+	/**
+	*	When a button is clicked from the right pane of the setup display, it sets the info of the ship based on what button was clicked. 
+	*	(each button has different values for each parameter of this constructor) The display of the right pane is also changed. The default
+	*	orientation is horizontal but players can switch to vertical by right clicking. It also activates a mouse listener in the large board
+	*	so that players can place the ship they're currently 'holding'. All checks are done so that ships can be placed with no conflicts. Will
+	*	continue to display the current player's setup phase until he/she has placed the indicated number of ships to be placed. Then setup phase display
+	*	will change to the next player. When mode is player vs ai, it continues directly into the game i.e the attack phase. 
+	*/	
 	public void handle(MouseEvent event) {
 		root.setRight(rightPanel());
 		//rightclicks for changing the orientation
@@ -91,7 +103,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 			}
 		});
 		
-		//this activates an event listener for the displayed board (the big one)
+		//this activates an event listener for the displayed board in setup phase gui
 		boardDisplay.getBoardGrid().setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent myEvent) {
@@ -126,21 +138,20 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 							//If player 1 finished the setup, if mode is player vs ai continue to the game
 							//else if mode is player vs player, continue to player 2 setup 
 							if (thisPlayer == "P1") {
+								//mode: player vs ai
 								if (Game.getAIStatus() == true) {
 									SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,true);
 									Game.userPlaceShip(Settings.p2.getPlayerBoard(), Settings.p2);
 									PauseTransition pause = new PauseTransition(Duration.seconds(1));
 									pause.setOnFinished(event -> scene.setRoot(startGameTransitionScreen()));
 									pause.play();
+								//mode: player vs player
 								} else {
 									Settings.setGeneratedShips(player.getPlayerBoard().getGeneratedShips());
 									SetupPhase nextShipSetup = new SetupPhase(scene,thisPlayer,shipsLeft,true);
 									PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
 									pause.setOnFinished(event -> scene.setRoot(p2Setup()));
-									pause.play();
-									
-									
-									
+									pause.play();	
 								}
 							}
 							//for player vs player. When player 2 is done setting up, continue to the game  
@@ -221,7 +232,7 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	
 	/**
 	*	Only for PvP. When player 1 setup phase is done, the display changes into another screen with a button at the center. This is to prevent the second player from
-	*	seeing the previous player's board setup. When ready, player two clicks the button the enter his/her own setup phase
+	*	seeing the previous player's board setup. When ready, player 2 clicks the button the start his/her own setup phase
 	*
 	*	@return		a BorderPane layout that displays the transition screen after player one's setup phase is done.
 	*/
@@ -248,7 +259,12 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	}	
 	
 
-	
+	/**
+	*	When setup is finished, this transition screen informs the players that the game will start with player 1 making the turn first
+	*	Then it calls AttackPhase when the continue button is clicked.
+	*
+	*	@return 	a VBox layout 
+	*/
 	public VBox startGameTransitionScreen() {
 		
 		VBox display = new VBox(100);

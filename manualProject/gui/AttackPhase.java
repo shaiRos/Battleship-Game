@@ -40,12 +40,10 @@ public class AttackPhase  {
 	/**
 	*	The constructor of the AttackPhase. It creates the user interface depending on which player is currently attacking.
 	*	Using the three regions from BorderPane (center, bottom, right) it displays the current player's guess board at the center 
-	*	(where the player sends attacks by clicking a section of the grid), their guess board at the very top of the right pane
-	* 	region and messages and stats on the bottom pane. 
+	*	(where the player sends attacks by clicking a section of the grid). At the right pane contains their guess board, info, and buttons
+	*	for saving and quitting. 
 	*
 	*	@param 		scn - the Scene where the root will be changed to display the next player's attack phase
-	*	@param		p1 - a Player instance of the first player
-	*	@param		p2 - a Player instance of the second payer
 	*	@param		player - a String that indicates which player the display should accommodate
 	*	@param		displayonly - a boolean indicating if this layout out should be display only with no event handlers on the guess board
 	*/
@@ -83,7 +81,7 @@ public class AttackPhase  {
 	*	(created in BoardGUI) which is the display of the player's guess board. This node has also been set as an event listener that calls
 	*	the AttackClickHandler class to take in mouse clicks from this node.
 	*	
-	*	@return 	a TilePane layout that displays the current player's guessing board
+	*	@return 	a TilePane layout 
 	*/
 	public TilePane centerPane() {	
 		
@@ -97,7 +95,8 @@ public class AttackPhase  {
 	}
 
 	/**
-	*	The child node that will be placed in the right region of the main layout.
+	*	The child node that will be placed in the right region of the main layout. Contains the player's own board and other info.
+	*
 	*	@return 	a TilePane layout
 	*/
 	public TilePane rightPanel() {
@@ -141,9 +140,11 @@ public class AttackPhase  {
 	}	
 	
 	/**
-	*	The child node that will be placed in the bottom region of the main layout.
-	*	@return a GridPane layout
-	*/	
+	*	The bottom panel consists of messages for the user. Placed at the bottom region of the
+	*	main layout.
+	*
+	*	@return 	a GridPane layout 
+	*/
 	public GridPane botPanel() {
 		
 		GridPane botPanel = new GridPane(); 
