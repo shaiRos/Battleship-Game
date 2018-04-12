@@ -56,8 +56,8 @@ public class GameConfig {
 	/**
 	* A method used to check if a ship has been sunken after a attack
 	* @param playerBoard the board of the player being attacked on
-	* @param row row of the coordinate being attacked one
-	* @param column column of the coordinate being attacked on
+	* @param row 
+	* @param column
 	* @return true if a ship is sunken
 	* 
 	*/
@@ -77,10 +77,10 @@ public class GameConfig {
 	 * 
 	 * @param board
 	 *            Board object that represents the current board 
-	 * @param length length of the ship
+	 * @param length 
 	 * @param orientation char representing orientation of the ship
-	 * @param column most right position of the ship
-	 * @param row most top position of the ship
+	 * @param column 
+	 * @param row 
 	 */
 	public static void validateShipProperties(Board board, int length, char orientation, int column, int row) {
 		int changingCoord = 'n';

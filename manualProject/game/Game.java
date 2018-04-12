@@ -230,7 +230,6 @@ public class Game {
 	 * @return  Will return a boolean to indicate whether the win
 	 *         conditions have been met
 	 */
-	// Check the board for remaining ships
 	public static boolean winCondition(Board board) {
 		int shipCounter = 0;
 		for (int x = 0; x < Board.getBoardSize(); x++) {
