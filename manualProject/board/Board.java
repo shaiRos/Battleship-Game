@@ -171,7 +171,7 @@ public class Board {
 
 	/**
 	* takes in a string array of the game board and load it 
-	* on the gamebard as enum values
+	* on the gameboard as enum values (for load game)
 	* @param a string array of game board that correspond with values of game board
 	*/
 	public void loadGameBaord(String [][] gameBoardFromFile){
