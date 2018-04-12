@@ -30,7 +30,7 @@ public class BoardTest {
 		System.out.println("herE");
 		Board b = new Board(5);
 		b.setBoardType(1);
-		assertFalse("Game board", b.getBoardType());
+		assertFalse("Expected board type to be gameboard", b.getBoardType());
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class BoardTest {
 		System.out.println("there");
 		Board b = new Board(5);
 		b.setBoardType(2);
-		assertTrue("It is not game board", b.getBoardType());
+		assertTrue("Expected board typ not to be gameboard", b.getBoardType());
 	}
 
 }

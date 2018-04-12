@@ -16,7 +16,7 @@ import javafx.scene.layout.BorderPane;
 
 /**
 * 	Application of java fx starts here. 
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 
 public class BattleShipGUI extends Application

@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.Scanner;
 import board.Board;
 import board.BoardValue;
+import players.Player;
+import players.HumanPlayer;
+import players.ComputerPlayer;
 
 /**
 *	Temporary class - to be implemented later in gameConfig or
@@ -13,8 +16,10 @@ import board.BoardValue;
 */
 public class LoadGame{
 
-    private String[][] p1Board = null;
-    private String[][] p2Board = null;
+    private static String[][] p1SBoard = null;
+    private static String[][] p2SBoard = null;
+    private static int boardSize;
+    private static int numShips;
 
     public static void loadBoard()
     {
@@ -37,37 +42,44 @@ public class LoadGame{
                     //System.out.println(line);
                     String data = reader.readLine();
                     //System.out.println(data);
-                    int boardSize = Integer.parseInt(data);
+                    boardSize = Integer.parseInt(data);
 
-                    
+
 
                 } else if (line.equals("Number of Ships:")) {
                     //System.out.println("after " + line );
                     String data = reader.readLine();
                     //System.out.println(data);
-                    int numShips = Integer.parseInt(data);
+                    numShips = Integer.parseInt(data);
                     Board.setNumOfShips(numShips);
 
                 } else if (line.equals("PLAYER1BOARD")){
+                
+
                     for (int row = 0; row < boardSize; row++){
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
                         for (int column = 0; column < boardSize; column++){
-                            p1Board[row][column] = rowData[column];
+                            p1SBoard[row][column] = rowData[column];
                         }
                     }
 
                 } else if (line.equals("PLAYER2BOARD")){
+                  
+
                     for (int row = 0; row < boardSize; row++){
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
                         for (int column = 0; column < boardSize; column++){
-                            p2Board[row][column] = rowData[column];
+                            p2SBoard[row][column] = rowData[column];
                         }
                     }
 
 
                 } else if (line.equals("PLAYER1SHIP:")){
+                    Board p1Board = new Board(boardSize);
+                    p1Board.loadGameBoard(p1SBoard);
+
                     for (int ship = 0; ship < numShips; ship++){
                         String shipLine = reader.readLine();
                         String[] shipData = shipLine.split(" ");
@@ -76,10 +88,25 @@ public class LoadGame{
                         char orient = shipData[2].charAt(0);
                         int row = Integer.parseInt(shipData[3]);
                         int column = Integer.parseInt(shipData[4]);
-                        //board object
+                  
                         p1Board.addShip(ID, len, orient, row, column);
                     }
 
+                } else if (line.equals("PLAYER2SHIP:")){
+                    Board p2Board = new Board(boardSize);
+                    p2Board.loadGameBoard(p2SBoard);
+
+                    for (int ship = 0; ship < numShips; ship++){
+                        String shipLine = reader.readLine();
+                        String[] shipData = shipLine.split(" ");
+                        int ID = Integer.parseInt(shipData[0]);
+                        int len = Integer.parseInt(shipData[1]);
+                        char orient = shipData[2].charAt(0);
+                        int row = Integer.parseInt(shipData[3]);
+                        int column = Integer.parseInt(shipData[4]);
+                 
+                        p2Board.addShip(ID, len, orient, row, column);
+                    }
                 }
 
             }
@@ -124,7 +151,45 @@ public class LoadGame{
         catch(IOException ex) {
             System.out.println("Error reading file '" + fileToRead + "'");  
         }
+
+
     }
+
+
+/*
+    public void loadPlayer(String name, Board playerBoard){
+
+    }
+*/
+
+
+/**
+    *   Makes the player instances for the game to load from 
+    *
+    *   @param      p1Board - a Board instance of player 1's board. gameBoard and shipArray is set (not guessBoard)
+    *   @param      p2Board - a Board instance of player 2's board. gameBoard and shipArray is set (not guessBoard)
+    *   @param      gameMode - the gameMode that is read from the file 
+    */
+
+    public void makeThePlayersForLoad(Board p1Board, Board p2Board, String gameMode) {
+        
+        Board player1Board = p1Board;
+        Board player2Board = p2Board;
+
+        Player player1 = new HumanPlayer(player1Board,"P1");
+        Player player2 = null;
+        
+        if (gameMode == "Player vs Ai") {
+                player2 = new ComputerPlayer(player2Board,"P2");
+        } else {
+                player2 = new HumanPlayer(player2Board,"P2");
+        }           
+        
+        player1Board.guessBoard = player2Board.gameBoard;
+        player2Board.guessBoard = player1Board.gameBoard;       
+        
+    }
+
 
 
 

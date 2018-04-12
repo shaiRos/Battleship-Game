@@ -20,7 +20,7 @@ public class MenuScreenTest {
 		try {
 			m.userChoice = Integer.parseInt("kahgakga");
 		} catch (Exception e) {
-			assertTrue("Wrong input. Cannot take random words/characters", m.getUserSelect());
+			assertTrue("Wrong input. Cannot take random words/characters, expected integer", m.getUserSelect());
 		}
 	}
 
@@ -28,7 +28,7 @@ public class MenuScreenTest {
 	public void test_printMenu2() {
 		MenuScreen m = new MenuScreen();
 		m.userChoice = (4);
-		assertTrue("Wrong input. Cannot take any integers other than 1, 2, or 3", m.getUserSelect());
+		assertTrue("Wrong input. Expected integers 1, 2, or 3", m.getUserSelect());
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class MenuScreenTest {
 			m.userChoice = Integer.parseInt("}|:><:");
 
 		} catch (Exception e) {
-			assertTrue("Wrong input. Cannot take any special characters", m.getUserSelect());
+			assertTrue("Wrong input. Cannot take any special characters, expected integers 1, 2, or 3", m.getUserSelect());
 		}
 	}
 
@@ -46,21 +46,21 @@ public class MenuScreenTest {
 	public void test_printMenu4() {
 		MenuScreen m = new MenuScreen();
 		m.setInput(1);
-		assertFalse("Chooses Player vs Player", m.getUserSelect());
+		assertFalse("Expects Player vs Player", m.getUserSelect());
 	}
 
 	@Test
 	public void test_printMenu5() {
 		MenuScreen n = new MenuScreen();
 		n.setInput(2);
-		assertFalse("Chooses Player vs AI", n.getUserSelect());
+		assertFalse("Expects Player vs AI", n.getUserSelect());
 	}
 
 	@Test
 	public void test_printMenu6() {
 		MenuScreen o = new MenuScreen();
 		o.setInput(3);
-		assertFalse("Chooses to exit", o.getUserSelect());
+		assertFalse("Expects to exit", o.getUserSelect());
 	}
 
 }
