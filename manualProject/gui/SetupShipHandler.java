@@ -48,7 +48,16 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	private String thisPlayer;
 
 	
-
+	/**
+	*	Sets up the instance variables of this class depending on which player is in the setup phase
+	*
+	*	@param 		scn - The scene of the game. changes the root as the display changes.
+	*	@param 		shipLen - an integer of the ship length of the button clicked in the setup phase
+	*	@param 		rt - a BorderPane layout. This is the layout made in SetupPhase class 
+	*	@param 		playerSettingUp - a String indicating which player is setting up
+	*	@param		numOfShips - an integer indicating the number of ships left to setup. 
+	*	@param		bigBoard - a BoardGUI instance of the large board representing the player's own board 
+	*/
 	public SetupShipHandler(Scene scn, int shipLen, BorderPane rt, String playerSettingUp, int numOfShips, BoardGUI bigBoard) {
 		
 		scene = scn;	
@@ -250,7 +259,12 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	}	
 	
 
-	
+	/**
+	*	When setup is finished, this transition screen informs the players that the game will start with player 1 making the turn first
+	*	Then it calls AttackPhase when the continue button is clicked.
+	*
+	*	@return 	a VBox layout 
+	*/
 	public VBox startGameTransitionScreen() {
 		
 		VBox display = new VBox(100);

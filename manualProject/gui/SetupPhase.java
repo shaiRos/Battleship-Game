@@ -141,6 +141,11 @@ public class SetupPhase {
 		return section;	
 	}
 	
+	/**
+	*	The bottom panel consists of messages for the user.
+	*
+	*	@return 	a GridPane layout 
+	*/
 	public GridPane botPanel() {
 		
 		GridPane botPanel = new GridPane(); 
