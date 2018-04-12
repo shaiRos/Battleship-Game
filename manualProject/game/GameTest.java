@@ -17,7 +17,7 @@ public class GameTest {
 	public void test_enableAI() {
 		Game g = new Game();
 		g.enableAI();
-		assertTrue("Enabled the AI", g.getAIStatus());
+		assertTrue("Expected AI to be enabled.", g.getAIStatus());
 	}
 
 //	@Test
