@@ -20,6 +20,10 @@ public class LoadGame{
     private static String[][] p2SBoard = null;
     private static int boardSize;
     private static int numShips;
+    private static String mode;
+    private static String currentPlayer;
+    private Board p1Board = new Board(boardSize);
+    private Board p2Board = new Board(boardSize);
 
     public static void loadBoard()
     {
@@ -53,6 +57,12 @@ public class LoadGame{
                     numShips = Integer.parseInt(data);
                     Board.setNumOfShips(numShips);
 
+                } else if (line.equals("Current Game Mode:")){
+                    mode = reader.readLine();
+
+                } else if (line.equals("Current Turn:")){
+                    currentPlayer = reader.readLine();
+
                 } else if (line.equals("PLAYER1BOARD")){
                 
 
@@ -77,7 +87,7 @@ public class LoadGame{
 
 
                 } else if (line.equals("PLAYER1SHIP:")){
-                    Board p1Board = new Board(boardSize);
+                   
                     p1Board.loadGameBoard(p1SBoard);
 
                     for (int ship = 0; ship < numShips; ship++){
@@ -93,7 +103,7 @@ public class LoadGame{
                     }
 
                 } else if (line.equals("PLAYER2SHIP:")){
-                    Board p2Board = new Board(boardSize);
+                   
                     p2Board.loadGameBoard(p2SBoard);
 
                     for (int ship = 0; ship < numShips; ship++){
@@ -110,6 +120,8 @@ public class LoadGame{
                 }
 
             }
+
+            makeThePlayersForLoad(p1Board,p2Board,mode);
 
 
             /*
@@ -171,7 +183,7 @@ public class LoadGame{
     *   @param      gameMode - the gameMode that is read from the file 
     */
 
-    public void makeThePlayersForLoad(Board p1Board, Board p2Board, String gameMode) {
+    public static void makeThePlayersForLoad(Board p1Board, Board p2Board, String gameMode) {
         
         Board player1Board = p1Board;
         Board player2Board = p2Board;
@@ -190,7 +202,9 @@ public class LoadGame{
         
     }
 
-
+    public String getCurrentPlayer(){
+        return currentPlayer;
+    }
 
 
     

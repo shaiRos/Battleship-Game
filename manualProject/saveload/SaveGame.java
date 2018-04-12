@@ -138,15 +138,8 @@ public class SaveGame{
 
 
 
-	//We are able to get the board and all from the player....... then ad valyues from array 
-	//SAve  each enum between spaces 
-	/*
-	public BoardValue[][] getGameBoard(){
-		BoardValue][] boardValues = BoardValue[][] 
-		return boardValues;
-
-	}
-	*/ /*//when loading from txt file, MAKE the p1 GAMEBOARD and p2 GAMEBOARD
+		/*
+		//when loading from txt file, MAKE the p1 GAMEBOARD and p2 GAMEBOARD
 			
 			new constructor on Board?...
 			Board p1Board = new Board(boardSize, shipArray, gameBoard)
@@ -156,31 +149,7 @@ public class SaveGame{
 	
 	
 	
-	/**
-	*	Makes the player instances for the game to load from 
-	*
-	*	@param		p1Board - a Board instance of player 1's board. gameBoard and shipArray is set (not guessBoard)
-	*	@param 		p2Board - a Board instance of player 2's board. gameBoard and shipArray is set (not guessBoard)
-	*	@param 		gameMode - the gameMode that is read from the file 
-	*/
-	public void makeThePlayersForLoad(Board p1Board, Board p2Board, String gameMode) {
-		
-        Board player1Board = p1Board;
-        Board player2Board = p2Board;
-
-		Player player1 = new HumanPlayer(player1Board,"P1");
-		Player player2 = null;
-		
-        if (gameMode == "Player vs Ai") {
-	    		player2 = new ComputerPlayer(player2Board,"P2");
-        } else {
-        		player2 = new HumanPlayer(player2Board,"P2");
-        }			
-		
-		player1Board.guessBoard = player2Board.gameBoard;
-		player2Board.guessBoard = player1Board.gameBoard;		
-		
-	}
+	
 
 
 
