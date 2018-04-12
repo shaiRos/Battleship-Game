@@ -18,7 +18,7 @@ import javafx.scene.layout.BackgroundImage;
 /**
 *	Creates the display of the boards. The display uses GridPane layout to visually show the players' boards.
 *	Also manages the size and adding contents into the grid.
-*	<p>
+*	
 *	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
 */
 
@@ -36,7 +36,8 @@ public class BoardGUI {
 	*	and adjusts the sizes to accomodate for the window size.
 	*
 	*	@param 		gridSize - an integer indicating what board size to create
-	*	@param 		gridwidth - an integer indicating the width the display of the board occupies in the window.(Includes the margins) This is a final value set on Settings class.
+	*	@param 		gridwidth - an integer indicating the width the display of the board occupies in the window.
+	*							(Includes the margins) This is a final value set on Settings class.
 	*/
 	public BoardGUI(int gridsize, int gridwidth) {
 		
