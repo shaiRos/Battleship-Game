@@ -35,7 +35,6 @@ public class AttackPhase {
     private BoardGUI guessBoard;
     private BoardGUI ownBoard;
     public static String currentPlayer;
-    private Label coordinates = null;
     private boolean displayOnly;
 
     /**
@@ -54,7 +53,6 @@ public class AttackPhase {
         gameUI = scn;
         ownBoard = new BoardGUI(Board.getBoardSize(), Settings.smallGridWidth);
         guessBoard = new BoardGUI(Board.getBoardSize(), Settings.bigGridWidth);
-        //coordinates = coord;
         displayOnly = displayonly;
 
         if (currentPlayer.equals("P1")) {
