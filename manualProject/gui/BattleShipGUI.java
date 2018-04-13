@@ -103,13 +103,6 @@ public class BattleShipGUI extends Application
 		System.out.println("heere: " + p1.getPlayerBoard().getBoardSize());
 		
 		
-
-		
-		
-		
-		
-		
-		
 		
 		if (mode == "Player vs Ai") {
 			Game.enableAI();

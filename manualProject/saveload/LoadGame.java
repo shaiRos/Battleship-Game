@@ -41,7 +41,6 @@ public class LoadGame{
             FileReader fileReader = new FileReader(fileToRead);
             // Wrap FileReader in BufferedReader to efficiently read chars, lines, etc. (lines in this case)
             BufferedReader reader = new BufferedReader(fileReader);
-			System.out.println("heeelo");
 
 
             while((line = reader.readLine()) != null){
@@ -57,7 +56,6 @@ public class LoadGame{
 					p1Board = new Board(boardSize);
 					p2Board = new Board(boardSize);
 					
-					System.out.println("UMMWORK? " + boardSize);
 
 
                 } else if (line.equals("Number of Ships:")) {
@@ -96,8 +94,11 @@ public class LoadGame{
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
 						
+						System.out.println(rowData);
+						
                         for (int column = 0; column < boardSize; column++){
                             p2SBoard[row][column] = rowData[column];
+							
 							
                         }
                     }
@@ -207,6 +208,27 @@ public class LoadGame{
 		
         p1Board.guessBoard = p2Board.gameBoard;
         p2Board.guessBoard = p1Board.gameBoard;
+		
+/* 			for (int row = 0 ; row <  p2Board.gameBoard.length; row++) {
+				for (int column = 0; column < p2Board.gameBoard.length; column++){			
+					BoardValue value = p2Board.gameBoard[row][column];
+				
+					switch(value) {		
+						case MISS:
+							System.out.println("MISS");
+							break;
+						case HIT:
+							System.out.println("HIT");		
+							break;
+						case EMPTY: System.out.println("EMPTY"); break;
+						case SHIP: System.out.println("SHIP"); break;
+					}
+				}
+			}	 */
+					
+		
+		
+		
         
         if (mode == "Player vs Ai") {
                 player2 = new ComputerPlayer(p2Board,"P2");
