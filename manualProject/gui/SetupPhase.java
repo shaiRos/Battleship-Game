@@ -52,9 +52,9 @@ public class SetupPhase {
 		scene = scn;
 		thisPlayer = playerSettingUp;
 		displayOnly = displayonly;
-		if (playerSettingUp == "P1") {
+		if (playerSettingUp.equals("P1")) {
 			player = Settings.p1;
-		} else if (playerSettingUp == "P2") {
+		} else if (playerSettingUp.equals("P2")) {
 			player = Settings.p2;
 		}
 		shipsToSet = numOfShips;

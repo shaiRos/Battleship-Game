@@ -125,31 +125,12 @@ public class BoardGUI {
 	public void addValuesFromArray(Player thisPlayer, String boardType) {
 		BoardValue[][] boardArray = new BoardValue[1][1];
 	
-		if (boardType == "gameBoard") {
+		if (boardType.equals("gameBoard")) {
 			boardArray = thisPlayer.getPlayerBoard().gameBoard;
-		} else if (boardType == "guessBoard"){
+		} else if (boardType.equals("guessBoard")){
 			boardArray = thisPlayer.getPlayerBoard().guessBoard;
 		}
-		System.out.println("hello");
-		
-		if (boardType.equals("guessBoard")) {
-			for (int row = 0 ; row <  boardArray.length; row++) {
-				for (int column = 0; column < boardArray.length; column++){			
-					BoardValue value = boardArray[row][column];
-				
-					switch(value) {		
-						case MISS:
-							System.out.println("MISS");
-							break;
-						case HIT:
-							System.out.println("HIT");		
-							break;
-						case EMPTY: System.out.println("EMPTY"); break;
-						case SHIP: System.out.println("SHIP"); break;
-					}
-				}
-			}	
-		}			
+					
 				
 		
 		
@@ -176,7 +157,7 @@ public class BoardGUI {
 			}
 		}
 		//guessBoard: ships are hidden.
-		if (boardType != "guessBoard") {
+		if (boardType.equals("gameBoard")) {
 			setShipArrays(thisPlayer.getPlayerBoard().getShipArray(), boardArray);
 		}
 	}

@@ -59,15 +59,18 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		scene = scn;
 		blockSize = BlockSize;
 
-		if (attackingPlayer == "P1") {
+		if (attackingPlayer.equals("P1")) {
 			
 			playerAttacking = Settings.p1;
 			playerAttacked = Settings.p2;
 			nextPlayer = "P2";	
 			
-		}else if (attackingPlayer == "P2") {
+			System.out.println("oooy" + playerAttacking.getName());			
+			
+		}else if (attackingPlayer.equals("P2")) {
 			
 			playerAttacking = Settings.p2;
+
 			playerAttacked = Settings.p1;
 			nextPlayer = "P1";
 						
@@ -85,7 +88,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		//initiate attack
 		
 		if (x >= 1 && x <= Settings.boardSize && y >= 1 && y <= Settings.boardSize) {
-			
 			
 			boolean checkPrevHit = playerAttacked.checkPreviousHitEnum(playerAttacking.getPlayerBoard(), y, x);	
 			

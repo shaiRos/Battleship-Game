@@ -91,22 +91,20 @@ public class BattleShipGUI extends Application
 	*	@param		p2 - a player instance of player 2
 	*	@param		currentPlayer - a String indicating which player's turn it is. ( "P1" / "P2")
 	*/
-	public static void loadGame(Player p1, Player p2, String currentPlayer, String mode) {
+	public static void loadGame(Player player1, Player player2, String currentPlayer, String mode) {
 		//currentPlayer ( "P1" or "P2")
 		//player objects must be setup. both their own board and guess boards
 		
 		
 		
-		Settings.p1 = p1;
-		Settings.p2 = p2;
-		Settings.setBoardSize(p1.getPlayerBoard().getBoardSize());
-		System.out.println("heere: " + p1.getPlayerBoard().getBoardSize());
+		Settings.p1 = player1;
+		Settings.p2 = player2;
+		Settings.setBoardSize(player1.getPlayerBoard().getBoardSize());
 		
 		
-		
-		if (mode == "Player vs Ai") {
+		if (mode.equals("Player vs Ai")) {
 			Game.enableAI();
-			if (Settings.gameMode != "Player vs Ai") {
+			if (Settings.gameMode.equals("Player vs Player")) {
 				Settings.switchMode();	
 			}					
 		}

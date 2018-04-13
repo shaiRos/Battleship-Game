@@ -94,7 +94,7 @@ public class LoadGame{
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
 						
-						System.out.println(rowData);
+						//System.out.println(rowData);
 						
                         for (int column = 0; column < boardSize; column++){
                             p2SBoard[row][column] = rowData[column];
@@ -140,7 +140,7 @@ public class LoadGame{
             }
 
             makeThePlayersForLoad();
-			BattleShipGUI.loadGame(loadPlayer1(),loadPlayer2(),getCurrentPlayer(), mode);
+			BattleShipGUI.loadGame(player1,player2,currentPlayer, mode);
 
             /*
             while (line != null){
@@ -209,28 +209,8 @@ public class LoadGame{
         p1Board.guessBoard = p2Board.gameBoard;
         p2Board.guessBoard = p1Board.gameBoard;
 		
-/* 			for (int row = 0 ; row <  p2Board.gameBoard.length; row++) {
-				for (int column = 0; column < p2Board.gameBoard.length; column++){			
-					BoardValue value = p2Board.gameBoard[row][column];
-				
-					switch(value) {		
-						case MISS:
-							System.out.println("MISS");
-							break;
-						case HIT:
-							System.out.println("HIT");		
-							break;
-						case EMPTY: System.out.println("EMPTY"); break;
-						case SHIP: System.out.println("SHIP"); break;
-					}
-				}
-			}	 */
-					
-		
-		
-		
         
-        if (mode == "Player vs Ai") {
+        if (mode.equals("Player vs Ai")) {
                 player2 = new ComputerPlayer(p2Board,"P2");
         } else {
                 player2 = new HumanPlayer(p2Board,"P2");

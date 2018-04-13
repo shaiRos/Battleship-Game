@@ -33,6 +33,7 @@ public abstract class Player {
 	 *         previously attacked
 	 */
 	public boolean checkPreviousHitEnum(Board playerBoard, int row, int column) {
+		System.out.println("hello");
 		BoardValue value = (playerBoard.guessBoard[row - 1][column - 1]);
 		if (value == BoardValue.HIT) {
 			return true;

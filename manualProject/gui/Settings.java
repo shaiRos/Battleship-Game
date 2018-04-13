@@ -95,9 +95,9 @@ public class Settings {
 	*/
 	public static void switchMode() {
 		
-		if (gameMode == "Player vs Player") {
+		if (gameMode.equals("Player vs Player")) {
 			gameMode = "Player vs Ai";
-		} else if (gameMode == "Player vs Ai") {
+		} else if (gameMode.equals("Player vs Ai")) {
 			gameMode = "Player vs Player";
 		}
 	}
