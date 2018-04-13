@@ -1,24 +1,27 @@
 package game;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
+
 import java.util.InputMismatchException;
+
 import game.*;
 
 /**
  * JUNIT testing for set up for board
- * 
+ *
  * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayag
  */
 
 public class GameTest {
 
-	@Test
-	public void test_enableAI() {
-		//Game g = new Game();
-		//g.enableAI(); g.getAIStatus()
-		assertTrue("Expected AI to be enabled.", true);
-	}
+    @Test
+    public void test_enableAI() {
+        //Game g = new Game();
+        //g.enableAI(); g.getAIStatus()
+        assertTrue("Expected AI to be enabled.", true);
+    }
 
 //	@Test
 //	public void test_startCheck() {
