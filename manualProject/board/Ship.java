@@ -3,8 +3,8 @@ package board;
 /**
  * created January 30, 2018
  * 
- * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang Blueprint
- *         for ship objects
+ * 	@author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayag 
+ *	Blueprint for ship objects
  */
 
 public class Ship {

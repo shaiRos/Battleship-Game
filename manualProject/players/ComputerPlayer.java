@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * Houses all of the core logic dedicated to the AI
  * 
- * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+ * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayag
  */
 public class ComputerPlayer extends Player {
 

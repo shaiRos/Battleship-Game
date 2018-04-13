@@ -28,7 +28,7 @@ import javafx.geometry.Pos;
 	condition is met. By then. It calls another AttackPhase display where the event listener for the board is disabled 
 	which ends the game and stops the loop.
 	
-	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 
 */
 
@@ -59,13 +59,13 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		scene = scn;
 		blockSize = BlockSize;
 
-		if (attackingPlayer == "P1") {
+		if (attackingPlayer.equals("P1")) {
 			
 			playerAttacking = Settings.p1;
 			playerAttacked = Settings.p2;
-			nextPlayer = "P2";	
+			nextPlayer = "P2";				
 			
-		}else if (attackingPlayer == "P2") {
+		}else if (attackingPlayer.equals("P2")) {
 			
 			playerAttacking = Settings.p2;
 			playerAttacked = Settings.p1;
