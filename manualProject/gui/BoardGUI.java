@@ -130,6 +130,27 @@ public class BoardGUI {
 		} else if (boardType == "guessBoard"){
 			boardArray = thisPlayer.getPlayerBoard().guessBoard;
 		}
+		System.out.println("hello");
+		for (int row = 0 ; row <  boardArray.length; row++) {
+            for (int column = 0; column < boardArray.length; column++){			
+				BoardValue value = boardArray[row][column];
+			
+				switch(value) {		
+					case MISS:
+						System.out.println("MISS");
+						break;
+					case HIT:
+						System.out.println("HIT");		
+						break;
+					case EMPTY: System.out.println("EMPTY"); break;
+					case SHIP: System.out.println("SHIP"); break;
+				}
+			}
+		}		
+				
+		
+		
+		
 	
 		for (int x = 0; x < boardArray.length; x++) {
 			for (int y = 0; y < boardArray.length; y++) {

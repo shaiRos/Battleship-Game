@@ -56,11 +56,11 @@ public class AttackPhase  {
 		//coordinates = coord;
 		displayOnly = displayonly;
 
-		if (currentPlayer == "P1") {
+		if (currentPlayer.equals("P1")) {
 			ownBoard.addValuesFromArray(Settings.p1, "gameBoard");
 			guessBoard.addValuesFromArray(Settings.p1, "guessBoard");
 			}
-		else if (currentPlayer == "P2") {	
+		else if (currentPlayer.equals("P2")) {	
 				ownBoard.addValuesFromArray(Settings.p2, "gameBoard");
 				guessBoard.addValuesFromArray(Settings.p2, "guessBoard");		
 		}

@@ -139,7 +139,7 @@ public class LoadGame{
             }
 
             makeThePlayersForLoad();
-			BattleShipGUI.loadGame(loadPlayer1(),loadPlayer2(),getCurrentPlayer());
+			BattleShipGUI.loadGame(loadPlayer1(),loadPlayer2(),getCurrentPlayer(), mode);
 
             /*
             while (line != null){
@@ -204,6 +204,9 @@ public class LoadGame{
         
         player1 = new HumanPlayer(p1Board,"P1");
         player2 = null;
+		
+        p1Board.guessBoard = p2Board.gameBoard;
+        p2Board.guessBoard = p1Board.gameBoard;
         
         if (mode == "Player vs Ai") {
                 player2 = new ComputerPlayer(p2Board,"P2");
@@ -211,8 +214,27 @@ public class LoadGame{
                 player2 = new HumanPlayer(p2Board,"P2");
         }           
         
-        p1Board.guessBoard = p2Board.gameBoard;
-        p2Board.guessBoard = p1Board.gameBoard;
+
+		
+/* 		for (int row = 0 ; row < p1Board.gameBoard.length ; row++) {
+            for (int column = 0; column < p1Board.gameBoard.length; column++){			
+				BoardValue value = p1Board.gameBoard[row][column];
+			
+				switch(value) {		
+					case MISS:
+						System.out.println("MISS");
+						break;
+					case HIT:
+						System.out.println("HIT");		
+						break;
+					case EMPTY: System.out.println("EMPTY"); break;
+					case SHIP: System.out.println("SHIP"); break;
+				}
+			}
+		} */			
+		
+		
+		
 
         
     }

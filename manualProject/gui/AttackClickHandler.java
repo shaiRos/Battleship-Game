@@ -86,9 +86,6 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 		
 		if (x >= 1 && x <= Settings.boardSize && y >= 1 && y <= Settings.boardSize) {
 			
-			if (playerAttacking.getPlayerBoard() == null) {
-				System.out.println("ahaaaaaa");
-			}
 			
 			boolean checkPrevHit = playerAttacked.checkPreviousHitEnum(playerAttacking.getPlayerBoard(), y, x);	
 			
