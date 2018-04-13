@@ -81,7 +81,6 @@ public class LoadGame{
 
                 } else if (line.equals("PLAYER1BOARD:")){
                 
-					System.out.println("y u no work");
                     for (int row = 0; row < boardSize; row++){
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
@@ -92,7 +91,6 @@ public class LoadGame{
                     }
 
                 } else if (line.equals("PLAYER2BOARD:")){
-                  
 
                     for (int row = 0; row < boardSize; row++){
                         String rowLine = reader.readLine();
@@ -100,7 +98,6 @@ public class LoadGame{
 						
                         for (int column = 0; column < boardSize; column++){
                             p2SBoard[row][column] = rowData[column];
-							System.out.println(p1SBoard[row][column]);	
 							
                         }
                     }
@@ -215,7 +212,8 @@ public class LoadGame{
         }           
         
         p1Board.guessBoard = p2Board.gameBoard;
-        p2Board.guessBoard = p1Board.gameBoard;       
+        p2Board.guessBoard = p1Board.gameBoard;
+
         
     }
 

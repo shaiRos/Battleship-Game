@@ -5,7 +5,7 @@ Number of Ships:
 Current Game Mode:
 Player vs Ai
 Current Turn:
-P2
+P1
 PLAYER1BOARD:
 SHIP SHIP EMPTY EMPTY MISS 
 EMPTY EMPTY SHIP SHIP EMPTY 
