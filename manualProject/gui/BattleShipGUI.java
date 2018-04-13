@@ -87,9 +87,9 @@ public class BattleShipGUI extends Application
 	/**
 	*	Loads the game from a save file.
 	*
-	*	@param		p1 - a player instance of player 1
-	*	@param		p2 - a player instance of player 2
-	*	@param		currentPlayer - a String indicating which player's turn it is. ( "P1" / "P2")
+	*	@param		p1 a player instance of player 1
+	*	@param		p2 a player instance of player 2
+	*	@param		currentPlayer a String indicating which player's turn it is. ( "P1" / "P2")
 	*/
 	public static void loadGame(Player player1, Player player2, String currentPlayer, String mode) {
 		Settings.p1 = player1;

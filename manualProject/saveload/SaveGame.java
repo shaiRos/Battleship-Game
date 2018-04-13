@@ -4,31 +4,30 @@ import java.lang.Object;
 import java.io.Reader;
 import java.io.BufferedReader;
 import java.io.*;
-import board.Board;
-import board.BoardValue;
+import board.*;
 import gui.Settings;
-import board.Ship;
 import gui.AttackPhase;
-import players.Player;
-import players.HumanPlayer;
-import players.ComputerPlayer;
+import players.*;
 
-
-
+/**
+* Saves the current progress of the game in a text file file
+* implemented in the GUI version of the game
+*/
 public class SaveGame{
 	
 	public Player p1 = null;
 	public Player p2 = null;
 	public static String mode = "";
 
-
-	public static void main(String[] args){
-		
-		saveBoard();
-	}
-	
+	/**
+	* 
+	* @param P1Board the board object for user 1
+	* @param P2Board
+	* @param gamemode a string representing whether the game was PVP or PVComputer
+	*/
 	public static void saveProgress(Board P1Board, Board P2Board, String gamemode){
-		String boardFile = "boards.txt";
+		//saved game file is in pacakge/folder "saveload"
+		String boardFile = "saveload/savedGame.txt";
 		mode = gamemode;
 
 		try{
@@ -86,7 +85,6 @@ public class SaveGame{
             for (int i = 0; i < P2Ships.length; i++){
             	writer.println(P2Ships[i].toString());
             }
-				          
 
            
   
@@ -100,56 +98,5 @@ public class SaveGame{
             // ex.printStackTrace();
         }
 	}
-
-	public static void saveBoard(){
-		String boardFile = "boards.txt";
-
-		try{
-			  // Assume default encoding.
-            FileWriter fileWriter = new FileWriter(boardFile);
-
-            // Always wrap FileWriter in BufferedWriter.
-            PrintWriter writer = new PrintWriter(new BufferedWriter(fileWriter));
-
-          
-   			writer.println("Board Size: " + Board.getBoardSize());
-
-
-            writer.println("Current Game Mode: " + mode);
-
-            /*
-            *	Need to fix
-            */
-   		//writer.print(AttackPhase.getCurrentPlayer() + "\n\n");
-    
-
-            /*Last type of data to store due to varying size of boards 
-            *but if we save player including the boards then  youre set
-            *SAVE BOARD, SHIP, ARRAYS 
-			*/
-			
-    //	writer.print(this.getGameBoard());
-  
-            // Always close files.
-            writer.flush();
-            writer.close();
-        }
-        catch(IOException ex) {
-            System.out.println("Error writing to file '" + boardFile + "'");
-            // Or we could just do this:
-            // ex.printStackTrace();
-        }
-	}
-
-
-	
-	
-
-
-
-
-
-
-
 
 }

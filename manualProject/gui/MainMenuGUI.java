@@ -73,7 +73,7 @@ public class MainMenuGUI {
 	/**
 	*	gets the GridPane layout of the main menu
 	*
-	*	@return 	a GridPane instance of the main menu layout
+	*	@return root a GridPane instance of the main menu layout
 	*/
 	public GridPane getMenuRoot() { 
 		return root;
@@ -82,7 +82,7 @@ public class MainMenuGUI {
 	/**
 	*	creates a label of the section title of a specific setting
 	*
-	*	@return		a Label instance of the title of a specific setting 
+	*	@return	modeTitle a Label instance of the title of a specific setting 
 	*/
 	public Label sectionTitle(String section) {
 		
@@ -92,12 +92,11 @@ public class MainMenuGUI {
 	}
 	
 	/**
-	*		The section of the game mode settings in the GridPane layout of the main menu.This section has two parts. 
+	*		The section of the game mode settings in the GridPane layout of the main menu. This section has two parts. 
 	*		The section Title at the top, and at the bottom, the left and right buttons with the changing
-	*		values in between. The left and right buttons respond to actions which switches the game mode between
-	*		player vs player and player vs ai. 
+	*		values in between.
 	*
-	*		@return		a VBox layout which represents the Game mode settings in the menu screen.
+	*		@return	modeVSection a VBox layout which represents the Game mode settings in the menu screen.
 	*/
 	public VBox modeSection() {
 		
@@ -130,11 +129,11 @@ public class MainMenuGUI {
 	}	
 
 	/**
-	*		The section of the board size settings in the GridPane layout of the main menu.This section has two parts. 
+	*		The section of the board size settings in the GridPane layout of the main menu. 
 	*		The section Title at the top, and at the bottom, the left and right buttons with the changing
-	*		values in between. The left and right buttons respond to actions which increases or decreases the board size.
+	*		values in between. 
 	*
-	*		@return		a VBox layout which represents the Board size settings in the menu screen.
+	*		@return	boardVSection a VBox layout which represents the Board size settings in the menu screen.
 	*/	
 	public VBox boardSizeSection() {
 		

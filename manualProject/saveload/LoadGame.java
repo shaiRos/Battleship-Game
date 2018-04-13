@@ -28,10 +28,14 @@ public class LoadGame{
     private static Player player1;
     private static Player player2;
 
+	
+	/**
+	* read and interpreter the values on the saved file
+	*/
     public static void loadBoard()
     {
-        //Initiate which file to read
-        String fileToRead = "boards.txt";
+        //Initiate which file to read (saved in folder/package "saveload")
+        String fileToRead = "saveload/savedGame.txt";
 
         
         //Initiate line for ship data from file 
@@ -44,7 +48,8 @@ public class LoadGame{
 
 
             while((line = reader.readLine()) != null){
-
+				//read files using flags such as "PLAYER1BOARD"
+				
                 if (line.equals("Board Size:")){
                     String data = reader.readLine();
                     boardSize = Integer.parseInt(data);
@@ -91,8 +96,6 @@ public class LoadGame{
                     }
                 } else if (line.equals("PLAYER1SHIP:")){
                  
-					
-
                     for (int ship = 0; ship < numShips; ship++){
                         String shipLine = reader.readLine();
                         String[] shipData = shipLine.split(" ");
@@ -106,11 +109,9 @@ public class LoadGame{
                     }
 					p1Board.loadGameBoard(p1SBoard);
 
+					
                 } else if (line.equals("PLAYER2SHIP:")){
-                   
-                   
-
-                    for (int ship = 0; ship < numShips; ship++){
+                   for (int ship = 0; ship < numShips; ship++){
                         String shipLine = reader.readLine();
                         String[] shipData = shipLine.split(" ");
                         int ID = Integer.parseInt(shipData[0]);
@@ -136,17 +137,19 @@ public class LoadGame{
         }
         catch(IOException ex) {
             System.out.println("Error reading file '" + fileToRead + "'");  
-        }
+        }catch (Exception e){
+			e.printStackTrace();
+		}
 
 
     }
 
-/**
+	/**
     *   Makes the player instances for the game to load from 
     *
-    *   @param      p1Board - a Board instance of player 1's board. gameBoard and shipArray is set (not guessBoard)
-    *   @param      p2Board - a Board instance of player 2's board. gameBoard and shipArray is set (not guessBoard)
-    *   @param      gameMode - the gameMode that is read from the file 
+    *   @param p1Board a Board instance of player 1's board. gameBoard and shipArray is set (not guessBoard)
+    *   @param p2Board
+    *   @param gameMode the gameMode that is read from the file 
     */
 
     public static void makeThePlayersForLoad() {
