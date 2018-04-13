@@ -16,8 +16,8 @@ import players.ComputerPlayer;
 */
 public class LoadGame{
 
-    private static String[][] p1SBoard = null;
-    private static String[][] p2SBoard = null;
+    private static String[][] p1SBoard;
+    private static String[][] p2SBoard;
     private static int boardSize;
     private static int numShips;
     private static String mode;
@@ -68,10 +68,10 @@ public class LoadGame{
                 } else if (line.equals("PLAYER1BOARD")){
                 
 
-                    for (int row = 0; row < boardSize; row++){
+                    for (int row = 0; row < (boardSize-1); row++){
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
-                        for (int column = 0; column < boardSize; column++){
+                        for (int column = 0; column < (boardSize-1); column++){
                             p1SBoard[row][column] = rowData[column];
                         }
                     }
@@ -79,11 +79,12 @@ public class LoadGame{
                 } else if (line.equals("PLAYER2BOARD")){
                   
 
-                    for (int row = 0; row < boardSize; row++){
+                    for (int row = 0; row < (boardSize-1); row++){
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
-                        for (int column = 0; column < boardSize; column++){
+                        for (int column = 0; column < (boardSize-1); column++){
                             p2SBoard[row][column] = rowData[column];
+                            
                         }
                     }
 
