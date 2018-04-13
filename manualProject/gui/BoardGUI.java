@@ -1,23 +1,25 @@
 package gui;
+import board.Ship;
+import players.Player;
+import board.BoardValue;
+
 import javafx.scene.layout.GridPane;
+
+import javafx.geometry.Insets;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.control.Label;
-import board.BoardValue;
-import board.Ship;
-import javafx.geometry.Insets;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
-import players.Player;
+
 
 /**
 *	Creates the display of the boards. The display uses GridPane layout to visually show the players' boards.
 *	Also manages the size and adding contents into the grid.
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 
 
@@ -34,7 +36,8 @@ public class BoardGUI {
 	*	and adjusts the sizes to accomodate for the window size.
 	*
 	*	@param 		gridSize - an integer indicating what board size to create
-	*	@param 		gridwidth - an integer indicating the width the display of the board occupies in the window.(Includes the margins) This is a final value set on Settings class.
+	*	@param 		gridwidth - an integer indicating the width the display of the board occupies in the window.
+	*							(Includes the margins) This is a final value set on Settings class.
 	*/
 	public BoardGUI(int gridsize, int gridwidth) {
 		
@@ -61,7 +64,6 @@ public class BoardGUI {
 			board.getColumnConstraints().add(column);			
 			board.getRowConstraints().add(row);
 		}		
-//========== ONLY INTENDED FOR DEBUG. find another way to display grid lines. ==============================	
 		board.setGridLinesVisible(true);	
 	}
 	
@@ -114,7 +116,8 @@ public class BoardGUI {
 
 	/**
 	*	Reads an array that represents a player's board and creates the visual representation of it. Using the getImage() method,
-	*	it adds the image representation of ships, hits and misses into the GridPane Layout display of the player's board.
+	*	it adds the image representation of ships, hits and misses into the GridPane Layout display of the player's board. Ships
+	*	are setup from shipArrays using setShipArrays method.
 	*
 	*	@param 		boardArray - an array containing enum values of ships, hits and misses
 	*	@param		boardType - a String indicating what type this GridPane represents. ("gameBoard" or "guessBoard"). In guessBoard, the ships are hidden
@@ -122,12 +125,11 @@ public class BoardGUI {
 	public void addValuesFromArray(Player thisPlayer, String boardType) {
 		BoardValue[][] boardArray = new BoardValue[1][1];
 	
-		if (boardType == "gameBoard") {
+		if (boardType.equals("gameBoard")) {
 			boardArray = thisPlayer.getPlayerBoard().gameBoard;
-		} else if (boardType == "guessBoard"){
+		} else if (boardType.equals("guessBoard")){
 			boardArray = thisPlayer.getPlayerBoard().guessBoard;
 		}
-	
 		for (int x = 0; x < boardArray.length; x++) {
 			for (int y = 0; y < boardArray.length; y++) {
 				//add the object to this coordinate
@@ -148,7 +150,8 @@ public class BoardGUI {
 				}	
 			}
 		}
-		if (boardType != "guessBoard") {
+		//guessBoard: ships are hidden.
+		if (boardType.equals("gameBoard")) {
 			setShipArrays(thisPlayer.getPlayerBoard().getShipArray(), boardArray);
 		}
 	}
@@ -158,34 +161,33 @@ public class BoardGUI {
 	*	more complex since front and back have different images and images have to be rotated when the ship is horizontal
 	*
 	*	@param 		array - a Ship array containing a player's ships in his/her current gameboard
-	*				boardArray - An array of a player containg boardvalues.
+	*	@param		boardArray - An array of a player containg boardvalues.
 	*/
-	public void setShipArrays(Ship[] array, BoardValue[][] boardArray) {
-			
+	public void setShipArrays(Ship[] array, BoardValue[][] boardArray) {		
 
- 		for (Ship ships : array) {
-			if (ships != null){
-				//all coordinates this ships occupies
-				int[][] coords = ships.getShipCoordinates();
+ 		for (Ship ship : array) {
+			if (ship != null){
+				//all coordinates this ship occupies
+				int[][] coords = ship.getShipCoordinates();
 
-				//going through the coordinates [row,column]
- 				for (int body = 0 ; body <= (ships.getLength() - 1) ; body++) {
+				//going through the coordinates [row,column] of a ship
+ 				for (int body = 0 ; body <= (ship.getLength() - 1) ; body++) {
 					
-					//FRONT of the ship has different image
+					//FRONT of the ship has different image. The very first value of this loop
 					if (body == 0) {
 						int[] front = coords[0];
-						//different images for front and back ships
-						addShipImage("/images/ShipHead.png", boardArray, front[0], front[1], ships.getOrientation());
+						//different images for front and back of ship
+						addShipImage("/images/ShipHead.png", boardArray, front[0], front[1], ship.getOrientation());
 						
-					//BACK of the ship has different image	
-					} else if (body == (ships.getLength()-1)) {
+					//BACK of the ship has different image. The very last value of this loop
+					} else if (body == (ship.getLength()-1)) {
 						int[] back = coords[body];
-						addShipImage("/images/ShipTail.png", boardArray, back[0], back[1], ships.getOrientation());			
+						addShipImage("/images/ShipTail.png", boardArray, back[0], back[1], ship.getOrientation());			
 						
 					//BODY of the ship	
 					} else {
 						int[] coordinate = coords[body];
-						addShipImage("/images/ShipBody.png", boardArray, coordinate[0], coordinate[1], ships.getOrientation());			
+						addShipImage("/images/ShipBody.png", boardArray, coordinate[0], coordinate[1], ship.getOrientation());			
 					}
 				}
 			}
@@ -197,15 +199,15 @@ public class BoardGUI {
 	*	images are rotated if the ship orientation is horizontal
 	*
 	*	@param 		imgPath - a String specifying what file image should be added into the board display
-	*				boardArray - An array of a player containg boardvalues.
-	*				row - an integer indicating the row where the ship image should be added
-	*				col - an integer indicating the column where the ship image should be added
-	*				orientation - a char indicating the orientation of the ship that is to be added into the board display
+	*	@param		boardArray - An array of a player containg boardvalues.
+	*	@param		row - an integer indicating the row where the ship image should be added
+	*	@param		col - an integer indicating the column where the ship image should be added
+	*	@param		orientation - a char indicating the orientation of the ship that is to be added into the board display
 	*/
 	public void addShipImage(String imgPath, BoardValue[][] boardArray, int row , int col, char orientation) {
 		if (boardArray[row][col] != BoardValue.HIT) {
 			ImageView shipImg = getImage(imgPath);
-			//have to rotate image if vertical
+			//have to rotate image if horizontal
 			if (orientation == 'h') {
 				shipImg.setRotate(-90);
 			}

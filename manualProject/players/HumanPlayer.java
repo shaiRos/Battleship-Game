@@ -8,7 +8,7 @@ import board.Board;
  * Holds the code the main player will utilize. Contains the logic necessary to
  * execute a game 'turn'
  *
- * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+ * @author Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
  */
 public class HumanPlayer extends Player {
 	Board playerBoard = null;

@@ -27,18 +27,30 @@ public class BoardTest {
 	// Possible change!
 	@Test
 	public void test_returnBoard1() {
-		System.out.println("herE");
 		Board b = new Board(5);
 		b.setBoardType(1);
-		assertFalse("Game board", b.getBoardType());
+		assertFalse("Expected board type to be gameboard", b.getBoardType());
 	}
 
 	@Test
 	public void test_returnBoard2() {
-		System.out.println("there");
 		Board b = new Board(5);
 		b.setBoardType(2);
-		assertTrue("It is not game board", b.getBoardType());
+		assertTrue("Expected board typ not to be gameboard", b.getBoardType());
 	}
+
+	@Test 
+	public void test_addShip1(){
+		Board b = new Board(5);
+		b.addShip(0, 2, 'v', 0, 0);
+		b.addShip(1, 2, 'h', 0, 0);
+		assertEquals("Expected second ship not to be added coordinate (0, 1) should be empty", BoardValue.EMPTY, b.gameBoard[0][1]);
+
+	}
+
+
+
+
+
 
 }

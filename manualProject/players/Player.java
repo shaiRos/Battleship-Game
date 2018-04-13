@@ -9,7 +9,7 @@ import board.BoardValue;
  * Parent Player of the players created. Will contain the methods each Player
  * requires to complete game logic functionality
  *
- * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+ * @author Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
  */
 public abstract class Player {
 	String name;	
