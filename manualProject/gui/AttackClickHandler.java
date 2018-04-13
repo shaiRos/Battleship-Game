@@ -63,14 +63,11 @@ public class AttackClickHandler implements EventHandler<MouseEvent> {
 			
 			playerAttacking = Settings.p1;
 			playerAttacked = Settings.p2;
-			nextPlayer = "P2";	
-			
-			System.out.println("oooy" + playerAttacking.getName());			
+			nextPlayer = "P2";				
 			
 		}else if (attackingPlayer.equals("P2")) {
 			
 			playerAttacking = Settings.p2;
-
 			playerAttacked = Settings.p1;
 			nextPlayer = "P1";
 						

@@ -133,7 +133,7 @@ public class AttackPhase  {
 		secondTile.getChildren().add(thisPlayerTurn);
 		rightPanel.getChildren().addAll(ownBoard.getBoardGrid(),secondTile);			
 		
-		if(Settings.getMessage() == "You Lose!" || Settings.getMessage() == "You Win!") {
+		if(Settings.getMessage().equals("You Lose!") || Settings.getMessage().equals("You Win!")) {
 			mainMenuBt.setText("Play again");
 			secondTile.getChildren().add(mainMenuBt);
 		}

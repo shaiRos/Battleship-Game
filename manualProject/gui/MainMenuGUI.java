@@ -52,12 +52,7 @@ public class MainMenuGUI {
 		root.setHalignment(loadButton,HPos.CENTER);	
 		
 		loadButton.setOnMouseClicked(event -> {
-			//read file and get p1 and p2 instance and string currentPlayer P1 or P2
 			LoadGame.loadBoard();
-			//Player player1 = LoadGame.loadPlayer1();
-			//Player player2 = LoadGame.loadPlayer2();
-			//String currentPlayer = LoadGame.getCurrentPlayer();
-			//BattleShipGUI.loadGame(LoadGame.loadPlayer1(),LoadGame.loadPlayer2(),LoadGame.getCurrentPlayer());
 		});
 		
 		

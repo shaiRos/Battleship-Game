@@ -92,15 +92,9 @@ public class BattleShipGUI extends Application
 	*	@param		currentPlayer - a String indicating which player's turn it is. ( "P1" / "P2")
 	*/
 	public static void loadGame(Player player1, Player player2, String currentPlayer, String mode) {
-		//currentPlayer ( "P1" or "P2")
-		//player objects must be setup. both their own board and guess boards
-		
-		
-		
 		Settings.p1 = player1;
 		Settings.p2 = player2;
 		Settings.setBoardSize(player1.getPlayerBoard().getBoardSize());
-		
 		
 		if (mode.equals("Player vs Ai")) {
 			Game.enableAI();
@@ -109,7 +103,7 @@ public class BattleShipGUI extends Application
 		else if (mode.equals("Player vs Player")) {
 			Settings.gameMode = "Player vs Player";
 		}
-		System.out.println("txt mode: " + mode + " settings mode : " + Settings.getMode());
+		
 		AttackPhase startAttack = new AttackPhase(gameUI, currentPlayer, false);
 	}
 }	
