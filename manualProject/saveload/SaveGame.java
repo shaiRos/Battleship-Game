@@ -94,8 +94,7 @@ public class SaveGame{
         }
         catch(IOException ex) {
             System.out.println("Error writing to file '" + boardFile + "'");
-            // Or we could just do this:
-            // ex.printStackTrace();
+             ex.printStackTrace();
         }
 	}
 

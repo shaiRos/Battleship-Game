@@ -274,11 +274,14 @@ public class Board {
 		for (int i = 0; i < addCoordinates.length; i++) {
 			int r = addCoordinates[i][0];
 			int c = addCoordinates[i][1];
-			//add 1 to ID on the array because of int array default value (0)
-			shipBoard[r][c] = ID + 1; 
-			
-			//add each ship's coordinate on the board
-			gameBoard[r][c] = BoardValue.SHIP;
+			if (r >= 0 && c >= 0 && r <= getBoardSize() && c <= getBoardSize()) {
+				//add 1 to ID on the array because of int array default value (0)
+				shipBoard[r][c] = ID + 1; 
+				
+				//add each ship's coordinate on the board
+				gameBoard[r][c] = BoardValue.SHIP;
+			}
+
 		}
 
 	}
