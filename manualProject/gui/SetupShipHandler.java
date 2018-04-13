@@ -33,7 +33,7 @@ import javafx.event.ActionEvent;
 /**
 * 	Called when player clicks a button in the right panel.
 *	<p>
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 public class SetupShipHandler implements EventHandler<MouseEvent> {
 	

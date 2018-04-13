@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
 * 	The setup phase where players setup their ships in their board. Players are given a number of ships for each
 *	specific ship length. Players have to setup all the given ships.
 *	<p>
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 public class SetupPhase {
 	

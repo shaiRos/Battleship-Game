@@ -14,7 +14,7 @@ import javafx.geometry.Insets;
 /**
 *	Settings for the game window and the game itself. The GUI depends on the values in the settings to run the game.
 *	<p>
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 
 public class Settings {

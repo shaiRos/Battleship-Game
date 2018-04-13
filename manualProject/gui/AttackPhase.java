@@ -24,7 +24,7 @@ import saveload.*;
 * 	This class creates the user interface of the main game where players take turns to attack each other's ships 
 *	It's base layout is a BorderPane where only the center, bottom and left regions are used.
 *
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 
 public class AttackPhase  {

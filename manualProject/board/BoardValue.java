@@ -3,7 +3,7 @@ package board;
 /**
  * state of each grid displayed on the board
  * 
- * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+ * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayag
  */
 public enum BoardValue {
 	/**

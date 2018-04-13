@@ -28,7 +28,7 @@ import javafx.geometry.Pos;
 	condition is met. By then. It calls another AttackPhase display where the event listener for the board is disabled 
 	which ends the game and stops the loop.
 	
-	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 
 */
 
