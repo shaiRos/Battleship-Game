@@ -131,7 +131,7 @@ public class LoadGame {
 
             reader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + fileToRead + "'");
+            System.out.println("Cannot find any previously saved files");
         } catch (IOException ex) {
             System.out.println("Error reading file '" + fileToRead + "'");
         } catch (Exception e) {

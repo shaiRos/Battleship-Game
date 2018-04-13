@@ -245,7 +245,7 @@ public class Game {
 
     /**
      * Reads from a given file and creates the current board and ship placements
-     * based on line-by-line fed information
+     * based on line-by-line fed information (no longer implemented in new version of the game)
      *
      * @param mapLevel The final that contains the information required to build the
      *                 level
@@ -324,6 +324,7 @@ public class Game {
             player2 = new ComputerPlayer(player2Board);
         }
 
+		
         // This will allow user to input coordinates and setup board
         setupBoard(player1Board, player1, player2Board, player2);
 
