@@ -81,13 +81,10 @@ public class LoadGame{
 
                 } else if (line.equals("PLAYER1BOARD:")){
                 
-                    for (int row = 0; row < (boardSize-1); row++){
-
-					System.out.println("y u no work");
-
+                    for (int row = 0; row < boardSize; row++){
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
-                        for (int column = 0; column < (boardSize-1); column++){
+                        for (int column = 0; column < boardSize; column++){
                             p1SBoard[row][column] = rowData[column];
 
                         }
@@ -95,11 +92,11 @@ public class LoadGame{
 
                 } else if (line.equals("PLAYER2BOARD:")){
 
-                    for (int row = 0; row < (boardSize-1); row++){
+                    for (int row = 0; row < boardSize; row++){
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
-                        for (int column = 0; column < (boardSize-1); column++){
-
+						
+                        for (int column = 0; column < boardSize; column++){
                             p2SBoard[row][column] = rowData[column];
 							
                         }
