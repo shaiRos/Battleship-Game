@@ -33,7 +33,7 @@ import javafx.event.ActionEvent;
 /**
 * 	Called when player clicks a button in the right panel.
 *	<p>
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 public class SetupShipHandler implements EventHandler<MouseEvent> {
 	
@@ -76,11 +76,8 @@ public class SetupShipHandler implements EventHandler<MouseEvent> {
 	
 	/**
 	*	When a button is clicked from the right pane of the setup display, it sets the info of the ship based on what button was clicked. 
-	*	(each button has different values for each parameter of this constructor) The display of the right pane is also changed. The default
-	*	orientation is horizontal but players can switch to vertical by right clicking. It also activates a mouse listener in the large board
-	*	so that players can place the ship they're currently 'holding'. All checks are done so that ships can be placed with no conflicts. Will
-	*	continue to display the current player's setup phase until he/she has placed the indicated number of ships to be placed. Then setup phase display
-	*	will change to the next player. When mode is player vs ai, it continues directly into the game i.e the attack phase. 
+	*	All checks are done so that ships can be placed with no conflicts.
+	*	will change to the next player a turn is done. When mode is player vs ai, it continues directly into the game i.e the attack phase. 
 	*/	
 	public void handle(MouseEvent event) {
 		root.setRight(rightPanel());

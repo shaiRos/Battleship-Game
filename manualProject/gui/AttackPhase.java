@@ -24,7 +24,7 @@ import saveload.*;
 * 	This class creates the user interface of the main game where players take turns to attack each other's ships 
 *	It's base layout is a BorderPane where only the center, bottom and left regions are used.
 *
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 
 public class AttackPhase  {
@@ -56,11 +56,11 @@ public class AttackPhase  {
 		//coordinates = coord;
 		displayOnly = displayonly;
 
-		if (currentPlayer == "P1") {
+		if (currentPlayer.equals("P1")) {
 			ownBoard.addValuesFromArray(Settings.p1, "gameBoard");
 			guessBoard.addValuesFromArray(Settings.p1, "guessBoard");
 			}
-		else if (currentPlayer == "P2") {	
+		else if (currentPlayer.equals("P2")) {	
 				ownBoard.addValuesFromArray(Settings.p2, "gameBoard");
 				guessBoard.addValuesFromArray(Settings.p2, "guessBoard");		
 		}
@@ -126,16 +126,22 @@ public class AttackPhase  {
 		
 		Button saveGameBt = new Button("Save");
 		saveGameBt.setOnMouseClicked(event -> {
-			SaveGame.saveProgress(Settings.p1.getPlayerBoard(),Settings.p2.getPlayerBoard());
+			SaveGame.saveProgress(Settings.p1.getPlayerBoard(),Settings.p2.getPlayerBoard(),Settings.getMode());
 			Settings.changeMessage("Saved");	
 		});
 		
-		
-		secondTile.getChildren().addAll(thisPlayerTurn,saveGameBt, mainMenuBt);
-		if(Settings.getMessage() == "You Lose!" || Settings.getMessage() == "You Win!") {
-			mainMenuBt.setText("Play again");
-		}
+		secondTile.getChildren().add(thisPlayerTurn);
 		rightPanel.getChildren().addAll(ownBoard.getBoardGrid(),secondTile);			
+		
+		if(Settings.getMessage().equals("You Lose!") || Settings.getMessage().equals("You Win!")) {
+			mainMenuBt.setText("Play again");
+			secondTile.getChildren().add(mainMenuBt);
+		}
+		
+		if (displayOnly == false) {
+			secondTile.getChildren().addAll(saveGameBt, mainMenuBt);
+		}
+		
 		return rightPanel;
 	}	
 	

@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 /**
 * created January 30, 2018
-*   @author Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*   @author Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 *	Board object that will hold all values of our board
 */
 public class Board {
@@ -28,6 +28,7 @@ public class Board {
 	/**
 	 * Default constructor for our board
 	 * initialize all arrays and variables base on boardSize
+	 * @param boardValue the determined size of the board
 	 */
 	public Board(int boardValue) {
 		setBoardSize(boardValue);
@@ -41,7 +42,9 @@ public class Board {
 		shipArray = new Ship[numOfShips];
 
 	}
-
+	
+	
+	
 	/**
 	 * Populates the board with initial values
 	 *
@@ -67,8 +70,7 @@ public class Board {
 	*/
 	private static void setBoardSize(int size) {
 		boardSize = size;
-//		numOfShips = (int)(Math.ceil(size/2.0));
-//		listOfShipSizes = generateShipsToAdd();
+
 	}
 	
 
@@ -79,6 +81,10 @@ public class Board {
 	*/
 	public static int getNumOfShips() {
 		return numOfShips;
+	}
+
+	public static void setNumOfShips(int num) {
+		numOfShips = num;
 	}
 
 	/**
@@ -167,6 +173,33 @@ public class Board {
 		
 	}
 
+	/**
+	* takes in a string array of the game board and load it 
+	* on the gameboard as enum values
+	* @param a string array of game board that correspond with values of game board
+	*/
+	public void loadGameBoard(String[][] gameBoardFromFile){
+		
+		
+		for(int row = 0; row < gameBoardFromFile.length; row ++){
+			for (int col = 0; col < gameBoardFromFile[row].length; col ++){
+				switch (gameBoardFromFile[row][col]){
+				
+				case "EMPTY": gameBoard[row][col] = BoardValue.EMPTY;
+							break;
+				case "MISS": gameBoard[row][col] = BoardValue.MISS;
+							break;
+				case "SHIP": gameBoard[row][col] = BoardValue.SHIP;
+							break;
+				case "HIT": gameBoard[row][col] = BoardValue.HIT;
+							aShipSunken(row,col);
+							break;
+				}
+				
+			}
+		}
+
+	}
 	
 
 

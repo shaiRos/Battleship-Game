@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * Houses all of the core logic dedicated to the AI
  * 
- * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayang
+ * @author Brandon Lu, Shaina Rossel, Betty Zhang, Charlene Madayag
  */
 public class ComputerPlayer extends Player {
 
@@ -183,8 +183,6 @@ public class ComputerPlayer extends Player {
 				// check to make sure its a legit value
 				if ((row > Board.getBoardSize()) || (column > Board.getBoardSize()) || (row < 0) || (column < 0)) {
 					System.out.println("Invalid coordinates");
-					System.out.println(row);
-					System.out.println(column);
 					System.exit(0);
 				} else {
 					formatted = true;

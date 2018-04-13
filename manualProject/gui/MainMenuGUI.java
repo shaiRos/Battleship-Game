@@ -14,12 +14,14 @@ import javafx.geometry.Pos;
 import javafx.geometry.HPos;
 import javafx.scene.text.Font;
 
+import saveload.LoadGame;
+
 
 /**
 * 	The GUI of the game starts at the main menu where the players are prompted to set the settings of the game.
 *	They also have the option to load a game from a save file. 
 *	<p> 
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 public class MainMenuGUI {
 	
@@ -50,9 +52,7 @@ public class MainMenuGUI {
 		root.setHalignment(loadButton,HPos.CENTER);	
 		
 		loadButton.setOnMouseClicked(event -> {
-			//read file and get p1 and p2 instance and string currentPlayer P1 or P2
-
-			//BattleShipGUI.loadGame(player1,player2,currentPlayer);  *currentPlayer and player2 instances of player with boards already setup and all....
+			LoadGame.loadBoard();
 		});
 		
 		

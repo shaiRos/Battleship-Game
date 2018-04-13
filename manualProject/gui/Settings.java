@@ -14,7 +14,7 @@ import javafx.geometry.Insets;
 /**
 *	Settings for the game window and the game itself. The GUI depends on the values in the settings to run the game.
 *	<p>
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 
 public class Settings {
@@ -95,17 +95,13 @@ public class Settings {
 	*/
 	public static void switchMode() {
 		
-		if (gameMode == "Player vs Player") {
+		if (gameMode.equals("Player vs Player")) {
 			gameMode = "Player vs Ai";
-		} else if (gameMode == "Player vs Ai") {
+		} else if (gameMode.equals("Player vs Ai")) {
 			gameMode = "Player vs Player";
 		}
 	}
 	
-
-	public static String getCurrentMode(){
-		return gameMode;
-	}
 	
 	/**
 	*	creates the label instance of the message label. 

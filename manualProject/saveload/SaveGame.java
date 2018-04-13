@@ -19,6 +19,7 @@ public class SaveGame{
 	
 	public Player p1 = null;
 	public Player p2 = null;
+	public static String mode = "";
 
 
 	public static void main(String[] args){
@@ -26,8 +27,9 @@ public class SaveGame{
 		saveBoard();
 	}
 	
-	public static void saveProgress(Board P1Board, Board P2Board){
+	public static void saveProgress(Board P1Board, Board P2Board, String gamemode){
 		String boardFile = "boards.txt";
+		mode = gamemode;
 
 		try{
 			  // Assume default encoding.
@@ -36,33 +38,57 @@ public class SaveGame{
             // Always wrap FileWriter in BufferedWriter.
             PrintWriter writer = new PrintWriter(new BufferedWriter(fileWriter));
 
-          
-   			writer.println("Board Size: " + Board.getBoardSize());
+          	
+   			writer.println("Board Size:");
+   			writer.println(Board.getBoardSize());
 
-            writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
+   			writer.println("Number of Ships:");
+   			writer.println(Board.getNumOfShips());
+
+            writer.println("Current Game Mode:");
+           	writer.println(mode);
+
+            writer.println("Current Turn:");
             writer.println(AttackPhase.currentPlayer);
-            
+
+
+
+            	writer.println("PLAYER1BOARD:");
+             for (int row = 0; row < Board.getBoardSize(); row++){
+             	for (int column = 0; column < Board.getBoardSize(); column++){
+             		if (column == (Board.getBoardSize() - 1)){
+             			writer.println((P1Board.gameBoard[row][column]) + " ");
+             		} else {
+             			writer.append((P1Board.gameBoard[row][column]) + " ");
+             		}
+             	}
+             }            
 				//save the ship placements of current ship board
-				writer.println("PLAYER1SHIP");
+				writer.println("PLAYER1SHIP:");
 				Ship [] P1Ships = P1Board.getShipArray();   
             for (int i = 0; i < P1Ships.length; i++){
             	writer.println(P1Ships[i].toString());
             }
-				            
-            
-     
-            /*
-            *	Need to fix
-            */
-   		//writer.print(AttackPhase.getCurrentPlayer() + "\n\n);
-    
+				          
+            	writer.println("PLAYER2BOARD:");
+             for (int row = 0; row < Board.getBoardSize(); row++){
+             	for (int column = 0; column < Board.getBoardSize(); column++){
+             		if (column == (Board.getBoardSize() - 1)){
+             			writer.println((P2Board.gameBoard[row][column]) + " ");
+             		} else {
+             			writer.append((P2Board.gameBoard[row][column]) + " ");
+             		}
+             	}
+             }
 
-            /*Last type of data to store due to varying size of boards 
-            *but if we save player including the boards then  youre set
-            *SAVE BOARD, SHIP, ARRAYS 
-			*/
+             	writer.println("PLAYER2SHIP:");
+     			Ship [] P2Ships = P2Board.getShipArray();   
+            for (int i = 0; i < P2Ships.length; i++){
+            	writer.println(P2Ships[i].toString());
+            }
+				          
 
-    //	writer.print(this.getGameBoard());
+           
   
             // Always close files.
             writer.flush();
@@ -89,8 +115,7 @@ public class SaveGame{
    			writer.println("Board Size: " + Board.getBoardSize());
 
 
-            writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
-     
+            writer.println("Current Game Mode: " + mode);
 
             /*
             *	Need to fix
@@ -117,50 +142,9 @@ public class SaveGame{
 	}
 
 
-
-	//We are able to get the board and all from the player....... then ad valyues from array 
-	//SAve  each enum between spaces 
-	/*
-	public BoardValue[][] getGameBoard(){
-		BoardValue][] boardValues = BoardValue[][] 
-		return boardValues;
-
-	}
-	*/ /*//when loading from txt file, MAKE the p1 GAMEBOARD and p2 GAMEBOARD
-			
-			new constructor on Board?...
-			Board p1Board = new Board(boardSize, shipArray, gameBoard)
-			Board p2Board = new Board(boardSize, shipArray, gameBoard)
-			
-			then call vvv that method
 	
 	
-	
-	/**
-	*	Makes the player instances for the game to load from 
-	*
-	*	@param		p1Board - a Board instance of player 1's board. gameBoard and shipArray is set (not guessBoard)
-	*	@param 		p2Board - a Board instance of player 2's board. gameBoard and shipArray is set (not guessBoard)
-	*	@param 		gameMode - the gameMode that is read from the file 
-	*/
-	public void makeThePlayersForLoad(Board p1Board, Board p2Board, String gameMode) {
-		
-        Board player1Board = p1Board;
-        Board player2Board = p2Board;
 
-		Player player1 = new HumanPlayer(player1Board,"P1");
-		Player player2 = null;
-		
-        if (gameMode == "Player vs Ai") {
-	    		player2 = new ComputerPlayer(player2Board,"P2");
-        } else {
-        		player2 = new HumanPlayer(player2Board,"P2");
-        }			
-		
-		player1Board.guessBoard = player2Board.gameBoard;
-		player2Board.guessBoard = player1Board.gameBoard;		
-		
-	}
 
 
 

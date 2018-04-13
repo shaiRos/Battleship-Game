@@ -18,8 +18,8 @@ import javafx.scene.layout.BackgroundImage;
 /**
 *	Creates the display of the boards. The display uses GridPane layout to visually show the players' boards.
 *	Also manages the size and adding contents into the grid.
-*	<p>
-*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayang
+*	
+*	@author 	Brandon Lu, Shaina Rosell, Betty Zhang, Charlene Madayag
 */
 
 
@@ -36,7 +36,8 @@ public class BoardGUI {
 	*	and adjusts the sizes to accomodate for the window size.
 	*
 	*	@param 		gridSize - an integer indicating what board size to create
-	*	@param 		gridwidth - an integer indicating the width the display of the board occupies in the window.(Includes the margins) This is a final value set on Settings class.
+	*	@param 		gridwidth - an integer indicating the width the display of the board occupies in the window.
+	*							(Includes the margins) This is a final value set on Settings class.
 	*/
 	public BoardGUI(int gridsize, int gridwidth) {
 		
@@ -124,12 +125,11 @@ public class BoardGUI {
 	public void addValuesFromArray(Player thisPlayer, String boardType) {
 		BoardValue[][] boardArray = new BoardValue[1][1];
 	
-		if (boardType == "gameBoard") {
+		if (boardType.equals("gameBoard")) {
 			boardArray = thisPlayer.getPlayerBoard().gameBoard;
-		} else if (boardType == "guessBoard"){
+		} else if (boardType.equals("guessBoard")){
 			boardArray = thisPlayer.getPlayerBoard().guessBoard;
 		}
-	
 		for (int x = 0; x < boardArray.length; x++) {
 			for (int y = 0; y < boardArray.length; y++) {
 				//add the object to this coordinate
@@ -151,7 +151,7 @@ public class BoardGUI {
 			}
 		}
 		//guessBoard: ships are hidden.
-		if (boardType != "guessBoard") {
+		if (boardType.equals("gameBoard")) {
 			setShipArrays(thisPlayer.getPlayerBoard().getShipArray(), boardArray);
 		}
 	}
