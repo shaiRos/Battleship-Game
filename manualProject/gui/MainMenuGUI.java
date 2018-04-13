@@ -57,7 +57,7 @@ public class MainMenuGUI {
 			//Player player1 = LoadGame.loadPlayer1();
 			//Player player2 = LoadGame.loadPlayer2();
 			//String currentPlayer = LoadGame.getCurrentPlayer();
-			BattleShipGUI.loadGame(LoadGame.loadPlayer1(),LoadGame.loadPlayer2(),LoadGame.getCurrentPlayer());
+			//BattleShipGUI.loadGame(LoadGame.loadPlayer1(),LoadGame.loadPlayer2(),LoadGame.getCurrentPlayer());
 		});
 		
 		
