@@ -178,7 +178,9 @@ public class Board {
 	* on the gameboard as enum values
 	* @param a string array of game board that correspond with values of game board
 	*/
-	public void loadGameBoard(String [][] gameBoardFromFile){
+	public void loadGameBoard(String[][] gameBoardFromFile){
+		
+		
 		for(int row = 0; row < gameBoardFromFile.length; row ++){
 			for (int col = 0; col < gameBoardFromFile[row].length; col ++){
 				switch (gameBoardFromFile[row][col]){

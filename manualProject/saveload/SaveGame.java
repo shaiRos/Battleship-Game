@@ -48,14 +48,9 @@ public class SaveGame{
 
             writer.println("Current Turn:");
             writer.println(AttackPhase.currentPlayer);
-            
-				//save the ship placements of current ship board
-				writer.println("PLAYER1SHIP:");
-				Ship [] P1Ships = P1Board.getShipArray();   
-            for (int i = 0; i < P1Ships.length; i++){
-            	writer.println(P1Ships[i].toString());
-            }
-				          
+
+
+
             	writer.println("PLAYER1BOARD:");
              for (int row = 0; row < Board.getBoardSize(); row++){
              	for (int column = 0; column < Board.getBoardSize(); column++){
@@ -65,12 +60,12 @@ public class SaveGame{
              			writer.append((P1Board.gameBoard[row][column]) + " ");
              		}
              	}
-             }
-
-             	writer.println("PLAYER2SHIP:");
-     			Ship [] P2Ships = P2Board.getShipArray();   
-            for (int i = 0; i < P2Ships.length; i++){
-            	writer.println(P2Ships[i].toString());
+             }            
+				//save the ship placements of current ship board
+				writer.println("PLAYER1SHIP:");
+				Ship [] P1Ships = P1Board.getShipArray();   
+            for (int i = 0; i < P1Ships.length; i++){
+            	writer.println(P1Ships[i].toString());
             }
 				          
             	writer.println("PLAYER2BOARD:");
@@ -83,6 +78,14 @@ public class SaveGame{
              		}
              	}
              }
+
+             	writer.println("PLAYER2SHIP:");
+     			Ship [] P2Ships = P2Board.getShipArray();   
+            for (int i = 0; i < P2Ships.length; i++){
+            	writer.println(P2Ships[i].toString());
+            }
+				          
+
            
   
             // Always close files.

@@ -7,6 +7,7 @@ import board.BoardValue;
 import players.Player;
 import players.HumanPlayer;
 import players.ComputerPlayer;
+import gui.BattleShipGUI;
 
 /**
 *	Temporary class - to be implemented later in gameConfig or
@@ -22,8 +23,8 @@ public class LoadGame{
     private static int numShips;
     private static String mode;
     private static String currentPlayer;
-    private static Board p1Board = new Board(boardSize);
-    private static Board p2Board = new Board(boardSize);
+    private static Board p1Board = null;
+    private static Board p2Board = null;
     private static Player player1;
     private static Player player2;
 
@@ -40,6 +41,7 @@ public class LoadGame{
             FileReader fileReader = new FileReader(fileToRead);
             // Wrap FileReader in BufferedReader to efficiently read chars, lines, etc. (lines in this case)
             BufferedReader reader = new BufferedReader(fileReader);
+			System.out.println("heeelo");
 
 
             while((line = reader.readLine()) != null){
@@ -49,48 +51,64 @@ public class LoadGame{
                     String data = reader.readLine();
                     //System.out.println(data);
                     boardSize = Integer.parseInt(data);
-
+					p1SBoard = new String[boardSize][boardSize];
+					p2SBoard = new String[boardSize][boardSize];
+					
+					p1Board = new Board(boardSize);
+					p2Board = new Board(boardSize);
+					
+					System.out.println("UMMWORK? " + boardSize);
 
 
                 } else if (line.equals("Number of Ships:")) {
                     //System.out.println("after " + line );
+						
+					
                     String data = reader.readLine();
                     //System.out.println(data);
                     numShips = Integer.parseInt(data);
                     Board.setNumOfShips(numShips);
 
                 } else if (line.equals("Current Game Mode:")){
+					
+							
                     mode = reader.readLine();
 
                 } else if (line.equals("Current Turn:")){
+					
+							
                     currentPlayer = reader.readLine();
 
-                } else if (line.equals("PLAYER1BOARD")){
+                } else if (line.equals("PLAYER1BOARD:")){
                 
-
+					System.out.println("y u no work");
                     for (int row = 0; row < boardSize; row++){
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
                         for (int column = 0; column < boardSize; column++){
                             p1SBoard[row][column] = rowData[column];
+
                         }
                     }
 
-                } else if (line.equals("PLAYER2BOARD")){
+                } else if (line.equals("PLAYER2BOARD:")){
                   
 
                     for (int row = 0; row < boardSize; row++){
                         String rowLine = reader.readLine();
                         String[] rowData = rowLine.split(" ");
+						
                         for (int column = 0; column < boardSize; column++){
                             p2SBoard[row][column] = rowData[column];
+							System.out.println(p1SBoard[row][column]);	
+							
                         }
                     }
 
 
                 } else if (line.equals("PLAYER1SHIP:")){
-                   
-                    p1Board.loadGameBoard(p1SBoard);
+                 
+					p1Board.loadGameBoard(p1SBoard);
 
                     for (int ship = 0; ship < numShips; ship++){
                         String shipLine = reader.readLine();
@@ -123,8 +141,8 @@ public class LoadGame{
 
             }
 
-            makeThePlayersForLoad(p1Board,p2Board,mode);
-
+            makeThePlayersForLoad();
+			BattleShipGUI.loadGame(loadPlayer1(),loadPlayer2(),getCurrentPlayer());
 
             /*
             while (line != null){
@@ -185,22 +203,19 @@ public class LoadGame{
     *   @param      gameMode - the gameMode that is read from the file 
     */
 
-    public static void makeThePlayersForLoad(Board p1Board, Board p2Board, String gameMode) {
+    public static void makeThePlayersForLoad() {
         
-        Board player1Board = p1Board;
-        Board player2Board = p2Board;
-
-        Player player1 = new HumanPlayer(player1Board,"P1");
-        Player player2 = null;
+        player1 = new HumanPlayer(p1Board,"P1");
+        player2 = null;
         
-        if (gameMode == "Player vs Ai") {
-                player2 = new ComputerPlayer(player2Board,"P2");
+        if (mode == "Player vs Ai") {
+                player2 = new ComputerPlayer(p2Board,"P2");
         } else {
-                player2 = new HumanPlayer(player2Board,"P2");
+                player2 = new HumanPlayer(p2Board,"P2");
         }           
         
-        player1Board.guessBoard = player2Board.gameBoard;
-        player2Board.guessBoard = player1Board.gameBoard;       
+        p1Board.guessBoard = p2Board.gameBoard;
+        p2Board.guessBoard = p1Board.gameBoard;       
         
     }
 
