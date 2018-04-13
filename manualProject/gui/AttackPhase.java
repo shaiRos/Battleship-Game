@@ -126,16 +126,22 @@ public class AttackPhase  {
 		
 		Button saveGameBt = new Button("Save");
 		saveGameBt.setOnMouseClicked(event -> {
-			SaveGame.saveProgress(Settings.p1.getPlayerBoard(),Settings.p2.getPlayerBoard());
+			SaveGame.saveProgress(Settings.p1.getPlayerBoard(),Settings.p2.getPlayerBoard(),Settings.getMode());
 			Settings.changeMessage("Saved");	
 		});
 		
+		secondTile.getChildren().add(thisPlayerTurn);
+		rightPanel.getChildren().addAll(ownBoard.getBoardGrid(),secondTile);			
 		
-		secondTile.getChildren().addAll(thisPlayerTurn,saveGameBt, mainMenuBt);
 		if(Settings.getMessage() == "You Lose!" || Settings.getMessage() == "You Win!") {
 			mainMenuBt.setText("Play again");
+			secondTile.getChildren().add(mainMenuBt);
 		}
-		rightPanel.getChildren().addAll(ownBoard.getBoardGrid(),secondTile);			
+		
+		if (displayOnly == false) {
+			secondTile.getChildren().addAll(saveGameBt, mainMenuBt);
+		}
+		
 		return rightPanel;
 	}	
 	

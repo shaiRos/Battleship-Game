@@ -106,7 +106,7 @@ public class LoadGame{
 
                 } else if (line.equals("PLAYER1SHIP:")){
                  
-					p1Board.loadGameBoard(p1SBoard);
+					
 
                     for (int ship = 0; ship < numShips; ship++){
                         String shipLine = reader.readLine();
@@ -119,10 +119,11 @@ public class LoadGame{
                   
                         p1Board.addShip(ID, len, orient, row, column);
                     }
+					p1Board.loadGameBoard(p1SBoard);
 
                 } else if (line.equals("PLAYER2SHIP:")){
                    
-                    p2Board.loadGameBoard(p2SBoard);
+                   
 
                     for (int ship = 0; ship < numShips; ship++){
                         String shipLine = reader.readLine();
@@ -135,6 +136,7 @@ public class LoadGame{
                  
                         p2Board.addShip(ID, len, orient, row, column);
                     }
+					p2Board.loadGameBoard(p2SBoard);
                 }
 
             }

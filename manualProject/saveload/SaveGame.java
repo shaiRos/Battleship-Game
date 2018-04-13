@@ -19,6 +19,7 @@ public class SaveGame{
 	
 	public Player p1 = null;
 	public Player p2 = null;
+	public static String mode = "";
 
 
 	public static void main(String[] args){
@@ -26,8 +27,9 @@ public class SaveGame{
 		saveBoard();
 	}
 	
-	public static void saveProgress(Board P1Board, Board P2Board){
+	public static void saveProgress(Board P1Board, Board P2Board, String gamemode){
 		String boardFile = "boards.txt";
+		mode = gamemode;
 
 		try{
 			  // Assume default encoding.
@@ -44,7 +46,7 @@ public class SaveGame{
    			writer.println(Board.getNumOfShips());
 
             writer.println("Current Game Mode:");
-           	writer.println((Settings.getCurrentMode()));
+           	writer.println(mode);
 
             writer.println("Current Turn:");
             writer.println(AttackPhase.currentPlayer);
@@ -113,7 +115,7 @@ public class SaveGame{
    			writer.println("Board Size: " + Board.getBoardSize());
 
 
-            writer.println("Current Game Mode: " + (Settings.getCurrentMode()));
+            writer.println("Current Game Mode: " + mode);
 
             /*
             *	Need to fix

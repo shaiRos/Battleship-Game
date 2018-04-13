@@ -104,10 +104,12 @@ public class BattleShipGUI extends Application
 		
 		if (mode.equals("Player vs Ai")) {
 			Game.enableAI();
-			if (Settings.gameMode.equals("Player vs Player")) {
-				Settings.switchMode();	
-			}					
+			Settings.gameMode = "Player vs Ai";					
 		}
+		else if (mode.equals("Player vs Player")) {
+			Settings.gameMode = "Player vs Player";
+		}
+		System.out.println("txt mode: " + mode + " settings mode : " + Settings.getMode());
 		AttackPhase startAttack = new AttackPhase(gameUI, currentPlayer, false);
 	}
 }	

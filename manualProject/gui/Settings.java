@@ -102,10 +102,6 @@ public class Settings {
 		}
 	}
 	
-
-	public static String getCurrentMode(){
-		return gameMode;
-	}
 	
 	/**
 	*	creates the label instance of the message label. 
