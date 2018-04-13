@@ -22,8 +22,10 @@ public class LoadGame{
     private static int numShips;
     private static String mode;
     private static String currentPlayer;
-    private Board p1Board = new Board(boardSize);
-    private Board p2Board = new Board(boardSize);
+    private static Board p1Board = new Board(boardSize);
+    private static Board p2Board = new Board(boardSize);
+    private static Player player1;
+    private static Player player2;
 
     public static void loadBoard()
     {
@@ -202,11 +204,25 @@ public class LoadGame{
         
     }
 
-    public String getCurrentPlayer(){
+    public static String getCurrentPlayer(){
         return currentPlayer;
     }
 
+     public static void setPlayer1(Player p1){
+        player1 = p1;
+    }
 
+    public static Player loadPlayer1(){
+        return player1;
+    }
+
+     public static void setPlayer2(Player p2){
+         player2 = p2;
+    }
+
+    public static Player loadPlayer2(){
+        return player2; 
+    }
     
 	//read file and store data in an array
 	/*

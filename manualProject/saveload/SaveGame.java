@@ -137,17 +137,6 @@ public class SaveGame{
 	}
 
 
-
-		/*
-		//when loading from txt file, MAKE the p1 GAMEBOARD and p2 GAMEBOARD
-			
-			new constructor on Board?...
-			Board p1Board = new Board(boardSize, shipArray, gameBoard)
-			Board p2Board = new Board(boardSize, shipArray, gameBoard)
-			
-			then call vvv that method
-	
-	
 	
 	
 
