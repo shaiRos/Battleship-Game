@@ -1,5 +1,5 @@
 (Winter 2018) Group project for the course: Intro to Computer Science for CS Majors II
-Battleship game created with Java and JavaFX
+Battleship game created with Java and JavaFX. A class diagram is included for an overview. 
 
 # **How to Run** 
 ###### *Requires java to run!*
